@@ -344,92 +344,7 @@
         )
       )
     )
-    (symbol "WOBCLibrary:Board" (in_bom yes) (on_board yes)
-      (property "Reference" "B" (at 0 2.54 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "" (at 0 0 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Footprint" "" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "Datasheet" "" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "Board_0_1"
-        (polyline
-          (pts
-            (xy 0 -1.27)
-            (xy 0 0)
-          )
-          (stroke (width 0) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy -1.016 -1.27)
-            (xy -1.27 -2.032)
-            (xy -1.27 -2.032)
-          )
-          (stroke (width 0.2032) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy -0.508 -1.27)
-            (xy -0.762 -2.032)
-            (xy -0.762 -2.032)
-          )
-          (stroke (width 0.2032) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 0 -1.27)
-            (xy -0.254 -2.032)
-            (xy -0.254 -2.032)
-          )
-          (stroke (width 0.2032) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 0.508 -1.27)
-            (xy 0.254 -2.032)
-            (xy 0.254 -2.032)
-          )
-          (stroke (width 0.2032) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 1.016 -1.27)
-            (xy -1.016 -1.27)
-            (xy -1.016 -1.27)
-          )
-          (stroke (width 0.2032) (type default))
-          (fill (type none))
-        )
-        (polyline
-          (pts
-            (xy 1.016 -1.27)
-            (xy 0.762 -2.032)
-            (xy 0.762 -2.032)
-            (xy 0.762 -2.032)
-          )
-          (stroke (width 0.2032) (type default))
-          (fill (type none))
-        )
-      )
-      (symbol "Board_1_1"
-        (pin power_in line (at 0 0 270) (length 0) hide
-          (name "GND" (effects (font (size 1.27 1.27))))
-          (number "GND" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
-    (symbol "WOBCLibrary:CJ2102" (in_bom yes) (on_board yes)
+    (symbol "WOBC_libraries:CJ2102" (in_bom yes) (on_board yes)
       (property "Reference" "Q" (at 6.35 0 0)
         (effects (font (size 1.27 1.27)))
       )
@@ -548,17 +463,17 @@
           (stroke (width 0) (type default))
           (fill (type outline))
         )
-        (pin input line (at -6.35 -2.54 0) (length 2.54)
-          (name "" (effects (font (size 1.27 1.27))))
-          (number "" (effects (font (size 1.27 1.27))))
-        )
         (pin input line (at 0 5.08 270) (length 2.54)
           (name "" (effects (font (size 1.27 1.27))))
-          (number "" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
         )
         (pin input line (at 6.35 -2.54 180) (length 2.54)
           (name "" (effects (font (size 1.27 1.27))))
-          (number "" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27))))
+        )
+        (pin input line (at -6.35 -2.54 0) (length 2.54)
+          (name "" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27))))
         )
       )
     )
@@ -830,6 +745,10 @@
     (stroke (width 0) (type default))
     (uuid 56f4f8f9-139c-4d6f-a28c-8677f17a99ed)
   )
+  (wire (pts (xy 223.52 40.64) (xy 223.52 64.77))
+    (stroke (width 0) (type default))
+    (uuid 57beb5ba-1cd2-45ce-949b-1171d79db7e0)
+  )
   (wire (pts (xy 200.66 106.68) (xy 203.2 106.68))
     (stroke (width 0) (type default))
     (uuid 5f96b018-c9d9-4ab9-82ba-43a74b36ba3a)
@@ -1001,10 +920,6 @@
   (wire (pts (xy 60.96 34.29) (xy 60.96 39.37))
     (stroke (width 0) (type default))
     (uuid ebaf6475-bb3f-4a80-89b5-f33a5a8f17ef)
-  )
-  (wire (pts (xy 223.52 40.64) (xy 223.52 64.77))
-    (stroke (width 0) (type default))
-    (uuid eda91929-c447-4d90-afb6-f43fc933d4a0)
   )
   (wire (pts (xy 107.95 77.47) (xy 119.38 77.47))
     (stroke (width 0) (type default))
@@ -1219,7 +1134,7 @@
     )
     (pin "1" (uuid 1ba849b8-0a00-4776-a271-679c180bbcd0))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#FLG01") (unit 1)
         )
@@ -1245,7 +1160,7 @@
     (pin "1" (uuid e2192b88-6e38-4332-b981-926f70f577f4))
     (pin "2" (uuid e733c406-5a7c-45f6-8754-fa5b68f6608b))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C4") (unit 1)
         )
@@ -1271,7 +1186,7 @@
     (pin "1" (uuid e1056c2d-0da4-4d73-8da6-ed5abe22bff0))
     (pin "2" (uuid 2912e012-95b6-471d-8a28-7fab3193e647))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C5") (unit 1)
         )
@@ -1296,7 +1211,7 @@
     )
     (pin "1" (uuid 44c15799-fe4d-49b3-8110-aaaa67015476))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#PWR03") (unit 1)
         )
@@ -1322,7 +1237,7 @@
     (pin "1" (uuid b05bffbb-b508-483b-8f2b-6456af3fbb13))
     (pin "2" (uuid dbbfbdd4-6bd4-45f0-a39d-505fe19b9a71))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "R1") (unit 1)
         )
@@ -1348,36 +1263,9 @@
     (pin "1" (uuid f40334c3-f50b-4506-8980-a5692f4e73ee))
     (pin "2" (uuid a0ebecc4-da41-45de-8ae9-a3b9af4813af))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "R2") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "WOBCLibrary:CJ2102") (at 185.42 38.1 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 2486f1c9-ecc1-45fc-9e2a-24c9412fd5f9)
-    (property "Reference" "Q1" (at 188.595 46.99 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "CJ2102" (at 188.595 49.53 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "WOBCLibrary:CJ2102" (at 180.34 33.02 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "https://files.seeedstudio.com/wiki/Grove-3-Axis_Digital_Accelerometer-16g_Ultra-low_Power-BMA400/res/CJ2102.pdf" (at 180.34 30.48 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "" (uuid fc050bad-f50b-4fb4-9380-d67b4916147e))
-    (pin "" (uuid 6a7e1776-d03c-446c-aba3-75a74b498bcd))
-    (pin "" (uuid 3555f670-2da6-4332-9e6f-9db6420a733b))
-    (instances
-      (project "SLAM"
-        (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-          (reference "Q1") (unit 1)
         )
       )
     )
@@ -1401,7 +1289,7 @@
     (pin "1" (uuid 6f5c3c5c-2d3d-4be8-a348-97f6c5a2997b))
     (pin "2" (uuid 019fedb1-10ea-4151-85d5-ea76dd3b1d22))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "R5") (unit 1)
         )
@@ -1418,7 +1306,7 @@
     (property "Value" "BMI088" (at 120.843 99.7654 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "WOBCLibrary:BMI088" (at 116.84 90.17 0)
+    (property "Footprint" "WOBC_librsries:BMI088" (at 116.84 90.17 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "http://uk.rs-online.com/web/p/products/2457367P" (at 116.84 92.71 0)
@@ -1459,7 +1347,7 @@
     (pin "8" (uuid 9aee0272-1a52-4c73-afbd-38c650541acf))
     (pin "9" (uuid bb520114-1e25-4ab6-9ad1-38f40cb1133e))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "IC1") (unit 1)
         )
@@ -1485,7 +1373,7 @@
     (pin "1" (uuid 46f65251-05b1-4e9f-8567-e30655772739))
     (pin "2" (uuid 672d502a-687f-40de-a835-8e24874746c0))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C3") (unit 1)
         )
@@ -1510,36 +1398,9 @@
     )
     (pin "1" (uuid 1e3d7883-74e3-485e-9a3c-f2498f62f4e1))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#PWR05") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "WOBCLibrary:CJ2102") (at 185.42 62.23 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 5ee3c14b-5924-4793-87d7-dc9f32eb68d0)
-    (property "Reference" "Q2" (at 188.595 71.12 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "CJ2102" (at 188.595 73.66 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "WOBCLibrary:CJ2102" (at 180.34 57.15 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "https://files.seeedstudio.com/wiki/Grove-3-Axis_Digital_Accelerometer-16g_Ultra-low_Power-BMA400/res/CJ2102.pdf" (at 180.34 54.61 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "" (uuid 0090a7f0-7a3f-43e3-b1c4-58467bdf1ddd))
-    (pin "" (uuid 75f91793-e98c-4735-b6e7-892d74ab69e9))
-    (pin "" (uuid fbfd19e1-db83-4278-abf6-9ca14b0eefc4))
-    (instances
-      (project "SLAM"
-        (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-          (reference "Q2") (unit 1)
         )
       )
     )
@@ -1562,7 +1423,7 @@
     )
     (pin "1" (uuid 973c8f1f-412e-403d-95db-494b823ddecb))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#PWR01") (unit 1)
         )
@@ -1587,7 +1448,7 @@
     )
     (pin "1" (uuid 78aa9ff6-23c4-47de-a59a-5c730e714e44))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#FLG02") (unit 1)
         )
@@ -1613,7 +1474,7 @@
     (pin "1" (uuid a272b5ab-3e8f-4922-8fbe-3c29da926696))
     (pin "2" (uuid eeaa4681-b69c-4474-a15a-da3c9705e6ab))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C7") (unit 1)
         )
@@ -1639,7 +1500,7 @@
     (pin "1" (uuid 73283ba0-9f73-4509-8fae-f615da2dc0b9))
     (pin "2" (uuid 2ac0b91b-1bbd-4487-92ab-6f953fe94b31))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "R4") (unit 1)
         )
@@ -1647,26 +1508,28 @@
     )
   )
 
-  (symbol (lib_id "WOBCLibrary:Board") (at 41.91 137.16 0) (unit 1)
+  (symbol (lib_id "WOBC_libraries:CJ2102") (at 185.42 62.23 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 80d9ae34-385a-47a0-8cd3-6e6ae9a9d6e7)
-    (property "Reference" "B1" (at 44.45 138.2268 0)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "~" (at 41.91 137.16 0)
+    (uuid 7a811394-3ecd-4848-8619-ff7abdada85d)
+    (property "Reference" "Q2" (at 188.595 71.12 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "WOBCLibrary:Board_FullSize_76x76" (at 41.91 137.16 0)
+    (property "Value" "CJ2102" (at 188.595 73.66 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "WOBC_librsries:CJ2102" (at 180.34 57.15 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 41.91 137.16 0)
+    (property "Datasheet" "https://files.seeedstudio.com/wiki/Grove-3-Axis_Digital_Accelerometer-16g_Ultra-low_Power-BMA400/res/CJ2102.pdf" (at 180.34 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "GND" (uuid 1c1c321a-a165-43d8-99bf-82874402ab1a))
+    (pin "1" (uuid ec37af53-90f4-41ac-8b35-fe4dc10b37b5))
+    (pin "2" (uuid ae5eff13-44a4-4059-bfa3-1c8896330a22))
+    (pin "3" (uuid 17301d63-cadc-47ad-837d-708d453ac16a))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-          (reference "B1") (unit 1)
+          (reference "Q2") (unit 1)
         )
       )
     )
@@ -1690,7 +1553,7 @@
     (pin "1" (uuid a2cbcacf-3fcc-4c55-8051-f97bdbc8ecc7))
     (pin "2" (uuid 9d124ba0-424b-429d-b35d-e9d9b2ac4c07))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C1") (unit 1)
         )
@@ -1715,7 +1578,7 @@
     )
     (pin "1" (uuid 85d352fd-a204-46d3-81d0-2f0e04f3ee4a))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#PWR04") (unit 1)
         )
@@ -1741,7 +1604,7 @@
     (pin "1" (uuid df63a596-c25c-46b3-8033-46b785e0fae7))
     (pin "2" (uuid 20d5da1a-b200-4bf2-b34e-fbba0ec67d3f))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C6") (unit 1)
         )
@@ -1766,7 +1629,7 @@
     )
     (pin "1" (uuid fab19351-8c90-49f9-97eb-5acd6ce76315))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#PWR06") (unit 1)
         )
@@ -1792,7 +1655,7 @@
     (pin "1" (uuid bdb0fb65-af70-4c85-a800-4be0f031cb2e))
     (pin "2" (uuid 2fbddb9a-9d9f-43f0-8e05-980e6a947e96))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "R3") (unit 1)
         )
@@ -1818,7 +1681,7 @@
     (pin "1" (uuid 2390f3ee-6988-47c4-90cd-fef49c2c9781))
     (pin "2" (uuid 11263707-1b00-4f7c-a932-3d99315ce58d))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "R6") (unit 1)
         )
@@ -1844,7 +1707,7 @@
     (pin "1" (uuid 4fd0a6ab-5f63-4bee-b2ca-44cddbdef23f))
     (pin "2" (uuid 9d8ebd7b-21b1-4468-a6f5-19ff43bbe2f4))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C8") (unit 1)
         )
@@ -1871,9 +1734,36 @@
     (pin "2" (uuid 5d0b4edf-dcb7-465f-8839-cc37f972df3d))
     (pin "3" (uuid ba49309a-5b74-491a-bbf4-16a23c374fbb))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "U1") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "WOBC_libraries:CJ2102") (at 185.42 38.1 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid e7e93890-f4ac-4624-b1c5-542079fd0f03)
+    (property "Reference" "Q1" (at 188.595 46.99 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "CJ2102" (at 188.595 49.53 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "WOBC_librsries:CJ2102" (at 180.34 33.02 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "https://files.seeedstudio.com/wiki/Grove-3-Axis_Digital_Accelerometer-16g_Ultra-low_Power-BMA400/res/CJ2102.pdf" (at 180.34 30.48 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 57957a00-3bb3-494b-bd2a-8a7b07219b2c))
+    (pin "2" (uuid 7413c39b-39cc-4de5-80c7-b3d8221eb790))
+    (pin "3" (uuid 3b0c5a7f-10a4-4c19-af0b-68323f7683a9))
+    (instances
+      (project "IMU"
+        (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
+          (reference "Q1") (unit 1)
         )
       )
     )
@@ -1896,7 +1786,7 @@
     )
     (pin "1" (uuid cce91639-df30-4001-ad66-a9aecab7d579))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#PWR07") (unit 1)
         )
@@ -1922,7 +1812,7 @@
     (pin "1" (uuid e754b28c-64a2-4f7f-9251-28a611cec195))
     (pin "2" (uuid 5daf1c94-da90-4abd-b0e8-95dd6d313dbc))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "C2") (unit 1)
         )
@@ -1947,7 +1837,7 @@
     )
     (pin "1" (uuid 8bd9873c-b243-4a40-9c3c-7051b2ed780a))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "#PWR02") (unit 1)
         )
@@ -1975,7 +1865,7 @@
     (pin "3" (uuid e10d4a5b-cacb-4fde-b306-92e3476bc4c1))
     (pin "4" (uuid ca02f13f-a3ff-40a8-ad4e-4ddd816234d9))
     (instances
-      (project "SLAM"
+      (project "IMU"
         (path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
           (reference "J1") (unit 1)
         )
