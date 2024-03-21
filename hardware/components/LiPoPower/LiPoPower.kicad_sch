@@ -945,6 +945,58 @@
         )
       )
     )
+    (symbol "power:VBUS" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+      (property "Reference" "#PWR" (at 0 -3.81 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Value" "VBUS" (at 0 3.81 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Footprint" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "global power" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "Power symbol creates a global label with name \"VBUS\"" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "VBUS_0_1"
+        (polyline
+          (pts
+            (xy -0.762 1.27)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 0)
+            (xy 0 2.54)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+        (polyline
+          (pts
+            (xy 0 2.54)
+            (xy 0.762 1.27)
+          )
+          (stroke (width 0) (type default))
+          (fill (type none))
+        )
+      )
+      (symbol "VBUS_1_1"
+        (pin power_in line (at 0 0 90) (length 0) hide
+          (name "VBUS" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
     (symbol "power:VDD" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
       (property "Reference" "#PWR" (at 0 -3.81 0)
         (effects (font (size 1.27 1.27)) hide)
@@ -1894,6 +1946,15 @@
     (uuid febf1c46-81fa-448b-a942-934d412a8929)
   )
 
+  (text "I2C ADDR: 0x4F" (at 173.355 133.985 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 3c5b597a-7248-4219-be77-fd3b4a87c1f1)
+  )
+  (text "I2C ADDR: 0x4E" (at 201.295 82.55 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid bd0c1a60-6b78-4930-b114-22178d422b4a)
+  )
+
   (hierarchical_label "STAT1" (shape output) (at 104.14 119.38 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 23229895-ec88-460a-91ea-38d9fd6783d3)
@@ -1934,10 +1995,6 @@
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid a5d5c5cc-6351-4c30-8869-96aa19e26cdd)
   )
-  (hierarchical_label "VUSB" (shape input) (at 29.21 93.98 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right))
-    (uuid a859c6cf-ae43-41a2-a543-6474ce785faa)
-  )
   (hierarchical_label "I2C_SDA" (shape bidirectional) (at 219.075 76.2 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid d0f3ec03-8d1d-48ba-ae2c-a0abde284726)
@@ -1946,7 +2003,7 @@
   (symbol (lib_id "WOBCLibrary:TCK106AF") (at 167.005 151.13 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0417b772-4bbb-45c9-ace1-75aa16ba17c4)
-    (property "Reference" "U4" (at 167.005 144.78 0)
+    (property "Reference" "U8" (at 167.005 144.78 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "~" (at 168.275 151.13 0)
@@ -1964,6 +2021,11 @@
     (pin "4" (uuid e83a2e8b-f907-4c8a-9e63-5ac929f4b139))
     (pin "5" (uuid 9c6c4189-0a80-4add-88ec-f12d9a0b5c00))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "U8") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "U4") (unit 1)
@@ -1975,7 +2037,7 @@
   (symbol (lib_id "power:GND") (at 80.645 132.08 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0de2d1f9-7c38-4690-ba2e-f7ffec690268)
-    (property "Reference" "#PWR07" (at 80.645 138.43 0)
+    (property "Reference" "#PWR034" (at 80.645 138.43 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 80.645 137.16 0)
@@ -1989,6 +2051,11 @@
     )
     (pin "1" (uuid 86ef9e87-126a-43f7-b4ab-55f850fbb164))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR034") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR07") (unit 1)
@@ -2000,7 +2067,7 @@
   (symbol (lib_id "Device:C") (at 221.615 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1517d276-5a92-469f-b0e6-f5d62fc74189)
-    (property "Reference" "C7" (at 222.25 52.07 0)
+    (property "Reference" "C13" (at 222.25 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 221.615 55.88 0)
@@ -2015,6 +2082,11 @@
     (pin "1" (uuid bd6a824e-2f2d-49f7-a2c7-fc801578013b))
     (pin "2" (uuid 45f09ba5-0dc8-43b1-a072-fb44f1523545))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C13") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C7") (unit 1)
@@ -2026,7 +2098,7 @@
   (symbol (lib_id "Device:Polyfuse") (at 47.625 49.53 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 15531b61-a407-4689-ad5c-03a2ad2391d7)
-    (property "Reference" "F3" (at 47.625 46.99 90)
+    (property "Reference" "F2" (at 47.625 46.99 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Polyfuse" (at 46.99 52.07 90)
@@ -2041,6 +2113,11 @@
     (pin "1" (uuid ee312cb1-8594-454c-9899-eb4d9972824b))
     (pin "2" (uuid a564d9da-31ae-4fff-8c79-d34049f635af))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "F2") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "F3") (unit 1)
@@ -2052,7 +2129,7 @@
   (symbol (lib_id "Device:LED") (at 264.16 60.325 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 17c433a6-b8d5-4347-96c1-80825fbefd0a)
-    (property "Reference" "LED4" (at 270.51 60.325 90)
+    (property "Reference" "LED5" (at 270.51 60.325 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "VDD" (at 269.875 62.865 90)
@@ -2067,6 +2144,11 @@
     (pin "1" (uuid b6e397a8-efc8-4d7d-a42f-e26b7d4944c5))
     (pin "2" (uuid aaa30826-00f4-48c4-b3a2-2688b6be053b))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "LED5") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "LED4") (unit 1)
@@ -2078,7 +2160,7 @@
   (symbol (lib_id "power:GND") (at 90.17 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 193c977a-b8fc-4dcc-bd31-068b8dddf765)
-    (property "Reference" "#PWR023" (at 90.17 82.55 0)
+    (property "Reference" "#PWR036" (at 90.17 82.55 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 90.17 80.01 0)
@@ -2092,6 +2174,11 @@
     )
     (pin "1" (uuid 24bb655f-bd64-466f-ad08-3191ae791d0d))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR036") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR023") (unit 1)
@@ -2103,7 +2190,7 @@
   (symbol (lib_id "Device:R") (at 40.005 114.3 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1c7cbbac-39f7-4e51-9de6-a6072248938c)
-    (property "Reference" "R1" (at 38.1 113.03 0)
+    (property "Reference" "R8" (at 38.1 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1k" (at 38.1 115.57 0)
@@ -2118,6 +2205,11 @@
     (pin "1" (uuid 239dd8b3-c6d6-4f28-8d88-08def69250cd))
     (pin "2" (uuid 29c05631-86f9-40fd-9082-3575056f423a))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R8") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R1") (unit 1)
@@ -2129,7 +2221,7 @@
   (symbol (lib_id "Device:C") (at 103.505 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1e2900d0-7f1e-4d46-a19b-4fd4d24fe8d3)
-    (property "Reference" "C1" (at 104.14 52.07 0)
+    (property "Reference" "C7" (at 104.14 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 103.505 55.88 0)
@@ -2144,6 +2236,11 @@
     (pin "1" (uuid 65ad984e-13c5-4d68-82fe-137be08fc546))
     (pin "2" (uuid a279dfef-e66b-4d07-b5b4-072bd380e469))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C7") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C1") (unit 1)
@@ -2155,7 +2252,7 @@
   (symbol (lib_id "power:GND") (at 41.275 66.04 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1f6f48e5-cfb7-46c2-8db2-e611889cc953)
-    (property "Reference" "#PWR01" (at 41.275 72.39 0)
+    (property "Reference" "#PWR030" (at 41.275 72.39 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 41.275 70.485 0)
@@ -2169,6 +2266,11 @@
     )
     (pin "1" (uuid 00cb4349-7dd3-42f3-a7e5-bd87127a9c4b))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR030") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR01") (unit 1)
@@ -2180,7 +2282,7 @@
   (symbol (lib_id "Device:C") (at 216.535 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2173bd3f-1bec-4759-9ecf-64529377160f)
-    (property "Reference" "C6" (at 217.17 52.07 0)
+    (property "Reference" "C12" (at 217.17 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 216.535 55.88 0)
@@ -2195,6 +2297,11 @@
     (pin "1" (uuid 0a4757cf-22b3-42fc-a693-a149ecb5c948))
     (pin "2" (uuid e4b21609-7f89-4e0b-96c4-1a18817e0bda))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C12") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C6") (unit 1)
@@ -2206,7 +2313,7 @@
   (symbol (lib_id "Device:LED") (at 184.785 151.13 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2351072e-d4e0-4da9-a55d-5dce61cd6c74)
-    (property "Reference" "LED5" (at 187.325 148.59 90)
+    (property "Reference" "LED4" (at 187.325 148.59 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "Heater" (at 184.785 149.225 90)
@@ -2221,6 +2328,11 @@
     (pin "1" (uuid 50826499-86e6-4200-8104-276555eca517))
     (pin "2" (uuid f3eecd32-54e3-4439-b8ab-8c5dee60964a))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "LED4") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "LED5") (unit 1)
@@ -2247,6 +2359,11 @@
     (pin "1" (uuid 05c4ba2e-2cfe-433c-a900-53e801a3891b))
     (pin "2" (uuid e41a246e-8e65-423b-8477-b9e4bd225069))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "L1") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "L1") (unit 1)
@@ -2273,6 +2390,11 @@
     (pin "1" (uuid 7733d9a2-e24f-435a-a5cc-f8319d427065))
     (pin "2" (uuid 6ed67b1e-d252-4b96-b001-eda964943135))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "J4") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "J4") (unit 1)
@@ -2284,7 +2406,7 @@
   (symbol (lib_id "power:GND") (at 85.09 56.515 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2d72ad64-1722-422e-aa94-fbe2d2fd4581)
-    (property "Reference" "#PWR020" (at 85.09 62.865 0)
+    (property "Reference" "#PWR035" (at 85.09 62.865 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 85.09 60.96 0)
@@ -2298,6 +2420,11 @@
     )
     (pin "1" (uuid 46f3a2c4-2c9f-4017-871a-3536752f25af))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR035") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR020") (unit 1)
@@ -2309,7 +2436,7 @@
   (symbol (lib_id "power:GND") (at 187.325 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2d93e4be-8ecb-4b5a-882a-19968457c94f)
-    (property "Reference" "#PWR012" (at 187.325 77.47 0)
+    (property "Reference" "#PWR044" (at 187.325 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 187.325 76.2 0)
@@ -2323,6 +2450,11 @@
     )
     (pin "1" (uuid 782293be-1cfd-4e18-8383-d053efa7efc3))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR044") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR012") (unit 1)
@@ -2353,6 +2485,11 @@
     (pin "2" (uuid d3f82fa8-055e-4981-a77a-375375a65123))
     (pin "3" (uuid 12b7dae2-18e8-40cd-84fa-b5e640aa03b0))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "Q1") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "Q1") (unit 1)
@@ -2364,7 +2501,7 @@
   (symbol (lib_id "power:GND") (at 167.005 133.35 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 352a3d71-f739-4f86-b499-a554285bf6b7)
-    (property "Reference" "#PWR013" (at 167.005 139.7 0)
+    (property "Reference" "#PWR043" (at 167.005 139.7 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 167.005 138.43 0)
@@ -2378,6 +2515,11 @@
     )
     (pin "1" (uuid b51de15b-7098-4d4d-bdd8-c3e367e762be))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR043") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR013") (unit 1)
@@ -2389,7 +2531,7 @@
   (symbol (lib_id "power:GND") (at 220.98 111.125 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 40519dff-b53a-443b-b6bc-4be2bee64d15)
-    (property "Reference" "#PWR019" (at 220.98 117.475 0)
+    (property "Reference" "#PWR049" (at 220.98 117.475 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 220.98 115.57 0)
@@ -2403,6 +2545,11 @@
     )
     (pin "1" (uuid 67cd6fb2-4fa7-441d-934e-5ff495999198))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR049") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR019") (unit 1)
@@ -2414,7 +2561,7 @@
   (symbol (lib_id "Device:C") (at 190.5 67.31 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 46cb66a9-18b9-4ced-95b2-b069061ea778)
-    (property "Reference" "C5" (at 191.135 65.405 0)
+    (property "Reference" "C11" (at 191.135 65.405 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 190.5 69.215 0)
@@ -2429,6 +2576,11 @@
     (pin "1" (uuid 70187826-c86f-4f05-8840-36642d44d83c))
     (pin "2" (uuid 5356f307-5efb-46f4-9b34-148897533bc9))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C11") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C5") (unit 1)
@@ -2440,7 +2592,7 @@
   (symbol (lib_id "Device:C") (at 226.695 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 48133f8e-9188-4181-8d71-7d5b8d6e9ac9)
-    (property "Reference" "C8" (at 227.33 52.07 0)
+    (property "Reference" "C14" (at 227.33 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 226.695 55.88 0)
@@ -2455,6 +2607,11 @@
     (pin "1" (uuid cf6884cc-3a1a-44e4-b3e4-ad6a937f6ca7))
     (pin "2" (uuid 61644957-f978-47a2-a7bd-e1486612008c))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C14") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C8") (unit 1)
@@ -2466,7 +2623,7 @@
   (symbol (lib_id "power:GND") (at 108.585 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 48190945-4c90-41de-8ba9-73f23f2635ee)
-    (property "Reference" "#PWR08" (at 108.585 84.455 0)
+    (property "Reference" "#PWR037" (at 108.585 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 108.585 82.55 0)
@@ -2480,6 +2637,11 @@
     )
     (pin "1" (uuid e47dcaeb-708d-4a58-a23c-c56cba04e46e))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR037") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR08") (unit 1)
@@ -2491,7 +2653,7 @@
   (symbol (lib_id "Device:R") (at 207.645 54.61 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4abd6f17-c3ca-4396-8c68-4f7af73642bf)
-    (property "Reference" "R9" (at 207.645 50.8 90)
+    (property "Reference" "R20" (at 207.645 50.8 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "470k" (at 207.645 52.705 90)
@@ -2506,6 +2668,11 @@
     (pin "1" (uuid 1f3d84de-4524-4a10-8f53-60ca6edf4e67))
     (pin "2" (uuid e8e9a06c-a338-4067-adef-92f497285f7b))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R20") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R9") (unit 1)
@@ -2517,7 +2684,7 @@
   (symbol (lib_id "Device:C") (at 154.94 74.295 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4ce0c5cf-9104-45ba-9a6d-32b323e0c302)
-    (property "Reference" "C4" (at 157.48 72.39 0)
+    (property "Reference" "C10" (at 157.48 72.39 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100nF" (at 155.575 76.835 0)
@@ -2532,6 +2699,11 @@
     (pin "1" (uuid 528ff1c2-062c-4767-a4d7-d22a268e62ab))
     (pin "2" (uuid bc8eda04-2e91-490b-b430-ffcce992bc64))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C10") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C4") (unit 1)
@@ -2543,7 +2715,7 @@
   (symbol (lib_id "power:GND") (at 264.16 74.295 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4d29d0fe-53f8-48d5-b096-a4a4dde1716d)
-    (property "Reference" "#PWR021" (at 264.16 80.645 0)
+    (property "Reference" "#PWR051" (at 264.16 80.645 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 264.16 79.375 0)
@@ -2557,6 +2729,11 @@
     )
     (pin "1" (uuid 1362ab6e-a400-4e03-b720-e7a91427b137))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR051") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR021") (unit 1)
@@ -2568,7 +2745,7 @@
   (symbol (lib_id "power:GND") (at 216.535 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 50749442-3264-47e7-81b9-501e4551dfdc)
-    (property "Reference" "#PWR016" (at 216.535 77.47 0)
+    (property "Reference" "#PWR048" (at 216.535 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 212.725 73.025 0)
@@ -2582,6 +2759,11 @@
     )
     (pin "1" (uuid eeeffbaf-ec5c-4ffd-8fb8-a758c8f7baa4))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR048") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR016") (unit 1)
@@ -2593,7 +2775,7 @@
   (symbol (lib_id "Device:R") (at 184.15 101.6 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 50d48796-5621-4cb0-a23e-2c3e21ccefc4)
-    (property "Reference" "R8" (at 184.15 97.155 90)
+    (property "Reference" "R16" (at 184.15 97.155 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "50mΩ" (at 184.15 99.06 90)
@@ -2608,6 +2790,11 @@
     (pin "1" (uuid b03db9db-be7f-48ea-af1c-57a5117c327e))
     (pin "2" (uuid cdc90188-883d-4be5-a49c-498163107c45))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R16") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R8") (unit 1)
@@ -2635,6 +2822,11 @@
     (pin "2" (uuid 2757d9ca-10cc-4399-b246-e3f41c2c6bd0))
     (pin "3" (uuid 12fc1996-f944-4bdd-a67a-f119e413f85d))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "RV1") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "RV1") (unit 1)
@@ -2646,7 +2838,7 @@
   (symbol (lib_id "Device:C") (at 108.585 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5d8fb30c-e773-45b0-8dba-1cff7a393e6d)
-    (property "Reference" "C2" (at 109.22 52.07 0)
+    (property "Reference" "C8" (at 109.22 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 108.585 55.88 0)
@@ -2661,6 +2853,11 @@
     (pin "1" (uuid 1e83570e-feb3-4c43-8983-8a9ea1534ff7))
     (pin "2" (uuid 95043b44-9da1-421c-871c-470a6d8d70fc))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C8") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C2") (unit 1)
@@ -2672,7 +2869,7 @@
   (symbol (lib_id "Device:R") (at 57.785 54.61 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5e72e577-a086-435c-b0c1-187a72734d31)
-    (property "Reference" "R13" (at 57.785 57.15 90)
+    (property "Reference" "R11" (at 57.785 57.15 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "47k" (at 57.785 59.055 90)
@@ -2687,6 +2884,11 @@
     (pin "1" (uuid 9664304d-afe5-46df-b14a-0f42a54c4fba))
     (pin "2" (uuid 80c20558-d91d-4236-8c4c-bc4c4a691876))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R11") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R13") (unit 1)
@@ -2698,7 +2900,7 @@
   (symbol (lib_id "power:GND") (at 48.26 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 60aba6af-d040-42cc-8605-de0bad4cd191)
-    (property "Reference" "#PWR03" (at 48.26 124.46 0)
+    (property "Reference" "#PWR031" (at 48.26 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 48.26 123.19 0)
@@ -2712,6 +2914,11 @@
     )
     (pin "1" (uuid cc22bcf5-0da5-4f24-b17e-b352b0f765dc))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR031") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR03") (unit 1)
@@ -2723,7 +2930,7 @@
   (symbol (lib_id "Device:R") (at 48.26 114.3 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6382872f-f476-4e85-a791-737cdcb4d14a)
-    (property "Reference" "R2" (at 45.72 113.03 0)
+    (property "Reference" "R9" (at 45.72 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1k" (at 45.72 115.57 0)
@@ -2738,6 +2945,11 @@
     (pin "1" (uuid 5fd735cb-fddb-437d-80be-a836c1064102))
     (pin "2" (uuid 7417ffc8-5565-4b24-b773-13691f9febd3))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R9") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R2") (unit 1)
@@ -2749,7 +2961,7 @@
   (symbol (lib_id "Device:R") (at 121.285 120.015 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6ccf9fa6-4a6e-4865-931a-9c3289020661)
-    (property "Reference" "R5" (at 123.825 120.015 90)
+    (property "Reference" "R14" (at 123.825 120.015 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "1k" (at 126.365 120.015 90)
@@ -2764,6 +2976,11 @@
     (pin "1" (uuid a9acdf46-78eb-44a1-bae9-84df08e3723e))
     (pin "2" (uuid 7762e569-23f1-40fe-9c4c-5be3204f21b2))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R14") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R5") (unit 1)
@@ -2775,7 +2992,7 @@
   (symbol (lib_id "power:GND") (at 197.485 155.575 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 6f836207-439b-4d19-9f0b-34bcb2c56a56)
-    (property "Reference" "#PWR017" (at 197.485 161.925 0)
+    (property "Reference" "#PWR046" (at 197.485 161.925 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 197.485 160.655 0)
@@ -2789,6 +3006,11 @@
     )
     (pin "1" (uuid 5a5aac3c-baf8-420e-b316-19edeead94bd))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR046") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR017") (unit 1)
@@ -2815,6 +3037,11 @@
     (pin "1" (uuid d77de69d-acb4-4989-998d-d0e661cff106))
     (pin "2" (uuid b8e8e793-84e3-4f7f-8782-d651930bf328))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R15") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R15") (unit 1)
@@ -2826,7 +3053,7 @@
   (symbol (lib_id "power:GND") (at 121.285 131.445 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 848ef7fa-c44c-40aa-bbfb-8bd77479865e)
-    (property "Reference" "#PWR024" (at 121.285 137.795 0)
+    (property "Reference" "#PWR038" (at 121.285 137.795 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 121.285 135.89 0)
@@ -2840,6 +3067,11 @@
     )
     (pin "1" (uuid 44542a54-22a5-42a8-8c3c-b32704835436))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR038") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR024") (unit 1)
@@ -2851,7 +3083,7 @@
   (symbol (lib_id "power:GND") (at 137.16 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8aac25af-7181-410d-83f1-07c340e02de6)
-    (property "Reference" "#PWR025" (at 137.16 84.455 0)
+    (property "Reference" "#PWR039" (at 137.16 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 137.16 81.915 0)
@@ -2865,6 +3097,11 @@
     )
     (pin "1" (uuid c70489ee-8e20-4982-b253-fe2a05809bb4))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR039") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR025") (unit 1)
@@ -2876,7 +3113,7 @@
   (symbol (lib_id "power:GND") (at 146.685 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8ab11ad4-b103-440f-ab24-7cf587837348)
-    (property "Reference" "#PWR06" (at 146.685 84.455 0)
+    (property "Reference" "#PWR040" (at 146.685 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 146.685 81.915 0)
@@ -2890,6 +3127,11 @@
     )
     (pin "1" (uuid ddd8926a-5428-4507-9ca5-c81e733441b1))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR040") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR06") (unit 1)
@@ -2901,7 +3143,7 @@
   (symbol (lib_id "Device:R") (at 264.16 70.485 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8b21af05-375d-4d94-9e79-eb73563542f3)
-    (property "Reference" "R12" (at 262.255 69.215 0)
+    (property "Reference" "R22" (at 262.255 69.215 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1k" (at 262.255 71.755 0)
@@ -2916,6 +3158,11 @@
     (pin "1" (uuid 2eafcf49-1c4f-4ab6-86e0-ebf505cc2f52))
     (pin "2" (uuid 5b139b0b-9424-4446-975c-cd7c4ac2d99e))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R22") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R12") (unit 1)
@@ -2927,7 +3174,7 @@
   (symbol (lib_id "Device:R") (at 252.095 49.53 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8c366be4-a483-4661-8c30-7238bdf03e87)
-    (property "Reference" "R11" (at 252.095 45.085 90)
+    (property "Reference" "R21" (at 252.095 45.085 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "50mΩ" (at 252.095 46.99 90)
@@ -2942,6 +3189,11 @@
     (pin "1" (uuid 0e56ac3a-e0a6-452f-b6e4-66eb5c45cd16))
     (pin "2" (uuid 689b3805-eff1-4ac8-a1df-0543bff5b8b2))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R21") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R11") (unit 1)
@@ -2950,10 +3202,35 @@
     )
   )
 
+  (symbol (lib_id "power:VBUS") (at 29.21 93.98 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 964573b4-c3fa-4053-a66c-d0ee64b1f421)
+    (property "Reference" "#PWR028" (at 33.02 93.98 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "VBUS" (at 25.4 93.98 90)
+      (effects (font (size 1.27 1.27)) (justify left))
+    )
+    (property "Footprint" "" (at 29.21 93.98 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 29.21 93.98 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid d0d5a672-df38-4479-8b96-97ac0565001d))
+    (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR028") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "WOBCLibrary:TCK106AF") (at 73.66 52.07 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 9d3c2376-8bf6-48e2-ba6d-506e2bfbbe9d)
-    (property "Reference" "U6" (at 73.66 44.45 0)
+    (property "Reference" "U5" (at 73.66 44.45 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "~" (at 74.93 52.07 0)
@@ -2971,6 +3248,11 @@
     (pin "4" (uuid 6c3952dd-c939-487e-b211-2f2561859799))
     (pin "5" (uuid 32723d26-4d74-41b8-aa2c-26376d14b138))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "U5") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "U6") (unit 1)
@@ -2982,7 +3264,7 @@
   (symbol (lib_id "power:VDD") (at 269.24 49.53 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a461308f-2d4a-41e9-935f-fab0acc6652e)
-    (property "Reference" "#PWR022" (at 265.43 49.53 0)
+    (property "Reference" "#PWR052" (at 265.43 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VDD" (at 273.05 49.53 90)
@@ -2996,6 +3278,11 @@
     )
     (pin "1" (uuid da9e6d3a-3069-4a32-a6fa-83b74476605c))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR052") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR022") (unit 1)
@@ -3007,7 +3294,7 @@
   (symbol (lib_id "Device:LED") (at 90.17 62.23 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a6b44aa5-141a-4e6d-91fa-9954e607a301)
-    (property "Reference" "LED3" (at 92.075 62.23 90)
+    (property "Reference" "LED2" (at 92.075 62.23 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "Backup Power" (at 87.63 59.69 90)
@@ -3022,6 +3309,11 @@
     (pin "1" (uuid c1c1b516-9e80-4cae-bd64-9da3ca8751d1))
     (pin "2" (uuid cb4d9f7c-ee33-46ec-9402-c06124a6851a))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "LED2") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "LED3") (unit 1)
@@ -3033,7 +3325,7 @@
   (symbol (lib_id "Device:R") (at 195.58 62.23 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a7eabf72-d46c-4326-8c13-e06e5602f03c)
-    (property "Reference" "R6" (at 195.58 55.88 90)
+    (property "Reference" "R18" (at 195.58 55.88 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "100k" (at 195.58 58.42 90)
@@ -3048,6 +3340,11 @@
     (pin "1" (uuid c7c7f025-fd4c-4baa-85dc-b98620e94dc4))
     (pin "2" (uuid e654eff1-82c6-4b4e-a1e6-094175108d84))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R18") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R6") (unit 1)
@@ -3059,7 +3356,7 @@
   (symbol (lib_id "power:GND") (at 52.07 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ab1ca4e3-0e65-42d2-b022-9b650f72a42e)
-    (property "Reference" "#PWR04" (at 52.07 124.46 0)
+    (property "Reference" "#PWR032" (at 52.07 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 52.07 123.19 0)
@@ -3073,6 +3370,11 @@
     )
     (pin "1" (uuid 62681a06-8198-46e1-81f7-f89b4c2c62d7))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR032") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR04") (unit 1)
@@ -3084,7 +3386,7 @@
   (symbol (lib_id "Device:C") (at 146.685 67.945 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b4996496-d0c0-4b16-ad8d-9a042f39edac)
-    (property "Reference" "C3" (at 147.32 66.04 0)
+    (property "Reference" "C9" (at 147.32 66.04 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 146.685 69.85 0)
@@ -3099,6 +3401,11 @@
     (pin "1" (uuid ba85974e-c59a-43e7-adb3-05a7f8a0a1db))
     (pin "2" (uuid ab613c8d-f1d3-45fd-9fe8-678d1ef0d8c5))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "C9") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "C3") (unit 1)
@@ -3110,7 +3417,7 @@
   (symbol (lib_id "Device:R") (at 120.65 55.88 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b4bfc247-0c47-471b-aa9e-739abf6111dc)
-    (property "Reference" "R4" (at 118.745 59.69 0)
+    (property "Reference" "R13" (at 118.745 59.69 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 121.92 60.96 0)
@@ -3125,6 +3432,11 @@
     (pin "1" (uuid 4eefc285-0625-45d0-ab71-8e8c837f39d4))
     (pin "2" (uuid 98af2bd3-e9bb-4d3a-be87-71c7aab0d694))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R13") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R4") (unit 1)
@@ -3136,7 +3448,7 @@
   (symbol (lib_id "Sensor_Energy:INA226") (at 167.005 120.65 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b8f88259-5ba4-42ea-81b2-e3386ad903d8)
-    (property "Reference" "U3" (at 164.8109 105.41 0)
+    (property "Reference" "U7" (at 164.8109 105.41 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "INA226" (at 164.8109 107.95 0)
@@ -3159,6 +3471,11 @@
     (pin "8" (uuid 3f9f9dc6-a9f9-421a-b7a5-44c0c829edf3))
     (pin "9" (uuid e71cfaba-ee37-466e-a563-7c58c9a01f7e))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "U7") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "U3") (unit 1)
@@ -3170,7 +3487,7 @@
   (symbol (lib_id "power:GND") (at 61.595 120.65 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b9c7957f-a370-4124-91d4-efc76f94ee61)
-    (property "Reference" "#PWR05" (at 61.595 127 0)
+    (property "Reference" "#PWR033" (at 61.595 127 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 60.96 117.475 0)
@@ -3184,6 +3501,11 @@
     )
     (pin "1" (uuid 634a1d92-151e-4284-bc3f-bc80b0dda602))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR033") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR05") (unit 1)
@@ -3210,6 +3532,11 @@
     (pin "1" (uuid 765d984a-4f3f-4646-a5c0-0ba15ad1f625))
     (pin "2" (uuid 26b8099c-bcfb-4e0f-9855-a0167e3d62a2))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "J2") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "J2") (unit 1)
@@ -3221,7 +3548,7 @@
   (symbol (lib_id "power:GND") (at 40.005 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid be82da3a-2b2a-4ca3-88c2-f261aa756a61)
-    (property "Reference" "#PWR02" (at 40.005 124.46 0)
+    (property "Reference" "#PWR029" (at 40.005 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 40.005 123.19 0)
@@ -3235,6 +3562,11 @@
     )
     (pin "1" (uuid 1b75285a-c071-4f5c-b357-c5e56ac3966e))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR029") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR02") (unit 1)
@@ -3246,7 +3578,7 @@
   (symbol (lib_id "power:GND") (at 190.5 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid beba7cc2-1438-4798-b784-c67dab723d6e)
-    (property "Reference" "#PWR014" (at 190.5 77.47 0)
+    (property "Reference" "#PWR045" (at 190.5 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 190.5 76.2 0)
@@ -3260,6 +3592,11 @@
     )
     (pin "1" (uuid 6006a74f-813a-47df-be54-c4ed04660b3c))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR045") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR014") (unit 1)
@@ -3271,7 +3608,7 @@
   (symbol (lib_id "Switch:SW_SPDT") (at 211.455 101.6 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bf978cd1-f8d4-4e4c-8a8d-ea415e4067da)
-    (property "Reference" "SW2" (at 211.455 106.045 0)
+    (property "Reference" "SW3" (at 211.455 106.045 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "LiPo Switch" (at 211.455 107.95 0)
@@ -3287,6 +3624,11 @@
     (pin "2" (uuid 9201d5fa-154d-4761-af1e-aa43ce39526e))
     (pin "3" (uuid 4ef82021-018d-4fa7-bc28-dbd30610aad2))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "SW3") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "SW2") (unit 1)
@@ -3298,7 +3640,7 @@
   (symbol (lib_id "power:GND") (at 151.13 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c1615838-1b41-4516-82f2-e156536cdbdc)
-    (property "Reference" "#PWR010" (at 151.13 84.455 0)
+    (property "Reference" "#PWR041" (at 151.13 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 151.13 81.915 0)
@@ -3312,6 +3654,11 @@
     )
     (pin "1" (uuid cd05020a-2d83-4c16-9e1d-cac7d73bf8a9))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR041") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR010") (unit 1)
@@ -3323,7 +3670,7 @@
   (symbol (lib_id "Device:LED") (at 121.285 127.635 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c37eea54-0da4-4ac6-b07e-eef4dabff4c2)
-    (property "Reference" "LED2" (at 123.825 125.095 90)
+    (property "Reference" "LED3" (at 123.825 125.095 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "CHARGE" (at 123.825 127.635 90)
@@ -3338,6 +3685,11 @@
     (pin "1" (uuid eb329c63-eaef-4260-9a03-04c652837329))
     (pin "2" (uuid ecbe6362-b0ba-4579-b27b-0dc4963d7756))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "LED3") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "LED2") (unit 1)
@@ -3349,7 +3701,7 @@
   (symbol (lib_id "Device:R") (at 202.565 59.69 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c8a06529-bd2b-4f71-a11b-c022be6a1f39)
-    (property "Reference" "R7" (at 204.47 58.42 0)
+    (property "Reference" "R19" (at 204.47 58.42 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "150k" (at 204.47 60.96 0)
@@ -3364,6 +3716,11 @@
     (pin "1" (uuid 261620d3-008f-4326-818c-8d1c0bc03a48))
     (pin "2" (uuid 05e74320-6672-41b3-b42c-7f93bf189e66))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R19") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R7") (unit 1)
@@ -3390,6 +3747,11 @@
     (pin "1" (uuid d428ea84-cb0f-4d0c-90db-6934f08640ed))
     (pin "2" (uuid 2ef8bbbc-ad57-4252-b747-2090898a3380))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "J1") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "J1") (unit 1)
@@ -3416,6 +3778,11 @@
     (pin "1" (uuid 2051be49-08b3-4794-955d-f8d775aa7daa))
     (pin "2" (uuid 62cb112c-3ea2-460b-b4b2-08f8b1c3f43c))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "F1") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "F1") (unit 1)
@@ -3427,7 +3794,7 @@
   (symbol (lib_id "Device:R") (at 52.07 114.3 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d3bfb9e6-eb50-456e-8871-9581db07889a)
-    (property "Reference" "R3" (at 56.515 113.03 0)
+    (property "Reference" "R10" (at 56.515 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "47k" (at 57.15 115.57 0)
@@ -3442,6 +3809,11 @@
     (pin "1" (uuid f3a07730-a078-46d7-9017-931c8231bd72))
     (pin "2" (uuid 49e5b067-80bb-4868-a5e6-d19795b61ac9))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R10") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R3") (unit 1)
@@ -3453,7 +3825,7 @@
   (symbol (lib_id "Device:Polyfuse") (at 197.485 101.6 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d59c563f-15a8-47ed-abd6-a77fd01e332b)
-    (property "Reference" "F2" (at 197.485 95.885 90)
+    (property "Reference" "F3" (at 197.485 95.885 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Polyfuse" (at 197.485 98.425 90)
@@ -3468,6 +3840,11 @@
     (pin "1" (uuid 20a30921-e9d4-4ace-a595-bda54d78af36))
     (pin "2" (uuid 26db0046-c548-4f44-95af-285a93896cd3))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "F3") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "F2") (unit 1)
@@ -3479,7 +3856,7 @@
   (symbol (lib_id "power:GND") (at 234.315 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d5ee7ae9-c72f-47e5-aca2-05704057d2d5)
-    (property "Reference" "#PWR018" (at 234.315 95.25 0)
+    (property "Reference" "#PWR050" (at 234.315 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 234.315 92.71 0)
@@ -3493,6 +3870,11 @@
     )
     (pin "1" (uuid d66a6d09-c351-4045-aaeb-7dc2daf8dee5))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR050") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR018") (unit 1)
@@ -3504,7 +3886,7 @@
   (symbol (lib_id "power:GND") (at 202.565 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid dbcd226f-edf3-449c-ae93-a795bc08c972)
-    (property "Reference" "#PWR015" (at 202.565 77.47 0)
+    (property "Reference" "#PWR047" (at 202.565 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 202.565 76.2 0)
@@ -3518,6 +3900,11 @@
     )
     (pin "1" (uuid e8bd4a04-1ba1-47d0-9bd8-6e6a8137743e))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR047") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR015") (unit 1)
@@ -3529,7 +3916,7 @@
   (symbol (lib_id "WOBCLibrary:TPS63070RNMR") (at 170.815 57.15 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e36ea898-f228-4b74-93ff-db6ec01c45b1)
-    (property "Reference" "U2" (at 170.815 73.66 0)
+    (property "Reference" "U9" (at 170.815 73.66 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "TPS63070RNMR" (at 170.815 76.2 0)
@@ -3582,6 +3969,11 @@
     (pin "7_8" (uuid 66b157e8-d9c9-4a37-85ea-f68bbaab41ff))
     (pin "9" (uuid 6a665946-7458-4d79-a4fa-08be83e491bc))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "U9") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "U2") (unit 1)
@@ -3609,6 +4001,11 @@
     (pin "2" (uuid 1ea5de35-07eb-4a2a-a05d-46fcc4c3e9c8))
     (pin "3" (uuid fe74d3bb-448d-4ca6-b3b4-b226b1985396))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "J3") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "J3") (unit 1)
@@ -3635,6 +4032,11 @@
     (pin "1" (uuid 9de41b42-5710-4fdf-bdf6-838a3595da66))
     (pin "2" (uuid eb9fc2d3-f41e-4d7a-b981-541dd36a1c4c))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "LED1") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "LED1") (unit 1)
@@ -3646,7 +4048,7 @@
   (symbol (lib_id "Sensor_Energy:INA226") (at 234.315 76.2 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid eff24c80-3195-45cf-8778-e3c38a79722b)
-    (property "Reference" "U5" (at 232.1209 60.96 0)
+    (property "Reference" "U10" (at 232.1209 60.96 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "INA226" (at 232.1209 63.5 0)
@@ -3669,6 +4071,11 @@
     (pin "8" (uuid 47fb305a-e649-4e87-aaeb-e98a3d7d67aa))
     (pin "9" (uuid 00ce897b-a746-42b7-8d0f-4d4b215735ec))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "U10") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "U5") (unit 1)
@@ -3680,7 +4087,7 @@
   (symbol (lib_id "Switch:SW_SPDT") (at 132.08 55.88 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f1b085c7-7cfd-42e5-9d2a-680fb450d9bb)
-    (property "Reference" "SW1" (at 131.445 62.865 0)
+    (property "Reference" "SW2" (at 131.445 62.865 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Power Switch" (at 132.08 60.96 0)
@@ -3696,6 +4103,11 @@
     (pin "2" (uuid cdccf936-492e-4816-bf53-2d931e85dfd9))
     (pin "3" (uuid 9d53ee68-696e-4645-8fd4-db15fb4566b7))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "SW2") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "SW1") (unit 1)
@@ -3707,7 +4119,7 @@
   (symbol (lib_id "power:GND") (at 154.94 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f58da63c-55ef-430a-adf3-49520c75bfb8)
-    (property "Reference" "#PWR011" (at 154.94 84.455 0)
+    (property "Reference" "#PWR042" (at 154.94 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 154.94 81.915 0)
@@ -3721,6 +4133,11 @@
     )
     (pin "1" (uuid 11921931-9dfb-4781-af7c-f9b8eaa33b4e))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "#PWR042") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "#PWR011") (unit 1)
@@ -3732,7 +4149,7 @@
   (symbol (lib_id "Device:R") (at 192.405 151.13 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f6bcd0a6-ad4c-4afa-bcc2-3b55d9acff2a)
-    (property "Reference" "R10" (at 192.405 145.415 90)
+    (property "Reference" "R17" (at 192.405 145.415 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "1k" (at 192.405 147.955 90)
@@ -3747,6 +4164,11 @@
     (pin "1" (uuid 72971496-1791-462d-bc8c-4a650ed34050))
     (pin "2" (uuid eee10eb7-4b58-44ac-9cf5-9f7c687d4b59))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R17") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R10") (unit 1)
@@ -3758,7 +4180,7 @@
   (symbol (lib_id "Battery_Management:MCP73871-1CC") (at 80.645 109.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f8541ea1-a718-44ab-a285-f92a93f67e48)
-    (property "Reference" "U1" (at 82.8391 84.455 0)
+    (property "Reference" "U6" (at 82.8391 84.455 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "MCP73871-1CC" (at 82.8391 86.995 0)
@@ -3792,6 +4214,11 @@
     (pin "8" (uuid 8d4da2b1-4f87-46ed-b282-f59913b43b8b))
     (pin "9" (uuid cee07f14-6da9-4c8d-8d2d-aa918619d05a))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "U6") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "U1") (unit 1)
@@ -3803,7 +4230,7 @@
   (symbol (lib_id "Device:R") (at 90.17 54.61 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fbbd7fde-6f15-4083-9f88-d25ed41a7d3d)
-    (property "Reference" "R14" (at 92.71 54.61 90)
+    (property "Reference" "R12" (at 92.71 54.61 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "1k" (at 95.25 54.61 90)
@@ -3818,15 +4245,16 @@
     (pin "1" (uuid 40265d53-6493-472e-84e3-f79e2d131438))
     (pin "2" (uuid 384f05ff-3a8b-4042-b9de-5238cbfe98da))
     (instances
+      (project "RockoonBus"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/f4aeda9e-f468-4f62-8c63-032b115f36d1"
+          (reference "R12") (unit 1)
+        )
+      )
       (project "LiPoPower"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
           (reference "R14") (unit 1)
         )
       )
     )
-  )
-
-  (sheet_instances
-    (path "/" (page "1"))
   )
 )
