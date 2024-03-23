@@ -22,8 +22,9 @@ void setup() {
   // put your setup code here, to run once:
 
   Serial.begin(115200);
-
+  
   Serial1.begin(9600);
+
   lora.begin();
   bool ok = true;
   ok &= lora.setMode(E220::Mode::CONFIG_DS);
@@ -40,6 +41,7 @@ void setup() {
   Serial1.begin(115200);
 
   delay(1000);
+
   if (ok) Serial.println("LoRa ok.");
   else Serial.println("LoRa error.");
 }

@@ -25,12 +25,8 @@ bool E220::isBusy() {
 bool E220::sendTransparent(const uint8_t* data, unsigned len) {
   if (isBusy()) return false;
 
-  uint8_t buf[256];
-  buf[0] = len;
-  memcpy(buf+1, data, len);
-  stream_.write(buf, len + 1); 
-  // stream.write(len);
-  // stream.write(data, len);
+  stream_.write(len);
+  stream_.write(data, len);
   return true;
 }
 
@@ -200,9 +196,7 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
   }
 
   uint8_t rx[16];
-  int rx_len = stream_.readBytes(rx, 3 + len);
-
-  //Serial.println(rx_len);
+  stream_.readBytes(rx, 3 + len);
 
   cmd[0] = 0xC1;
   ok &= memcmp(cmd, rx, 3) == 0;
