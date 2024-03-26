@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <cstring>
 
-namespace algorithm {
+namespace kernel {
 
 Heap::Heap(uint8_t *arena, pointer_t arena_size)
   :arena_(arena) {
@@ -272,4 +272,4 @@ void Heap::dump() const {
 
 }
 
-} // namespace algorithm
+} 

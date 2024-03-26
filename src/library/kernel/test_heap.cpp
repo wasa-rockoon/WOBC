@@ -1,5 +1,7 @@
 #include "heap.h"
 
+#ifndef ARDUINO
+
 #include <cassert>
 #include <cstring>
 #include <gtest/gtest.h>
@@ -11,7 +13,7 @@ TEST(HeapTest, BasicAssertions) {
   uint8_t arena[arena_size];
   memset(arena, 0, arena_size);
 
-  algorithm::Heap h(arena, arena_size);
+  internal::Heap h(arena, arena_size);
 
   // h.dump();
 
@@ -78,3 +80,4 @@ TEST(HeapTest, BasicAssertions) {
   printf("complete\n");
 
 }
+#endif

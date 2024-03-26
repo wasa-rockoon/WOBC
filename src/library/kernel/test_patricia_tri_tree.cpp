@@ -1,5 +1,7 @@
 #include "patricia_tri_tree.h"
 
+#ifndef ARDUINO
+
 #include <cassert>
 #include <cstring>
 #include <gtest/gtest.h>
@@ -8,7 +10,7 @@
 #include <random>
 
 
-class TestTreeNode : public algorithm::PatriciaTrieTree<unsigned&>::Node {
+class TestTreeNode : public internal::PatriciaTrieTree<unsigned&>::Node {
 public:
   TestTreeNode(uint32_t key = 0, uint32_t mask = 0):
     algorithm::PatriciaTrieTree<unsigned&>::Node(key, mask) {}
@@ -63,3 +65,5 @@ TEST(TreeTest, BasicAssertions) {
     ASSERT_EQ(answer, traversed);
   }
 }
+
+#endif
