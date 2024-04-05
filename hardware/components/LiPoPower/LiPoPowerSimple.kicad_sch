@@ -1002,7 +1002,7 @@
     (stroke (width 0) (type default))
     (uuid 0280a190-6422-432a-8de0-c9e50fe28b85)
   )
-  (wire (pts (xy 225.425 101.6) (xy 226.695 101.6))
+  (wire (pts (xy 215.265 104.14) (xy 216.535 104.14))
     (stroke (width 0) (type default))
     (uuid 0373f729-7b52-46de-b8c4-0722c728cada)
   )
@@ -1018,7 +1018,7 @@
     (stroke (width 0) (type default))
     (uuid 08d68a43-3249-4120-a1ad-d22e5b980fe9)
   )
-  (wire (pts (xy 225.425 111.125) (xy 225.425 101.6))
+  (wire (pts (xy 215.265 113.665) (xy 215.265 104.14))
     (stroke (width 0) (type default))
     (uuid 0af8fa76-9efb-4a81-95f5-c4695bc3ec68)
   )
@@ -1046,7 +1046,7 @@
     (stroke (width 0) (type default))
     (uuid 1034c8fa-050b-4494-86eb-687a6f9776d0)
   )
-  (wire (pts (xy 220.98 99.06) (xy 226.695 99.06))
+  (wire (pts (xy 205.74 101.6) (xy 216.535 101.6))
     (stroke (width 0) (type default))
     (uuid 1042e749-f9f3-4bf5-9d1f-0fcd88d9029d)
   )
@@ -1185,10 +1185,6 @@
   (wire (pts (xy 103.505 57.785) (xy 103.505 58.42))
     (stroke (width 0) (type default))
     (uuid 5c9249ee-3460-4203-aff2-4013ff7cbed5)
-  )
-  (wire (pts (xy 205.74 101.6) (xy 210.82 101.6))
-    (stroke (width 0) (type default))
-    (uuid 5e812033-7164-4dac-a381-a23a0e22cb7a)
   )
   (wire (pts (xy 183.515 101.6) (xy 184.785 101.6))
     (stroke (width 0) (type default))
@@ -1567,7 +1563,7 @@
   (symbol (lib_id "power:GND") (at 112.395 111.125 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 092f2f5a-a4af-424f-832b-c2c13cc500c7)
-    (property "Reference" "#PWR018" (at 112.395 117.475 0)
+    (property "Reference" "#PWR0109" (at 112.395 117.475 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 112.395 116.205 0)
@@ -1581,9 +1577,14 @@
     )
     (pin "1" (uuid 11a1e871-51a4-4bf0-b7bf-9082ce95c2d5))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0109") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR018") (unit 1)
+          (reference "#PWR0109") (unit 1)
         )
       )
     )
@@ -1592,7 +1593,7 @@
   (symbol (lib_id "power:GND") (at 80.645 132.08 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0de2d1f9-7c38-4690-ba2e-f7ffec690268)
-    (property "Reference" "#PWR07" (at 80.645 138.43 0)
+    (property "Reference" "#PWR0107" (at 80.645 138.43 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 80.645 137.16 0)
@@ -1606,9 +1607,14 @@
     )
     (pin "1" (uuid 86ef9e87-126a-43f7-b4ab-55f850fbb164))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0107") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR07") (unit 1)
+          (reference "#PWR0107") (unit 1)
         )
       )
     )
@@ -1617,7 +1623,7 @@
   (symbol (lib_id "Device:C") (at 40.64 104.14 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1235d0d4-ad52-4192-a080-30f394817593)
-    (property "Reference" "C10" (at 41.275 102.235 0)
+    (property "Reference" "C101" (at 41.275 102.235 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 40.64 106.045 0)
@@ -1632,9 +1638,14 @@
     (pin "1" (uuid 8027314d-a788-4b6e-a59c-f18105a2ece1))
     (pin "2" (uuid ceb25ef1-0b35-49ea-b1b0-47c707fdff20))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C10") (unit 1)
+          (reference "C101") (unit 1)
         )
       )
     )
@@ -1643,7 +1654,7 @@
   (symbol (lib_id "Device:C") (at 221.615 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1517d276-5a92-469f-b0e6-f5d62fc74189)
-    (property "Reference" "C7" (at 222.25 52.07 0)
+    (property "Reference" "C110" (at 222.25 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 221.615 55.88 0)
@@ -1658,9 +1669,14 @@
     (pin "1" (uuid bd6a824e-2f2d-49f7-a2c7-fc801578013b))
     (pin "2" (uuid 45f09ba5-0dc8-43b1-a072-fb44f1523545))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C110") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C7") (unit 1)
+          (reference "C110") (unit 1)
         )
       )
     )
@@ -1669,13 +1685,13 @@
   (symbol (lib_id "Device:Polyfuse") (at 46.355 49.53 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 15531b61-a407-4689-ad5c-03a2ad2391d7)
-    (property "Reference" "F3" (at 46.355 46.99 90)
+    (property "Reference" "F102" (at 46.355 46.99 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Polyfuse" (at 45.72 52.07 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 51.435 48.26 0)
+    (property "Footprint" "Fuse:Fuse_1206_3216Metric" (at 51.435 48.26 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "~" (at 46.355 49.53 0)
@@ -1684,9 +1700,14 @@
     (pin "1" (uuid ee312cb1-8594-454c-9899-eb4d9972824b))
     (pin "2" (uuid a564d9da-31ae-4fff-8c79-d34049f635af))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "F102") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "F3") (unit 1)
+          (reference "F102") (unit 1)
         )
       )
     )
@@ -1695,7 +1716,7 @@
   (symbol (lib_id "Device:LED") (at 234.315 60.325 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 17c433a6-b8d5-4347-96c1-80825fbefd0a)
-    (property "Reference" "LED4" (at 240.665 60.325 90)
+    (property "Reference" "LED103" (at 240.665 60.325 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "VDD" (at 240.03 62.865 90)
@@ -1710,9 +1731,14 @@
     (pin "1" (uuid b6e397a8-efc8-4d7d-a42f-e26b7d4944c5))
     (pin "2" (uuid aaa30826-00f4-48c4-b3a2-2688b6be053b))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "LED103") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "LED4") (unit 1)
+          (reference "LED103") (unit 1)
         )
       )
     )
@@ -1721,7 +1747,7 @@
   (symbol (lib_id "Device:R") (at 31.115 114.3 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1c7cbbac-39f7-4e51-9de6-a6072248938c)
-    (property "Reference" "R1" (at 29.21 113.03 0)
+    (property "Reference" "R101" (at 29.21 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1k" (at 29.21 115.57 0)
@@ -1736,9 +1762,14 @@
     (pin "1" (uuid 239dd8b3-c6d6-4f28-8d88-08def69250cd))
     (pin "2" (uuid 29c05631-86f9-40fd-9082-3575056f423a))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R1") (unit 1)
+          (reference "R101") (unit 1)
         )
       )
     )
@@ -1747,7 +1778,7 @@
   (symbol (lib_id "Device:C") (at 103.505 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1e2900d0-7f1e-4d46-a19b-4fd4d24fe8d3)
-    (property "Reference" "C1" (at 104.14 52.07 0)
+    (property "Reference" "C102" (at 104.14 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 103.505 55.88 0)
@@ -1762,9 +1793,14 @@
     (pin "1" (uuid 65ad984e-13c5-4d68-82fe-137be08fc546))
     (pin "2" (uuid a279dfef-e66b-4d07-b5b4-072bd380e469))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C102") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C1") (unit 1)
+          (reference "C102") (unit 1)
         )
       )
     )
@@ -1773,7 +1809,7 @@
   (symbol (lib_id "power:GND") (at 40.005 66.04 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1f6f48e5-cfb7-46c2-8db2-e611889cc953)
-    (property "Reference" "#PWR01" (at 40.005 72.39 0)
+    (property "Reference" "#PWR0102" (at 40.005 72.39 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 40.005 70.485 0)
@@ -1787,9 +1823,14 @@
     )
     (pin "1" (uuid 00cb4349-7dd3-42f3-a7e5-bd87127a9c4b))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0102") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR01") (unit 1)
+          (reference "#PWR0102") (unit 1)
         )
       )
     )
@@ -1798,7 +1839,7 @@
   (symbol (lib_id "Device:C") (at 216.535 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2173bd3f-1bec-4759-9ecf-64529377160f)
-    (property "Reference" "C6" (at 217.17 52.07 0)
+    (property "Reference" "C109" (at 217.17 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 216.535 55.88 0)
@@ -1813,9 +1854,14 @@
     (pin "1" (uuid 0a4757cf-22b3-42fc-a693-a149ecb5c948))
     (pin "2" (uuid e4b21609-7f89-4e0b-96c4-1a18817e0bda))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C109") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C6") (unit 1)
+          (reference "C109") (unit 1)
         )
       )
     )
@@ -1824,7 +1870,7 @@
   (symbol (lib_id "Device:L") (at 170.18 39.37 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2732823f-f471-40c1-80af-45e165defc4c)
-    (property "Reference" "L1" (at 170.18 34.29 90)
+    (property "Reference" "L101" (at 170.18 34.29 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "L" (at 170.18 36.83 90)
@@ -1839,35 +1885,45 @@
     (pin "1" (uuid 05c4ba2e-2cfe-433c-a900-53e801a3891b))
     (pin "2" (uuid e41a246e-8e65-423b-8477-b9e4bd225069))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "L101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "L1") (unit 1)
+          (reference "L101") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "Connector_Generic:Conn_01x02") (at 231.775 99.06 0) (unit 1)
+  (symbol (lib_id "Connector_Generic:Conn_01x02") (at 221.615 101.6 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 28765f03-3818-4e49-bc2d-1f89935f9442)
-    (property "Reference" "J4" (at 234.315 99.06 0)
+    (property "Reference" "J103" (at 224.155 101.6 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "LiPo" (at 234.315 101.6 0)
+    (property "Value" "LiPo" (at 224.155 104.14 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" (at 231.775 99.06 0)
+    (property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal" (at 221.615 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "~" (at 231.775 99.06 0)
+    (property "Datasheet" "~" (at 221.615 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 7733d9a2-e24f-435a-a5cc-f8319d427065))
     (pin "2" (uuid 6ed67b1e-d252-4b96-b001-eda964943135))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "J103") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "J4") (unit 1)
+          (reference "J103") (unit 1)
         )
       )
     )
@@ -1876,7 +1932,7 @@
   (symbol (lib_id "power:GND") (at 187.325 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2d93e4be-8ecb-4b5a-882a-19968457c94f)
-    (property "Reference" "#PWR012" (at 187.325 77.47 0)
+    (property "Reference" "#PWR0117" (at 187.325 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 187.325 76.2 0)
@@ -1890,9 +1946,14 @@
     )
     (pin "1" (uuid 782293be-1cfd-4e18-8383-d053efa7efc3))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0117") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR012") (unit 1)
+          (reference "#PWR0117") (unit 1)
         )
       )
     )
@@ -1901,7 +1962,7 @@
   (symbol (lib_id "power:GND") (at 171.45 133.35 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 352a3d71-f739-4f86-b499-a554285bf6b7)
-    (property "Reference" "#PWR013" (at 171.45 139.7 0)
+    (property "Reference" "#PWR0116" (at 171.45 139.7 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 171.45 138.43 0)
@@ -1915,9 +1976,14 @@
     )
     (pin "1" (uuid b51de15b-7098-4d4d-bdd8-c3e367e762be))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0116") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR013") (unit 1)
+          (reference "#PWR0116") (unit 1)
         )
       )
     )
@@ -1926,7 +1992,7 @@
   (symbol (lib_id "power:GND") (at 152.4 113.03 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 35d2aed6-b104-4b68-a7e2-c01c8173b95f)
-    (property "Reference" "#PWR09" (at 152.4 119.38 0)
+    (property "Reference" "#PWR0114" (at 152.4 119.38 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 149.225 115.57 0)
@@ -1940,34 +2006,44 @@
     )
     (pin "1" (uuid 336aa119-4b7b-46c7-9ada-166da99e797f))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0114") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR09") (unit 1)
+          (reference "#PWR0114") (unit 1)
         )
       )
     )
   )
 
-  (symbol (lib_id "power:GND") (at 225.425 111.125 0) (unit 1)
+  (symbol (lib_id "power:GND") (at 215.265 113.665 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 40519dff-b53a-443b-b6bc-4be2bee64d15)
-    (property "Reference" "#PWR019" (at 225.425 117.475 0)
+    (property "Reference" "#PWR0120" (at 215.265 120.015 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "GND" (at 225.425 115.57 0)
+    (property "Value" "GND" (at 215.265 118.11 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 225.425 111.125 0)
+    (property "Footprint" "" (at 215.265 113.665 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 225.425 111.125 0)
+    (property "Datasheet" "" (at 215.265 113.665 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid 67cd6fb2-4fa7-441d-934e-5ff495999198))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0120") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR019") (unit 1)
+          (reference "#PWR0120") (unit 1)
         )
       )
     )
@@ -1976,7 +2052,7 @@
   (symbol (lib_id "Device:C") (at 190.5 67.31 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 46cb66a9-18b9-4ced-95b2-b069061ea778)
-    (property "Reference" "C5" (at 191.135 65.405 0)
+    (property "Reference" "C108" (at 191.135 65.405 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 190.5 69.215 0)
@@ -1991,9 +2067,14 @@
     (pin "1" (uuid 70187826-c86f-4f05-8840-36642d44d83c))
     (pin "2" (uuid 5356f307-5efb-46f4-9b34-148897533bc9))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C108") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C5") (unit 1)
+          (reference "C108") (unit 1)
         )
       )
     )
@@ -2002,7 +2083,7 @@
   (symbol (lib_id "Device:C") (at 226.695 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 48133f8e-9188-4181-8d71-7d5b8d6e9ac9)
-    (property "Reference" "C8" (at 227.33 52.07 0)
+    (property "Reference" "C111" (at 227.33 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 226.695 55.88 0)
@@ -2017,9 +2098,14 @@
     (pin "1" (uuid cf6884cc-3a1a-44e4-b3e4-ad6a937f6ca7))
     (pin "2" (uuid 61644957-f978-47a2-a7bd-e1486612008c))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C111") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C8") (unit 1)
+          (reference "C111") (unit 1)
         )
       )
     )
@@ -2028,7 +2114,7 @@
   (symbol (lib_id "power:GND") (at 108.585 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 48190945-4c90-41de-8ba9-73f23f2635ee)
-    (property "Reference" "#PWR08" (at 108.585 84.455 0)
+    (property "Reference" "#PWR0108" (at 108.585 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 108.585 82.55 0)
@@ -2042,9 +2128,14 @@
     )
     (pin "1" (uuid e47dcaeb-708d-4a58-a23c-c56cba04e46e))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0108") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR08") (unit 1)
+          (reference "#PWR0108") (unit 1)
         )
       )
     )
@@ -2053,7 +2144,7 @@
   (symbol (lib_id "Device:R") (at 207.645 54.61 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4abd6f17-c3ca-4396-8c68-4f7af73642bf)
-    (property "Reference" "R9" (at 207.645 50.8 90)
+    (property "Reference" "R110" (at 207.645 50.8 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "470k" (at 207.645 52.705 90)
@@ -2068,9 +2159,14 @@
     (pin "1" (uuid 1f3d84de-4524-4a10-8f53-60ca6edf4e67))
     (pin "2" (uuid e8e9a06c-a338-4067-adef-92f497285f7b))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R110") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R9") (unit 1)
+          (reference "R110") (unit 1)
         )
       )
     )
@@ -2079,7 +2175,7 @@
   (symbol (lib_id "Device:C") (at 154.94 74.295 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4ce0c5cf-9104-45ba-9a6d-32b323e0c302)
-    (property "Reference" "C4" (at 157.48 72.39 0)
+    (property "Reference" "C107" (at 157.48 72.39 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100nF" (at 155.575 76.835 0)
@@ -2094,9 +2190,14 @@
     (pin "1" (uuid 528ff1c2-062c-4767-a4d7-d22a268e62ab))
     (pin "2" (uuid bc8eda04-2e91-490b-b430-ffcce992bc64))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C107") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C4") (unit 1)
+          (reference "C107") (unit 1)
         )
       )
     )
@@ -2105,7 +2206,7 @@
   (symbol (lib_id "power:GND") (at 234.315 74.295 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4d29d0fe-53f8-48d5-b096-a4a4dde1716d)
-    (property "Reference" "#PWR021" (at 234.315 80.645 0)
+    (property "Reference" "#PWR0122" (at 234.315 80.645 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 234.315 79.375 0)
@@ -2119,9 +2220,14 @@
     )
     (pin "1" (uuid 1362ab6e-a400-4e03-b720-e7a91427b137))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0122") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR021") (unit 1)
+          (reference "#PWR0122") (unit 1)
         )
       )
     )
@@ -2130,7 +2236,7 @@
   (symbol (lib_id "power:GND") (at 216.535 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 50749442-3264-47e7-81b9-501e4551dfdc)
-    (property "Reference" "#PWR016" (at 216.535 77.47 0)
+    (property "Reference" "#PWR0121" (at 216.535 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 212.725 73.025 0)
@@ -2144,9 +2250,14 @@
     )
     (pin "1" (uuid eeeffbaf-ec5c-4ffd-8fb8-a758c8f7baa4))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0121") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR016") (unit 1)
+          (reference "#PWR0121") (unit 1)
         )
       )
     )
@@ -2155,7 +2266,7 @@
   (symbol (lib_id "Device:R") (at 188.595 101.6 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 50d48796-5621-4cb0-a23e-2c3e21ccefc4)
-    (property "Reference" "R8" (at 188.595 97.155 90)
+    (property "Reference" "R107" (at 188.595 97.155 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "50mΩ" (at 188.595 99.06 90)
@@ -2170,9 +2281,14 @@
     (pin "1" (uuid b03db9db-be7f-48ea-af1c-57a5117c327e))
     (pin "2" (uuid cdc90188-883d-4be5-a49c-498163107c45))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R107") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R8") (unit 1)
+          (reference "R107") (unit 1)
         )
       )
     )
@@ -2181,13 +2297,13 @@
   (symbol (lib_id "Device:R_Potentiometer") (at 48.26 104.14 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 55656ff8-9041-461e-9537-b8944ed6f125)
-    (property "Reference" "RV1" (at 36.83 102.87 0)
+    (property "Reference" "RV101" (at 36.83 102.87 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "20k" (at 36.83 105.41 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "PCM_Resistor_SMD_AKL:R_0402_1005Metric" (at 48.26 104.14 0)
+    (property "Footprint" "PCM_Potentiometer_SMD_AKL:Potentiometer_Bourns_TC33X_Vertical" (at 48.26 104.14 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 48.26 104.14 0)
@@ -2197,9 +2313,14 @@
     (pin "2" (uuid 2757d9ca-10cc-4399-b246-e3f41c2c6bd0))
     (pin "3" (uuid 12fc1996-f944-4bdd-a67a-f119e413f85d))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "RV101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "RV1") (unit 1)
+          (reference "RV101") (unit 1)
         )
       )
     )
@@ -2208,7 +2329,7 @@
   (symbol (lib_id "Device:C") (at 108.585 53.975 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5d8fb30c-e773-45b0-8dba-1cff7a393e6d)
-    (property "Reference" "C2" (at 109.22 52.07 0)
+    (property "Reference" "C103" (at 109.22 52.07 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 108.585 55.88 0)
@@ -2223,9 +2344,14 @@
     (pin "1" (uuid 1e83570e-feb3-4c43-8983-8a9ea1534ff7))
     (pin "2" (uuid 95043b44-9da1-421c-871c-470a6d8d70fc))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C103") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C2") (unit 1)
+          (reference "C103") (unit 1)
         )
       )
     )
@@ -2234,7 +2360,7 @@
   (symbol (lib_id "power:GND") (at 48.26 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 60aba6af-d040-42cc-8605-de0bad4cd191)
-    (property "Reference" "#PWR03" (at 48.26 124.46 0)
+    (property "Reference" "#PWR0104" (at 48.26 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 48.26 123.19 0)
@@ -2248,9 +2374,14 @@
     )
     (pin "1" (uuid cc22bcf5-0da5-4f24-b17e-b352b0f765dc))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0104") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR03") (unit 1)
+          (reference "#PWR0104") (unit 1)
         )
       )
     )
@@ -2259,7 +2390,7 @@
   (symbol (lib_id "Device:R") (at 48.26 114.3 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6382872f-f476-4e85-a791-737cdcb4d14a)
-    (property "Reference" "R2" (at 36.83 113.03 0)
+    (property "Reference" "R102" (at 36.83 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1k" (at 36.83 115.57 0)
@@ -2274,9 +2405,14 @@
     (pin "1" (uuid 5fd735cb-fddb-437d-80be-a836c1064102))
     (pin "2" (uuid 7417ffc8-5565-4b24-b773-13691f9febd3))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R102") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R2") (unit 1)
+          (reference "R102") (unit 1)
         )
       )
     )
@@ -2285,13 +2421,13 @@
   (symbol (lib_id "Device:D_Schottky") (at 64.135 49.53 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 68c6cfc0-75f8-407a-89f6-c5d5682d81da)
-    (property "Reference" "D1" (at 64.4525 43.815 0)
+    (property "Reference" "D101" (at 64.4525 43.815 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "D_Schottky" (at 64.4525 46.355 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 64.135 49.53 0)
+    (property "Footprint" "Diode_SMD:D_SOD-323" (at 64.135 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 64.135 49.53 0)
@@ -2300,9 +2436,14 @@
     (pin "1" (uuid 81b54124-f930-4944-b2ac-421ad86beacb))
     (pin "2" (uuid b8e903fb-c10e-4361-a1e4-80563f7ac75a))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "D101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "D1") (unit 1)
+          (reference "D101") (unit 1)
         )
       )
     )
@@ -2311,7 +2452,7 @@
   (symbol (lib_id "Device:R") (at 121.285 120.015 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6ccf9fa6-4a6e-4865-931a-9c3289020661)
-    (property "Reference" "R5" (at 123.825 120.015 90)
+    (property "Reference" "R105" (at 123.825 120.015 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "1k" (at 126.365 120.015 90)
@@ -2326,9 +2467,14 @@
     (pin "1" (uuid a9acdf46-78eb-44a1-bae9-84df08e3723e))
     (pin "2" (uuid 7762e569-23f1-40fe-9c4c-5be3204f21b2))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R105") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R5") (unit 1)
+          (reference "R105") (unit 1)
         )
       )
     )
@@ -2337,7 +2483,7 @@
   (symbol (lib_id "Device:R") (at 140.97 74.295 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 746aabc1-d394-45a9-a413-5b698bb56067)
-    (property "Reference" "R15" (at 135.89 73.025 0)
+    (property "Reference" "R106" (at 135.89 73.025 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100k" (at 133.985 75.565 0)
@@ -2352,9 +2498,14 @@
     (pin "1" (uuid d77de69d-acb4-4989-998d-d0e661cff106))
     (pin "2" (uuid b8e8e793-84e3-4f7f-8782-d651930bf328))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R106") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R15") (unit 1)
+          (reference "R106") (unit 1)
         )
       )
     )
@@ -2363,7 +2514,7 @@
   (symbol (lib_id "power:GND") (at 121.285 131.445 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 848ef7fa-c44c-40aa-bbfb-8bd77479865e)
-    (property "Reference" "#PWR024" (at 121.285 137.795 0)
+    (property "Reference" "#PWR0110" (at 121.285 137.795 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 121.285 135.89 0)
@@ -2377,9 +2528,14 @@
     )
     (pin "1" (uuid 44542a54-22a5-42a8-8c3c-b32704835436))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0110") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR024") (unit 1)
+          (reference "#PWR0110") (unit 1)
         )
       )
     )
@@ -2388,7 +2544,7 @@
   (symbol (lib_id "power:GND") (at 140.97 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8aac25af-7181-410d-83f1-07c340e02de6)
-    (property "Reference" "#PWR025" (at 140.97 84.455 0)
+    (property "Reference" "#PWR0111" (at 140.97 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 140.97 81.915 0)
@@ -2402,9 +2558,14 @@
     )
     (pin "1" (uuid c70489ee-8e20-4982-b253-fe2a05809bb4))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0111") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR025") (unit 1)
+          (reference "#PWR0111") (unit 1)
         )
       )
     )
@@ -2413,7 +2574,7 @@
   (symbol (lib_id "power:GND") (at 146.685 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8ab11ad4-b103-440f-ab24-7cf587837348)
-    (property "Reference" "#PWR06" (at 146.685 84.455 0)
+    (property "Reference" "#PWR0112" (at 146.685 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 146.685 81.915 0)
@@ -2427,9 +2588,14 @@
     )
     (pin "1" (uuid ddd8926a-5428-4507-9ca5-c81e733441b1))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0112") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR06") (unit 1)
+          (reference "#PWR0112") (unit 1)
         )
       )
     )
@@ -2438,7 +2604,7 @@
   (symbol (lib_id "Device:R") (at 234.315 70.485 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8b21af05-375d-4d94-9e79-eb73563542f3)
-    (property "Reference" "R12" (at 232.41 69.215 0)
+    (property "Reference" "R111" (at 232.41 69.215 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1k" (at 232.41 71.755 0)
@@ -2453,9 +2619,14 @@
     (pin "1" (uuid 2eafcf49-1c4f-4ab6-86e0-ebf505cc2f52))
     (pin "2" (uuid 5b139b0b-9424-4446-975c-cd7c4ac2d99e))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R111") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R12") (unit 1)
+          (reference "R111") (unit 1)
         )
       )
     )
@@ -2464,7 +2635,7 @@
   (symbol (lib_id "power:VDD") (at 239.395 49.53 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a461308f-2d4a-41e9-935f-fab0acc6652e)
-    (property "Reference" "#PWR022" (at 235.585 49.53 0)
+    (property "Reference" "#PWR0123" (at 235.585 49.53 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VDD" (at 243.205 49.53 90)
@@ -2478,9 +2649,14 @@
     )
     (pin "1" (uuid da9e6d3a-3069-4a32-a6fa-83b74476605c))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0123") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR022") (unit 1)
+          (reference "#PWR0123") (unit 1)
         )
       )
     )
@@ -2489,7 +2665,7 @@
   (symbol (lib_id "Device:R") (at 195.58 62.23 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a7eabf72-d46c-4326-8c13-e06e5602f03c)
-    (property "Reference" "R6" (at 195.58 55.88 90)
+    (property "Reference" "R108" (at 195.58 55.88 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "100k" (at 195.58 58.42 90)
@@ -2504,9 +2680,14 @@
     (pin "1" (uuid c7c7f025-fd4c-4baa-85dc-b98620e94dc4))
     (pin "2" (uuid e654eff1-82c6-4b4e-a1e6-094175108d84))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R108") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R6") (unit 1)
+          (reference "R108") (unit 1)
         )
       )
     )
@@ -2515,7 +2696,7 @@
   (symbol (lib_id "power:GND") (at 52.07 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ab1ca4e3-0e65-42d2-b022-9b650f72a42e)
-    (property "Reference" "#PWR04" (at 52.07 124.46 0)
+    (property "Reference" "#PWR0105" (at 52.07 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 52.07 123.19 0)
@@ -2529,9 +2710,14 @@
     )
     (pin "1" (uuid 62681a06-8198-46e1-81f7-f89b4c2c62d7))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0105") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR04") (unit 1)
+          (reference "#PWR0105") (unit 1)
         )
       )
     )
@@ -2540,7 +2726,7 @@
   (symbol (lib_id "power:GND") (at 40.64 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b0209956-0712-420e-bfa8-42800e9cde81)
-    (property "Reference" "#PWR017" (at 40.64 124.46 0)
+    (property "Reference" "#PWR0103" (at 40.64 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 40.64 123.19 0)
@@ -2554,9 +2740,14 @@
     )
     (pin "1" (uuid d4beda19-e1a6-409b-a2ba-0a6b3035f765))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0103") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR017") (unit 1)
+          (reference "#PWR0103") (unit 1)
         )
       )
     )
@@ -2565,7 +2756,7 @@
   (symbol (lib_id "Device:C") (at 146.685 67.945 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b4996496-d0c0-4b16-ad8d-9a042f39edac)
-    (property "Reference" "C3" (at 147.32 66.04 0)
+    (property "Reference" "C105" (at 147.32 66.04 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 146.685 69.85 0)
@@ -2580,9 +2771,14 @@
     (pin "1" (uuid ba85974e-c59a-43e7-adb3-05a7f8a0a1db))
     (pin "2" (uuid ab613c8d-f1d3-45fd-9fe8-678d1ef0d8c5))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C105") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C3") (unit 1)
+          (reference "C105") (unit 1)
         )
       )
     )
@@ -2591,7 +2787,7 @@
   (symbol (lib_id "Device:R") (at 120.65 55.88 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b4bfc247-0c47-471b-aa9e-739abf6111dc)
-    (property "Reference" "R4" (at 118.745 59.69 0)
+    (property "Reference" "R104" (at 118.745 59.69 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 121.92 60.96 0)
@@ -2606,9 +2802,14 @@
     (pin "1" (uuid 4eefc285-0625-45d0-ab71-8e8c837f39d4))
     (pin "2" (uuid 98af2bd3-e9bb-4d3a-be87-71c7aab0d694))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R104") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R4") (unit 1)
+          (reference "R104") (unit 1)
         )
       )
     )
@@ -2617,7 +2818,7 @@
   (symbol (lib_id "Device:C") (at 152.4 109.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b7eb5825-c0da-4abc-9af7-d866dcab2ea5)
-    (property "Reference" "C9" (at 154.94 107.315 0)
+    (property "Reference" "C106" (at 154.94 107.315 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100nF" (at 153.035 111.76 0)
@@ -2632,9 +2833,14 @@
     (pin "1" (uuid 55defc9a-fc5f-42d1-b04f-ae3e405ac531))
     (pin "2" (uuid 723c07cd-c913-4063-8733-93f0f6bb3498))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C106") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C9") (unit 1)
+          (reference "C106") (unit 1)
         )
       )
     )
@@ -2643,7 +2849,7 @@
   (symbol (lib_id "Sensor_Energy:INA226") (at 171.45 120.65 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b8f88259-5ba4-42ea-81b2-e3386ad903d8)
-    (property "Reference" "U3" (at 169.2559 105.41 0)
+    (property "Reference" "U103" (at 169.2559 105.41 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "INA226" (at 169.2559 107.95 0)
@@ -2666,9 +2872,14 @@
     (pin "8" (uuid 3f9f9dc6-a9f9-421a-b7a5-44c0c829edf3))
     (pin "9" (uuid e71cfaba-ee37-466e-a563-7c58c9a01f7e))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "U103") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "U3") (unit 1)
+          (reference "U103") (unit 1)
         )
       )
     )
@@ -2677,7 +2888,7 @@
   (symbol (lib_id "power:GND") (at 61.595 120.65 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b9c7957f-a370-4124-91d4-efc76f94ee61)
-    (property "Reference" "#PWR05" (at 61.595 127 0)
+    (property "Reference" "#PWR0106" (at 61.595 127 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 60.96 117.475 0)
@@ -2691,9 +2902,14 @@
     )
     (pin "1" (uuid 634a1d92-151e-4284-bc3f-bc80b0dda602))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0106") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR05") (unit 1)
+          (reference "#PWR0106") (unit 1)
         )
       )
     )
@@ -2702,7 +2918,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 125.73 72.39 90) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bdca6c1c-1649-44f9-bb52-aff40fcd6441)
-    (property "Reference" "J2" (at 121.285 72.39 0)
+    (property "Reference" "J102" (at 121.285 72.39 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Ext Switch" (at 123.19 72.39 0)
@@ -2717,9 +2933,14 @@
     (pin "1" (uuid 765d984a-4f3f-4646-a5c0-0ba15ad1f625))
     (pin "2" (uuid 26b8099c-bcfb-4e0f-9855-a0167e3d62a2))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "J102") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "J2") (unit 1)
+          (reference "J102") (unit 1)
         )
       )
     )
@@ -2728,7 +2949,7 @@
   (symbol (lib_id "power:GND") (at 31.115 118.11 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid be82da3a-2b2a-4ca3-88c2-f261aa756a61)
-    (property "Reference" "#PWR02" (at 31.115 124.46 0)
+    (property "Reference" "#PWR0101" (at 31.115 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 31.115 123.19 0)
@@ -2742,9 +2963,14 @@
     )
     (pin "1" (uuid 1b75285a-c071-4f5c-b357-c5e56ac3966e))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR02") (unit 1)
+          (reference "#PWR0101") (unit 1)
         )
       )
     )
@@ -2753,7 +2979,7 @@
   (symbol (lib_id "power:GND") (at 190.5 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid beba7cc2-1438-4798-b784-c67dab723d6e)
-    (property "Reference" "#PWR014" (at 190.5 77.47 0)
+    (property "Reference" "#PWR0118" (at 190.5 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 190.5 76.2 0)
@@ -2767,36 +2993,14 @@
     )
     (pin "1" (uuid 6006a74f-813a-47df-be54-c4ed04660b3c))
     (instances
-      (project "LiPoPowerSimple"
-        (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR014") (unit 1)
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0118") (unit 1)
         )
       )
-    )
-  )
-
-  (symbol (lib_id "Switch:SW_SPDT") (at 215.9 101.6 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid bf978cd1-f8d4-4e4c-8a8d-ea415e4067da)
-    (property "Reference" "SW2" (at 215.9 106.045 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "LiPo Switch" (at 215.9 107.95 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 215.9 101.6 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 215.9 101.6 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid c1a2d4a5-cb52-4f26-96c9-0a12cb1cf9cb))
-    (pin "2" (uuid 9201d5fa-154d-4761-af1e-aa43ce39526e))
-    (pin "3" (uuid 4ef82021-018d-4fa7-bc28-dbd30610aad2))
-    (instances
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "SW2") (unit 1)
+          (reference "#PWR0118") (unit 1)
         )
       )
     )
@@ -2805,7 +3009,7 @@
   (symbol (lib_id "power:GND") (at 151.13 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c1615838-1b41-4516-82f2-e156536cdbdc)
-    (property "Reference" "#PWR010" (at 151.13 84.455 0)
+    (property "Reference" "#PWR0113" (at 151.13 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 151.13 81.915 0)
@@ -2819,9 +3023,14 @@
     )
     (pin "1" (uuid cd05020a-2d83-4c16-9e1d-cac7d73bf8a9))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0113") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR010") (unit 1)
+          (reference "#PWR0113") (unit 1)
         )
       )
     )
@@ -2830,7 +3039,7 @@
   (symbol (lib_id "Device:LED") (at 121.285 127.635 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c37eea54-0da4-4ac6-b07e-eef4dabff4c2)
-    (property "Reference" "LED2" (at 123.825 125.095 90)
+    (property "Reference" "LED102" (at 123.825 125.095 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "CHARGE" (at 123.825 127.635 90)
@@ -2845,9 +3054,14 @@
     (pin "1" (uuid eb329c63-eaef-4260-9a03-04c652837329))
     (pin "2" (uuid ecbe6362-b0ba-4579-b27b-0dc4963d7756))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "LED102") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "LED2") (unit 1)
+          (reference "LED102") (unit 1)
         )
       )
     )
@@ -2856,7 +3070,7 @@
   (symbol (lib_id "Device:R") (at 202.565 59.69 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c8a06529-bd2b-4f71-a11b-c022be6a1f39)
-    (property "Reference" "R7" (at 204.47 58.42 0)
+    (property "Reference" "R109" (at 204.47 58.42 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "150k" (at 204.47 60.96 0)
@@ -2871,9 +3085,14 @@
     (pin "1" (uuid 261620d3-008f-4326-818c-8d1c0bc03a48))
     (pin "2" (uuid 05e74320-6672-41b3-b42c-7f93bf189e66))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R109") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R7") (unit 1)
+          (reference "R109") (unit 1)
         )
       )
     )
@@ -2882,7 +3101,7 @@
   (symbol (lib_id "Connector_Generic:Conn_01x02") (at 34.29 49.53 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cf61d61a-2a47-4173-af64-baabdc059dee)
-    (property "Reference" "J1" (at 31.115 49.53 0)
+    (property "Reference" "J101" (at 31.115 49.53 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "Battery" (at 31.115 52.07 0)
@@ -2897,9 +3116,14 @@
     (pin "1" (uuid d428ea84-cb0f-4d0c-90db-6934f08640ed))
     (pin "2" (uuid 2ef8bbbc-ad57-4252-b747-2090898a3380))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "J101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "J1") (unit 1)
+          (reference "J101") (unit 1)
         )
       )
     )
@@ -2908,13 +3132,13 @@
   (symbol (lib_id "Device:Polyfuse") (at 26.035 93.98 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d0752976-92ae-4a00-a77b-0c3c06f9cc4b)
-    (property "Reference" "F1" (at 26.035 91.44 90)
+    (property "Reference" "F101" (at 26.035 91.44 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Polyfuse" (at 25.4 96.52 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 31.115 92.71 0)
+    (property "Footprint" "Fuse:Fuse_1206_3216Metric" (at 31.115 92.71 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "~" (at 26.035 93.98 0)
@@ -2923,9 +3147,14 @@
     (pin "1" (uuid 2051be49-08b3-4794-955d-f8d775aa7daa))
     (pin "2" (uuid 62cb112c-3ea2-460b-b4b2-08f8b1c3f43c))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "F101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "F1") (unit 1)
+          (reference "F101") (unit 1)
         )
       )
     )
@@ -2934,7 +3163,7 @@
   (symbol (lib_id "Device:R") (at 52.07 114.3 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d3bfb9e6-eb50-456e-8871-9581db07889a)
-    (property "Reference" "R3" (at 56.515 113.03 0)
+    (property "Reference" "R103" (at 56.515 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "47k" (at 57.15 115.57 0)
@@ -2949,9 +3178,14 @@
     (pin "1" (uuid f3a07730-a078-46d7-9017-931c8231bd72))
     (pin "2" (uuid 49e5b067-80bb-4868-a5e6-d19795b61ac9))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "R103") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "R3") (unit 1)
+          (reference "R103") (unit 1)
         )
       )
     )
@@ -2960,13 +3194,13 @@
   (symbol (lib_id "Device:Polyfuse") (at 201.93 101.6 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid d59c563f-15a8-47ed-abd6-a77fd01e332b)
-    (property "Reference" "F2" (at 201.93 95.885 90)
+    (property "Reference" "F103" (at 201.93 95.885 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Polyfuse" (at 201.93 98.425 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 207.01 100.33 0)
+    (property "Footprint" "Fuse:Fuse_1206_3216Metric" (at 207.01 100.33 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
     (property "Datasheet" "~" (at 201.93 101.6 0)
@@ -2975,9 +3209,14 @@
     (pin "1" (uuid 20a30921-e9d4-4ace-a595-bda54d78af36))
     (pin "2" (uuid 26db0046-c548-4f44-95af-285a93896cd3))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "F103") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "F2") (unit 1)
+          (reference "F103") (unit 1)
         )
       )
     )
@@ -2986,7 +3225,7 @@
   (symbol (lib_id "power:GND") (at 202.565 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid dbcd226f-edf3-449c-ae93-a795bc08c972)
-    (property "Reference" "#PWR015" (at 202.565 77.47 0)
+    (property "Reference" "#PWR0119" (at 202.565 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 202.565 76.2 0)
@@ -3000,9 +3239,14 @@
     )
     (pin "1" (uuid e8bd4a04-1ba1-47d0-9bd8-6e6a8137743e))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0119") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR015") (unit 1)
+          (reference "#PWR0119") (unit 1)
         )
       )
     )
@@ -3011,7 +3255,7 @@
   (symbol (lib_id "WOBCLibrary:TPS63070RNMR") (at 170.815 57.15 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e36ea898-f228-4b74-93ff-db6ec01c45b1)
-    (property "Reference" "U2" (at 170.815 73.66 0)
+    (property "Reference" "U102" (at 170.815 73.66 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "TPS63070RNMR" (at 170.815 76.2 0)
@@ -3064,9 +3308,14 @@
     (pin "7_8" (uuid 66b157e8-d9c9-4a37-85ea-f68bbaab41ff))
     (pin "9" (uuid 6a665946-7458-4d79-a4fa-08be83e491bc))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "U102") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "U2") (unit 1)
+          (reference "U102") (unit 1)
         )
       )
     )
@@ -3075,7 +3324,7 @@
   (symbol (lib_id "Device:LED") (at 31.115 104.14 270) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ef887e2a-9319-424b-9154-35e4a00627ca)
-    (property "Reference" "LED1" (at 27.305 104.4575 90)
+    (property "Reference" "LED101" (at 27.305 104.4575 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "USB Power" (at 27.305 106.9975 90)
@@ -3090,9 +3339,14 @@
     (pin "1" (uuid 9de41b42-5710-4fdf-bdf6-838a3595da66))
     (pin "2" (uuid eb9fc2d3-f41e-4d7a-b981-541dd36a1c4c))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "LED101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "LED1") (unit 1)
+          (reference "LED101") (unit 1)
         )
       )
     )
@@ -3101,13 +3355,13 @@
   (symbol (lib_id "Switch:SW_SPDT") (at 132.08 55.88 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f1b085c7-7cfd-42e5-9d2a-680fb450d9bb)
-    (property "Reference" "SW1" (at 131.445 62.865 0)
+    (property "Reference" "SW101" (at 131.445 62.865 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "Power Switch" (at 132.08 60.96 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 132.08 55.88 0)
+    (property "Footprint" "Button_Switch_THT:SW_CuK_OS102011MA1QN1_SPDT_Angled" (at 132.08 55.88 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 132.08 55.88 0)
@@ -3117,9 +3371,14 @@
     (pin "2" (uuid cdccf936-492e-4816-bf53-2d931e85dfd9))
     (pin "3" (uuid 9d53ee68-696e-4645-8fd4-db15fb4566b7))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "SW101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "SW1") (unit 1)
+          (reference "SW101") (unit 1)
         )
       )
     )
@@ -3128,7 +3387,7 @@
   (symbol (lib_id "power:GND") (at 154.94 78.105 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f58da63c-55ef-430a-adf3-49520c75bfb8)
-    (property "Reference" "#PWR011" (at 154.94 84.455 0)
+    (property "Reference" "#PWR0115" (at 154.94 84.455 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 154.94 81.915 0)
@@ -3142,9 +3401,14 @@
     )
     (pin "1" (uuid 11921931-9dfb-4781-af7c-f9b8eaa33b4e))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "#PWR0115") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "#PWR011") (unit 1)
+          (reference "#PWR0115") (unit 1)
         )
       )
     )
@@ -3153,7 +3417,7 @@
   (symbol (lib_id "Battery_Management:MCP73871-1CC") (at 80.645 109.22 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f8541ea1-a718-44ab-a285-f92a93f67e48)
-    (property "Reference" "U1" (at 82.8391 84.455 0)
+    (property "Reference" "U101" (at 82.8391 84.455 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "MCP73871-1CC" (at 82.8391 86.995 0)
@@ -3187,9 +3451,14 @@
     (pin "8" (uuid 8d4da2b1-4f87-46ed-b282-f59913b43b8b))
     (pin "9" (uuid cee07f14-6da9-4c8d-8d2d-aa918619d05a))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "U101") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "U1") (unit 1)
+          (reference "U101") (unit 1)
         )
       )
     )
@@ -3198,7 +3467,7 @@
   (symbol (lib_id "Device:C") (at 112.395 107.315 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ff3a9b21-8714-4517-88df-1c9ba998ebc5)
-    (property "Reference" "C11" (at 113.03 105.41 0)
+    (property "Reference" "C104" (at 113.03 105.41 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10uF" (at 112.395 109.22 0)
@@ -3213,9 +3482,14 @@
     (pin "1" (uuid 32e83c46-9166-43ab-bdd1-a47005b1ece7))
     (pin "2" (uuid e56f3dab-0f5f-4700-8334-5068cd4e9606))
     (instances
+      (project "GS"
+        (path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/0c385ab9-3621-430e-9a05-41e08a81fa71"
+          (reference "C104") (unit 1)
+        )
+      )
       (project "LiPoPowerSimple"
         (path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
-          (reference "C11") (unit 1)
+          (reference "C104") (unit 1)
         )
       )
     )
