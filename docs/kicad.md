@@ -101,7 +101,7 @@ ELCを実行し，回路に間違いがないか確認する．
 
 # モジュールの基板設計
 
-(ノイズ対策.COM)[https://www.noise-counterplan.com]などを参考に.
+[ノイズ対策.COM](https://www.noise-counterplan.com)などを参考に.
 
 ## ベース基板の決定
 
@@ -114,7 +114,7 @@ PCBAサービスで実装する部品は必ず，手実装する部品もなる�
 
 ## 配線
 
-(JLCPCBの寸法ルール)[https://jlcpcb.com/capabilities/pcb-capabilities]
+[JLCPCBの寸法ルール](https://jlcpcb.com/capabilities/pcb-capabilities)
 を破らないように，配線幅やクリアランスをとる．
 
 基板厚さは基本的に1mmとする．
