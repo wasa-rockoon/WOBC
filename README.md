@@ -47,6 +47,6 @@ WOBCは，WASAロケットプロジェクトにおける電装関連の共通基
 
 # ドキュメント
 
-- (develop)[docs/develop.md]: 詳細な開発の手順
-- (kicad)[docs/kicad.md]: KiCADを用いた回路・基板設計マニュアル
-- (components)[docs/components]: コンポーネントとその機能，インターフェースの一覧
+- [develop](docs/develop.md): 詳細な開発の手順
+- [kicad](docs/kicad.md): KiCADを用いた回路・基板設計マニュアル
+- [components](docs/components): コンポーネントとその機能，インターフェースの一覧
