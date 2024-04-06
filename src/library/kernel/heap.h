@@ -9,7 +9,7 @@
 #endif
 
 
-namespace algorithm {
+namespace kernel {
 
 typedef uint8_t data_size_t;
 typedef uint16_t pointer_t;
@@ -114,4 +114,4 @@ private:
   unsigned  fail_count_;
 };
 
-} // namespace algorithm
+}

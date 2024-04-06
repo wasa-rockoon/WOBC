@@ -11,7 +11,7 @@
 #endif
 
 
-namespace algorithm {
+namespace kernel {
 
 
 template<typename T>
@@ -22,7 +22,7 @@ public:
 
   class Node {
   public:
-    Node(key_t key, key_t mask = ~(key_t)0)
+    Node(key_t key = 0, key_t mask = ~(key_t)0)
       : key_(key), mask_(mask), label_(~(key_t)0),
         bit0_(nullptr), bit1_(nullptr), dontcare_(nullptr) {}
 
@@ -138,6 +138,6 @@ private:
   Node* root_;
 };
 
-} // namespace algorithm
+}
 
 
