@@ -2881,28 +2881,6 @@
 			)
 		)
 	)
-	(global_label "RX"
-		(shape input)
-		(at 242.57 104.14 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "aa4de09a-fd1c-450d-89a8-2767c973ff4e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 248.0347 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "GPS_ANT1"
 		(shape input)
 		(at 143.51 121.92 180)
@@ -2921,28 +2899,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "TX"
-		(shape input)
-		(at 242.57 106.68 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "c30f0c7b-88c9-480f-a75d-d608c48c4837")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 247.7323 106.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -2980,6 +2936,30 @@
 			(justify left)
 		)
 		(uuid "1f118f22-d4fb-4f84-aa67-f6f8000681ec")
+	)
+	(hierarchical_label "GPS_TX"
+		(shape input)
+		(at 242.57 106.68 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "59efcb27-4346-4134-a8be-0be3770847e9")
+	)
+	(hierarchical_label "GPS_RX"
+		(shape input)
+		(at 242.57 104.14 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8e382e59-e4fe-4319-8c8d-79b97b268bde")
 	)
 	(symbol
 		(lib_id "Device:R")
@@ -3070,6 +3050,12 @@
 			(uuid "1ec859ec-62fc-4b45-9c6c-ec5053c85e2d")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "R106")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "R106")
@@ -3167,6 +3153,12 @@
 			(uuid "4257a1f1-59c6-43cc-95af-bad0e30edfe1")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "J101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "J101")
@@ -3233,6 +3225,12 @@
 			(uuid "25326681-e73c-421d-9e79-86a6f0feaa83")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0105")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0105")
@@ -3299,6 +3297,12 @@
 			(uuid "5ad0223f-2241-4308-bb6d-8a23e3daaa6e")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0102")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0102")
@@ -3395,6 +3399,12 @@
 			(uuid "181995b1-321b-48f4-a114-17d5806a44c8")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "D102")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "D102")
@@ -3490,6 +3500,12 @@
 			(uuid "3073da53-da03-42c5-b1a9-225b6bd0d8d6")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "R103")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "R103")
@@ -3556,6 +3572,12 @@
 			(uuid "fe336687-e1e4-4a68-b125-cc49da6b2752")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0106")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0106")
@@ -3623,6 +3645,12 @@
 			(uuid "a41bcd16-0893-4c62-bba2-d037abfd1e6c")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0107")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0107")
@@ -3720,6 +3748,12 @@
 			(uuid "804ca6e0-ff37-48f6-947d-f5110cb45faa")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "C101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "C101")
@@ -3814,6 +3848,12 @@
 			(uuid "927f75c9-be81-4f99-91d6-42082a8a2f73")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "R102")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "R102")
@@ -3953,6 +3993,12 @@
 			(uuid "3be6b12b-07f4-4da7-87c4-2faf6585410d")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "USB101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "USB101")
@@ -4019,6 +4065,12 @@
 			(uuid "f8790d88-683d-4549-9a2e-982262395ef7")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0104")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0104")
@@ -4086,6 +4138,12 @@
 			(uuid "80aff1fd-4ec3-47ab-a9ad-cd0de4a55e4e")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0111")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0111")
@@ -4152,6 +4210,12 @@
 			(uuid "f934aad3-7a4d-486b-951d-b55adaec0dcf")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0101")
@@ -4246,6 +4310,12 @@
 			(uuid "ac8a453a-7073-45af-9861-1ae8c4fcb4f4")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "R105")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "R105")
@@ -4340,6 +4410,12 @@
 			(uuid "27d248c2-1232-44b4-8e70-4187848562de")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "R104")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "R104")
@@ -4436,6 +4512,12 @@
 			(uuid "cc4b90e5-2192-4859-a35c-26d68c4c6570")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "C102")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "C102")
@@ -4503,6 +4585,12 @@
 			(uuid "993a7c7d-3820-4acf-bdf3-84ee348f1368")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0110")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0110")
@@ -4569,6 +4657,12 @@
 			(uuid "54777720-eb76-4701-8111-a1ca8d0c466d")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0103")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0103")
@@ -4635,6 +4729,12 @@
 			(uuid "6a57df47-7576-48e8-a92c-fd3a7adbd42c")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0108")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0108")
@@ -4732,6 +4832,12 @@
 			(uuid "4600f355-8a3f-4daf-b865-1f061ad115d8")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "L101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "L101")
@@ -4828,6 +4934,12 @@
 			(uuid "8802bd3b-ff62-4e85-aa58-83eaec3ac2c8")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "D103")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "D103")
@@ -4893,6 +5005,12 @@
 			(uuid "0b56004c-80df-4b84-ab25-0374588c263a")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "#PWR0109")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "#PWR0109")
@@ -5047,6 +5165,12 @@
 			(uuid "fd25c43a-4f88-4c92-9902-99491de9df91")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "U101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "U101")
@@ -5141,6 +5265,12 @@
 			(uuid "02dbf532-8e60-4c62-9f97-faf31b16eca2")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "R101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "R101")
@@ -5237,17 +5367,18 @@
 			(uuid "5fafa168-75f4-48b9-b43b-c00c2a0e4fec")
 		)
 		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/95f3149b-86c1-42e8-8495-781e8c620d59"
+					(reference "D101")
+					(unit 1)
+				)
+			)
 			(project "GPS_active"
 				(path "/5f9b828f-1c2c-4351-867f-3d75ed6b6f5d"
 					(reference "D101")
 					(unit 1)
 				)
 			)
-		)
-	)
-	(sheet_instances
-		(path "/"
-			(page "1")
 		)
 	)
 )
