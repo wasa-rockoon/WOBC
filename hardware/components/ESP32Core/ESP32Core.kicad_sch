@@ -2715,126 +2715,6 @@
 				)
 			)
 		)
-		(symbol "power:VBUS"
-			(power)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "VBUS"
-				(at 0 3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"VBUS\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "VBUS_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "VBUS_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0) hide
-					(name "VBUS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "power:VDD"
 			(power)
 			(pin_names
@@ -3101,6 +2981,16 @@
 			(type default)
 		)
 		(uuid "051f0986-aa43-40d8-b9fd-e65362704a43")
+	)
+	(wire
+		(pts
+			(xy 48.26 26.67) (xy 74.0972 26.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0978136e-d6e1-49f8-bdc1-83fd5be2749c")
 	)
 	(wire
 		(pts
@@ -3371,16 +3261,6 @@
 			(type default)
 		)
 		(uuid "63d9fc90-a5ad-4a60-bac7-ec005fc66135")
-	)
-	(wire
-		(pts
-			(xy 73.025 26.67) (xy 48.26 26.67)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "67a06899-68fe-47be-b7e2-d2f0334cc642")
 	)
 	(wire
 		(pts
@@ -4226,6 +4106,18 @@
 		)
 		(uuid "d7fafd97-c100-484b-9f5b-a0608042dfa7")
 	)
+	(hierarchical_label "VUSB"
+		(shape output)
+		(at 74.0972 26.67 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "da53fc74-a028-4a36-b93e-858f620031bc")
+	)
 	(hierarchical_label "GPIO39"
 		(shape bidirectional)
 		(at 139.065 68.58 180)
@@ -4272,7 +4164,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0052313d-3e7c-4b55-a7e4-5a09b0529f1d")
-		(property "Reference" "#PWR0122"
+		(property "Reference" "#PWR0106"
 			(at 29.845 130.175 0)
 			(effects
 				(font
@@ -4320,21 +4212,15 @@
 			(uuid "f5ef6c2d-b820-4743-8da7-4dfb052c4829")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0122")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR09")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0106")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0104")
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -4350,7 +4236,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "017be745-4efd-4987-b9b9-fb59e30a289b")
-		(property "Reference" "#PWR0124"
+		(property "Reference" "#PWR0108"
 			(at 45.085 156.21 0)
 			(effects
 				(font
@@ -4398,21 +4284,15 @@
 			(uuid "1890e4f7-6bab-4028-884d-8f80196667d3")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0124")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR011")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0108")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0106")
+					(reference "#PWR015")
 					(unit 1)
 				)
 			)
@@ -4428,7 +4308,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1360c788-07cb-401d-a369-d608f5f31388")
-		(property "Reference" "#PWR0130"
+		(property "Reference" "#PWR0114"
 			(at 64.77 98.425 0)
 			(effects
 				(font
@@ -4476,21 +4356,15 @@
 			(uuid "58a529ca-cfb0-4105-b407-246666aee6f6")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0130")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR017")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0114")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0112")
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
@@ -4506,7 +4380,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1a3ca329-75d4-459d-a629-d500f11dcc90")
-		(property "Reference" "U107"
+		(property "Reference" "U103"
 			(at 186.9791 46.355 0)
 			(effects
 				(font
@@ -4543,15 +4417,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 184.785 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" ""
 			(at 184.785 88.9 0)
 			(effects
 				(font
@@ -4684,21 +4549,15 @@
 			(uuid "b0010aa6-cadf-45ba-9af2-9c9ec6422057")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "U107")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "U4")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "U103")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "U103")
+					(reference "U1")
 					(unit 1)
 				)
 			)
@@ -4713,7 +4572,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1c910bfe-7483-447e-8057-4796e5c58244")
-		(property "Reference" "#PWR0137"
+		(property "Reference" "#PWR0121"
 			(at 176.53 51.435 0)
 			(effects
 				(font
@@ -4761,21 +4620,15 @@
 			(uuid "7f110583-4315-4a5e-b300-34c757aeebb2")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0137")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR024")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0121")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0119")
+					(reference "#PWR019")
 					(unit 1)
 				)
 			)
@@ -4791,7 +4644,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1d50f4c7-ab73-47ed-bace-f143fedbeb5f")
-		(property "Reference" "#PWR0139"
+		(property "Reference" "#PWR0123"
 			(at 184.785 135.89 0)
 			(effects
 				(font
@@ -4839,21 +4692,15 @@
 			(uuid "5f402c95-1729-4d3f-ad2f-02ddbb3cfe32")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0139")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR026")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0123")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0121")
+					(reference "#PWR017")
 					(unit 1)
 				)
 			)
@@ -4868,7 +4715,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1d6c2a6d-2af1-4a14-a618-9781c78b12e4")
-		(property "Reference" "#PWR0123"
+		(property "Reference" "#PWR0107"
 			(at 33.655 179.705 0)
 			(effects
 				(font
@@ -4916,21 +4763,15 @@
 			(uuid "5955c35c-6bcd-4258-ad78-3a775829d821")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0123")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR010")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0107")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0105")
+					(reference "#PWR016")
 					(unit 1)
 				)
 			)
@@ -4945,7 +4786,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "343fb6aa-757d-4d21-a8f9-a3e0075680fc")
-		(property "Reference" "R106"
+		(property "Reference" "R105"
 			(at 53.34 29.21 90)
 			(effects
 				(font
@@ -4988,15 +4829,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25768"
-			(at 55.88 31.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f083b695-0afe-4a13-98ae-955592eb7d07")
 		)
@@ -5004,21 +4836,15 @@
 			(uuid "29772bef-b63d-49ef-b07a-669acd655b5f")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "R106")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "R1")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "R105")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R101")
+					(reference "R1")
 					(unit 1)
 				)
 			)
@@ -5040,7 +4866,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3f33dcc0-ef80-4cf6-8ed0-96502f16115e")
-		(property "Reference" "R111"
+		(property "Reference" "R110"
 			(at 128.905 80.01 0)
 			(effects
 				(font
@@ -5085,15 +4911,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25117"
-			(at 126.365 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "303a49ae-a789-4dad-9fc0-60a74951fb69")
 		)
@@ -5101,21 +4918,15 @@
 			(uuid "8e26a314-4657-41f7-9bf3-8f3b29e1c40b")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "R111")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "R6")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "R110")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R106")
+					(reference "R5")
 					(unit 1)
 				)
 			)
@@ -5130,7 +4941,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4d498a94-2b4d-4aac-88fa-8ced82b64c3b")
-		(property "Reference" "C118"
+		(property "Reference" "C103"
 			(at 170.18 43.815 0)
 			(effects
 				(font
@@ -5175,15 +4986,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C96446"
-			(at 172.085 42.545 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "80af995f-3de0-4a39-9ded-dc9d935b4963")
 		)
@@ -5191,21 +4993,15 @@
 			(uuid "52eab822-fc6e-4bde-ae86-98b59b531aec")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "C118")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "C5")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "C103")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "C103")
+					(reference "C5")
 					(unit 1)
 				)
 			)
@@ -5221,7 +5017,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5345656b-1412-4c75-be24-35fce8269408")
-		(property "Reference" "#PWR0138"
+		(property "Reference" "#PWR0122"
 			(at 184.785 41.91 0)
 			(effects
 				(font
@@ -5269,21 +5065,15 @@
 			(uuid "fd3c8383-78f7-4a98-9aa0-454750f7c668")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0138")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR025")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0122")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0120")
+					(reference "#PWR018")
 					(unit 1)
 				)
 			)
@@ -5298,7 +5088,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "54a2381d-bd90-4cae-ae51-30333aaf85eb")
-		(property "Reference" "#PWR0140"
+		(property "Reference" "#PWR0124"
 			(at 252.095 101.6 0)
 			(effects
 				(font
@@ -5346,21 +5136,15 @@
 			(uuid "9d84e332-3e9f-463f-85ed-55934106029f")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0140")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR027")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0124")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0122")
+					(reference "#PWR010")
 					(unit 1)
 				)
 			)
@@ -5376,7 +5160,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6405d20a-7a4d-414a-b1c8-85dc716ef30e")
-		(property "Reference" "R109"
+		(property "Reference" "R108"
 			(at 114.935 80.01 0)
 			(effects
 				(font
@@ -5421,15 +5205,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25117"
-			(at 112.395 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f48be1db-3653-42cf-be36-34a34159a687")
 		)
@@ -5437,21 +5212,15 @@
 			(uuid "52e7e650-c706-4d80-92ee-2a5732a7d83d")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "R109")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "R4")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "R108")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R104")
+					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -5467,7 +5236,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "664fb049-dacf-44ff-8f02-a94681c1c201")
-		(property "Reference" "#PWR0131"
+		(property "Reference" "#PWR0115"
 			(at 64.77 130.175 0)
 			(effects
 				(font
@@ -5515,21 +5284,15 @@
 			(uuid "e92a65ac-1724-4f8b-98fc-e8d2a8e4de59")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0131")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR018")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0115")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0113")
+					(reference "#PWR013")
 					(unit 1)
 				)
 			)
@@ -5545,7 +5308,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68770ed8-9403-4f52-b2b0-86d575cd8e22")
-		(property "Reference" "U105"
+		(property "Reference" "U101"
 			(at 40.005 104.14 0)
 			(effects
 				(font
@@ -5561,7 +5324,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+		(property "Footprint" "PCM_Package_TO_SOT_SMD_AKL:SOT-23-5"
 			(at 40.005 104.775 0)
 			(effects
 				(font
@@ -5588,15 +5351,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C130064"
-			(at 40.005 116.205 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "36045861-dbba-476f-8a0e-487b527b6fb4")
 		)
@@ -5613,21 +5367,15 @@
 			(uuid "ee7d9fcc-7ca0-43a0-9aa5-e36d1690f488")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "U105")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "U2")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "U101")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "U101")
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -5642,7 +5390,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6989cfb6-ebb0-48f8-9d42-1100fb5ce618")
-		(property "Reference" "C119"
+		(property "Reference" "C104"
 			(at 178.435 41.275 0)
 			(effects
 				(font
@@ -5687,15 +5435,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
-			(at 176.53 42.545 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "913b2298-e6f7-4df5-8ec7-1a77d7fcd6c4")
 		)
@@ -5703,21 +5442,15 @@
 			(uuid "99a6f2c9-c249-4ab3-9e24-1292424f9011")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "C119")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "C6")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "C104")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "C104")
+					(reference "C4")
 					(unit 1)
 				)
 			)
@@ -5733,7 +5466,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6b730f2f-349f-42d4-89fa-56a04e734490")
-		(property "Reference" "#PWR0128"
+		(property "Reference" "#PWR0112"
 			(at 59.69 71.12 0)
 			(effects
 				(font
@@ -5781,21 +5514,15 @@
 			(uuid "40d76b9e-f442-4a37-becd-f8eaf6d2da8b")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0128")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR015")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0112")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0110")
+					(reference "#PWR06")
 					(unit 1)
 				)
 			)
@@ -5810,7 +5537,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6c5a9828-cfb4-44ef-af29-77121f6cf08b")
-		(property "Reference" "D110"
+		(property "Reference" "D105"
 			(at 116.205 87.63 90)
 			(effects
 				(font
@@ -5855,15 +5582,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C84256"
-			(at 112.395 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "23049167-2fbe-4dc0-aa6f-2a6475c7d9f0")
 		)
@@ -5871,21 +5589,15 @@
 			(uuid "0a5a53cd-31d2-445b-8fb7-31e6dca5a6d2")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "D110")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "D5")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "D105")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "D105")
+					(reference "D5")
 					(unit 1)
 				)
 			)
@@ -5901,7 +5613,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6cf2a274-50e4-4ddb-9dab-db27f19f2e31")
-		(property "Reference" "R112"
+		(property "Reference" "R111"
 			(at 254.635 100.33 0)
 			(effects
 				(font
@@ -5946,15 +5658,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25744"
-			(at 252.095 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "d7f65d17-bc97-49ac-b101-18d20bc4d4dd")
 		)
@@ -5962,21 +5665,15 @@
 			(uuid "b068c8ce-e4c2-4a24-957d-3bef144cdf76")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "R112")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "R7")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "R111")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R107")
+					(reference "R7")
 					(unit 1)
 				)
 			)
@@ -5992,7 +5689,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7a141b29-f912-4fb9-acb4-fa9abba6ffa3")
-		(property "Reference" "#PWR0127"
+		(property "Reference" "#PWR0111"
 			(at 53.975 71.12 0)
 			(effects
 				(font
@@ -6040,21 +5737,15 @@
 			(uuid "38255186-5690-40c7-ad4c-634b6d01ddd9")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0127")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR014")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0111")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0109")
+					(reference "#PWR07")
 					(unit 1)
 				)
 			)
@@ -6070,7 +5761,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7acd6fa1-b1c1-46c7-9d51-03dc13408d89")
-		(property "Reference" "R108"
+		(property "Reference" "R107"
 			(at 67.31 97.155 0)
 			(effects
 				(font
@@ -6115,15 +5806,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25117"
-			(at 64.77 98.425 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "da410e70-74b6-479d-bc1f-67c6b12d1968")
 		)
@@ -6131,21 +5813,15 @@
 			(uuid "56679cf1-90c9-44ed-97bf-78e995c2e3c3")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "R108")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "R3")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "R107")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R103")
+					(reference "R3")
 					(unit 1)
 				)
 			)
@@ -6160,7 +5836,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "820871d5-d65a-4b5a-b747-96d9cef43fcb")
-		(property "Reference" "#PWR0136"
+		(property "Reference" "#PWR0120"
 			(at 172.085 51.435 0)
 			(effects
 				(font
@@ -6208,21 +5884,15 @@
 			(uuid "457d375c-3096-4324-abd0-0cacb9c7d153")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0136")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR023")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0120")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0118")
+					(reference "#PWR020")
 					(unit 1)
 				)
 			)
@@ -6238,7 +5908,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8cb3137a-728f-4baa-9bdb-c141aec44d20")
-		(property "Reference" "#PWR0126"
+		(property "Reference" "#PWR0110"
 			(at 48.26 71.12 0)
 			(effects
 				(font
@@ -6286,21 +5956,15 @@
 			(uuid "60b74b0b-d2fc-4a5f-b5c4-5993e6222109")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0126")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR013")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0110")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0108")
+					(reference "#PWR08")
 					(unit 1)
 				)
 			)
@@ -6316,7 +5980,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8d69f109-7e2b-4f0a-a4ec-52e1b3646dcf")
-		(property "Reference" "R110"
+		(property "Reference" "R109"
 			(at 123.19 56.515 0)
 			(effects
 				(font
@@ -6361,15 +6025,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25744"
-			(at 120.65 57.785 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "2a05a675-d6d4-4736-8d9e-e2cf67686d54")
 		)
@@ -6377,21 +6032,15 @@
 			(uuid "0db493b8-1cb7-43c0-bc28-b5458b686703")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "R110")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "R5")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "R109")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R105")
+					(reference "R6")
 					(unit 1)
 				)
 			)
@@ -6407,7 +6056,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8e55ed8c-2663-4680-8570-da48b3ff2c68")
-		(property "Reference" "#PWR0135"
+		(property "Reference" "#PWR0119"
 			(at 126.365 99.06 0)
 			(effects
 				(font
@@ -6455,21 +6104,15 @@
 			(uuid "e4454e29-e86c-4554-802d-0903cc6cf427")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0135")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR022")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0119")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0117")
+					(reference "#PWR05")
 					(unit 1)
 				)
 			)
@@ -6485,7 +6128,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9797a050-176e-4906-8cd4-7459d50c4695")
-		(property "Reference" "#PWR0120"
+		(property "Reference" "#PWR0104"
 			(at 28.575 71.12 0)
 			(effects
 				(font
@@ -6533,21 +6176,15 @@
 			(uuid "2e3e9800-8c57-4b65-b473-24277864628f")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0120")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR07")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0104")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0102")
+					(reference "#PWR02")
 					(unit 1)
 				)
 			)
@@ -6569,7 +6206,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9db6113a-af1c-4670-aa50-d37dfff2e57b")
-		(property "Reference" "#PWR0119"
+		(property "Reference" "#PWR0103"
 			(at 20.955 71.12 0)
 			(effects
 				(font
@@ -6617,21 +6254,15 @@
 			(uuid "b38e4e5f-10a7-4b40-a444-b2557051ca9a")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0119")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR06")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0103")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0101")
+					(reference "#PWR01")
 					(unit 1)
 				)
 			)
@@ -6652,7 +6283,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9e6ed5b3-255f-4eea-a6ce-44c588bbaf7d")
-		(property "Reference" "R107"
+		(property "Reference" "R106"
 			(at 53.34 36.83 90)
 			(effects
 				(font
@@ -6695,15 +6326,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25768"
-			(at 55.88 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "d2e928e7-11a2-4df2-963b-bfaee0981b42")
 		)
@@ -6711,21 +6333,15 @@
 			(uuid "ac3ec378-53cd-40a7-ab00-06d5d4f926b0")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "R107")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "R2")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "R106")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R102")
+					(reference "R2")
 					(unit 1)
 				)
 			)
@@ -6746,7 +6362,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9ee40bd6-ec62-4db9-976e-616aba1eda75")
-		(property "Reference" "D107"
+		(property "Reference" "D102"
 			(at 55.245 54.61 90)
 			(effects
 				(font
@@ -6764,7 +6380,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-882D"
+		(property "Footprint" "Diode_SMD:D_SOD-923"
 			(at 53.975 55.88 0)
 			(effects
 				(font
@@ -6791,15 +6407,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C7420372"
-			(at 53.975 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "7839a7bf-a011-46b7-a7a4-2df8fda0f62a")
 		)
@@ -6807,21 +6414,15 @@
 			(uuid "23e33c21-16ce-434a-9559-3016e17d79ec")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "D107")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "D2")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "D102")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "D102")
+					(reference "D2")
 					(unit 1)
 				)
 			)
@@ -6836,7 +6437,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a5fc9789-6446-436e-9aa7-9a95b6ed48ff")
-		(property "Reference" "C116"
+		(property "Reference" "C101"
 			(at 27.305 117.4687 0)
 			(effects
 				(font
@@ -6881,15 +6482,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
-			(at 29.845 116.205 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "e74fc802-497f-42b7-abec-3f2d7997ca32")
 		)
@@ -6897,21 +6489,15 @@
 			(uuid "8ec6d206-b5ab-436e-9748-7e2e376f3ae1")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "C116")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "C3")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "C101")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "C101")
+					(reference "C2")
 					(unit 1)
 				)
 			)
@@ -6926,7 +6512,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b08cc87b-4101-4058-a40e-b6782ca8ffab")
-		(property "Reference" "SW101"
+		(property "Reference" "SW102"
 			(at 50.8 113.665 0)
 			(effects
 				(font
@@ -6942,7 +6528,7 @@
 				)
 			)
 		)
-		(property "Footprint" "WOBClibrary:TVAF06-A020B-R"
+		(property "Footprint" "WOBCLibrary:TVAF06-A020B-R"
 			(at 53.975 111.125 0)
 			(effects
 				(font
@@ -6969,15 +6555,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
-			(at 53.975 116.205 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "3813a66d-6dc9-4b8a-abf3-1e4c2248002c")
 		)
@@ -6985,21 +6562,15 @@
 			(uuid "48d26ad2-096d-4b6c-b52c-3446ab765eb8")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "SW101")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "SW1")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "SW102")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "SW101")
+					(reference "SW1")
 					(unit 1)
 				)
 			)
@@ -7015,7 +6586,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b0ad6e60-3d77-4804-a599-ee5e84ad14f2")
-		(property "Reference" "U106"
+		(property "Reference" "U102"
 			(at 47.2791 153.67 0)
 			(effects
 				(font
@@ -7060,15 +6631,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C12084"
-			(at 45.085 163.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "236778f3-34ce-469f-95a3-8385e44f4577")
 		)
@@ -7094,21 +6656,15 @@
 			(uuid "1e6a4a4f-c278-4e9a-ba1e-6ed5bedf1f05")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "U106")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "U3")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "U102")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "U102")
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -7123,7 +6679,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b6d516ce-6886-4d62-9479-e65d5d8e39e5")
-		(property "Reference" "D111"
+		(property "Reference" "D106"
 			(at 130.175 87.63 90)
 			(effects
 				(font
@@ -7168,15 +6724,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2297"
-			(at 126.365 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "229d1319-f50d-4dd5-adfb-b6b5a8077a07")
 		)
@@ -7184,21 +6731,15 @@
 			(uuid "3180175d-0a60-4880-b480-bbac8f9ff32e")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "D111")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "D6")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "D106")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "D106")
+					(reference "D6")
 					(unit 1)
 				)
 			)
@@ -7213,7 +6754,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ba584e31-5bac-40cf-a525-e48508fb7665")
-		(property "Reference" "USB102"
+		(property "Reference" "USB101"
 			(at 28.575 26.67 0)
 			(effects
 				(font
@@ -7248,15 +6789,6 @@
 			)
 		)
 		(property "Description" ""
-			(at 28.575 41.91 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C2982481"
 			(at 28.575 41.91 0)
 			(effects
 				(font
@@ -7317,21 +6849,15 @@
 			(uuid "d81fed47-8cc4-4c12-847f-bff31b308710")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "USB102")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "USB1")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "USB101")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "USB101")
+					(reference "USB1")
 					(unit 1)
 				)
 			)
@@ -7352,7 +6878,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c2dd731e-0cdc-400d-8540-fb84d5210f57")
-		(property "Reference" "D106"
+		(property "Reference" "D101"
 			(at 49.53 54.61 90)
 			(effects
 				(font
@@ -7370,7 +6896,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-882D"
+		(property "Footprint" "Diode_SMD:D_SOD-923"
 			(at 48.26 55.88 0)
 			(effects
 				(font
@@ -7397,15 +6923,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C7420372"
-			(at 48.26 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "f9f91853-dfb8-4f9f-a8a8-9e8ed28b44a3")
 		)
@@ -7413,21 +6930,15 @@
 			(uuid "5c6108d6-9cd5-4d25-ab8e-2c3d83d3e08e")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "D106")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "D1")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "D101")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "D101")
+					(reference "D1")
 					(unit 1)
 				)
 			)
@@ -7443,7 +6954,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c2e193d5-25d3-4f0c-b842-606f09357cf3")
-		(property "Reference" "#PWR0125"
+		(property "Reference" "#PWR0109"
 			(at 45.085 179.705 0)
 			(effects
 				(font
@@ -7491,21 +7002,15 @@
 			(uuid "6bd1c202-c9b1-4cda-8b3c-88986c1c90af")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0125")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR012")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0109")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0107")
+					(reference "#PWR014")
 					(unit 1)
 				)
 			)
@@ -7521,7 +7026,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c6d13de9-ca31-4b31-9625-b21b27295841")
-		(property "Reference" "#PWR0121"
+		(property "Reference" "#PWR0105"
 			(at 29.845 113.665 0)
 			(effects
 				(font
@@ -7569,99 +7074,15 @@
 			(uuid "16449b5b-8dc6-4d79-8684-0a4755cd0dd8")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0121")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR08")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0105")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0103")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VBUS")
-		(at 73.025 26.67 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d10006ca-4683-4558-bec1-ea1ac5f015cf")
-		(property "Reference" "#PWR0132"
-			(at 69.215 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VBUS"
-			(at 70.485 24.13 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 73.025 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 73.025 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 73.025 26.67 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2752508a-325c-466f-a772-d08faf1ef2d4")
-		)
-		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0132")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR019")
-					(unit 1)
-				)
-			)
-			(project "ESP32Core"
-				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0114")
+					(reference "#PWR011")
 					(unit 1)
 				)
 			)
@@ -7676,7 +7097,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d169d200-b079-4a32-aaa6-41a1529f6ffc")
-		(property "Reference" "D108"
+		(property "Reference" "D103"
 			(at 60.96 54.61 90)
 			(effects
 				(font
@@ -7694,7 +7115,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-882D"
+		(property "Footprint" "Diode_SMD:D_SOD-923"
 			(at 59.69 55.88 0)
 			(effects
 				(font
@@ -7721,15 +7142,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C7420372"
-			(at 59.69 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "7b9c38b6-6192-4f50-8d4a-c107c43c6e84")
 		)
@@ -7737,21 +7149,15 @@
 			(uuid "504a388a-9120-41db-ad29-459887b0f5a5")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "D108")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "D3")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "D103")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "D103")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -7766,7 +7172,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dfea90cd-b47a-499d-b098-3be6f8f41727")
-		(property "Reference" "D109"
+		(property "Reference" "D104"
 			(at 68.58 104.775 90)
 			(effects
 				(font
@@ -7811,15 +7217,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C2296"
-			(at 64.77 106.045 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "2671a145-2371-49a7-b08c-4c430e9118f6")
 		)
@@ -7827,21 +7224,15 @@
 			(uuid "971a3395-4401-4c2a-95a2-88e668331974")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "D109")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "D4")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "D104")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "D104")
+					(reference "D4")
 					(unit 1)
 				)
 			)
@@ -7857,7 +7248,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e34b69f6-7d0f-467e-ae35-4f3a41a22a2c")
-		(property "Reference" "#PWR0133"
+		(property "Reference" "#PWR0117"
 			(at 112.395 99.06 0)
 			(effects
 				(font
@@ -7905,21 +7296,15 @@
 			(uuid "ace22ec8-c579-4748-acc3-7abe27636bfc")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0133")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR020")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0117")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0115")
+					(reference "#PWR025")
 					(unit 1)
 				)
 			)
@@ -7935,7 +7320,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e87c0368-021f-4aef-90af-a40bf0cf2c89")
-		(property "Reference" "#PWR0129"
+		(property "Reference" "#PWR0113"
 			(at 64.77 71.12 0)
 			(effects
 				(font
@@ -7983,21 +7368,15 @@
 			(uuid "932e9823-ae4e-448f-b5f7-0fac2104c135")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0129")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR016")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0113")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0111")
+					(reference "#PWR04")
 					(unit 1)
 				)
 			)
@@ -8018,7 +7397,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f0db2007-5f2b-4754-a076-ba0a258c7cf1")
-		(property "Reference" "C117"
+		(property "Reference" "C102"
 			(at 39.37 148.59 90)
 			(effects
 				(font
@@ -8061,15 +7440,6 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
-			(at 39.37 154.305 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
 		(pin "1"
 			(uuid "ecd9d528-f8f5-4b67-9987-682ddaf7542a")
 		)
@@ -8077,21 +7447,15 @@
 			(uuid "6d3a4644-99ca-467a-8c5e-771e70b2987b")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "C117")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "C4")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "C102")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "C102")
+					(reference "C3")
 					(unit 1)
 				)
 			)
@@ -8107,7 +7471,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fdbb1d91-51c7-4bc2-bc0c-96025ca3ac5b")
-		(property "Reference" "#PWR0134"
+		(property "Reference" "#PWR0118"
 			(at 120.65 57.785 0)
 			(effects
 				(font
@@ -8155,21 +7519,15 @@
 			(uuid "58259508-11f8-4330-8900-69180eaa7645")
 		)
 		(instances
-			(project "Tracker"
-				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
-					(reference "#PWR0134")
-					(unit 1)
-				)
-			)
-			(project "RockoonBus"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/bccd0183-9768-4de3-b122-ff3ed2015550"
-					(reference "#PWR021")
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/7581e5ab-4bf8-4a5f-bcf6-6d148cd61adf"
+					(reference "#PWR0118")
 					(unit 1)
 				)
 			)
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "#PWR0116")
+					(reference "#PWR09")
 					(unit 1)
 				)
 			)
