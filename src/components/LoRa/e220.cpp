@@ -46,6 +46,7 @@ bool E220::send(uint16_t addr, uint8_t channel, const uint8_t* data, unsigned le
 unsigned E220::receive(uint8_t* data, unsigned max_len) {
   if (stream_.available() == 0) return 0;
   uint8_t len = stream_.peek();
+
   if (RSSI_enabled_) {
     if ((int)stream_.available() < len + 2) return 0;
     if (max_len > 0 && len > max_len) {
