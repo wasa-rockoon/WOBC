@@ -27,7 +27,7 @@ void setup() {
   bool ok = true;
   ok &= lora.setMode(E220::Mode::CONFIG_DS);
   ok &= lora.setParametersToDefault();
-  ok &= lora.setSerialBaudRate(9600);
+  ok &= lora.setSerialBaudRate(115200);
   ok &= lora.setDataRate(E220::SF::SF9, E220::BW::BW125kHz);
   ok &= lora.setEnvRSSIEnable(true);
   ok &= lora.setSendMode(E220::SendMode::TRANSPARENT);
@@ -35,6 +35,7 @@ void setup() {
   ok &= lora.setChannel(LORA_CHANNEL);
   ok &= lora.setRSSIEnable(true);
   ok &= lora.setMode(E220::Mode::NORMAL);
+  lora_serial.begin(115200);
 
   if (ok) Serial.println("LoRa ok.");
   else Serial.println("LoRa error.");
@@ -52,7 +53,7 @@ void loop() {
 
 void loop1() {
   delay(5000);
-  while (!lora.isBusy());
+  while (lora.isBusy());
   const char message[] = "HELLO LORA!";
   lora.sendTransparent((const uint8_t*)message, 12);
 }
