@@ -51,7 +51,13 @@
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -172,7 +178,15 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0,
+        0.2,
+        0.4,
+        1.3,
+        1.5,
+        1.8,
+        2.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -199,7 +213,16 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        },
+        {
+          "diameter": 0.5,
+          "drill": 0.3
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -432,7 +455,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "GS.kicad_pro",
+    "filename": "LoRa.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -580,28 +603,20 @@
       "ルート"
     ],
     [
-      "951c9b78-7f7a-40cb-9924-3a13ae950f3e",
-      "ESP32"
+      "3fd69d7a-3935-432d-9331-5ddecceac0d8",
+      "IF3"
     ],
     [
-      "c990673b-a39e-4a98-a254-0d1624c91320",
-      "GPS"
+      "3b791c74-f14e-421b-856f-483993ca41de",
+      "LoRa1"
     ],
     [
-      "b6596e6a-331e-4110-9845-3f13c73105a2",
-      "IF2"
+      "08150646-03d3-490b-91bc-b349c1a686bf",
+      "LoRa2"
     ],
     [
-      "b68d4887-c983-40fc-adcd-c70e88ae0d4a",
-      "IF4"
-    ],
-    [
-      "e96674da-5496-4e06-8fa1-e9734b97109d",
-      "LiPoSimple"
-    ],
-    [
-      "2c35cf26-1e44-42e5-8139-efbe5f54c1ed",
-      "Logger"
+      "356a1ada-8c3e-443c-8840-b50d5fdee803",
+      "PR2040_2"
     ]
   ],
   "text_variables": {}
