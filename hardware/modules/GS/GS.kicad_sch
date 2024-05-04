@@ -454,6 +454,126 @@
 				)
 			)
 		)
+		(symbol "power:VDD"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VDD"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VDD\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VDD_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VDD_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 	)
 	(junction
 		(at 139.461 76.5128)
@@ -686,6 +806,16 @@
 			(type default)
 		)
 		(uuid "00661075-9c25-43dd-babd-a758c58cace6")
+	)
+	(wire
+		(pts
+			(xy 89.3229 92.3451) (xy 98.4685 92.3451)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "01ca37ac-3051-415b-bfd0-cb42322d59f1")
 	)
 	(wire
 		(pts
@@ -1249,6 +1379,26 @@
 	)
 	(wire
 		(pts
+			(xy 199.1315 87.1666) (xy 199.1315 91.412)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a6c27f4e-dfce-48a2-874b-9cb1f6091db1")
+	)
+	(wire
+		(pts
+			(xy 89.3229 86.3314) (xy 89.3229 92.3451)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a76f6608-e91b-40b7-9bf1-8012ec22076b")
+	)
+	(wire
+		(pts
 			(xy 137.2195 70.7511) (xy 137.2195 74.6319)
 		)
 		(stroke
@@ -1539,6 +1689,16 @@
 	)
 	(wire
 		(pts
+			(xy 199.1315 91.412) (xy 186.2144 91.412)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f6b97292-ff0c-41d7-b710-50692210b85e")
+	)
+	(wire
+		(pts
 			(xy 73.5717 83.3949) (xy 73.5717 85.8344)
 		)
 		(stroke
@@ -1810,6 +1970,72 @@
 		(uuid "f0eda92d-3c82-4285-980a-1fa2a59512c6")
 	)
 	(symbol
+		(lib_id "power:VDD")
+		(at 199.1315 87.1666 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "042aec9e-68f6-4ffb-9c4a-b94a48b78283")
+		(property "Reference" "#PWR024"
+			(at 199.1315 90.9766 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VDD"
+			(at 199.1315 82.1152 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 199.1315 87.1666 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.1315 87.1666 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VDD\""
+			(at 199.1315 87.1666 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b1128996-069b-4b84-ba31-792ce125f8e9")
+		)
+		(instances
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe"
+					(reference "#PWR024")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 65.5964 77.9351 180)
 		(unit 1)
@@ -2009,6 +2235,72 @@
 			(project "GS"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe"
 					(reference "BT1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VDD")
+		(at 89.3229 86.3314 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9b763e29-ab10-4cc0-a237-66a42ac48db0")
+		(property "Reference" "#PWR023"
+			(at 89.3229 90.1414 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VDD"
+			(at 89.3229 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 89.3229 86.3314 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 89.3229 86.3314 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VDD\""
+			(at 89.3229 86.3314 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "29044e68-61e0-4464-9b92-fa7bed8e22b9")
+		)
+		(instances
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe"
+					(reference "#PWR023")
 					(unit 1)
 				)
 			)
