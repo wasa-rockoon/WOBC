@@ -97,7 +97,7 @@
 	(net 15 "/lcd_DB7")
 	(net 16 "/lcd_sw1")
 	(net 17 "Net-(D101-A)")
-	(net 18 "Net-(D102-A)")
+	(net 18 "Net-(D111-A)")
 	(net 19 "Net-(D103-A)")
 	(net 20 "/ind_row1")
 	(net 21 "/ind_row3")
@@ -110,20 +110,20 @@
 	(net 28 "/LoRaSW3")
 	(net 29 "/LoRaSW4")
 	(net 30 "/ind_column4")
-	(net 31 "Net-(SW103-B)")
+	(net 31 "Net-(SW101-B)")
 	(net 32 "/ind_column3")
 	(net 33 "/ind_column2")
 	(net 34 "/ind_column1")
 	(net 35 "/launch_sub")
 	(net 36 "/launch_abort")
 	(net 37 "/launch_go")
-	(net 38 "unconnected-(SW108-Pad6)")
-	(net 39 "unconnected-(SW108-Pad10)")
-	(net 40 "unconnected-(SW108-Pad7)")
-	(net 41 "unconnected-(SW108-Pad8)")
-	(net 42 "unconnected-(SW108-Pad9)")
+	(net 38 "unconnected-(SW102-Pad6)")
+	(net 39 "unconnected-(SW102-Pad10)")
+	(net 40 "unconnected-(SW102-Pad7)")
+	(net 41 "unconnected-(SW102-Pad8)")
+	(net 42 "unconnected-(SW102-Pad9)")
 	(net 43 "unconnected-(SW101-A-Pad1)")
-	(net 44 "unconnected-(SW102-A-Pad1)")
+	(net 44 "unconnected-(SW108-A-Pad1)")
 	(net 45 "unconnected-(SW103-A-Pad1)")
 	(net 46 "unconnected-(SW104-A-Pad1)")
 	(net 47 "unconnected-(SW105-A-Pad1)")
@@ -135,7 +135,7 @@
 		(at 87.1 106.3 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R106"
+		(property "Reference" "R114"
 			(at 3.1 0.1 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -357,7 +357,7 @@
 		(layer "F.Cu")
 		(uuid "0c0eb833-13ca-4cc5-87be-50550ed9354f")
 		(at 102.1 98.7)
-		(property "Reference" "SW102"
+		(property "Reference" "SW107"
 			(at 0 5.08 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -476,7 +476,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 44 "unconnected-(SW102-A-Pad1)")
+			(net 49 "unconnected-(SW107-A-Pad1)")
 			(pinfunction "A")
 			(pintype "passive+no_connect")
 			(uuid "cd35206c-8ebd-4d4e-b061-8bcd6dc37d02")
@@ -510,7 +510,7 @@
 		(at 161 104.78 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R116"
+		(property "Reference" "R106"
 			(at 0 -1.16 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -712,7 +712,7 @@
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 17 "Net-(D101-A)")
+			(net 18 "Net-(D111-A)")
 			(pintype "passive")
 			(uuid "01650333-727e-433b-a1d6-6fc08dbfc482")
 		)
@@ -734,7 +734,7 @@
 		(at 72.7 80.58 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R101"
+		(property "Reference" "R102"
 			(at -2.92 0.1 -90)
 			(layer "F.SilkS")
 			(uuid "dc78beff-5e40-4e9b-910b-4215b75e2239")
@@ -957,7 +957,7 @@
 		(at 151.4 93.6 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R111"
+		(property "Reference" "R109"
 			(at -4.1 0 90)
 			(layer "F.SilkS")
 			(uuid "34e790c7-e86e-477c-89ed-1ffc75a10a3f")
@@ -1180,7 +1180,7 @@
 		(at 180 96 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D103"
+		(property "Reference" "D106"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1420,7 +1420,7 @@
 		(at 102.3 106.42 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R108"
+		(property "Reference" "R116"
 			(at 2.98 0 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1644,7 +1644,7 @@
 		(at 166 96 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D101"
+		(property "Reference" "D114"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -1861,7 +1861,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 17 "Net-(D101-A)")
+			(net 18 "Net-(D111-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "19b017fe-c6b6-478c-b8b7-509a5108904a")
@@ -1882,7 +1882,7 @@
 		(layer "F.Cu")
 		(uuid "3744f82d-35f9-4767-b498-f5e0726bf507")
 		(at 82.4 109.48)
-		(property "Reference" "SW104"
+		(property "Reference" "SW105"
 			(at 0 5.08 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -2001,7 +2001,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 46 "unconnected-(SW104-A-Pad1)")
+			(net 47 "unconnected-(SW105-A-Pad1)")
 			(pinfunction "A")
 			(pintype "passive+no_connect")
 			(uuid "90ed8b58-5ddb-4ee2-bcce-eb94d27ae506")
@@ -2035,7 +2035,7 @@
 		(at 175.8 94.68 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R115"
+		(property "Reference" "R105"
 			(at 0 -1.16 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2237,7 +2237,7 @@
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 18 "Net-(D102-A)")
+			(net 23 "Net-(D107-A)")
 			(pintype "passive")
 			(uuid "1e987658-8052-4090-87ba-1002d0f33ee5")
 		)
@@ -2259,7 +2259,7 @@
 		(at 87.1 101.8 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R103"
+		(property "Reference" "R111"
 			(at 3.02 -0.1 -90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2483,7 +2483,7 @@
 		(at 183.075 114 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D111"
+		(property "Reference" "D101"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -2700,7 +2700,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 23 "Net-(D107-A)")
+			(net 17 "Net-(D101-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "7cf9d094-9ba3-405c-84a7-967a1eb9ba7a")
@@ -2723,7 +2723,7 @@
 		(at 149 93.58 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R110"
+		(property "Reference" "R108"
 			(at -4.12 -0.1 90)
 			(layer "F.SilkS")
 			(uuid "306d51e4-01d3-444c-aca6-6a683c55a978")
@@ -2946,7 +2946,7 @@
 		(at 87 95.5 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R102"
+		(property "Reference" "R101"
 			(at -2.98 0 -90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3139,7 +3139,7 @@
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 31 "Net-(SW103-B)")
+			(net 31 "Net-(SW101-B)")
 			(pintype "passive")
 			(uuid "98081e08-83cc-4cc4-9238-a1c39385b0ad")
 		)
@@ -3168,7 +3168,7 @@
 		(layer "F.Cu")
 		(uuid "6c84d010-b04c-4df6-917b-81a75a4d4879")
 		(at 97.7 109.5)
-		(property "Reference" "SW106"
+		(property "Reference" "SW103"
 			(at 0 5.08 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -3287,7 +3287,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 48 "unconnected-(SW106-A-Pad1)")
+			(net 45 "unconnected-(SW103-A-Pad1)")
 			(pinfunction "A")
 			(pintype "passive+no_connect")
 			(uuid "0e16c66d-6f9f-43bd-8bc3-414ebcd92914")
@@ -3321,7 +3321,7 @@
 		(at 173 102 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D114"
+		(property "Reference" "D108"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -3538,7 +3538,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 18 "Net-(D102-A)")
+			(net 23 "Net-(D107-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "4ad7c8d4-01b9-4365-b6fa-14e277b569db")
@@ -3561,7 +3561,7 @@
 		(at 154 93.6 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R112"
+		(property "Reference" "R110"
 			(at -4.1 -0.1 90)
 			(layer "F.SilkS")
 			(uuid "9ffc59c0-0538-4293-bde6-ad5afd014c43")
@@ -3784,7 +3784,7 @@
 		(at 183.075 108 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D107"
+		(property "Reference" "D102"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4001,7 +4001,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 23 "Net-(D107-A)")
+			(net 17 "Net-(D101-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "7514977a-5e3d-48eb-999e-a8c78db8b060")
@@ -4024,7 +4024,7 @@
 		(at 170.8 108 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D105"
+		(property "Reference" "D109"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4241,7 +4241,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 18 "Net-(D102-A)")
+			(net 23 "Net-(D107-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "98f17b99-a07f-47ac-a900-a5719f1ed6c0")
@@ -4264,7 +4264,7 @@
 		(at 164.3 114 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D108"
+		(property "Reference" "D111"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4481,7 +4481,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 17 "Net-(D101-A)")
+			(net 18 "Net-(D111-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "f5a16f16-ad0f-4b43-9d05-396b29cf6b8a")
@@ -4504,7 +4504,7 @@
 		(at 85.7 106.3 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R105"
+		(property "Reference" "R113"
 			(at 3 0 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -4728,7 +4728,7 @@
 		(at 146.5 93.6 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R109"
+		(property "Reference" "R107"
 			(at -4.12 -0.1 90)
 			(layer "F.SilkS")
 			(uuid "bf4539c8-d105-4af0-94c2-779d01115c4a")
@@ -4951,7 +4951,7 @@
 		(at 177 108 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D106"
+		(property "Reference" "D105"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5191,7 +5191,7 @@
 		(at 177 114 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D110"
+		(property "Reference" "D103"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5431,7 +5431,7 @@
 		(at 173 96 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D102"
+		(property "Reference" "D110"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5648,7 +5648,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 18 "Net-(D102-A)")
+			(net 23 "Net-(D107-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "9b6646ad-8fc4-410c-8659-1fbcf13c08b7")
@@ -5671,7 +5671,7 @@
 		(at 161.8 94.68 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R113"
+		(property "Reference" "R103"
 			(at -0.24 -1.38 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -5873,7 +5873,7 @@
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 23 "Net-(D107-A)")
+			(net 17 "Net-(D101-A)")
 			(pintype "passive")
 			(uuid "e2f93619-9e23-4508-b555-bd168e89f612")
 		)
@@ -5895,7 +5895,7 @@
 		(at 164.3 108 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D104"
+		(property "Reference" "D113"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6112,7 +6112,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 17 "Net-(D101-A)")
+			(net 18 "Net-(D111-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "30cbc2e2-de39-4dd9-a2e0-b06050c7c9ff")
@@ -6135,7 +6135,7 @@
 		(at 101 106.4 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R107"
+		(property "Reference" "R115"
 			(at 2.88 -0.1 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6359,7 +6359,7 @@
 		(at 166 102 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D113"
+		(property "Reference" "D112"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -6576,7 +6576,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 17 "Net-(D101-A)")
+			(net 18 "Net-(D111-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "52fa13ae-6a77-41fb-bacc-26f2b9c0289e")
@@ -6597,7 +6597,7 @@
 		(layer "F.Cu")
 		(uuid "c0954625-5085-4082-84c3-3571d53ae574")
 		(at 149 105.55 180)
-		(property "Reference" "SW108"
+		(property "Reference" "SW102"
 			(at 0 -0.5 180)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -6775,7 +6775,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 38 "unconnected-(SW108-Pad6)")
+			(net 38 "unconnected-(SW102-Pad6)")
 			(pinfunction "6")
 			(pintype "passive+no_connect")
 			(uuid "263e5162-a9bd-4586-af90-2478f5646e44")
@@ -6786,7 +6786,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 40 "unconnected-(SW108-Pad7)")
+			(net 40 "unconnected-(SW102-Pad7)")
 			(pinfunction "7")
 			(pintype "passive+no_connect")
 			(uuid "b32ddfd1-19b2-47f3-9fc1-998985c2a9fb")
@@ -6797,7 +6797,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 41 "unconnected-(SW108-Pad8)")
+			(net 41 "unconnected-(SW102-Pad8)")
 			(pinfunction "8")
 			(pintype "passive+no_connect")
 			(uuid "ee8b01b1-5b0c-4bb3-9e67-249ec6bd8ec1")
@@ -6808,7 +6808,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 42 "unconnected-(SW108-Pad9)")
+			(net 42 "unconnected-(SW102-Pad9)")
 			(pinfunction "9")
 			(pintype "passive+no_connect")
 			(uuid "ff935bc4-a04f-43be-aa93-da033b94724c")
@@ -6819,7 +6819,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 39 "unconnected-(SW108-Pad10)")
+			(net 39 "unconnected-(SW102-Pad10)")
 			(pinfunction "10")
 			(pintype "passive+no_connect")
 			(uuid "720fc2f0-74e0-4a8e-9f3d-269f1924fedf")
@@ -6829,7 +6829,7 @@
 		(layer "F.Cu")
 		(uuid "c3ceca5c-3e88-49cc-8b79-a9b599ca6898")
 		(at 82.1 98.7)
-		(property "Reference" "SW103"
+		(property "Reference" "SW101"
 			(at 0 5.08 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -6948,7 +6948,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 45 "unconnected-(SW103-A-Pad1)")
+			(net 43 "unconnected-(SW101-A-Pad1)")
 			(pinfunction "A")
 			(pintype "passive+no_connect")
 			(uuid "52aa9cfd-5af0-496b-896f-139402e37c59")
@@ -6959,7 +6959,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 31 "Net-(SW103-B)")
+			(net 31 "Net-(SW101-B)")
 			(pinfunction "B")
 			(pintype "passive")
 			(uuid "83cbf7e0-6e81-499a-ba15-a4a484bca723")
@@ -6982,7 +6982,7 @@
 		(at 180 102 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D112"
+		(property "Reference" "D104"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7222,7 +7222,7 @@
 		(at 170.8 114 180)
 		(descr "LED, Round, FlatTop, diameter 3.0mm, 2 pins, http://www.kingbright.com/attachments/file/psearch/000/00/00/L-47XEC(Ver.9A).pdf")
 		(tags "LED Round FlatTop diameter 3.0mm 2 pins")
-		(property "Reference" "D109"
+		(property "Reference" "D107"
 			(at 1.27 -2.96 180)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7439,7 +7439,7 @@
 			(drill 0.9)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 18 "Net-(D102-A)")
+			(net 23 "Net-(D107-A)")
 			(pinfunction "A")
 			(pintype "passive")
 			(uuid "f1ceb645-0713-4db5-8685-5e8809c2303e")
@@ -7460,7 +7460,7 @@
 		(layer "F.Cu")
 		(uuid "ca286ea7-e33c-483b-a017-ae5a3577c279")
 		(at 92.1 98.7)
-		(property "Reference" "SW101"
+		(property "Reference" "SW108"
 			(at 0 5.08 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -7579,7 +7579,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 43 "unconnected-(SW101-A-Pad1)")
+			(net 44 "unconnected-(SW108-A-Pad1)")
 			(pinfunction "A")
 			(pintype "passive+no_connect")
 			(uuid "b9ae66c5-cc0b-4999-9247-bc074871d56d")
@@ -7613,7 +7613,7 @@
 		(at 168.8 94.68 -90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R114"
+		(property "Reference" "R104"
 			(at 0 -1.16 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -7837,7 +7837,7 @@
 		(at 97.3 101.9 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
-		(property "Reference" "R104"
+		(property "Reference" "R112"
 			(at 3 0 -90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -8059,7 +8059,7 @@
 		(layer "F.Cu")
 		(uuid "e351a97b-6150-4a87-84ff-6cfa399ad517")
 		(at 105.5 109.64)
-		(property "Reference" "SW107"
+		(property "Reference" "SW104"
 			(at 0 5.08 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -8178,7 +8178,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 49 "unconnected-(SW107-A-Pad1)")
+			(net 46 "unconnected-(SW104-A-Pad1)")
 			(pinfunction "A")
 			(pintype "passive+no_connect")
 			(uuid "ce42eae4-d96b-428d-bb45-e6fa10cbcb90")
@@ -8659,7 +8659,7 @@
 		(layer "F.Cu")
 		(uuid "eec041ab-d760-40a4-b9ad-c1156f0ed3ba")
 		(at 90.3 109.54)
-		(property "Reference" "SW105"
+		(property "Reference" "SW106"
 			(at 0 5.08 0)
 			(unlocked yes)
 			(layer "F.SilkS")
@@ -8778,7 +8778,7 @@
 			(drill 1.09)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 47 "unconnected-(SW105-A-Pad1)")
+			(net 48 "unconnected-(SW106-A-Pad1)")
 			(pinfunction "A")
 			(pintype "passive+no_connect")
 			(uuid "916e477f-8410-4777-a1fb-405824a63265")
