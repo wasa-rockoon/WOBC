@@ -1,8 +1,5 @@
 #pragma once
 
-#include <FreeRTOS.h>
-#include <timers.h>
-
 #include "process.h"
 
 namespace process {
@@ -24,11 +21,11 @@ protected:
   virtual void callback() {} // Overwrite this
 
 private:
-  TimerHandle_t timer_handle_;
+  xTimerHandle timer_handle_;
 
   void onStart() override;
 
-  static void entryPoint(TimerHandle_t timer_handle);
+  static void entryPoint(xTimerHandle timer_handle);
 };
 
 }

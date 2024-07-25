@@ -1,7 +1,5 @@
 #pragma once
 
-#include <FreeRTOS.h>
-#include <task.h>
 #include "library/kernel/kernel.h"
 #include "library/kernel/listener.h"
 
