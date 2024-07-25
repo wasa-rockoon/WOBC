@@ -6,18 +6,11 @@
 
 namespace process {
 
-class Module: public Process {
+class Module: public Component {
 public:
-  Module(const char *name) : Process(name) {};
+  Module(const char *name, uint8_t id) : Component(name, id) {};
   void main();
 
-protected:
-  virtual void setup() {};
-
-private:
-  kernel::Kernel kernel_;
-
-  void onStart() override {};
 };
 
 }

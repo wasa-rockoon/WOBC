@@ -3,7 +3,7 @@
 namespace process {
 
 void Module::main() {
-  startProcess(&kernel_);
+  onStart();
 }
 
 }

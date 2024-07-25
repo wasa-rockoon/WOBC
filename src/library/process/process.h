@@ -7,6 +7,8 @@
 
 namespace process {
 
+class Component;
+
 class Process {
 public:
   using Listener = kernel::Listener;
@@ -17,11 +19,14 @@ public:
 
   void listen(kernel::Listener &listener, unsigned queue_size = 1, bool force_push = true);
 
-  inline void start(Process& sub_process) { sub_process.startProcess(kernel_); };
+  inline void start(Process& sub_process) { sub_process.startProcess(component_); };
 
-  wcpp::Packet packet(uint8_t size);
-  void send(wcpp::Packet &packet);
+  Component& component() const { return *component_; };
 
+  wcpp::Packet newPacket(uint8_t size);
+  wcpp::Packet decodePacket(const uint8_t* buf);
+  void send(const wcpp::Packet &packet);
+  void send(const wcpp::Packet &packet, const Listener& exclude);
 
 
   // void readROM();
@@ -29,11 +34,10 @@ public:
 
 protected:
   const char *name_;
+  Component* component_;
   uint8_t core_;
 
-  kernel::Kernel *kernel_;
-
-  void startProcess(kernel::Kernel* kernel);
+  void startProcess(Component* component);
   virtual void onStart() = 0;
 };
 

@@ -23,8 +23,12 @@ Listener& Listener::component(uint8_t id, uint8_t mask) {
   updateKey(id << 8, mask << 8);
   return *this;
 }
-Listener& Listener::unit(uint8_t id, uint8_t mask) {
+Listener& Listener::unit_origin(uint8_t id, uint8_t mask) {
   updateKey(id << 16, mask << 16);
+  return *this;
+}
+Listener& Listener::unit_dest(uint8_t id, uint8_t mask) {
+  updateKey(id << 24, mask << 24);
   return *this;
 }
 
@@ -33,7 +37,6 @@ Listener& Listener::updateKey(key_t key, key_t mask) {
   return *this;
 }
 
-
 unsigned Listener::available() const {
   return uxQueueMessagesWaiting(queue_handle_);
 }
@@ -41,7 +44,7 @@ unsigned Listener::available() const {
 const wcpp::Packet Listener::peek() const {
   uint8_t* ptr;
   if (xQueuePeek(queue_handle_, &ptr, 0)) {
-    return wcpp::Packet::decode(ptr);
+    return wcpp::Packet::decode(ptr, ref_change_);
   }
   else {
     return wcpp::Packet::null();
@@ -50,7 +53,7 @@ const wcpp::Packet Listener::peek() const {
 const wcpp::Packet Listener::pop() {
   uint8_t* ptr;
   if (xQueueReceive(queue_handle_, &ptr, 0)) {
-    return wcpp::Packet::decode(ptr);
+    return wcpp::Packet::decode(ptr, ref_change_);
   }
   else {
     return wcpp::Packet::null();
@@ -75,16 +78,22 @@ bool Listener::push(const wcpp::Packet& packet) {
   }
 }
 
-void Listener::onTraverse(const uint8_t* ptr) {
+void Listener::onTraverse(ListenerArg arg) {
+  if (arg.exclude == this) return;
   if (force_push_) {
-    xQueueOverwrite(queue_handle_, &ptr);
+    xQueueOverwrite(queue_handle_, &arg.packet_buf);
   }
   else {
-    xQueueSend(queue_handle_, &ptr, 0);
+    xQueueSend(queue_handle_, &arg.packet_buf, 0);
   }
 }
 
-
+key_t Listener::keyOf(const wcpp::Packet& packet) {
+  return (key_t)packet.type_and_id() 
+       | ((key_t)packet.component_id() << 8)
+       | ((key_t)packet.origin_unit_id() << 16)
+       | ((key_t)packet.dest_unit_id() << 24);
+}
 
 
 }

@@ -5,7 +5,8 @@ namespace process {
 
 Component::Component(const char* name, uint8_t id, unsigned command_queue_size)
 : Process(name), id_(id) {
-    command_listener_.command().component(id);
+  component_ = this;
+  command_listener_.command().component(id);
 }
 
 void Component::onStart() {

@@ -9,12 +9,14 @@ class Component: public Process {
 public:
   Component(const char* name, uint8_t id, unsigned command_queue_size = 5);
 
+  void begin();
+
 protected:
   virtual void setup() {}
   virtual void loop() {}
   virtual void onCommand(const wcpp::Packet& command) {};
 
-private:
+protected:
   uint8_t id_; 
   uint8_t priority_;
   unsigned stack_size_;
