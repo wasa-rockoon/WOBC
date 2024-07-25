@@ -55,10 +55,10 @@ void loop() {
     Serial.printf("message (%d byte, %d dB): %.*s\n", len, lora.getRSSI(), len, rx);
   }
   
-  const char message[] = "HELLO LORA!";
+  /*const char message[] = "HELLO LORA!";
   //Serial.println("SENT");
   lora.sendTransparent((const uint8_t*)message, 12);
-  delay(5000);
+  delay(5000);*/
 }
 
 /*void loop1() {
