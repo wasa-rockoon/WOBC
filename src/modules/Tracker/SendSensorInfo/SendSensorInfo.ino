@@ -44,7 +44,13 @@ HardwareSerial lora_serial(1); // 通常、1 は Serial1 を指しますが、�
 E220 lora(lora_serial, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN);
 
 void setup() {
-  Serial.begin(115200);
+  //Serial.begin(115200);
+  pinMode(42, OUTPUT);
+  pinMode(10, INPUT_PULLUP);
+  pinMode(43, INPUT_PULLUP);
+  pinMode(44, INPUT_PULLUP);
+  pinMode(7, OUTPUT);
+  digitalWrite(7, HIGH);
   setupLoRa();
   setBME();
   setupINA();
@@ -52,8 +58,10 @@ void setup() {
 
 void loop() {
   unsigned long currentTime = millis();
-  if (currentTime - lastUpdateTime >= 5000) {
+
+  if (currentTime - lastUpdateTime >= 3000) {
     lastUpdateTime = currentTime;
+    digitalWrite(42, HIGH);
 
     float* data = getBMEData();
     
@@ -62,19 +70,24 @@ void loop() {
     snprintf(message, sizeof(message), "BME%.2f,%.2f,%.2f", data[0], data[1], data[2]);
     
     // LoRaでデータを送信
-    lora.sendTransparent((const uint8_t*)message, strlen(message));
+    //lora.sendTransparent((const uint8_t*)message, strlen(message));
     
     float* inadata = getINAData();
     char messageV[50];
     char messageI[50];
-    snprintf(messageV, sizeof(messageV), "INAV%.2f,%.2f,%.2f", inadata[0], inadata[2], inadata[4]);
-    snprintf(messageI, sizeof(messageI), "INAI%.2f,%.2f,%.2f", inadata[1], inadata[3], inadata[5]);
+    char messageStat[50];
+    snprintf(messageV, sizeof(messageV), "INAV %.2f,%.2f,%.2f", inadata[0], inadata[2], inadata[4]);
+    snprintf(messageI, sizeof(messageI), "INAI %.2f,%.2f,%.2f", inadata[1], inadata[3], inadata[5]);
+    snprintf(messageStat, sizeof(messageStat), "STAT_S1,S2,PG %d,%d,%d", digitalRead(44), digitalRead(43), digitalRead(10));
     
     // LoRaでデータを送信
     delay(1000);
     lora.sendTransparent((const uint8_t*)messageV, strlen(messageV));
+    digitalWrite(42, LOW);
     delay(1000);
     lora.sendTransparent((const uint8_t*)messageI, strlen(messageI));
+    delay(1000);
+    lora.sendTransparent((const uint8_t*)messageStat, strlen(messageStat));
   }
 }
 
@@ -99,18 +112,18 @@ void setupLoRa() {
 
   delay(1000);
 
-  if (ok) {
+  /*if (ok) {
     Serial.println("LoRa ok.");
   } else {
     Serial.println("LoRa error.");
-  }
+  }*/
 }
 
 void setBME() {
     Serial.begin(9600);
     delay(100);
     while (!Serial); // シリアル通信の準備ができるまで待機
-    Serial.println(F("BME280 test"));
+    //Serial.println(F("BME280 test"));
 
     unsigned status;
   
@@ -119,16 +132,16 @@ void setBME() {
     status = bme.begin(BME_ADDR, &Wire);
     delay(200);
     if (!status) {
-        Serial.println("Could not find a valid BME280 sensor, check wiring, address, sensor ID!");
+        /*Serial.println("Could not find a valid BME280 sensor, check wiring, address, sensor ID!");
         Serial.print("SensorID was: 0x"); Serial.println(bme.sensorID(),16);
         Serial.print("        ID of 0xFF probably means a bad address, a BMP 180 or BMP 085\n");
         Serial.print("   ID of 0x56-0x58 represents a BMP 280,\n");
         Serial.print("        ID of 0x60 represents a BME 280.\n");
-        Serial.print("        ID of 0x61 represents a BME 680.\n");
+        Serial.print("        ID of 0x61 represents a BME 680.\n");*/
         while (1) delay(10);
     }
     
-    Serial.println("-- Default Test --");
+    //Serial.println("-- Default Test --");
     delay(1000);
 }
 
@@ -144,19 +157,19 @@ void setupINA(){
   Wire.begin(17, 16);
   if (!INA1.begin() )
   {
-    Serial.println("could not connect. Fix and Reboot");
+    //Serial.println("could not connect. Fix and Reboot");
     while(1);
   }
   INA1.setMaxCurrentShunt(1, 0.05);
   if (!INA2.begin() )
   {
-    Serial.println("could not connect. Fix and Reboot");
+    //Serial.println("could not connect. Fix and Reboot");
     while(1);
   }
   INA2.setMaxCurrentShunt(1, 0.05);
   if (!INA3.begin() )
   {
-    Serial.println("could not connect. Fix and Reboot");
+    //Serial.println("could not connect. Fix and Reboot");
     while(1);
   }
   INA3.setMaxCurrentShunt(1, 0.05);
