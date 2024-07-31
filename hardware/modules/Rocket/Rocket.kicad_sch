@@ -82,7 +82,7 @@
 		)
 	)
 	(sheet
-		(at 69.514 84.435)
+		(at 157.144 119.995)
 		(size 29.506 21.027)
 		(fields_autoplaced yes)
 		(stroke
@@ -94,7 +94,7 @@
 		)
 		(uuid "65382814-301c-4e80-8bce-91a246262373")
 		(property "Sheetname" "GPS SAM-M10Q2"
-			(at 69.514 83.7234 0)
+			(at 157.144 119.2834 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -103,7 +103,7 @@
 			)
 		)
 		(property "Sheetfile" "GPS SAM-M10Q2.kicad_sch"
-			(at 69.514 106.0466 0)
+			(at 157.144 141.6066 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -158,8 +158,8 @@
 		)
 	)
 	(sheet
-		(at 54.253 39.328)
-		(size 46.463 26.115)
+		(at 25.4 30.48)
+		(size 27.94 66.04)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -170,7 +170,7 @@
 		)
 		(uuid "e76c5276-18f2-4183-aadc-1a601896981d")
 		(property "Sheetname" "ESP32Core2"
-			(at 54.253 38.6164 0)
+			(at 25.4 29.7684 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -179,13 +179,253 @@
 			)
 		)
 		(property "Sheetfile" "ESP32Core2.kicad_sch"
-			(at 54.253 66.0276 0)
+			(at 25.4 97.1046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
 			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 53.34 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "db7e63c6-e0c2-472a-a824-9683d3cc9d15")
+		)
+		(pin "GPIO40" bidirectional
+			(at 53.34 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "06fc3126-9898-4f44-8727-d151e8f40093")
+		)
+		(pin "GPIO39" bidirectional
+			(at 53.34 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5651ce42-3095-413f-982f-8e10a8ef23ed")
+		)
+		(pin "VUSB" output
+			(at 53.34 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "38bcf667-1ea5-4c5f-b679-a559920e5041")
+		)
+		(pin "GPIO21" bidirectional
+			(at 53.34 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "48eec1f8-00ba-45da-b2be-0c322f13a21c")
+		)
+		(pin "GPIO38" bidirectional
+			(at 53.34 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d4b3e700-93d7-4e70-8019-7d1e9e74e6be")
+		)
+		(pin "GPIO18" bidirectional
+			(at 53.34 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "29ba3209-5177-4b84-b9f0-fc80fb568599")
+		)
+		(pin "GPIO48" bidirectional
+			(at 53.34 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d2656ea1-ab7f-465f-9178-d363b3d1ffca")
+		)
+		(pin "GPIO47" bidirectional
+			(at 53.34 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d981bc77-f4c8-42ab-8563-4eb14190b06e")
+		)
+		(pin "GPIO13" bidirectional
+			(at 53.34 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "332182f0-8026-4efd-a85e-7ddcb321d601")
+		)
+		(pin "GPIO12" bidirectional
+			(at 53.34 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "59ca59c2-da96-41c1-86b8-c305b97c2f94")
+		)
+		(pin "GPIO14" bidirectional
+			(at 53.34 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "49eefe2a-67c4-4f68-9541-1ab400d2cf5a")
+		)
+		(pin "GPIO4{slash}ADC1_CH3" bidirectional
+			(at 53.34 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "03b0cd2d-66d9-4fe8-91b0-9e3d7eac9cee")
+		)
+		(pin "GPIO3{slash}ADC1_CH2" bidirectional
+			(at 53.34 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "cdac56f5-973e-4517-81a0-a9d82ecbd579")
+		)
+		(pin "GPIO5{slash}ADC1_CH4" bidirectional
+			(at 53.34 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0c61445a-c09b-4a5d-b5ac-2e7157d9f534")
+		)
+		(pin "GPIO1{slash}ADC1_CH0" bidirectional
+			(at 53.34 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9579e9ae-dadd-4d03-ab39-03d609f3f568")
+		)
+		(pin "GPIO2{slash}ADC1_CH1" bidirectional
+			(at 53.34 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "11fbc2b2-feab-4241-9cd3-bc0b885b8654")
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 53.34 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5e7dcc03-b5bd-4db5-bc51-adcdd435ba02")
+		)
+		(pin "GPIO10{slash}ADC1_CH9" bidirectional
+			(at 53.34 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "79ccb29c-dbe4-4d87-b826-c058fbcb1141")
+		)
+		(pin "GPIO8{slash}ADC1_CH7" bidirectional
+			(at 53.34 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "9446ecf9-d6dc-471a-8bfe-bd198ed6b234")
+		)
+		(pin "GPIO7{slash}ADC1_CH6" bidirectional
+			(at 53.34 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "821040c3-4236-4d30-8271-e1579cf5085d")
+		)
+		(pin "GPIO11" bidirectional
+			(at 53.34 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0897a363-c407-4fd2-889c-18bda1e1fbf3")
+		)
+		(pin "GPIO9{slash}ADC1_CH8" bidirectional
+			(at 53.34 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5b58d899-d7e0-4ece-a40b-d509e3974a63")
+		)
+		(pin "GPIO6{slash}ADC1_CH5" bidirectional
+			(at 53.34 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "57fdced5-0031-4c2f-9631-69de4ef7c3b4")
 		)
 		(instances
 			(project "Rocket"
@@ -234,7 +474,7 @@
 		)
 	)
 	(sheet
-		(at 60.357 134.29)
+		(at 122.587 125.4)
 		(size 21.367 19.67)
 		(fields_autoplaced yes)
 		(stroke
@@ -246,7 +486,7 @@
 		)
 		(uuid "f0fa73b0-1045-403f-90c9-c4ec46b4e16f")
 		(property "Sheetname" "9DoF2"
-			(at 60.357 133.5784 0)
+			(at 122.587 124.6884 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -255,7 +495,7 @@
 			)
 		)
 		(property "Sheetfile" "9DoF2.kicad_sch"
-			(at 60.357 154.5446 0)
+			(at 122.587 145.6546 0)
 			(effects
 				(font
 					(size 1.27 1.27)
