@@ -6,7 +6,7 @@
         "apply_defaults_to_fp_fields": false,
         "apply_defaults_to_fp_shapes": false,
         "apply_defaults_to_fp_text": false,
-        "board_outline_line_width": 0.1,
+        "board_outline_line_width": 0.05,
         "copper_line_width": 0.2,
         "copper_text_italic": false,
         "copper_text_size_h": 1.5,
@@ -30,7 +30,7 @@
         "fab_text_size_v": 1.0,
         "fab_text_thickness": 0.15,
         "fab_text_upright": false,
-        "other_line_width": 0.15,
+        "other_line_width": 0.1,
         "other_text_italic": false,
         "other_text_size_h": 1.0,
         "other_text_size_v": 1.0,
@@ -41,23 +41,17 @@
           "height": 1.524,
           "width": 1.524
         },
-        "silk_line_width": 0.15,
+        "silk_line_width": 0.1,
         "silk_text_italic": false,
         "silk_text_size_h": 1.0,
         "silk_text_size_v": 1.0,
-        "silk_text_thickness": 0.15,
+        "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [
-        {
-          "gap": 0.0,
-          "via_gap": 0.0,
-          "width": 0.0
-        }
-      ],
+      "diff_pair_dimensions": [],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -118,7 +112,7 @@
         "max_error": 0.005,
         "min_clearance": 0.0,
         "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.0,
+        "min_copper_edge_clearance": 0.5,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
@@ -131,8 +125,6 @@
         "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_clearance": 0.0,
-        "solder_mask_min_width": 0.0,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
@@ -179,12 +171,7 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [
-        0.0,
-        0.2,
-        0.4,
-        0.8
-      ],
+      "track_widths": [],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -211,16 +198,7 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [
-        {
-          "diameter": 0.0,
-          "drill": 0.0
-        },
-        {
-          "diameter": 0.5,
-          "drill": 0.3
-        }
-      ],
+      "via_dimensions": [],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -438,7 +416,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "error",
+      "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "simulation_model_issue": "ignore",
@@ -453,7 +431,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "LiPoPower.kicad_pro",
+    "filename": "Rocket.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -470,9 +448,9 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.25,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
+        "track_width": 0.2,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
         "wire_width": 6
       }
     ],
@@ -498,7 +476,8 @@
     "page_layout_descr_file": ""
   },
   "schematic": {
-    "annotate_start_num": 300,
+    "annotate_start_num": 1,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -529,7 +508,7 @@
           "group_by": false,
           "label": "Datasheet",
           "name": "Datasheet",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -548,79 +527,13 @@
           "label": "DNP",
           "name": "${DNP}",
           "show": true
-        },
-        {
-          "group_by": false,
-          "label": "#",
-          "name": "${ITEM_NUMBER}",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Availability",
-          "name": "Availability",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Check_prices",
-          "name": "Check_prices",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "LCSC",
-          "name": "LCSC",
-          "show": true
-        },
-        {
-          "group_by": false,
-          "label": "MF",
-          "name": "MF",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "MP",
-          "name": "MP",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Package",
-          "name": "Package",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Price",
-          "name": "Price",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Purchase-URL",
-          "name": "Purchase-URL",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "SnapEDA_Link",
-          "name": "SnapEDA_Link",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "説明",
-          "name": "Description",
-          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
-      "name": "",
-      "sort_asc": false,
-      "sort_field": "Value"
+      "name": "Grouped By Value",
+      "sort_asc": true,
+      "sort_field": "リファレンス"
     },
     "connection_grid_size": 50.0,
     "drawing": {
@@ -663,8 +576,36 @@
   },
   "sheets": [
     [
-      "ed97c6c4-a1a7-4dde-a640-89eca815dd0d",
+      "52d1bc60-6512-43cb-8972-9a300fe0bb85",
       "ルート"
+    ],
+    [
+      "e76c5276-18f2-4183-aadc-1a601896981d",
+      "ESP32Core2"
+    ],
+    [
+      "90aff762-b68a-4b53-834f-fa85fa70dcc5",
+      "LiPoPower2"
+    ],
+    [
+      "e9eb2b2e-c4fd-441a-874d-0d97c5907a43",
+      "Logger2"
+    ],
+    [
+      "65382814-301c-4e80-8bce-91a246262373",
+      "GPS SAM-M10Q2"
+    ],
+    [
+      "5dcd2f20-a8da-4479-88a8-9b875bc379c6",
+      "LoRa2"
+    ],
+    [
+      "04ec3012-b583-4c6c-b398-defa47e48bba",
+      "Pressure2"
+    ],
+    [
+      "f0fa73b0-1045-403f-90c9-c4ec46b4e16f",
+      "9DoF2"
     ]
   ],
   "text_variables": {}
