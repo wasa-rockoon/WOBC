@@ -49,8 +49,6 @@ void setup() {
   pinMode(10, INPUT_PULLUP);
   pinMode(43, INPUT_PULLUP);
   pinMode(44, INPUT_PULLUP);
-  pinMode(7, OUTPUT);
-  digitalWrite(7, HIGH);
   setupLoRa();
   setBME();
   setupINA();
