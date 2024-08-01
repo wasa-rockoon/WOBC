@@ -11,11 +11,9 @@
 namespace kernel {
 
 #ifndef WOBC_PACKET_HEAP_SIZE
-#define WOBC_PACKET_HEAP_SIZE 32768
+#define WOBC_PACKET_HEAP_SIZE 4096
 #endif
 
-
-constexpr unsigned send_packet_queue_size = 8;
 
 class Kernel;
 
@@ -35,7 +33,6 @@ private:
   Heap packet_heap_;
   PatriciaTrieTree<ListenerArg> packet_listener_tree_;
 
-  QueueHandle_t packet_queue_handle_;
   SemaphoreHandle_t mutex_;
 
   inline void enter() { xSemaphoreTake(mutex_, portMAX_DELAY); }

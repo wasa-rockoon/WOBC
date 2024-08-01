@@ -19,7 +19,7 @@ private:
   uint8_t  priority_;
   xTaskHandle task_handle_;
 
-  void onStart() override;
+  bool onStart() override;
 
   static void entryPoint(void* instance);
 };

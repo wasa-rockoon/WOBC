@@ -23,12 +23,9 @@ public:
 
   wcpp::Packet newPacket(uint8_t size);
   wcpp::Packet decodePacket(const uint8_t* buf);
-  void send(const wcpp::Packet &packet);
-  void send(const wcpp::Packet &packet, const Listener& exclude);
+  void sendPacket(const wcpp::Packet &packet);
+  void sendPacket(const wcpp::Packet &packet, const Listener& exclude);
 
-
-  // void readROM();
-  // void writeROM();
 
 protected:
   const char *name_;
@@ -36,7 +33,7 @@ protected:
   uint8_t core_;
 
   void startProcess(Component* component);
-  virtual void onStart() = 0;
+  virtual bool onStart() = 0;
 };
 
 }

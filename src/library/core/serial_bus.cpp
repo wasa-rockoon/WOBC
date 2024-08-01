@@ -4,12 +4,16 @@
 namespace core {
 
 SerialBus::SerialBus(Stream& serial)
-: Task("SerialBus", 128, 0), serial_(serial) {
+: Task("SerialBus", 4096, 0), serial_(serial) {
 
 };
 
+void SerialBus::begin() {
+  startProcess(nullptr);
+}
+
 void SerialBus::setup() {
-  listen(all_packets, 16, true);
+  listen(all_packets, serial_bus_packet_queue_size, true);
 }
 
 void SerialBus::loop() {
@@ -17,16 +21,12 @@ void SerialBus::loop() {
   {
     const wcpp::Packet packet = all_packets.pop();
     if (packet) {
-      // memcpy(tx_buf_ + 1, packet.encode(), packet.size());
-      // tx_buf_[packet.size() + 1] = packet.checksum();
-      // unsigned size = COBS::encode(tx_buf_ + 1, packet.size() + 1, tx_buf_);
-      // tx_buf_[size] = 0;
-      // serial_.write(tx_buf_, size + 1);
       serial_.write(packet.encode(), packet.size());
-      serial_.write(byte(0));
+      serial_.write((uint8_t)packet.checksum());
+      serial_.write((uint8_t)'\0');
+      serial_.flush();
     }
   }
-
 
   // Serial bus to kernel
   while (serial_.available() > 0) {
@@ -34,28 +34,26 @@ void SerialBus::loop() {
     rx_buf_[rx_count_] = b;
     rx_count_++;
 
-    if (rx_count_ + 1 >= wcpp::size_max) { // Too long 
+    if (rx_count_ >= wcpp::size_max + 2) { // Too long 
       rx_count_ = 0;
       break;
     }
 
     if (b == 0) {     
-      // unsigned decoded_size = COBS::decode(rx_buf_, rx_count_, rx_buf_);
-
       uint8_t size = rx_buf_[0];
-      if (size != rx_count_ - 1) { // Size mismatch
+      if (size != rx_count_ - 2) { // Size mismatch
         rx_count_ = 0;
         break;
       }
-      uint8_t checksum = rx_buf_[rx_count_ - 1];
-      if (checksum != wcpp::Packet::checksum(rx_buf_, rx_count_ - 1)) { // Incorrect checksum
+      uint8_t checksum = rx_buf_[rx_count_ - 2];
+      if (checksum != wcpp::Packet::checksum(rx_buf_, rx_count_ - 2)) { // Incorrect checksum
         rx_count_ = 0;
         break;
       }
 
       wcpp::Packet packet = decodePacket(rx_buf_);
 
-      send(packet, all_packets);
+      sendPacket(packet, all_packets);
       rx_count_ = 0;
       break;
     }

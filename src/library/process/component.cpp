@@ -3,16 +3,22 @@
 namespace process {
 
 
-Component::Component(const char* name, uint8_t id, unsigned command_queue_size)
-: Process(name), id_(id) {
+Component::Component(const char* name, uint8_t id, unsigned command_queue_size, unsigned stack_size)
+: Process(name), id_(id), stack_size_(stack_size) {
   component_ = this;
   command_listener_.command().component(id);
 }
 
-void Component::onStart() {
-  xTaskCreate(
-    entryPoint, name_, stack_size_ * sizeof(size_t), this,
-    priority_, &handle_);
+
+bool Component::begin() {
+  command_listener_.begin();
+  return onStart();
+}
+
+bool Component::onStart() {
+  return xTaskCreatePinnedToCore(
+    entryPoint, name_, stack_size_, this,
+    priority_, &handle_, 1) == pdPASS;
 }
 
 void Component::entryPoint(void* instance) {

@@ -7,9 +7,10 @@ namespace process {
 
 class Component: public Process {
 public:
-  Component(const char* name, uint8_t id, unsigned command_queue_size = 5);
+  Component(const char* name, uint8_t id, unsigned command_queue_size = 5, 
+            unsigned stack_size = 4096);
 
-  void begin();
+  bool begin();
 
 protected:
   virtual void setup() {}
@@ -24,7 +25,7 @@ protected:
   xTaskHandle handle_;
   kernel::Listener command_listener_;
 
-  void onStart() override;
+  bool onStart() override;
   static void entryPoint(void* instance);
 };
 

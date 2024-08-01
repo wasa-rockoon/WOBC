@@ -52,7 +52,7 @@ const wcpp::Packet Listener::peek() const {
 }
 const wcpp::Packet Listener::pop() {
   uint8_t* ptr;
-  if (xQueueReceive(queue_handle_, &ptr, 0)) {
+  if (xQueueReceive(queue_handle_, &ptr, 0) == pdPASS) {
     return wcpp::Packet::decode(ptr, ref_change_);
   }
   else {
@@ -67,25 +67,22 @@ unsigned Listener::clear() {
 
 bool Listener::push(const wcpp::Packet& packet) {
   const uint8_t* ptr = packet.getBuf();
-  if (force_push_) {
-    xQueueOverwrite(queue_handle_, &ptr);
-    return true;
+  if (force_push_ && uxQueueSpacesAvailable(queue_handle_) == 0) {
+    pop();
   }
-  else {
-    bool pushed = available() > 0;
-    xQueueSend(queue_handle_, &ptr, 0);
-    return pushed;
-  }
+  bool pushed = available() > 0;
+  xQueueSend(queue_handle_, &ptr, 0);
+  return pushed;
 }
 
 void Listener::onTraverse(ListenerArg arg) {
   if (arg.exclude == this) return;
-  if (force_push_) {
-    xQueueOverwrite(queue_handle_, &arg.packet_buf);
+  if (force_push_ && uxQueueSpacesAvailable(queue_handle_) == 0) {
+    pop();
   }
-  else {
-    xQueueSend(queue_handle_, &arg.packet_buf, 0);
-  }
+  xQueueSend(queue_handle_, &arg.packet_buf, 0);
+  wcpp::Packet packet = wcpp::Packet::decode(arg.packet_buf);
+  ref_change_(packet, +1);
 }
 
 key_t Listener::keyOf(const wcpp::Packet& packet) {

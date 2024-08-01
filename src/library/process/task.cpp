@@ -5,10 +5,10 @@ namespace process {
 Task::Task(const char *name, unsigned stack_size, uint8_t priority)
   : Process(name), stack_size_(stack_size), priority_(priority) {}
 
-void Task::onStart() {
-  xTaskCreate(
-    entryPoint, name_, stack_size_ * sizeof(size_t), this,
-    priority_, &task_handle_);
+bool Task::onStart() {
+  return xTaskCreatePinnedToCore(
+    entryPoint, name_, stack_size_, this,
+    priority_, &task_handle_, 1) == pdPASS;
 }
 
 void Task::entryPoint(void* instance) {

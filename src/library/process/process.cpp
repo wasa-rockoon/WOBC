@@ -24,10 +24,10 @@ wcpp::Packet Process::decodePacket(const uint8_t* buf) {
   return packet;
 }
 
-void Process::send(const wcpp::Packet &packet) {
+void Process::sendPacket(const wcpp::Packet &packet) {
   kernel::kernel_.sendPacket(packet);
 }
-void Process::send(const wcpp::Packet &packet, const Listener& exclude) {
+void Process::sendPacket(const wcpp::Packet &packet, const Listener& exclude) {
   kernel::kernel_.sendPacket(packet, &exclude);
 }
 

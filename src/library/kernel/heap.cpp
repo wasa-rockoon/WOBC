@@ -179,6 +179,11 @@ unsigned Heap::getSize(void *ptr) {
   return (pointer_t)getChunk(ptr)->allocated.data_size + 1;
 }
 
+
+bool Heap::inHeap(const void* ptr) {
+  return arena_ <= ptr && ptr <= arena_ + arena_size_;
+}
+
 void Heap::addFreeChunk(Chunk* chunk) {
   pointer_t chunk_ptr = getPtr(chunk);
 

@@ -12,16 +12,16 @@ Timer::~Timer() {
   xTimerDelete(timer_handle_, 0);
 }
 
-void Timer::stop() {
-  xTimerStop(timer_handle_, 0);
+bool Timer::stop() {
+  return xTimerStop(timer_handle_, 0) == pdPASS;
 }
 
-void Timer::start() {
-  xTimerStart(timer_handle_, 0);
+bool Timer::start() {
+  return xTimerStart(timer_handle_, 0) == pdPASS;
 }
 
-void Timer::reset() {
-  xTimerReset(timer_handle_, 0);
+bool Timer::reset() {
+  return xTimerReset(timer_handle_, 0) == pdPASS;
 }
 
 void Timer::setReload(bool auto_reload) {
@@ -32,8 +32,8 @@ void Timer::changePeriod(unsigned ms) {
   xTimerChangePeriod(timer_handle_, ms, 0);
 }
 
-void Timer::onStart() {
-    start();
+bool Timer::onStart() {
+  return start();
 }
 
 void Timer::entryPoint(TimerHandle_t timer_handle) {

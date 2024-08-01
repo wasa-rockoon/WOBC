@@ -2,13 +2,11 @@
 
 namespace kernel {
 
-
 Kernel kernel_;
 
 Kernel::Kernel()
 : packet_heap_(packet_heap_arena_, WOBC_PACKET_HEAP_SIZE), 
   mutex_(xSemaphoreCreateMutex()) {
-  packet_queue_handle_ = xQueueCreate(send_packet_queue_size, sizeof(uint8_t*));
 }
 
 wcpp::Packet Kernel::allocPacket(uint8_t size) {
@@ -16,6 +14,7 @@ wcpp::Packet Kernel::allocPacket(uint8_t size) {
   uint8_t* buf = static_cast<uint8_t*>(packet_heap_.alloc(size));
   exit();
   if (buf == nullptr) return wcpp::Packet::null();
+  memset(buf, 0, size);
   return wcpp::Packet::empty(buf, size, refChangeStatic);
 }
 
@@ -34,8 +33,17 @@ void Kernel::refChange(wcpp::Packet& packet, int change) {
 }
 
 void Kernel::sendPacket(const wcpp::Packet& packet, const Listener* exclude) {
-  ListenerArg arg = {packet.getBuf(), exclude};
-  packet_listener_tree_.traverse(Listener::keyOf(packet), arg);
+  const uint8_t* buf = packet.getBuf();
+  if (packet_heap_.inHeap(packet.getBuf())) {
+    ListenerArg arg = {packet.getBuf(), exclude};
+    packet_listener_tree_.traverse(Listener::keyOf(packet), arg);
+  }
+  else {
+    wcpp::Packet packet_copied = allocPacket(packet.size());
+    packet_copied = packet;
+    ListenerArg arg = {packet_copied.getBuf(), exclude};
+    packet_listener_tree_.traverse(Listener::keyOf(packet_copied), arg);
+  }
 }
 
 void Kernel::addListener(Listener& listener) {

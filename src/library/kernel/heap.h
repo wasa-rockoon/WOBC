@@ -38,6 +38,8 @@ public:
   uint8_t releaseRef(void* ptr);
   unsigned getSize(void* ptr);
 
+  bool inHeap(const void* ptr);
+
   inline unsigned failCount()  const { return fail_count_; }
   inline unsigned allocCount() const { return alloc_count_; }
 

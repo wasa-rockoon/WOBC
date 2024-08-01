@@ -1,6 +1,5 @@
 #pragma once
 
-#include "process/module.h"
 #include "process/component.h"
 #include "process/task.h"
 #include "process/timer.h"
