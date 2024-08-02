@@ -45,6 +45,7 @@ E220 lora(lora_serial, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN);
 
 void setup() {
   //Serial.begin(115200);
+  Serial.begin(115200, SERIAL_8N1, 13, 14);
   pinMode(42, OUTPUT);
   pinMode(10, INPUT_PULLUP);
   pinMode(43, INPUT_PULLUP);
@@ -76,7 +77,7 @@ void loop() {
     char messageStat[50];
     snprintf(messageV, sizeof(messageV), "INAV %.2f,%.2f,%.2f", inadata[0], inadata[2], inadata[4]);
     snprintf(messageI, sizeof(messageI), "INAI %.2f,%.2f,%.2f", inadata[1], inadata[3], inadata[5]);
-    snprintf(messageStat, sizeof(messageStat), "STAT_S1,S2,PG %d,%d,%d", digitalRead(44), digitalRead(43), digitalRead(10));
+    snprintf(messageStat, sizeof(messageStat), "STAT_S1,S2,PG %d,%d,%d", digitalRead(43), digitalRead(44), digitalRead(10));
     
     // LoRaでデータを送信
     delay(1000);
@@ -156,7 +157,7 @@ void setupINA(){
   if (!INA1.begin() )
   {
     //Serial.println("could not connect. Fix and Reboot");
-    while(1);
+    //while(1);
   }
   INA1.setMaxCurrentShunt(1, 0.05);
   if (!INA2.begin() )
