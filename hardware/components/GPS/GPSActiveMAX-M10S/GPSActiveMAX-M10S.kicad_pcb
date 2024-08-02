@@ -98,6 +98,11 @@
 	(net 16 "unconnected-(U101-EXTINT-Pad5)")
 	(net 17 "unconnected-(U101-SDA-Pad16)")
 	(net 18 "unconnected-(U101-~{SAFEBOOT}-Pad18)")
+	(net 19 "Net-(J101-Pin_2)")
+	(net 20 "unconnected-(J101-Pin_1-Pad1)")
+	(net 21 "Net-(R101-Pad2)")
+	(net 22 "Net-(R102-Pad2)")
+	(net 23 "unconnected-(SW101-A-Pad1)")
 	(footprint "Connector_Coaxial:SMA_Amphenol_132203-12_Horizontal"
 		(layer "F.Cu")
 		(uuid "08443369-292b-4d49-9b90-78837bbbe8dc")
@@ -135,6 +140,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -147,6 +153,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -159,6 +166,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -681,6 +689,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -693,6 +702,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -705,6 +715,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -880,7 +891,7 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 3 "/TX")
+			(net 20 "unconnected-(J101-Pin_1-Pad1)")
 			(pinfunction "Pin_1")
 			(pintype "passive")
 			(uuid "f22bbc75-b94f-4196-baca-4ad1e9498082")
@@ -891,7 +902,7 @@
 			(drill 1)
 			(layers "*.Cu" "*.Mask")
 			(remove_unused_layers no)
-			(net 2 "/RX")
+			(net 19 "Net-(J101-Pin_2)")
 			(pinfunction "Pin_2")
 			(pintype "passive")
 			(uuid "e46c4da2-f3eb-4b64-b471-6084f882c832")
@@ -945,6 +956,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -957,6 +969,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -969,6 +982,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1115,11 +1129,320 @@
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 3 "/TX")
+			(net 22 "Net-(R102-Pad2)")
 			(pintype "passive")
 			(uuid "0d96e994-f36c-4bc9-bc0c-cb254beb6381")
 		)
 		(model "${KICAD8_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.wrl"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
+	)
+	(footprint "WOBCLibrary:IS-2245S-G"
+		(layer "F.Cu")
+		(uuid "3d458233-6db1-432d-88ba-f9be0c4179c7")
+		(at 172 81.5)
+		(descr "SMD 3x-dip-switch SPST KingTek_DSHP03TJ, Slide, row spacing 5.25 mm (206 mils), body size  (see http://www.kingtek.net.cn/pic/201601201446313350.pdf), JPin")
+		(tags "SMD DIP Switch SPST Slide 5.25mm 206mil JPin")
+		(property "Reference" "SW101"
+			(at 0 -5.5 0)
+			(layer "F.SilkS")
+			(uuid "4ad5e93a-8d0a-492a-b18c-6d931eb837ea")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Value" "SW_Push_DPDT"
+			(at 0 5.5 0)
+			(layer "F.Fab")
+			(uuid "38baeeec-245a-4ec7-b151-659e0e6fb281")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:IS-2245S-G"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "fc8408a6-ddf3-4096-88e8-187abf334287")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "5e5b7ddc-b510-42c9-a07e-0a7a8be36283")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "Momentary Switch, dual pole double throw"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "25e1f750-83c6-4f5f-8171-591ac85a4eaf")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(path "/10642221-d63e-41a3-882b-19ffc46cfe6a")
+		(sheetname "ルート")
+		(sheetfile "GPSActiveMAX-M10S.kicad_sch")
+		(attr smd)
+		(fp_line
+			(start -1.75 -4.5)
+			(end -1.75 -3.5)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "0c952303-2743-4c5d-a27d-d68a954e4b89")
+		)
+		(fp_line
+			(start -1.75 -4.5)
+			(end 1.75 -4.5)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "d4ca604c-ba71-4822-b534-d03c58828118")
+		)
+		(fp_line
+			(start -1.75 3.5)
+			(end -1.75 4.5)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "e7d4d83c-1951-497b-8fa5-fe60f498e8a8")
+		)
+		(fp_line
+			(start -1.75 4.5)
+			(end 1.75 4.5)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "1f9b3e12-657d-4916-a666-8c99fb99ae2d")
+		)
+		(fp_line
+			(start 1.75 -4.5)
+			(end 1.75 -3.5)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "82449ce9-c15f-433b-96a4-f48b63e07764")
+		)
+		(fp_line
+			(start 1.75 3.5)
+			(end 1.75 4.5)
+			(stroke
+				(width 0.12)
+				(type solid)
+			)
+			(layer "F.SilkS")
+			(uuid "dde7963c-1e9d-45b6-8682-e4e6f5cae5e9")
+		)
+		(fp_line
+			(start -4.5 -4.5)
+			(end -4.5 4.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "1bea84e1-b3d3-4288-ac9d-935b19dee866")
+		)
+		(fp_line
+			(start -4.5 4.5)
+			(end 4.5 4.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "919f8905-1eac-4343-8ee9-78d97c4910c6")
+		)
+		(fp_line
+			(start 4.5 -4.5)
+			(end -4.5 -4.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "e4443c03-3773-485e-bcfd-fa18b9fcb814")
+		)
+		(fp_line
+			(start 4.5 4.5)
+			(end 4.5 -4.5)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(layer "F.CrtYd")
+			(uuid "133d6143-6b4f-4d2d-9740-7a1b7b1c1375")
+		)
+		(fp_line
+			(start -2.7 -1.805)
+			(end -1.7 -2.805)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "3076163b-53f9-4ff3-b755-aad11adee3d9")
+		)
+		(fp_line
+			(start -2 -4.5)
+			(end 2 -4.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "288befd5-1975-47aa-a29b-4b5e5533d694")
+		)
+		(fp_line
+			(start -2 4.5)
+			(end -2 -4.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "fb7edfaf-155b-44bc-abee-2190e773cb52")
+		)
+		(fp_line
+			(start 2 -4.5)
+			(end 2 4.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "813727ad-bf2e-47b1-b6b2-5ec44c91403e")
+		)
+		(fp_line
+			(start 2 4.5)
+			(end -2 4.5)
+			(stroke
+				(width 0.1)
+				(type solid)
+			)
+			(layer "F.Fab")
+			(uuid "13fb675e-a8f0-43f6-86d6-b95cdf9f9810")
+		)
+		(fp_text user "on"
+			(at 0.5375 -2.2375 0)
+			(layer "F.Fab")
+			(uuid "41447657-a7e8-4159-be08-8fc0d6e09a62")
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.12)
+				)
+			)
+		)
+		(fp_text user "${REFERENCE}"
+			(at 5.5 0 90)
+			(layer "F.Fab")
+			(uuid "f1f66391-8873-4bae-9344-19fa5b202793")
+			(effects
+				(font
+					(size 0.8 0.8)
+					(thickness 0.12)
+				)
+			)
+		)
+		(pad "1" smd rect
+			(at -3 -2.5)
+			(size 3 1.2)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 23 "unconnected-(SW101-A-Pad1)")
+			(pinfunction "A")
+			(pintype "passive")
+			(uuid "00910e7f-c142-4b02-a7d7-de425165a823")
+		)
+		(pad "2" smd rect
+			(at -3 0)
+			(size 3 1.2)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 22 "Net-(R102-Pad2)")
+			(pinfunction "B")
+			(pintype "passive")
+			(uuid "c095c578-1321-48c1-8e5f-4b5769301b2c")
+		)
+		(pad "3" smd rect
+			(at -3 2.5)
+			(size 3 1.2)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 3 "/TX")
+			(pinfunction "C")
+			(pintype "passive")
+			(uuid "cc39fd71-b942-4a19-b8c5-a82ec42b8f20")
+		)
+		(pad "4" smd rect
+			(at 3 -2.5)
+			(size 3 1.2)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 19 "Net-(J101-Pin_2)")
+			(pinfunction "A")
+			(pintype "passive")
+			(uuid "7efa808a-3491-4088-9ac6-4987e729f0af")
+		)
+		(pad "5" smd rect
+			(at 3 0)
+			(size 3 1.2)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 21 "Net-(R101-Pad2)")
+			(pinfunction "B")
+			(pintype "passive")
+			(uuid "43da97aa-0d1c-4b4a-81f8-6a6db9d3bc10")
+		)
+		(pad "6" smd rect
+			(at 3 2.5)
+			(size 3 1.2)
+			(layers "F.Cu" "F.Paste" "F.Mask")
+			(net 2 "/RX")
+			(pinfunction "C")
+			(pintype "passive")
+			(uuid "f6c68b3c-ccca-40bc-a5ae-c7425abb748a")
+		)
+		(model "${KICAD8_3DMODEL_DIR}/Button_Switch_SMD.3dshapes/SW_DIP_SPSTx03_Slide_KingTek_DSHP03TJ_W5.25mm_P1.27mm_JPin.wrl"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -1168,6 +1491,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1180,6 +1504,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1192,6 +1517,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1417,6 +1743,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1429,6 +1756,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1441,6 +1769,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1587,7 +1916,7 @@
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 2 "/RX")
+			(net 21 "Net-(R101-Pad2)")
 			(pintype "passive")
 			(uuid "afc2acd7-0644-4538-bf06-953817ed73f8")
 		)
@@ -1640,6 +1969,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1652,6 +1982,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1664,6 +1995,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1889,6 +2221,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1901,6 +2234,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1913,6 +2247,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2323,6 +2658,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2335,6 +2671,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2347,6 +2684,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
