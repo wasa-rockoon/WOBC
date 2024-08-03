@@ -2485,6 +2485,126 @@
 				)
 			)
 		)
+		(symbol "power:VBUS"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VBUS"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VBUS\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VBUS_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VBUS_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "power:VDD"
 			(power)
 			(pin_names
@@ -2617,6 +2737,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "051bd617-2fd2-4f1e-aa26-c00540b5fc50")
+	)
+	(junction
+		(at 90.17 29.21)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0590eb59-9b5c-4520-97d0-da43080580b0")
 	)
 	(junction
 		(at 48.26 123.825)
@@ -2928,6 +3054,16 @@
 	)
 	(wire
 		(pts
+			(xy 90.17 25.908) (xy 90.17 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "689a64ec-a40b-40eb-8801-2811f2bdb3c4")
+	)
+	(wire
+		(pts
 			(xy 48.26 126.365) (xy 48.26 123.825)
 		)
 		(stroke
@@ -2958,7 +3094,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.675 29.21) (xy 92.5122 29.21)
+			(xy 66.675 29.21) (xy 90.17 29.21)
 		)
 		(stroke
 			(width 0)
@@ -3015,6 +3151,16 @@
 			(type default)
 		)
 		(uuid "8daff929-315a-4e8e-9aca-90e9c3347e58")
+	)
+	(wire
+		(pts
+			(xy 90.17 29.21) (xy 92.5122 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91b5efb8-4a21-47f8-840d-dd8cbc92bcbc")
 	)
 	(wire
 		(pts
@@ -3352,17 +3498,6 @@
 		)
 		(uuid "093c3659-554a-4371-ae2d-278f5d61680c")
 	)
-	(label "CAN_RX"
-		(at 257.81 58.42 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "25de0e0c-c9c8-4dc8-8d0f-6d2f81f31cb5")
-	)
 	(label "WDI"
 		(at 73.025 123.825 180)
 		(fields_autoplaced yes)
@@ -3417,17 +3552,6 @@
 			(justify right bottom)
 		)
 		(uuid "d65dbb2c-afd4-47d8-9b99-1e8021066e02")
-	)
-	(label "CAN_TX"
-		(at 250.825 55.88 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "ec079d6d-6203-4044-87a3-4936e794c7d3")
 	)
 	(global_label "RESET"
 		(shape output)
@@ -3484,6 +3608,18 @@
 			(justify left)
 		)
 		(uuid "001c9de2-98e0-4f6a-869e-5241d696eab1")
+	)
+	(hierarchical_label "RV0"
+		(shape input)
+		(at 257.81 58.42 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0cd37214-b51d-4f1f-997e-670ee05b760c")
 	)
 	(hierarchical_label "GPIO13"
 		(shape bidirectional)
@@ -3544,6 +3680,18 @@
 			(justify left)
 		)
 		(uuid "5ad8985f-2814-4ad3-b352-5c8a4a228123")
+	)
+	(hierarchical_label "TX0"
+		(shape output)
+		(at 257.81 55.88 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "60f01cf5-637a-4edd-85f4-638b8606bb0b")
 	)
 	(hierarchical_label "GPIO8{slash}ADC1_CH7"
 		(shape bidirectional)
@@ -3770,7 +3918,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "259198cc-9da2-4428-925f-ccc53dc2b4ad")
-		(property "Reference" "D3"
+		(property "Reference" "D102"
 			(at 73.66 57.15 90)
 			(effects
 				(font
@@ -3833,7 +3981,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "D3")
+					(reference "D102")
 					(unit 1)
 				)
 			)
@@ -3849,7 +3997,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "27b89433-3e4b-46c3-9dfa-0a51b07dcba7")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR0118"
 			(at 203.2 44.45 0)
 			(effects
 				(font
@@ -3899,7 +4047,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR020")
+					(reference "#PWR0118")
 					(unit 1)
 				)
 			)
@@ -3914,7 +4062,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "28fe74df-89ae-45a5-9d86-c5caf1b5cc08")
-		(property "Reference" "D5"
+		(property "Reference" "D104"
 			(at 86.995 107.315 90)
 			(effects
 				(font
@@ -3977,7 +4125,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "D5")
+					(reference "D104")
 					(unit 1)
 				)
 			)
@@ -3992,7 +4140,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "29653794-f5c6-46f5-9563-5a22da63f771")
-		(property "Reference" "D2"
+		(property "Reference" "D101"
 			(at 67.945 57.15 90)
 			(effects
 				(font
@@ -4055,7 +4203,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "D2")
+					(reference "D101")
 					(unit 1)
 				)
 			)
@@ -4071,7 +4219,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2e569424-63cf-482f-a624-f88cb008852a")
-		(property "Reference" "R4"
+		(property "Reference" "R103"
 			(at 85.725 99.695 0)
 			(effects
 				(font
@@ -4134,7 +4282,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "R4")
+					(reference "R103")
 					(unit 1)
 				)
 			)
@@ -4149,7 +4297,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2f1ab587-cdb1-4c5e-b4a0-af280228e87c")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR0117"
 			(at 194.945 53.975 0)
 			(effects
 				(font
@@ -4199,7 +4347,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR019")
+					(reference "#PWR0117")
 					(unit 1)
 				)
 			)
@@ -4215,7 +4363,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "31002b7a-089c-447d-9d3a-2449e4a55e2a")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR0111"
 			(at 83.185 132.715 0)
 			(effects
 				(font
@@ -4265,7 +4413,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR014")
+					(reference "#PWR0111")
 					(unit 1)
 				)
 			)
@@ -4280,7 +4428,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "34098a68-d9d9-46b5-8aab-fa86d93c1458")
-		(property "Reference" "D7"
+		(property "Reference" "D106"
 			(at 148.59 90.17 90)
 			(effects
 				(font
@@ -4343,7 +4491,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "D7")
+					(reference "D106")
 					(unit 1)
 				)
 			)
@@ -4359,7 +4507,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "36ea5acd-5d42-4544-af99-9d712a75bc20")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR0103"
 			(at 46.99 73.66 0)
 			(effects
 				(font
@@ -4409,7 +4557,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR03")
+					(reference "#PWR0103")
 					(unit 1)
 				)
 			)
@@ -4424,7 +4572,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "51e18137-36b1-45e6-a875-69a617008e8a")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR0120"
 			(at 270.51 104.14 0)
 			(effects
 				(font
@@ -4474,7 +4622,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR022")
+					(reference "#PWR0120")
 					(unit 1)
 				)
 			)
@@ -4490,7 +4638,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "565213b0-7a1f-4812-8e79-650e92359447")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR0102"
 			(at 39.37 73.66 0)
 			(effects
 				(font
@@ -4540,7 +4688,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR02")
+					(reference "#PWR0102")
 					(unit 1)
 				)
 			)
@@ -4555,7 +4703,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5ece249e-e125-4678-8fa4-dd5bb1cd41ac")
-		(property "Reference" "C5"
+		(property "Reference" "C103"
 			(at 196.85 43.815 0)
 			(effects
 				(font
@@ -4618,7 +4766,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "C5")
+					(reference "C103")
 					(unit 1)
 				)
 			)
@@ -4634,7 +4782,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6331492a-4586-4834-b8d9-016e726a068e")
-		(property "Reference" "R8"
+		(property "Reference" "R107"
 			(at 273.05 102.87 0)
 			(effects
 				(font
@@ -4697,7 +4845,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "R8")
+					(reference "R107")
 					(unit 1)
 				)
 			)
@@ -4713,7 +4861,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6a24da20-e4e1-4aeb-bd24-dbf4a9d4e513")
-		(property "Reference" "R5"
+		(property "Reference" "R104"
 			(at 133.35 82.55 0)
 			(effects
 				(font
@@ -4776,7 +4924,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "R5")
+					(reference "R104")
 					(unit 1)
 				)
 			)
@@ -4792,7 +4940,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6f5c6d79-1090-404f-b342-653b2e3efe96")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR0114"
 			(at 139.065 60.325 0)
 			(effects
 				(font
@@ -4842,7 +4990,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR016")
+					(reference "#PWR0114")
 					(unit 1)
 				)
 			)
@@ -4858,7 +5006,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "723091e7-0730-4758-bb6b-575382773e1f")
-		(property "Reference" "U4"
+		(property "Reference" "U102"
 			(at 205.3941 48.895 0)
 			(effects
 				(font
@@ -5038,7 +5186,73 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "U4")
+					(reference "U102")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VBUS")
+		(at 90.17 25.908 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7ea6916f-d673-471d-9793-0386037e2068")
+		(property "Reference" "#PWR0112"
+			(at 90.17 29.718 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VBUS"
+			(at 90.17 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 90.17 25.908 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 90.17 25.908 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VBUS\""
+			(at 90.17 25.908 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "320dbae1-9530-4046-ba23-b3c27d8627cb")
+		)
+		(instances
+			(project ""
+				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
+					(reference "#PWR0112")
 					(unit 1)
 				)
 			)
@@ -5053,7 +5267,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "86dc55e4-8ade-4735-aa61-e2ecdf5614f6")
-		(property "Reference" "D6"
+		(property "Reference" "D105"
 			(at 134.62 90.17 90)
 			(effects
 				(font
@@ -5116,7 +5330,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "D6")
+					(reference "D105")
 					(unit 1)
 				)
 			)
@@ -5132,7 +5346,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9d54f578-cb33-46f7-a68b-9f1f3080c412")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR0106"
 			(at 66.675 73.66 0)
 			(effects
 				(font
@@ -5182,7 +5396,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR09")
+					(reference "#PWR0106")
 					(unit 1)
 				)
 			)
@@ -5198,7 +5412,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9d6d2058-03ad-4f26-92e3-d015218823b5")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR0119"
 			(at 203.2 138.43 0)
 			(effects
 				(font
@@ -5248,7 +5462,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR021")
+					(reference "#PWR0119")
 					(unit 1)
 				)
 			)
@@ -5264,7 +5478,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9ef695f2-2919-4e7e-b9f9-24de1f28ba71")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR0108"
 			(at 78.105 73.66 0)
 			(effects
 				(font
@@ -5314,7 +5528,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR011")
+					(reference "#PWR0108")
 					(unit 1)
 				)
 			)
@@ -5329,7 +5543,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a2e0c685-db97-4caf-a314-a9069f128095")
-		(property "Reference" "C2"
+		(property "Reference" "C101"
 			(at 45.72 120.0087 0)
 			(effects
 				(font
@@ -5392,7 +5606,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "C2")
+					(reference "C101")
 					(unit 1)
 				)
 			)
@@ -5407,7 +5621,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a72f6bbf-35de-401a-8176-89fd714149a7")
-		(property "Reference" "R3"
+		(property "Reference" "R102"
 			(at 71.755 39.37 90)
 			(effects
 				(font
@@ -5415,7 +5629,7 @@
 				)
 			)
 		)
-		(property "Value" "22k"
+		(property "Value" "5.1k"
 			(at 75.565 39.37 90)
 			(effects
 				(font
@@ -5450,7 +5664,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25768"
+		(property "LCSC" "C25905"
 			(at 74.295 36.83 0)
 			(effects
 				(font
@@ -5468,7 +5682,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "R3")
+					(reference "R102")
 					(unit 1)
 				)
 			)
@@ -5483,7 +5697,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aaa94732-e518-40ee-a99f-99a4757a0b04")
-		(property "Reference" "R2"
+		(property "Reference" "R101"
 			(at 71.755 31.75 90)
 			(effects
 				(font
@@ -5491,7 +5705,7 @@
 				)
 			)
 		)
-		(property "Value" "22k"
+		(property "Value" "5.1k"
 			(at 75.565 31.75 90)
 			(effects
 				(font
@@ -5526,7 +5740,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25768"
+		(property "LCSC" "C25905"
 			(at 74.295 34.29 0)
 			(effects
 				(font
@@ -5544,7 +5758,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "R2")
+					(reference "R101")
 					(unit 1)
 				)
 			)
@@ -5560,7 +5774,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bd972478-8219-4e9a-b382-8d7a9069d926")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR0113"
 			(at 130.81 101.6 0)
 			(effects
 				(font
@@ -5610,7 +5824,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR015")
+					(reference "#PWR0113")
 					(unit 1)
 				)
 			)
@@ -5626,7 +5840,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bdd2f5d2-e588-44f6-997d-b0402bead477")
-		(property "Reference" "R7"
+		(property "Reference" "R106"
 			(at 147.32 82.55 0)
 			(effects
 				(font
@@ -5689,7 +5903,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "R7")
+					(reference "R106")
 					(unit 1)
 				)
 			)
@@ -5705,7 +5919,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c15fb656-ad95-4f25-acfb-52bf1f28ac6a")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR0105"
 			(at 48.26 132.715 0)
 			(effects
 				(font
@@ -5755,7 +5969,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR05")
+					(reference "#PWR0105")
 					(unit 1)
 				)
 			)
@@ -5770,7 +5984,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cf95aaae-ffda-45c2-8227-67971b1d2b42")
-		(property "Reference" "#PWR018"
+		(property "Reference" "#PWR0116"
 			(at 190.5 53.975 0)
 			(effects
 				(font
@@ -5820,7 +6034,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR018")
+					(reference "#PWR0116")
 					(unit 1)
 				)
 			)
@@ -5836,7 +6050,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d49803ee-2ea3-4468-8ef8-bcb7acd93fd4")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR0115"
 			(at 144.78 101.6 0)
 			(effects
 				(font
@@ -5886,7 +6100,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR017")
+					(reference "#PWR0115")
 					(unit 1)
 				)
 			)
@@ -5902,7 +6116,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "da9b0dd0-c500-46e2-8aa4-e43d1a058872")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR0110"
 			(at 83.185 100.965 0)
 			(effects
 				(font
@@ -5952,7 +6166,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR013")
+					(reference "#PWR0110")
 					(unit 1)
 				)
 			)
@@ -5967,7 +6181,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dedee5b0-fbf1-4721-bbbe-1c031a09214a")
-		(property "Reference" "D4"
+		(property "Reference" "D103"
 			(at 79.375 57.15 90)
 			(effects
 				(font
@@ -6030,7 +6244,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "D4")
+					(reference "D103")
 					(unit 1)
 				)
 			)
@@ -6046,7 +6260,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e465ee18-285b-4b97-b901-371d2c368b24")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR0107"
 			(at 72.39 73.66 0)
 			(effects
 				(font
@@ -6096,7 +6310,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR010")
+					(reference "#PWR0107")
 					(unit 1)
 				)
 			)
@@ -6112,7 +6326,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e6c86060-751a-4f9f-a8b8-9408403b5495")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR0104"
 			(at 48.26 116.205 0)
 			(effects
 				(font
@@ -6162,7 +6376,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR04")
+					(reference "#PWR0104")
 					(unit 1)
 				)
 			)
@@ -6178,7 +6392,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ed41243c-c3b9-4401-92e9-9a34614b0bf0")
-		(property "Reference" "U2"
+		(property "Reference" "U101"
 			(at 58.42 106.68 0)
 			(effects
 				(font
@@ -6248,7 +6462,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "U2")
+					(reference "U101")
 					(unit 1)
 				)
 			)
@@ -6263,7 +6477,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f0da2db2-32ae-489a-a675-efebf009b88e")
-		(property "Reference" "C4"
+		(property "Reference" "C102"
 			(at 188.595 46.355 0)
 			(effects
 				(font
@@ -6326,7 +6540,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "C4")
+					(reference "C102")
 					(unit 1)
 				)
 			)
@@ -6341,7 +6555,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f42aa70f-4f04-47ec-8e31-c3cfbf9806d7")
-		(property "Reference" "USB2"
+		(property "Reference" "USB101"
 			(at 46.99 29.21 0)
 			(effects
 				(font
@@ -6447,7 +6661,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "USB2")
+					(reference "USB101")
 					(unit 1)
 				)
 			)
@@ -6462,7 +6676,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f7e2d4f6-8919-4137-8ee0-ae1cba17d1b6")
-		(property "Reference" "SW2"
+		(property "Reference" "SW101"
 			(at 69.215 116.205 0)
 			(effects
 				(font
@@ -6523,7 +6737,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "SW2")
+					(reference "SW101")
 					(unit 1)
 				)
 			)
@@ -6539,7 +6753,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fa7208b5-9059-4e0f-9e7a-9e4706675743")
-		(property "Reference" "R6"
+		(property "Reference" "R105"
 			(at 141.605 59.055 0)
 			(effects
 				(font
@@ -6602,7 +6816,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "R6")
+					(reference "R105")
 					(unit 1)
 				)
 			)
@@ -6618,7 +6832,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fb81d096-e77e-4016-a12b-ac9f98a0d370")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR0109"
 			(at 83.185 73.66 0)
 			(effects
 				(font
@@ -6668,7 +6882,7 @@
 		(instances
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
-					(reference "#PWR012")
+					(reference "#PWR0109")
 					(unit 1)
 				)
 			)
