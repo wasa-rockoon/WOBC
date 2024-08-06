@@ -3885,6 +3885,12 @@
 		(uuid "03aeae71-a1a4-4371-9f89-ecc615d3f171")
 	)
 	(junction
+		(at 55.245 153.67)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "094ce5d2-b656-40a4-a0fc-ed1e06328929")
+	)
+	(junction
 		(at 219.075 44.45)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5594,7 +5600,7 @@
 	)
 	(wire
 		(pts
-			(xy 48.895 153.67) (xy 127.635 153.67)
+			(xy 48.895 153.67) (xy 55.245 153.67)
 		)
 		(stroke
 			(width 0)
@@ -5761,6 +5767,16 @@
 			(type default)
 		)
 		(uuid "86b0e8af-f40f-4a1c-9562-f6cb151743c6")
+	)
+	(wire
+		(pts
+			(xy 55.245 153.67) (xy 127.635 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8759a77a-5d55-43af-b28b-246205c4faf5")
 	)
 	(wire
 		(pts
@@ -6511,6 +6527,16 @@
 			(type default)
 		)
 		(uuid "d3d20751-874b-4c46-b45c-e8508b20c3eb")
+	)
+	(wire
+		(pts
+			(xy 55.245 153.67) (xy 55.245 156.845)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d54f2cf6-fda8-4f22-ba57-013afb611c74")
 	)
 	(wire
 		(pts
@@ -10505,6 +10531,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 55.245 160.655 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "56085ec2-88d8-4e67-80e2-3cf8fe6fc198")
+		(property "Reference" "R139"
+			(at 50.8 159.258 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10k"
+			(at 51.054 161.544 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 53.467 160.655 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 55.245 160.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 55.245 160.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25744"
+			(at 55.245 160.655 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "0d748d0a-6b64-452e-9732-4a80b2fed65b")
+		)
+		(pin "2"
+			(uuid "499aa188-7878-438d-87cb-e685150b50b7")
+		)
+		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/b564a1a6-880f-4f3f-9b5e-b689a4514f2f"
+					(reference "R139")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:Q_NPN_BEC")
 		(at 105.41 179.705 0)
 		(unit 1)
@@ -12227,6 +12329,72 @@
 			(project "LiPoPower"
 				(path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
 					(reference "#PWR0313")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 55.245 164.465 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "8f6c3134-450f-4dd6-b609-5938791516d6")
+		(property "Reference" "#PWR0176"
+			(at 55.245 170.815 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 55.245 169.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 55.245 164.465 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 55.245 164.465 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 55.245 164.465 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d0c06c04-b028-4c9a-ad3e-16d49e132122")
+		)
+		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/b564a1a6-880f-4f3f-9b5e-b689a4514f2f"
+					(reference "#PWR0176")
 					(unit 1)
 				)
 			)
@@ -14167,7 +14335,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" " C25756"
+		(property "LCSC" "C25756"
 			(at 219.075 48.895 0)
 			(effects
 				(font
