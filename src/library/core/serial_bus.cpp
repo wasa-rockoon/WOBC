@@ -1,10 +1,9 @@
 #include "serial_bus.h"
-// #include <library/wcpp/cpp/cobs.h>
 
 namespace core {
 
 SerialBus::SerialBus(Stream& serial)
-: Task("SerialBus", 4096, 0), serial_(serial) {
+: Task("SerialBus", WOBC_SERIAL_BUS_STACK_SIZE, WOBC_SERIAL_BUS_PRIORITY), serial_(serial) {
 
 };
 
@@ -13,18 +12,21 @@ void SerialBus::begin() {
 }
 
 void SerialBus::setup() {
-  listen(all_packets, serial_bus_packet_queue_size, true);
+  listen(all_packets, WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE, true);
 }
 
 void SerialBus::loop() {
   // Kernel to serial bus
   {
-    const wcpp::Packet packet = all_packets.pop();
-    if (packet) {
-      serial_.write(packet.encode(), packet.size());
+    while (all_packets.available()) {
+      const wcpp::Packet packet = all_packets.pop();
+      const uint8_t* buf = packet.encode();
+      // portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
+      // taskENTER_CRITICAL(&mux);
+      serial_.write(buf, packet.size());
       serial_.write((uint8_t)packet.checksum());
       serial_.write((uint8_t)'\0');
-      serial_.flush();
+      // taskEXIT_CRITICAL(&mux);
     }
   }
 

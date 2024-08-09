@@ -1,10 +1,20 @@
 #pragma once
 
 #include "library/process/task.h"
+
 namespace core {
 
+#ifndef WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE
+#define WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE 8
+#endif
 
-constexpr unsigned serial_bus_packet_queue_size = 16;
+#ifndef WOBC_SERIAL_BUS_PRIORITY
+#define WOBC_SERIAL_BUS_PRIORITY 7
+#endif
+
+#ifndef WOBC_SERIAL_BUS_STACK_SIZE
+#define WOBC_SERIAL_BUS_STACK_SIZE 4024
+#endif
 
 class SerialBus: public process::Task {
 public:

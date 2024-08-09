@@ -16,7 +16,7 @@ struct ListenerArg {
 
 class Listener: public kernel::PatriciaTrieTree<ListenerArg>::Node {
 public:
-  Listener() {};
+  Listener();
   // ~Listener();
 
   void begin(unsigned queue_size = 1, bool force_push = true);

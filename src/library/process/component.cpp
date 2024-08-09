@@ -16,23 +16,22 @@ bool Component::begin() {
 }
 
 bool Component::onStart() {
-  return xTaskCreatePinnedToCore(
+  return xTaskCreate(
     entryPoint, name_, stack_size_, this,
-    priority_, &handle_, 1) == pdPASS;
+    priority_, &task_handle_) == pdPASS;
 }
 
 void Component::entryPoint(void* instance) {
   Component *component = static_cast<Component *>(instance);
   component->setup();
-  taskYIELD();
+  vTaskDelay(1 / portTICK_PERIOD_MS);
   for (;;) {
     while (component->command_listener_.available()) {
       const wcpp::Packet command = component->command_listener_.pop();
       component->onCommand(command);
-      taskYIELD();
     }
     component->loop();
-    taskYIELD();
+    vTaskDelay(1 / portTICK_PERIOD_MS);
   }
 }
 }

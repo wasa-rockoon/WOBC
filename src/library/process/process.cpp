@@ -31,4 +31,12 @@ void Process::sendPacket(const wcpp::Packet &packet, const Listener& exclude) {
   kernel::kernel_.sendPacket(packet, &exclude);
 }
 
+
+void Process::enterCritical() {
+  kernel::kernel_.enter();
+}
+void Process::exitCritical() {
+  kernel::kernel_.exit();
+}
+
 }

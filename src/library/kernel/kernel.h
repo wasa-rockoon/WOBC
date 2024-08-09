@@ -11,9 +11,8 @@
 namespace kernel {
 
 #ifndef WOBC_PACKET_HEAP_SIZE
-#define WOBC_PACKET_HEAP_SIZE 4096
+#define WOBC_PACKET_HEAP_SIZE 8192
 #endif
-
 
 class Kernel;
 
@@ -28,6 +27,9 @@ public:
 
   void addListener(Listener& listener);
 
+  inline void enter() { xSemaphoreTake(mutex_, portMAX_DELAY); }
+  inline void exit()  { xSemaphoreGive(mutex_); }
+
 private:
   uint8_t packet_heap_arena_[WOBC_PACKET_HEAP_SIZE];
   Heap packet_heap_;
@@ -35,14 +37,22 @@ private:
 
   SemaphoreHandle_t mutex_;
 
-  inline void enter() { xSemaphoreTake(mutex_, portMAX_DELAY); }
-  inline void exit()  { xSemaphoreGive(mutex_); }
+  unsigned packet_count_;
+  unsigned anomaly_count_;
 
-  void refChange(wcpp::Packet& packet, int change);
-  static void refChangeStatic(wcpp::Packet& packet, int change) { 
+
+  void refChange(const wcpp::Packet& packet, int change);
+  static void refChangeStatic(const wcpp::Packet& packet, int change) { 
     kernel_.refChange(packet, change); 
-    };
+  };
+
+  friend const unsigned& packetCount();
+  friend const unsigned& anomalyCount();
 };
+
+inline const unsigned& packetCount() { return kernel_.packet_count_; }
+inline const unsigned& anomalyCount() { return kernel_.anomaly_count_; }
+
 
 
 }

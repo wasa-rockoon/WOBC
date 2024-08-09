@@ -5,6 +5,8 @@
 
 namespace process {
 
+#define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__)
+
 class Component;
 
 class Process {
@@ -26,11 +28,24 @@ public:
   void sendPacket(const wcpp::Packet &packet);
   void sendPacket(const wcpp::Packet &packet, const Listener& exclude);
 
+  template <class... Args>
+  void log(const char* file, unsigned line, const char* format, Args... args) {
+    char message[240];
+    int len = snprintf(message, 240, format, args...);
+    wcpp::Packet p = newPacket(4 + 2 + strlen(file) + 2 + 8 + 2 + len);
+    p.telemetry('#');
+    p.append("Fn").setString(file);
+    p.append("Ln").setInt(line);
+    p.append("Ms").setString(message);
+    sendPacket(p);
+  }
+
+  void enterCritical();
+  void exitCritical();
 
 protected:
   const char *name_;
   Component* component_;
-  uint8_t core_;
 
   void startProcess(Component* component);
   virtual bool onStart() = 0;

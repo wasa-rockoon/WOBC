@@ -17,12 +17,11 @@ protected:
   virtual void loop() {}
   virtual void onCommand(const wcpp::Packet& command) {};
 
-protected:
   uint8_t id_; 
   uint8_t priority_;
   unsigned stack_size_;
 
-  xTaskHandle handle_;
+  xTaskHandle task_handle_;
   kernel::Listener command_listener_;
 
   bool onStart() override;
