@@ -4498,7 +4498,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.256 152.4) (xy 143.256 160.274)
+			(xy 143.51 152.4) (xy 143.51 161.29)
 		)
 		(stroke
 			(width 0)
@@ -4625,6 +4625,16 @@
 			(type default)
 		)
 		(uuid "2df1030e-be10-49fe-89b8-cfde81a7eb89")
+	)
+	(wire
+		(pts
+			(xy 143.51 163.83) (xy 143.51 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "31776a58-7d44-4079-a988-370adaab3d84")
 	)
 	(wire
 		(pts
@@ -5708,7 +5718,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 177.546) (xy 143.256 177.546)
+			(xy 125.73 177.546) (xy 143.51 177.546)
 		)
 		(stroke
 			(width 0)
@@ -6188,7 +6198,7 @@
 	)
 	(wire
 		(pts
-			(xy 143.256 177.546) (xy 143.256 167.894)
+			(xy 143.51 177.546) (xy 143.51 173.99)
 		)
 		(stroke
 			(width 0)
@@ -6378,7 +6388,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 152.4) (xy 143.256 152.4)
+			(xy 125.73 152.4) (xy 143.51 152.4)
 		)
 		(stroke
 			(width 0)
@@ -6763,16 +6773,6 @@
 			(justify left bottom)
 		)
 		(uuid "bd0c1a60-6b78-4930-b114-22178d422b4a")
-	)
-	(text "コネクタあるいは\nプルダウン抵抗を選択"
-		(exclude_from_sim no)
-		(at 138.176 182.626 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "c7014b3f-4e2f-48ef-95d4-c582fcd58e1a")
 	)
 	(text "Backup Battery ->"
 		(exclude_from_sim no)
@@ -10713,7 +10713,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 143.256 164.084 0)
+		(at 143.51 170.18 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10722,7 +10722,7 @@
 		(dnp no)
 		(uuid "75764e19-c771-4fe5-8fb2-c7095122289b")
 		(property "Reference" "R715"
-			(at 149.606 161.798 0)
+			(at 149.86 167.894 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10731,7 +10731,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 148.336 163.83 0)
+			(at 148.59 169.926 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10740,7 +10740,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 145.034 164.084 90)
+			(at 145.288 170.18 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10749,7 +10749,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 143.256 164.084 0)
+			(at 143.51 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10758,7 +10758,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 143.256 164.084 0)
+			(at 143.51 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10767,7 +10767,7 @@
 			)
 		)
 		(property "LCSC" "C25744"
-			(at 143.256 164.084 0)
+			(at 143.51 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10791,6 +10791,76 @@
 			(project "LiPoPower"
 				(path "/ed97c6c4-a1a7-4dde-a640-89eca815dd0d"
 					(reference "R327")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 148.59 161.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "796ef58d-dce4-413a-b861-3730dbebfc27")
+		(property "Reference" "J101"
+			(at 151.13 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "HeaterPin"
+			(at 151.13 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_1x02_P1.27mm_Vertical"
+			(at 148.59 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 148.59 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 148.59 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "10479ca7-de5c-4815-839d-e39bfdb13750")
+		)
+		(pin "2"
+			(uuid "176de94d-e5e9-40a7-ba0b-a7839a7038ce")
+		)
+		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/b564a1a6-880f-4f3f-9b5e-b689a4514f2f"
+					(reference "J101")
 					(unit 1)
 				)
 			)

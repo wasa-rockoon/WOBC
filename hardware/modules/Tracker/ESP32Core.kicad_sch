@@ -2685,10 +2685,6 @@
 		(uuid "f3771991-8d7f-4d4d-b701-501d6a8bb1bc")
 	)
 	(no_connect
-		(at 252.73 91.44)
-		(uuid "07787f58-4262-42f6-9cd1-d74407625927")
-	)
-	(no_connect
 		(at 252.73 139.7)
 		(uuid "12889389-025e-47e0-bb5d-17d4e5aa1247")
 	)
@@ -2988,6 +2984,16 @@
 	)
 	(wire
 		(pts
+			(xy 266.7 91.44) (xy 275.59 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b4f24c0-fbca-4995-811a-9b66b6502aa5")
+	)
+	(wire
+		(pts
 			(xy 99.695 133.985) (xy 86.995 133.985)
 		)
 		(stroke
@@ -3095,6 +3101,16 @@
 			(type default)
 		)
 		(uuid "bb32f227-4489-4445-aa30-099ee5bc54c6")
+	)
+	(wire
+		(pts
+			(xy 252.73 91.44) (xy 256.54 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bb60f0c0-1ccc-42dd-8a97-d653e03e6413")
 	)
 	(wire
 		(pts
@@ -3215,6 +3231,16 @@
 			(type default)
 		)
 		(uuid "e860f252-23d2-4b1f-9518-93b5f3895840")
+	)
+	(wire
+		(pts
+			(xy 275.59 91.44) (xy 275.59 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ecd84976-24df-49b3-9a18-ba6e681c049b")
 	)
 	(wire
 		(pts
@@ -4212,6 +4238,73 @@
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "#PWR019")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 261.62 91.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1c986525-175b-485a-bbbf-e1e0507847cf")
+		(property "Reference" "SW101"
+			(at 258.445 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "RESET"
+			(at 265.43 88.9 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:TVAF06-A020B-R"
+			(at 261.62 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 261.62 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 261.62 91.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f9861109-17ee-4433-bf93-512d565e750f")
+		)
+		(pin "2"
+			(uuid "e5c9f349-798c-42a7-bc4d-d45472318070")
+		)
+		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
+					(reference "SW101")
 					(unit 1)
 				)
 			)
@@ -7089,6 +7182,72 @@
 			(project "RemoteHub"
 				(path "/f0925637-73a6-486f-912c-c36abe1751f3"
 					(reference "#PWR03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 275.59 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f00b842b-3e89-4d8d-b9f5-78223a18900a")
+		(property "Reference" "#PWR0102"
+			(at 275.59 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 275.59 97.155 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 275.59 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 275.59 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 275.59 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "02cf95fc-5a08-41ea-9ed5-d8cbbb453308")
+		)
+		(instances
+			(project "Tracker"
+				(path "/485a01ee-6a57-485f-8e4c-0ef4d16d0717/5cabaded-bd55-4994-a616-0c2b094775d8"
+					(reference "#PWR0102")
 					(unit 1)
 				)
 			)
