@@ -50,18 +50,18 @@ unsigned E220::receive(uint8_t* data, unsigned max_len) {
   if (RSSI_enabled_) {
     if ((int)stream_.available() < len + 2) return 0;
     if (max_len > 0 && len > max_len) {
-      stream_.flush();
+      for (int i = 0; i < len + 2; i++) stream_.read();
       return 0;
     }
     len = stream_.read();
     stream_.readBytes(data, len);
-    rssi_ = - (256 -(int)stream_.read());
+    rssi_ = - ((int)256 - (uint8_t)stream_.read());
     return len;
   }
   else {
     if ((int)stream_.available() < len + 1) return 0;
     if (max_len > 0 && len > max_len) {
-      stream_.flush();
+      for (int i = 0; i < len + 1; i++) stream_.read();
       return 0;
     }
     len = stream_.read();
@@ -170,7 +170,7 @@ int E220::getEnvRSSI() {
   uint8_t rx[5];
   stream_.readBytes(rx, 5);
 
-  return - (256 - (int)(rx[3]));
+  return - ((int)256 - (rx[3]));
 }
 
 bool E220::setParametersToDefault() {

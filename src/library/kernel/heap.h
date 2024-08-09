@@ -32,11 +32,16 @@ class Heap {
 public:
   Heap(uint8_t* arena, pointer_t arena_size);
 
+  void clean();
+
   void* alloc(unsigned size);
-  void free(void *ptr);
-  uint8_t addRef(void* ptr);
-  uint8_t releaseRef(void* ptr);
-  unsigned getSize(void* ptr);
+  void free(const void *ptr);
+  uint8_t addRef(const void* ptr);
+  uint8_t releaseRef(const void* ptr);
+  unsigned getSize(const void* ptr);
+  unsigned getRefCount(const void* ptr);
+
+  bool inHeap(const void* ptr);
 
   inline unsigned failCount()  const { return fail_count_; }
   inline unsigned allocCount() const { return alloc_count_; }
@@ -89,11 +94,12 @@ private:
   };
 
   pointer_t allocSize(pointer_t size) const;
-  inline Chunk* getChunk(pointer_t ptr) const {
+  inline Chunk* getChunk(const pointer_t ptr) const {
     if (ptr >= arena_size_) return nullptr;
     return reinterpret_cast<Chunk *>(arena_ + ptr);
   }
-  inline Chunk* getChunk(void* ptr) const {
+  inline Chunk* getChunk(const void* ptr) const {
+    if (ptr < arena_ || arena_ + arena_size_ <= ptr) return nullptr;
     return reinterpret_cast<Chunk *>((uint8_t*)ptr - allocated_chunk_header_size);
   }
   inline pointer_t getPtr(const Chunk* chunk) const {

@@ -1,6 +1,4 @@
 #include "heap.h"
-#include <cassert>
-#include <stdio.h>
 #include <cstring>
 
 namespace kernel {
@@ -8,9 +6,14 @@ namespace kernel {
 Heap::Heap(uint8_t *arena, pointer_t arena_size)
   :arena_(arena) {
   arena_size_ = (arena_size / alloc_align) * alloc_align;
+  clean();
+}
+
+void Heap::clean() {
   in_use_bytes_ = 0;
   alloc_count_ = 0;
   fail_count_ = 0;
+  memset(arena_, 0, arena_size_);
 
   Chunk* first_chunk = reinterpret_cast<Chunk*>(arena_);
 
@@ -108,9 +111,13 @@ void* Heap::alloc(unsigned size) {
   }
 }
 
-void Heap::free(void *ptr) {
+void Heap::free(const void *ptr) {
+  if (!inHeap(ptr)) return;
   Chunk* free_chunk = getChunk(ptr);
-  assert(free_chunk->isInUse());
+  assert(free_chunk->isInUse()); // double free
+  if (!free_chunk->isInUse()) {
+    return;
+  }
 
   pointer_t free_ptr = getPtr(free_chunk);
   pointer_t free_size = allocSize((pointer_t)free_chunk->allocated.data_size + 1);
@@ -119,7 +126,7 @@ void Heap::free(void *ptr) {
 
   Chunk* next_chunk = getChunk(free_ptr + free_size);
   if (next_chunk) {
-    assert(next_chunk->isPrevInUse());
+    assert(next_chunk->isPrevInUse()); // ???
     next_chunk->setIsPrevInUse(false);
   }
 
@@ -130,10 +137,9 @@ void Heap::free(void *ptr) {
   pointer_t combined_size = free_size;
 
   if (prev_chunk != nullptr && prev_chunk != free_chunk) {
-    assert(!prev_chunk->isInUse());
+    assert(!prev_chunk->isInUse()); // TODO ??????
     combined_size += prev_chunk->freeSize();
     removeFreeChunk(prev_chunk);
-
     free_chunk = prev_chunk;
   }
   if (next_chunk != nullptr && !next_chunk->isInUse()) {
@@ -156,14 +162,16 @@ void Heap::free(void *ptr) {
   in_use_bytes_ -= free_size;
 }
 
-uint8_t Heap::addRef(void *ptr) {
+uint8_t Heap::addRef(const void *ptr) {
+  if (!inHeap(ptr)) return 0;
   Chunk* chunk = getChunk(ptr);
   if (chunk->refCount() < ref_count_max)
     chunk->setRefCount(chunk->refCount() + 1);
   return chunk->refCount();
 }
 
-uint8_t Heap::releaseRef(void *ptr) {
+uint8_t Heap::releaseRef(const void *ptr) {
+  if (!inHeap(ptr)) return 0;
   Chunk *chunk = getChunk(ptr);
   if (chunk->refCount() == 1) {
     this->free(ptr);
@@ -175,8 +183,18 @@ uint8_t Heap::releaseRef(void *ptr) {
   }
 }
 
-unsigned Heap::getSize(void *ptr) {
+unsigned Heap::getSize(const void *ptr) {
   return (pointer_t)getChunk(ptr)->allocated.data_size + 1;
+}
+
+
+unsigned Heap::getRefCount(const void* ptr) {
+  return getChunk(ptr)->refCount();
+}
+
+
+bool Heap::inHeap(const void* ptr) {
+  return arena_ <= ptr && ptr <= arena_ + arena_size_;
 }
 
 void Heap::addFreeChunk(Chunk* chunk) {
@@ -200,8 +218,6 @@ void Heap::addFreeChunk(Chunk* chunk) {
 }
 
 void Heap::removeFreeChunk(Chunk* chunk) {
-  pointer_t chunk_ptr = getPtr(chunk);
-
   unsigned i = chunk->freeSize() / alloc_align;
   Bin& bin = bins_[i > bin_number ? 0 : i];
 
@@ -252,6 +268,8 @@ void Heap::dump() const {
            i, bins_[i].skip_to, bins_[i].prev_free, bins_[i].next_free);
     if (bins_[i].next_free == bin_ptr) continue;
     Chunk *chunk = getChunk(bins_[i].next_free);
+    // printf("BINS %d %d %d\n", chunk, bins_[i].next_free, chunk->free.next_free);
+    assert(chunk != nullptr);
     while (true) {
       printf("%4X ", chunk->free.next_free);
       if (chunk->free.next_free == bin_ptr) break;
