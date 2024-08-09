@@ -4,9 +4,9 @@ INA226 INA1(0x4F);   //Lipoのコネクタから充放電モジュールまで
 INA226 INA2(0x4D);   //充放電とバックアップからDCDCまで
 INA226 INA3(0x4E);   //DCDC後
 
+
 void setup()
 {
-  pinMode(42, OUTPUT);
   Serial.begin(115200);
   delay(1000);
   //Serial.println(__FILE__);
@@ -34,8 +34,9 @@ void setup()
   INA3.setMaxCurrentShunt(1, 0.05);
 }
 
-void loop(){
-  digitalWrite(42, HIGH);
+
+void loop()
+{
   // Serial.println("\nBUS\tSHUNT\tCURRENT\tPOWER");
   Serial.print(INA1.getBusVoltage(), 3);
   Serial.print("\t");
@@ -43,13 +44,13 @@ void loop(){
   //Serial.print("\t");
   Serial.print(INA1.getCurrent_mA(), 8);
   Serial.print("\t");
-  //Serial.print("||");
+  Serial.print("||");
   // Serial.print(INA.getPower_mW(), 3);
   Serial.print(INA2.getBusVoltage(), 3);
   Serial.print("\t");
   Serial.print(INA2.getCurrent_mA(), 8);
   Serial.print("\t");
-  //Serial.print("||");
+  Serial.print("||");
   Serial.print(INA3.getBusVoltage(), 3);
   Serial.print("\t");
   Serial.print(INA3.getCurrent_mA(), 8);

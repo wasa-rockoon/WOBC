@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 3.0,
-          "height": 6.3,
-          "width": 6.3
+          "drill": 0.762,
+          "height": 1.524,
+          "width": 1.524
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -48,16 +48,10 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.0
+          "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [
-        {
-          "gap": 0.0,
-          "via_gap": 0.0,
-          "width": 0.0
-        }
-      ],
+      "diff_pair_dimensions": [],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -177,19 +171,7 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [
-        0.0,
-        0.2,
-        0.3,
-        0.35,
-        0.4,
-        0.6,
-        0.8,
-        1.0,
-        1.3,
-        1.5,
-        2.0
-      ],
+      "track_widths": [],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -216,20 +198,7 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [
-        {
-          "diameter": 0.0,
-          "drill": 0.0
-        },
-        {
-          "diameter": 0.5,
-          "drill": 0.3
-        },
-        {
-          "diameter": 1.0,
-          "drill": 0.8
-        }
-      ],
+      "via_dimensions": [],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -462,7 +431,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "Tracker.kicad_pro",
+    "filename": "IGN.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -507,7 +476,7 @@
     "page_layout_descr_file": ""
   },
   "schematic": {
-    "annotate_start_num": 100,
+    "annotate_start_num": 0,
     "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
@@ -567,45 +536,9 @@
         },
         {
           "group_by": false,
-          "label": "Availability",
-          "name": "Availability",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Check_prices",
-          "name": "Check_prices",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "LCSC",
           "name": "LCSC",
           "show": true
-        },
-        {
-          "group_by": false,
-          "label": "MF",
-          "name": "MF",
-          "show": true
-        },
-        {
-          "group_by": false,
-          "label": "MP",
-          "name": "MP",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Package",
-          "name": "Package",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Price",
-          "name": "Price",
-          "show": false
         },
         {
           "group_by": false,
@@ -621,32 +554,14 @@
         },
         {
           "group_by": false,
-          "label": "SnapEDA_Link",
-          "name": "SnapEDA_Link",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "シンボル名",
-          "name": "シンボル名",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "フィールド5",
-          "name": "フィールド5",
+          "label": "Sim.Type",
+          "name": "Sim.Type",
           "show": false
         },
         {
           "group_by": false,
           "label": "説明",
           "name": "Description",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Purchase-URL",
-          "name": "Purchase-URL",
           "show": false
         }
       ],
@@ -697,32 +612,20 @@
   },
   "sheets": [
     [
-      "485a01ee-6a57-485f-8e4c-0ef4d16d0717",
+      "2a7771e6-36a4-47ae-b559-dde705e1d286",
       "ルート"
     ],
     [
-      "f2c822c2-ff23-4752-bd0e-ff71e3258c4d",
-      "Pressure"
+      "64a642d9-98f3-4b06-b19e-15459cb9d7b9",
+      "Ignite"
     ],
     [
-      "a23375f4-2e82-4db5-822a-fa2e41534a72",
-      "Logger"
+      "fe769398-0d84-49c1-b491-e689ce977777",
+      "RP2040core"
     ],
     [
-      "efd7ae85-9fe5-4157-81cb-d43dd184a75d",
-      "LoRa"
-    ],
-    [
-      "044808ad-7608-410e-b679-04e2fdf81d41",
-      "GPSActive"
-    ],
-    [
-      "5cabaded-bd55-4994-a616-0c2b094775d8",
-      "ESP32"
-    ],
-    [
-      "b564a1a6-880f-4f3f-9b5e-b689a4514f2f",
-      "Lipo"
+      "0dc43a57-3d63-409f-ae53-b1796098c7d8",
+      "IF"
     ]
   ],
   "text_variables": {}
