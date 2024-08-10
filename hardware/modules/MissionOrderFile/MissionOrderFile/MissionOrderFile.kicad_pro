@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 3.0,
-          "height": 6.3,
-          "width": 6.3
+          "drill": 1.3,
+          "height": 1.3,
+          "width": 1.3
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -59,6 +59,12 @@
         }
       ],
       "drc_exclusions": [
+        "clearance|128078500|53503500|be410869-b2c6-4aa4-bfaa-555213e3e5c8|d997004c-05a0-4a2d-99cf-93b32cbb8199",
+        "clearance|128578500|53503500|83665249-7c2e-4823-8a39-34b4e4414e6f|be410869-b2c6-4aa4-bfaa-555213e3e5c8",
+        "clearance|41511000|58991500|1c045e86-2ade-41be-a305-2388997b2d03|7c129fba-2955-41f9-9b5b-b982338e1f85",
+        "clearance|41511000|59491500|7c129fba-2955-41f9-9b5b-b982338e1f85|b370777c-fae7-48f6-b1d7-9910e08a00ca",
+        "clearance|56681500|144398500|8ae38113-b92b-468c-9232-251ebacb23b4|fe9a96fb-5fc4-4fc7-b818-6d7297f228ef",
+        "clearance|56681500|144898500|61242688-16f8-4e3e-b057-e57b665b588e|8ae38113-b92b-468c-9232-251ebacb23b4",
         "copper_edge_clearance|149500000|153000000|4c4b327f-27a4-457e-a395-cd89492fe56e|0a8cb982-214a-4464-a2b3-44470c90e216",
         "copper_edge_clearance|149500000|30000000|6734cf90-f9a7-4cc2-a8e7-832bc0087ae1|a5af774f-0dc9-4133-b457-656df108efc4",
         "copper_edge_clearance|149500000|90000000|f9cfe5ae-43e0-482c-b5e6-752ddc86ac68|de7c5a82-e9a7-4cab-9eef-699bbbf8d1df",
@@ -194,7 +200,9 @@
         }
       ],
       "track_widths": [
-        0.0
+        0.0,
+        0.4,
+        0.8
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -583,7 +591,7 @@
           "group_by": false,
           "label": "LCSC",
           "name": "LCSC",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -637,6 +645,54 @@
           "group_by": false,
           "label": "説明",
           "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "RS Price/Stock",
+          "name": "RS Price/Stock",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Height",
+          "name": "Height",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Manufacturer_Name",
+          "name": "Manufacturer_Name",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Type",
+          "name": "Sim.Type",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Manufacturer_Part_Number",
+          "name": "Manufacturer_Part_Number",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "シンボル名",
+          "name": "シンボル名",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "フィールド5",
+          "name": "フィールド5",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "RS Part Number",
+          "name": "RS Part Number",
           "show": false
         }
       ],
@@ -769,6 +825,46 @@
     [
       "5cabaded-bd55-4994-a616-0c2b094775d8",
       "ESP32"
+    ],
+    [
+      "a804dae0-8056-4b0d-aba9-e154e63c0b61",
+      "MissionBus"
+    ],
+    [
+      "1e942735-6616-43ca-af00-c61093c0672f",
+      "ESPCore"
+    ],
+    [
+      "03abe940-cce2-4e6c-ae7c-8051317c85fb",
+      "IF1"
+    ],
+    [
+      "9afbf62a-6b9b-4ed6-a683-a6f0c0eb455f",
+      "Logger"
+    ],
+    [
+      "7c12ac69-769a-49b6-98e3-3ffea3996835",
+      "GPS"
+    ],
+    [
+      "e144185a-edee-4a92-8717-248055856b16",
+      "IF2"
+    ],
+    [
+      "bc30a2d0-3898-41ca-9b9c-eba4c0067b6e",
+      "LiPo"
+    ],
+    [
+      "94960033-c903-4cda-be3f-1525ff6d11a2",
+      "LoRa"
+    ],
+    [
+      "02c93ef4-227a-475c-b965-49c0148812d1",
+      "Pressure"
+    ],
+    [
+      "434a0a37-5143-45db-9aae-dbf9b95184f6",
+      "9DoF"
     ],
     [
       "b8d47059-39b3-466c-85f0-a572154ae61d",
