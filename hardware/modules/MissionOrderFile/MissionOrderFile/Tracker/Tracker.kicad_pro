@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -58,23 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        "copper_edge_clearance|149500000|153000000|4c4b327f-27a4-457e-a395-cd89492fe56e|0a8cb982-214a-4464-a2b3-44470c90e216",
-        "copper_edge_clearance|149500000|30000000|6734cf90-f9a7-4cc2-a8e7-832bc0087ae1|a5af774f-0dc9-4133-b457-656df108efc4",
-        "copper_edge_clearance|149500000|90000000|f9cfe5ae-43e0-482c-b5e6-752ddc86ac68|de7c5a82-e9a7-4cab-9eef-699bbbf8d1df",
-        "copper_edge_clearance|149500000|93000000|0ddf76ee-9c39-4c3a-9d44-8e3226dbf9f4|3cffb5f3-0c44-46c3-a0d5-164089cd9a01",
-        "copper_edge_clearance|30000000|149500000|78d0e0be-c8a0-4c79-9c9a-b552c6bd01a3|cc819afb-b3df-4237-a9e0-7b02cfec6da2",
-        "copper_edge_clearance|30000000|33500000|ad87677e-b051-48f7-a95f-062f3515bb17|e90553ff-e52f-4dad-9c5a-9a09dcea4f32",
-        "copper_edge_clearance|30000000|96500000|78d0e0be-c8a0-4c79-9c9a-b552c6bd01a3|a2960c78-0b7e-4a41-aae9-ff9652b1a81e",
-        "copper_edge_clearance|33500000|90000000|d7c973a4-df5b-402f-8ce4-2798239da864|058562a5-5b68-46a8-9681-80972d29df7b",
-        "copper_edge_clearance|86500000|153000000|b12baaea-06a2-4708-8508-7008a39cf105|fb6bef28-ece8-440d-9c9d-34a1bfbf4c39",
-        "copper_edge_clearance|86500000|90000000|72a49b1d-6e31-4ad6-a78f-97b71b08806c|2ff6541e-bedb-4b30-ae9d-e2b543d885d6",
-        "copper_edge_clearance|90000000|33500000|e18a4b6e-da7f-4ed6-90d3-5ba49fab5606|b6d194ec-31bb-4961-a095-11750dbc87e1",
-        "copper_edge_clearance|90000000|96500000|7291005d-32e7-4f5d-89d2-f92110f9eb4c|4b494dce-1165-4f02-97c3-49bb0e1be2c9",
-        "copper_edge_clearance|93000000|149500000|f92c15b0-da15-43d2-b11f-45325806502d|6de54a0a-5329-4f44-a5fd-5f512d0581a9",
-        "copper_edge_clearance|96500000|90000000|129384f5-9a14-4225-9dca-2c4bec12d152|d84e0c44-eaec-446e-b1a6-dc624e9a19fd",
-        "items_not_allowed|86500000|33500000|b6d194ec-31bb-4961-a095-11750dbc87e1|00000000-0000-0000-0000-000000000000"
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -194,7 +178,17 @@
         }
       ],
       "track_widths": [
-        0.0
+        0.0,
+        0.2,
+        0.3,
+        0.35,
+        0.4,
+        0.6,
+        0.8,
+        1.0,
+        1.3,
+        1.5,
+        2.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -230,6 +224,10 @@
         {
           "diameter": 0.5,
           "drill": 0.3
+        },
+        {
+          "diameter": 1.0,
+          "drill": 0.8
         }
       ],
       "zones_allow_external_fillets": false
@@ -464,7 +462,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "MissionOrderFile.kicad_pro",
+    "filename": "Tracker.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -509,7 +507,7 @@
     "page_layout_descr_file": ""
   },
   "schematic": {
-    "annotate_start_num": 700,
+    "annotate_start_num": 2100,
     "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
@@ -583,13 +581,13 @@
           "group_by": false,
           "label": "LCSC",
           "name": "LCSC",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
           "label": "MF",
           "name": "MF",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -607,12 +605,6 @@
           "group_by": false,
           "label": "Price",
           "name": "Price",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Purchase-URL",
-          "name": "Purchase-URL",
           "show": false
         },
         {
@@ -635,8 +627,26 @@
         },
         {
           "group_by": false,
+          "label": "シンボル名",
+          "name": "シンボル名",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "フィールド5",
+          "name": "フィールド5",
+          "show": false
+        },
+        {
+          "group_by": false,
           "label": "説明",
           "name": "Description",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Purchase-URL",
+          "name": "Purchase-URL",
           "show": false
         }
       ],
@@ -687,76 +697,12 @@
   },
   "sheets": [
     [
-      "3d8b10e6-807a-4b83-870c-e8187ef4ec90",
-      "GS"
-    ],
-    [
-      "951c9b78-7f7a-40cb-9924-3a13ae950f3e",
-      "ESP32"
-    ],
-    [
-      "c990673b-a39e-4a98-a254-0d1624c91320",
-      "GPS"
-    ],
-    [
-      "b6596e6a-331e-4110-9845-3f13c73105a2",
-      "IF2"
-    ],
-    [
-      "b68d4887-c983-40fc-adcd-c70e88ae0d4a",
-      "IF4"
-    ],
-    [
-      "e96674da-5496-4e06-8fa1-e9734b97109d",
-      "LiPoSimple"
-    ],
-    [
-      "2c35cf26-1e44-42e5-8139-efbe5f54c1ed",
-      "Logger"
-    ],
-    [
-      "3c4d17dd-97d2-480b-bb9a-bf4a422849cb",
-      "RCS"
-    ],
-    [
-      "4e66517c-6f12-4080-aae7-e8490684856a",
-      "RP2040"
-    ],
-    [
-      "75165dc7-ffb2-4f16-9f68-6478aa466472",
-      "IF"
-    ],
-    [
-      "329e8276-837f-4fe1-9cda-83ab8d0d94cb",
-      "RCS"
-    ],
-    [
-      "712675c7-f5bd-425c-bbfe-d7042feaf382",
-      "Tank1"
-    ],
-    [
-      "faba12a8-84b0-488c-9a5f-517348a49b5c",
-      "LoadCell1"
-    ],
-    [
-      "db154cb7-eab6-448f-a7fe-5bcfbe31da61",
-      "LoadCell2"
-    ],
-    [
-      "e6f85ca1-9338-4617-9ff8-a91ca6b74512",
-      "Tracker"
-    ],
-    [
-      "b564a1a6-880f-4f3f-9b5e-b689a4514f2f",
-      "Lipo"
+      "485a01ee-6a57-485f-8e4c-0ef4d16d0717",
+      "ルート"
     ],
     [
       "f2c822c2-ff23-4752-bd0e-ff71e3258c4d",
       "Pressure"
-    ],
-    [
-      "044808ad-7608-410e-b679-04e2fdf81d41",
-      "GPSActive"
     ],
     [
       "a23375f4-2e82-4db5-822a-fa2e41534a72",
@@ -767,12 +713,16 @@
       "LoRa"
     ],
     [
+      "044808ad-7608-410e-b679-04e2fdf81d41",
+      "GPSActive"
+    ],
+    [
       "5cabaded-bd55-4994-a616-0c2b094775d8",
       "ESP32"
     ],
     [
-      "b8d47059-39b3-466c-85f0-a572154ae61d",
-      "ルート"
+      "b564a1a6-880f-4f3f-9b5e-b689a4514f2f",
+      "Lipo"
     ]
   ],
   "text_variables": {}
