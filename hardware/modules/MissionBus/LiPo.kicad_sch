@@ -4700,7 +4700,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.6888 151.4457) (xy 142.2148 151.4457)
+			(xy 124.6888 151.4457) (xy 142.24 151.4457)
 		)
 		(stroke
 			(width 0)
@@ -5420,6 +5420,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 162.56) (xy 142.24 166.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8b8c2882-04c2-4610-87a3-f97395538ebd")
+	)
+	(wire
+		(pts
 			(xy 87.6048 36.3837) (xy 98.2728 36.3837)
 		)
 		(stroke
@@ -5540,7 +5550,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.2148 176.5917) (xy 142.2148 166.9397)
+			(xy 142.24 176.5917) (xy 142.24 173.99)
 		)
 		(stroke
 			(width 0)
@@ -6000,7 +6010,7 @@
 	)
 	(wire
 		(pts
-			(xy 124.6888 176.5917) (xy 142.2148 176.5917)
+			(xy 124.6888 176.5917) (xy 142.24 176.5917)
 		)
 		(stroke
 			(width 0)
@@ -6340,7 +6350,7 @@
 	)
 	(wire
 		(pts
-			(xy 142.2148 151.4457) (xy 142.2148 159.3197)
+			(xy 142.24 151.4457) (xy 142.24 160.02)
 		)
 		(stroke
 			(width 0)
@@ -6736,16 +6746,6 @@
 			(justify left bottom)
 		)
 		(uuid "b6f3218b-b379-4a05-8101-951fcc4e3ffb")
-	)
-	(text "コネクタあるいは\nプルダウン抵抗を選択"
-		(exclude_from_sim no)
-		(at 137.1348 181.6717 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "fb17bd44-183e-46d1-b95a-2743c5cc31b3")
 	)
 	(label "PROG"
 		(at 42.7738 110.8057 0)
@@ -9587,6 +9587,76 @@
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
 					(reference "R515")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 147.32 160.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "51b4d7be-479a-4f3b-9b1d-fdbdd83900d8")
+		(property "Reference" "J513"
+			(at 149.86 160.0199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Conn_01x02"
+			(at 149.86 162.5599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_1x02_P1.27mm_Vertical"
+			(at 147.32 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 147.32 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 147.32 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4b687063-a720-4776-a181-73a99e3b5838")
+		)
+		(pin "2"
+			(uuid "ef2eef6f-776a-485c-a064-a5d376e06030")
+		)
+		(instances
+			(project "MissionBus"
+				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
+					(reference "J513")
 					(unit 1)
 				)
 			)
@@ -12522,7 +12592,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 142.2148 163.1297 0)
+		(at 142.24 170.18 0)
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
@@ -12531,7 +12601,7 @@
 		(dnp no)
 		(uuid "cca72cd3-3968-4340-8f51-eefb3fe6c979")
 		(property "Reference" "R522"
-			(at 148.5648 160.8437 0)
+			(at 148.59 167.894 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12540,7 +12610,7 @@
 			)
 		)
 		(property "Value" "10k"
-			(at 147.2948 162.8757 0)
+			(at 147.32 169.926 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12549,7 +12619,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 143.9928 163.1297 90)
+			(at 144.018 170.18 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12558,7 +12628,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 142.2148 163.1297 0)
+			(at 142.24 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12567,7 +12637,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 142.2148 163.1297 0)
+			(at 142.24 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12576,7 +12646,7 @@
 			)
 		)
 		(property "LCSC" "C25744"
-			(at 142.2148 163.1297 0)
+			(at 142.24 170.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
