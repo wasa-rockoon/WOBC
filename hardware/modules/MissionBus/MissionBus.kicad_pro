@@ -6,7 +6,7 @@
         "apply_defaults_to_fp_fields": false,
         "apply_defaults_to_fp_shapes": false,
         "apply_defaults_to_fp_text": false,
-        "board_outline_line_width": 0.1,
+        "board_outline_line_width": 0.05,
         "copper_line_width": 0.2,
         "copper_text_italic": false,
         "copper_text_size_h": 1.5,
@@ -30,22 +30,22 @@
         "fab_text_size_v": 1.0,
         "fab_text_thickness": 0.15,
         "fab_text_upright": false,
-        "other_line_width": 0.15,
+        "other_line_width": 0.1,
         "other_text_italic": false,
         "other_text_size_h": 1.0,
         "other_text_size_v": 1.0,
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 3.0,
+          "height": 6.3,
+          "width": 6.3
         },
-        "silk_line_width": 0.15,
+        "silk_line_width": 0.1,
         "silk_text_italic": false,
         "silk_text_size_h": 1.0,
         "silk_text_size_v": 1.0,
-        "silk_text_thickness": 0.15,
+        "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
           "min_clearance": 0.5
@@ -58,7 +58,22 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "clearance|127328500|104591000|e47fcf81-183b-46d5-bfd0-00ce5cf23483|f9f37e6a-8467-4ff7-8d6e-4b9929554531",
+        "clearance|127828500|104591000|53e0f666-4316-4e4e-b387-2984d21a5f81|e47fcf81-183b-46d5-bfd0-00ce5cf23483",
+        "clearance|138100000|128900000|35d64c46-4024-4a8d-b21f-e946a44fd4df|d46441be-4eb6-4af5-b43d-3e001860c0b2",
+        "clearance|138200000|114400000|3e39f8ce-2aba-4328-a61f-9c57a9244a0e|5b4b7d88-806e-4d92-a8e3-89c83a72ba34",
+        "clearance|138300000|128700000|91910604-f877-46c0-b62c-c3b20b8dbd0e|35d64c46-4024-4a8d-b21f-e946a44fd4df",
+        "clearance|138300000|129100000|8e952aaf-55f2-489a-8ff0-d9931e54cacf|d46441be-4eb6-4af5-b43d-3e001860c0b2",
+        "clearance|138400000|114200000|9dc04471-bcd4-4a5d-854e-afebeb7484a8|3e39f8ce-2aba-4328-a61f-9c57a9244a0e",
+        "clearance|138400000|114600000|da77325d-0de1-448b-9b23-b0c3a0d0432d|5b4b7d88-806e-4d92-a8e3-89c83a72ba34",
+        "clearance|138500000|128900000|8e952aaf-55f2-489a-8ff0-d9931e54cacf|91910604-f877-46c0-b62c-c3b20b8dbd0e",
+        "clearance|138600000|114400000|da77325d-0de1-448b-9b23-b0c3a0d0432d|9dc04471-bcd4-4a5d-854e-afebeb7484a8",
+        "copper_edge_clearance|146500000|150000000|eb3df258-d3f2-4aec-b959-3dcf5c77bc13|a3b3bc5c-cbdd-4b84-bdb2-aef8cec5a556",
+        "copper_edge_clearance|146500000|90000000|e67feaa6-8ab8-4a38-abb1-8fb4b332815e|1c14c055-6ec1-471b-863f-424a03ad792b",
+        "copper_edge_clearance|90000000|146500000|61e30d50-1df2-4aaa-9a68-7b64cfb4b263|914e2789-62d0-4e1c-aba9-196d3cf4392b",
+        "copper_edge_clearance|90000000|93500000|61e30d50-1df2-4aaa-9a68-7b64cfb4b263|15e99e53-38c9-408f-a787-04e8ca90cd25"
+      ],
       "meta": {
         "version": 2
       },
@@ -118,7 +133,7 @@
         "max_error": 0.005,
         "min_clearance": 0.0,
         "min_connection": 0.0,
-        "min_copper_edge_clearance": 0.0,
+        "min_copper_edge_clearance": 0.5,
         "min_hole_clearance": 0.25,
         "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
@@ -127,12 +142,10 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.3,
+        "min_through_hole_diameter": 0.2,
         "min_track_width": 0.0,
         "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
-        "solder_mask_clearance": 0.0,
-        "solder_mask_min_width": 0.0,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
@@ -181,9 +194,14 @@
       ],
       "track_widths": [
         0.0,
+        0.1,
         0.2,
         0.4,
-        0.8
+        0.6,
+        0.8,
+        1.0,
+        1.0,
+        1.2
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -438,7 +456,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "error",
+      "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "simulation_model_issue": "ignore",
@@ -453,7 +471,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "LiPoPower.kicad_pro",
+    "filename": "MissionBus.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -470,9 +488,9 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.25,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
+        "track_width": 0.2,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
         "wire_width": 6
       }
     ],
@@ -498,7 +516,8 @@
     "page_layout_descr_file": ""
   },
   "schematic": {
-    "annotate_start_num": 100,
+    "annotate_start_num": 500,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -529,7 +548,7 @@
           "group_by": false,
           "label": "Datasheet",
           "name": "Datasheet",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -548,79 +567,13 @@
           "label": "DNP",
           "name": "${DNP}",
           "show": true
-        },
-        {
-          "group_by": false,
-          "label": "#",
-          "name": "${ITEM_NUMBER}",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Availability",
-          "name": "Availability",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Check_prices",
-          "name": "Check_prices",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "LCSC",
-          "name": "LCSC",
-          "show": true
-        },
-        {
-          "group_by": false,
-          "label": "MF",
-          "name": "MF",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "MP",
-          "name": "MP",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Package",
-          "name": "Package",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Price",
-          "name": "Price",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Purchase-URL",
-          "name": "Purchase-URL",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "SnapEDA_Link",
-          "name": "SnapEDA_Link",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "説明",
-          "name": "Description",
-          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
-      "name": "",
-      "sort_asc": false,
-      "sort_field": "Value"
+      "name": "Grouped By Value",
+      "sort_asc": true,
+      "sort_field": "リファレンス"
     },
     "connection_grid_size": 50.0,
     "drawing": {
@@ -663,8 +616,44 @@
   },
   "sheets": [
     [
-      "ed97c6c4-a1a7-4dde-a640-89eca815dd0d",
+      "6ad42b70-359f-4102-8634-1155beb51fd8",
       "ルート"
+    ],
+    [
+      "1e942735-6616-43ca-af00-c61093c0672f",
+      "ESPCore"
+    ],
+    [
+      "bc30a2d0-3898-41ca-9b9c-eba4c0067b6e",
+      "LiPo"
+    ],
+    [
+      "9afbf62a-6b9b-4ed6-a683-a6f0c0eb455f",
+      "Logger"
+    ],
+    [
+      "03abe940-cce2-4e6c-ae7c-8051317c85fb",
+      "IF1"
+    ],
+    [
+      "e144185a-edee-4a92-8717-248055856b16",
+      "IF2"
+    ],
+    [
+      "7c12ac69-769a-49b6-98e3-3ffea3996835",
+      "GPS"
+    ],
+    [
+      "94960033-c903-4cda-be3f-1525ff6d11a2",
+      "LoRa"
+    ],
+    [
+      "02c93ef4-227a-475c-b965-49c0148812d1",
+      "Pressure"
+    ],
+    [
+      "434a0a37-5143-45db-9aae-dbf9b95184f6",
+      "9DoF"
     ]
   ],
   "text_variables": {}
