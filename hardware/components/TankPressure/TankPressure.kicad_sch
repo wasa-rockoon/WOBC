@@ -1247,12 +1247,6 @@
 		(uuid "7874952f-f22f-4b5a-b98b-2c1e48ff0e69")
 	)
 	(junction
-		(at 210.693 92.71)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "8111eda8-7d1e-4e5b-9e37-120c45dd8e36")
-	)
-	(junction
 		(at 91.059 87.376)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1293,12 +1287,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ca28305c-b92f-404c-8a96-0d0fb83a3f53")
-	)
-	(junction
-		(at 201.549 92.71)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d66ec9ae-4d44-4ea7-b095-4f7dbc5c7efd")
 	)
 	(junction
 		(at 91.059 75.946)
@@ -1464,7 +1452,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.693 78.486) (xy 211.455 78.486)
+			(xy 210.566 78.486) (xy 211.455 78.486)
 		)
 		(stroke
 			(width 0)
@@ -1501,16 +1489,6 @@
 			(type default)
 		)
 		(uuid "4260633d-b7ca-4a7f-8602-c2d5014e1484")
-	)
-	(wire
-		(pts
-			(xy 210.693 92.71) (xy 210.439 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "44961aff-b6f8-4c7a-b521-55516930419a")
 	)
 	(wire
 		(pts
@@ -1611,6 +1589,16 @@
 			(type default)
 		)
 		(uuid "6e9f7107-4e77-4c94-be2e-157ae7495bb4")
+	)
+	(wire
+		(pts
+			(xy 219.964 92.71) (xy 221.234 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7136eb23-46f7-4dba-84ce-b62bf1b1d2d8")
 	)
 	(wire
 		(pts
@@ -1854,16 +1842,6 @@
 	)
 	(wire
 		(pts
-			(xy 201.549 92.71) (xy 202.819 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bb5dac83-51c9-4d90-92b1-f7f463301307")
-	)
-	(wire
-		(pts
 			(xy 153.924 88.646) (xy 153.924 75.946)
 		)
 		(stroke
@@ -2004,6 +1982,16 @@
 	)
 	(wire
 		(pts
+			(xy 210.566 92.71) (xy 212.344 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f5eb3421-d187-4d3b-b9b3-fc9ad6d9d0cc")
+	)
+	(wire
+		(pts
 			(xy 188.595 75.946) (xy 197.739 75.946)
 		)
 		(stroke
@@ -2024,17 +2012,7 @@
 	)
 	(wire
 		(pts
-			(xy 210.693 92.71) (xy 212.725 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fa3fee1d-0cf5-40e3-9be9-96572c4dfee8")
-	)
-	(wire
-		(pts
-			(xy 210.693 78.486) (xy 210.693 92.71)
+			(xy 210.566 78.486) (xy 210.566 92.71)
 		)
 		(stroke
 			(width 0)
@@ -2044,7 +2022,7 @@
 	)
 	(hierarchical_label "TankPressure"
 		(shape input)
-		(at 212.725 92.71 0)
+		(at 221.234 92.71 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2619,84 +2597,6 @@
 			(project "TankPressure"
 				(path "/d5adb002-6fc2-438b-bcfe-09361e17acf4"
 					(reference "#PWR0104")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 206.629 92.71 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "46d93824-7210-437e-b562-b454abe79376")
-		(property "Reference" "R107"
-			(at 207.899 94.615 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10k"
-			(at 205.359 94.615 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 206.629 94.488 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 206.629 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 206.629 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25744"
-			(at 206.629 92.71 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b58ff9f1-5f0e-47ed-b70b-0d2d90a219b0")
-		)
-		(pin "2"
-			(uuid "0a25b843-d307-4aa7-9349-f83cf0c48c73")
-		)
-		(instances
-			(project "TankPressure"
-				(path "/d5adb002-6fc2-438b-bcfe-09361e17acf4"
-					(reference "R107")
 					(unit 1)
 				)
 			)
@@ -3979,6 +3879,82 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 216.154 92.71 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c0797664-3c31-48c3-a6b7-8027cf817a78")
+		(property "Reference" "R107"
+			(at 216.154 88.9 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 216.154 90.805 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 216.154 94.488 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 216.154 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 216.154 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" " C11702"
+			(at 216.154 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1c254ce1-edf4-4316-aa46-306510b15774")
+		)
+		(pin "2"
+			(uuid "fdf05cad-01e2-4725-a658-ee654285bc8e")
+		)
+		(instances
+			(project "TankPressure"
+				(path "/d5adb002-6fc2-438b-bcfe-09361e17acf4"
+					(reference "R107")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 100.584 94.361 0)
 		(unit 1)
@@ -4074,7 +4050,7 @@
 				)
 			)
 		)
-		(property "Value" "L"
+		(property "Value" "1.5uH"
 			(at 124.079 63.246 90)
 			(effects
 				(font
