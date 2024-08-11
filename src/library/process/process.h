@@ -19,9 +19,9 @@ public:
 
   void listen(kernel::Listener &listener, unsigned queue_size = 1, bool force_push = true);
 
-  inline void start(Process& sub_process) { sub_process.startProcess(component_); };
+  inline void start(Process& sub_process) { sub_process.startProcess(component_id_); };
 
-  Component& component() const { return *component_; };
+  uint8_t component_id() const { return component_id_; };
 
   wcpp::Packet newPacket(uint8_t size);
   wcpp::Packet decodePacket(const uint8_t* buf);
@@ -40,16 +40,14 @@ public:
     sendPacket(p);
   }
 
-  void enterCritical();
-  void exitCritical();
-
 protected:
   const char *name_;
-  Component* component_;
+  uint8_t component_id_ = 0xFF;
 
-  void startProcess(Component* component);
+  void startProcess(uint8_t component_id);
   virtual bool onStart() = 0;
 };
 
 }
+
 

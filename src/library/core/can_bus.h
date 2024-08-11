@@ -25,11 +25,9 @@ namespace core {
 #define WOBC_CAN_BUS_PRIORITY 7
 #endif
 
-class CANBus: public process::Task, public driver::CAN::Receiver {
+class CANBus: public process::CoreTask, public driver::CAN::Receiver {
 public:
   CANBus(pin_t rx, pin_t tx);
-
-  void begin();
 
 private:
   driver::CAN can_;

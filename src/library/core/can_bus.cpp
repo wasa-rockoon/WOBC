@@ -2,11 +2,7 @@
 
 namespace core {
 
-CANBus::CANBus(pin_t rx, pin_t tx): Task("CANBus", WOBC_CAN_BUS_STACK_SIZE, WOBC_CAN_BUS_PRIORITY), can_(*this), rx_(rx), tx_(tx) {
-}
-
-void CANBus::begin() {
-  startProcess(nullptr);
+CANBus::CANBus(pin_t rx, pin_t tx): CoreTask("CANBus", WOBC_CAN_BUS_STACK_SIZE, WOBC_CAN_BUS_PRIORITY), can_(*this), rx_(rx), tx_(tx) {
 }
 
 void CANBus::setup() {

@@ -2,8 +2,8 @@
 
 namespace process {
 
-void Process::startProcess(Component* component) { 
-  component_ = component;
+void Process::startProcess(uint8_t component_id) { 
+  component_id_ = component_id;
   onStart(); 
 }
 
@@ -31,12 +31,5 @@ void Process::sendPacket(const wcpp::Packet &packet, const Listener& exclude) {
   kernel::kernel_.sendPacket(packet, &exclude);
 }
 
-
-void Process::enterCritical() {
-  kernel::kernel_.enter();
-}
-void Process::exitCritical() {
-  kernel::kernel_.exit();
-}
 
 }

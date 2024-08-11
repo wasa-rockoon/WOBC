@@ -5,4 +5,4 @@
 #include "process/timer.h"
 #include "core/can_bus.h"
 #include "core/serial_bus.h"
-#include "core/indicator.h"
+#include "interface/indicator.h"

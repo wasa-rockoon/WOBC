@@ -3,13 +3,10 @@
 namespace core {
 
 SerialBus::SerialBus(Stream& serial)
-: Task("SerialBus", WOBC_SERIAL_BUS_STACK_SIZE, WOBC_SERIAL_BUS_PRIORITY), serial_(serial) {
+: CoreTask("SerialBus", WOBC_SERIAL_BUS_STACK_SIZE, WOBC_SERIAL_BUS_PRIORITY), serial_(serial) {
 
 };
 
-void SerialBus::begin() {
-  startProcess(nullptr);
-}
 
 void SerialBus::setup() {
   listen(all_packets, WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE, true);

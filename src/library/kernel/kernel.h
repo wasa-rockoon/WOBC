@@ -37,8 +37,11 @@ private:
 
   SemaphoreHandle_t mutex_;
 
+  uint8_t module_id_ = 0xFF;
+  uint8_t unit_id_ = 0xFF;
+
   unsigned packet_count_;
-  unsigned anomaly_count_;
+  unsigned error_count_;
 
 
   void refChange(const wcpp::Packet& packet, int change);
@@ -47,12 +50,23 @@ private:
   };
 
   friend const unsigned& packetCount();
-  friend const unsigned& anomalyCount();
+  friend const unsigned& errorCount();
+  friend uint8_t module_id();
+  friend uint8_t unit_id();
+  friend void set_module_id(uint8_t id);
+  friend void set_unit_id(uint8_t id);
 };
 
+// System calls
+
 inline const unsigned& packetCount() { return kernel_.packet_count_; }
-inline const unsigned& anomalyCount() { return kernel_.anomaly_count_; }
+inline const unsigned& errorCount() { return kernel_.error_count_; }
 
 
+inline uint8_t module_id() { return kernel_.module_id_; }
+inline uint8_t unit_id() { return kernel_.unit_id_; }
+
+inline void set_module_id(uint8_t id) { kernel_.module_id_ = id; }
+inline void set_unit_id(uint8_t id) { kernel_.unit_id_ = id; }
 
 }
