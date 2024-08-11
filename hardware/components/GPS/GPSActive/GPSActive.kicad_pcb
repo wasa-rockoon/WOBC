@@ -91,24 +91,26 @@
 	(net 9 "Net-(USB101-CC2)")
 	(net 10 "VCC_RF")
 	(net 11 "Net-(U101-RXD_{slash}_SPI_MOSI)")
-	(net 12 "RX")
+	(net 12 "VDD")
 	(net 13 "Net-(U101-TXD_{slash}_SPI_MISO)")
-	(net 14 "TX")
-	(net 15 "unconnected-(U101-V_USB-Pad7)")
+	(net 14 "/RX")
+	(net 15 "/TX")
 	(net 16 "unconnected-(U101-D_SEL-Pad2)")
 	(net 17 "unconnected-(U101-SAFEBOOT_N-Pad1)")
 	(net 18 "unconnected-(U101-LNA_EN-Pad14)")
 	(net 19 "unconnected-(U101-RESERVED-Pad15)")
 	(net 20 "unconnected-(U101-RESERVED-Pad16)")
 	(net 21 "unconnected-(U101-SDA_{slash}_SPI_CS_N-Pad18)")
-	(net 22 "unconnected-(U101-RESET_N-Pad8)")
+	(net 22 "VCCRF")
 	(net 23 "unconnected-(U101-RESERVED-Pad17)")
-	(net 24 "V_BATT")
+	(net 24 "/RESET")
 	(net 25 "unconnected-(U101-EXTINT-Pad4)")
 	(net 26 "unconnected-(U101-SCL_{slash}_SPI_SLK-Pad19)")
-	(net 27 "unconnected-(U101-TIMEPULSE-Pad3)")
+	(net 27 "GPSANT1")
 	(net 28 "unconnected-(USB101-SBU2-PadB8)")
 	(net 29 "unconnected-(USB101-SBU1-PadA8)")
+	(net 30 "/+BATT")
+	(net 31 "/TIMEPULSE")
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "141285c9-4add-4b88-9a89-37d85fd67d7f")
@@ -146,6 +148,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -158,6 +161,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -170,10 +174,11 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
-		(property "LCSC" "C25139"
+		(property "LCSC" "C25077"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -215,7 +220,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/36e9019e-05a4-47ad-b8d9-2e33267efd3c")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -375,7 +380,7 @@
 				)
 			)
 		)
-		(property "Value" "22k"
+		(property "Value" "5.1k"
 			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "9ec791fb-0e67-455d-9b75-aaec7809f713")
@@ -395,6 +400,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -407,6 +413,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -419,10 +426,11 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
-		(property "LCSC" "C25768"
+		(property "LCSC" "C25905"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -464,7 +472,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/efb6199f-0850-4174-9c0b-b44758d4e98e")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -644,6 +652,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -656,6 +665,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -668,6 +678,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -713,7 +724,7 @@
 		(property ki_fp_filters "USB*C*Receptacle*")
 		(path "/4f3b35ab-787e-42ea-8d35-11a33f620af7")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -4.58 -1.85)
@@ -1107,6 +1118,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1119,6 +1131,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1131,6 +1144,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1176,7 +1190,7 @@
 		(property ki_fp_filters "D*SOD?923*")
 		(path "/d9c9b407-53e6-4308-bdbc-1a55e71f06b0")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.91 -0.61)
@@ -1442,6 +1456,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1454,6 +1469,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1466,6 +1482,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1511,7 +1528,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/9ed84bbe-096f-4094-b4fb-ce63745ecd86")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -1638,7 +1655,7 @@
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 3 "3V3")
+			(net 12 "VDD")
 			(pintype "passive")
 			(uuid "2c3cace5-5561-4b6a-9f96-03eabcecbf8e")
 		)
@@ -1691,6 +1708,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1703,6 +1721,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1715,6 +1734,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1760,7 +1780,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/710c8751-8ef6-4a44-839a-dc43d28dd835")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -1878,7 +1898,7 @@
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 14 "TX")
+			(net 15 "/TX")
 			(pintype "passive")
 			(uuid "a5ec2a2e-328f-4604-80bd-f339efb91a88")
 		)
@@ -1940,6 +1960,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1952,6 +1973,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -1964,10 +1986,11 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C18830"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -2009,7 +2032,7 @@
 		(property ki_fp_filters "Choke_* *Coil* Inductor_* L_*")
 		(path "/d1f1e626-feb9-4f72-8a0b-c8188948a3eb")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.93 -0.47)
@@ -2171,6 +2194,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2183,6 +2207,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2195,6 +2220,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2238,7 +2264,6 @@
 			)
 		)
 		(property ki_fp_filters "R_*")
-		(path "/024e1d98-6bab-4770-8776-c64c57e1157e")
 		(sheetname "ルート")
 		(sheetfile "GPS_active.kicad_sch")
 		(attr smd)
@@ -2420,6 +2445,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2432,6 +2458,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2444,6 +2471,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2489,7 +2517,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/9e69524c-a787-484a-b071-80ae79fc249d")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -2607,7 +2635,7 @@
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 12 "RX")
+			(net 14 "/RX")
 			(pintype "passive")
 			(uuid "eeea0e86-b0f9-4a5d-9920-81d5f1ff009e")
 		)
@@ -2669,6 +2697,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2681,6 +2710,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2693,6 +2723,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -2738,7 +2769,7 @@
 		(property ki_fp_filters "D*SOD?923*")
 		(path "/fd33214b-67c6-42db-92f0-7e53827922df")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.91 -0.61)
@@ -3004,6 +3035,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3016,6 +3048,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3028,6 +3061,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3073,7 +3107,7 @@
 		(property ki_fp_filters "*BNC* *SMA* *SMB* *SMC* *Cinch* *LEMO*")
 		(path "/09cd4959-bbd1-4c8b-ad91-830373b89417")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr through_hole)
 		(fp_line
 			(start -4.15 -4.15)
@@ -3550,6 +3584,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3562,6 +3597,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3574,6 +3610,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3619,7 +3656,7 @@
 		(property ki_fp_filters "C_*")
 		(path "/4a7830f6-7a17-4453-9cca-a525aec1247f")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.107836 -0.36)
@@ -3779,7 +3816,7 @@
 				)
 			)
 		)
-		(property "Value" "22k"
+		(property "Value" "5.1k"
 			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "02a03b88-834e-4294-8dc1-a3b25c8a1d3c")
@@ -3799,6 +3836,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3811,6 +3849,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -3823,10 +3862,11 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
-		(property "LCSC" "C25768"
+		(property "LCSC" "C25905"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -3868,7 +3908,7 @@
 		(property ki_fp_filters "R_*")
 		(path "/4b86b701-2d1a-497d-9b13-e92e6d65010f")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.153641 -0.38)
@@ -4048,6 +4088,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -4060,6 +4101,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -4072,6 +4114,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -4117,7 +4160,7 @@
 		(property ki_fp_filters "D*SOD?923*")
 		(path "/26c031de-b5a5-4bfb-b974-ffdc71dcb70a")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -0.91 -0.61)
@@ -4384,6 +4427,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -4396,6 +4440,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -4408,6 +4453,7 @@
 			(effects
 				(font
 					(size 1.27 1.27)
+					(thickness 0.15)
 				)
 			)
 		)
@@ -4440,7 +4486,7 @@
 		(property ki_fp_filters "SMT_9N-00B_UBL")
 		(path "/e6c3e5d0-7e19-4c6d-97a5-9be2cc3af400")
 		(sheetname "ルート")
-		(sheetfile "GPS_active.kicad_sch")
+		(sheetfile "GPSActive.kicad_sch")
 		(attr smd)
 		(fp_line
 			(start -6.277001 -8.4328)
@@ -5386,9 +5432,9 @@
 			(at 5.9214 4.499999)
 			(size 1.3716 0.7874)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 27 "unconnected-(U101-TIMEPULSE-Pad3)")
+			(net 31 "/TIMEPULSE")
 			(pinfunction "TIMEPULSE")
-			(pintype "unspecified+no_connect")
+			(pintype "unspecified")
 			(uuid "fdfe272e-22a6-45f6-affc-d8c356d42bfa")
 		)
 		(pad "4" smd rect
@@ -5422,25 +5468,25 @@
 			(at 5.9214 0.499999)
 			(size 1.3716 0.7874)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 15 "unconnected-(U101-V_USB-Pad7)")
+			(net 12 "VDD")
 			(pinfunction "V_USB")
-			(pintype "unspecified+no_connect")
+			(pintype "unspecified")
 			(uuid "1d0d5ac2-9d4e-44fb-b8a5-de42c767bbb0")
 		)
 		(pad "8" smd rect
 			(at 5.9214 -2.5)
 			(size 1.3716 0.7874)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 22 "unconnected-(U101-RESET_N-Pad8)")
+			(net 24 "/RESET")
 			(pinfunction "RESET_N")
-			(pintype "unspecified+no_connect")
+			(pintype "unspecified")
 			(uuid "83e30eb9-4353-442e-a769-be9673fd443c")
 		)
 		(pad "9" smd rect
 			(at 5.9214 -3.500001)
 			(size 1.3716 0.7874)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 10 "VCC_RF")
+			(net 22 "VCCRF")
 			(pinfunction "VCC_RF")
 			(pintype "power_in")
 			(uuid "8306e329-d5c1-4ac2-a721-0c951c47aa4a")
@@ -5458,7 +5504,7 @@
 			(at 5.9214 -5.499999)
 			(size 1.3716 0.7874)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 7 "GPS_ANT1")
+			(net 27 "GPSANT1")
 			(pinfunction "RF_IN")
 			(pintype "unspecified")
 			(uuid "aaf6edcb-4271-4d37-bfb1-8f63a130e6cd")
@@ -5557,7 +5603,7 @@
 			(at -5.9214 4.500001)
 			(size 1.3716 0.7874)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 24 "V_BATT")
+			(net 30 "/+BATT")
 			(pinfunction "V_BCKP")
 			(pintype "unspecified")
 			(uuid "b1410c21-ed9c-4fc7-bf56-c2c8ca1c10e3")
@@ -5566,7 +5612,7 @@
 			(at -5.9214 5.499999)
 			(size 1.3716 0.7874)
 			(layers "F.Cu" "F.Paste" "F.Mask")
-			(net 3 "3V3")
+			(net 12 "VDD")
 			(pinfunction "VCC")
 			(pintype "power_in")
 			(uuid "a9b0d133-04bb-4732-82b6-831e7f16737a")
