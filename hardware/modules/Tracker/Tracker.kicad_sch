@@ -404,10 +404,6 @@
 		(at 181.61 104.14)
 		(uuid "323a1e50-37fc-4785-9644-a305b4551c8d")
 	)
-	(no_connect
-		(at 181.61 101.6)
-		(uuid "f07e4ad7-e9df-4fd8-a397-6583d08a7d53")
-	)
 	(wire
 		(pts
 			(xy 129.54 72.39) (xy 129.54 62.23)
@@ -447,6 +443,16 @@
 			(type default)
 		)
 		(uuid "0ad3b121-01ab-4ca4-9073-d4fcec9a3a53")
+	)
+	(wire
+		(pts
+			(xy 72.39 50.8) (xy 133.985 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b58d762-2979-4fdf-bce8-fda8c86672b7")
 	)
 	(wire
 		(pts
@@ -530,6 +536,16 @@
 	)
 	(wire
 		(pts
+			(xy 237.49 44.45) (xy 237.49 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e9d448d-a315-4e8e-abed-f4e0dff74ff8")
+	)
+	(wire
+		(pts
 			(xy 134.62 78.74) (xy 134.62 59.69)
 		)
 		(stroke
@@ -587,6 +603,16 @@
 			(type default)
 		)
 		(uuid "2e2cb199-407c-42b9-975c-ee10258aac58")
+	)
+	(wire
+		(pts
+			(xy 133.985 50.8) (xy 133.985 44.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e480b0a-1764-42cf-b0c7-6f5e7807eeb1")
 	)
 	(wire
 		(pts
@@ -1100,16 +1126,6 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 53.34) (xy 132.08 53.34)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9b450e80-8a70-4ceb-b077-379261fc5655")
-	)
-	(wire
-		(pts
 			(xy 255.27 109.22) (xy 220.98 109.22)
 		)
 		(stroke
@@ -1140,16 +1156,6 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 53.34) (xy 132.08 46.99)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a642b4e4-afa0-4127-891c-c98e4dba7547")
-	)
-	(wire
-		(pts
 			(xy 142.24 86.36) (xy 142.24 52.07)
 		)
 		(stroke
@@ -1167,6 +1173,16 @@
 			(type default)
 		)
 		(uuid "a868f7ca-9ebb-4798-9a76-1efe5e090f53")
+	)
+	(wire
+		(pts
+			(xy 237.49 87.63) (xy 220.98 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ac718561-7b95-4c91-aafe-a3cb9ce5ae9b")
 	)
 	(wire
 		(pts
@@ -1500,26 +1516,6 @@
 	)
 	(wire
 		(pts
-			(xy 237.49 87.63) (xy 220.98 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f6deee37-4604-4291-8c16-71eeacd6c366")
-	)
-	(wire
-		(pts
-			(xy 237.49 46.99) (xy 237.49 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f6ef63c8-695c-4106-adef-395ef048730f")
-	)
-	(wire
-		(pts
 			(xy 80.01 133.35) (xy 167.64 133.35)
 		)
 		(stroke
@@ -1540,13 +1536,13 @@
 	)
 	(wire
 		(pts
-			(xy 132.08 46.99) (xy 237.49 46.99)
+			(xy 133.985 44.45) (xy 237.49 44.45)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "fce3bc6e-abda-4de5-9889-2c22174ebe2c")
+		(uuid "fe401e73-7c4f-4a45-acca-2c8c5d2a9bb6")
 	)
 	(wire
 		(pts
@@ -2395,17 +2391,17 @@
 			)
 			(uuid "fe7d395a-5420-4c4f-a123-b68d99adc904")
 		)
-		(pin "BATTERY_V" output
-			(at 72.39 53.34 0)
+		(pin "ST" output
+			(at 72.39 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "1519b742-d08a-4d16-a5d1-242eb0eab8ac")
+			(uuid "801b71f0-19d3-452e-aa3a-eadeb980d959")
 		)
-		(pin "VBUS" input
+		(pin "VUSB" input
 			(at 72.39 24.13 0)
 			(effects
 				(font
@@ -2413,7 +2409,7 @@
 				)
 				(justify right)
 			)
-			(uuid "e9549102-3a86-4f07-9d69-f01852f20e98")
+			(uuid "c125f652-58b6-4f5c-8226-0ef362353879")
 		)
 		(instances
 			(project "Tracker"
