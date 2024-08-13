@@ -10,3 +10,6 @@
 #endif
 
 using pin_t = byte;
+
+constexpr uint8_t packet_id_error = '!';
+constexpr uint8_t packet_id_log = '#';

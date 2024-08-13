@@ -3,9 +3,13 @@
 #include <Arduino.h>
 #include <library/wobc.h>
 
+core::CANBus can_bus(44, 43);
+core::SerialBus serial_bus(Serial);
+
+
 class Main: public process::Component {
 public:
-  Main(): process::Component("main", 0) {}
+  Main(): process::Component("main", 0x11) {}
 
   void setup() override {
     // printf("Start");
@@ -18,16 +22,16 @@ public:
     static unsigned i = 0;
     switch (i % 1) {
     case 0:
-      p.command('A', 0x11);
+      p.command('A', component_id());
       break;
     case 1:
-      p.command('B', 0x11, 0x22, 0x33, 12345);
+      p.command('B', component_id(), 0x22, 0x33, 12345);
       break;
     case 2:
-      p.telemetry('C', 0x11);
+      p.telemetry('C', component_id());
       break;
     case 3:
-      p.telemetry('D', 0x11, 0x22, 0x33, 12345);
+      p.telemetry('D', component_id(), 0x22, 0x33, 12345);
       break;
     }
     p.append("Nu").setNull();
@@ -41,41 +45,45 @@ public:
     sendPacket(p);
 
     i++;
-  }
-};
 
-core::CANBus can_bus(44, 43);
-core::SerialBus serial_bus(Serial);
-core::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
-// core::WatchIndicator<unsigned> error_indicator(41, kernel::anomalyCount());
-Main main_;
+    LOG("stack: %d %d", serial_bus.getMaximumStackUsage(), can_bus.getMaximumStackUsage());
+  }
+} main_;
+
+interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   Serial0.setPins(2, 1);
 
+  kernel::set_unit_id(0xFF);
+  kernel::set_module_id(0xFE);
+
+  status_indicator.begin();
+  status_indicator.blink_on_change();
+  error_indicator.begin();
+  error_indicator.set(true);
+
   delay(1000);
   // enableCore1WDT();
 
   can_bus.begin();
   serial_bus.begin();
-  status_indicator.begin();
-  // error_indicator.begin();
+
   main_.begin();
 
-  pinMode(41, OUTPUT);
+  error_indicator.set(false);
+  error_indicator.blink_on_change();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-  digitalWrite(41, LOW);
-  vTaskDelay(1000);
-  digitalWrite(41, HIGH);
-  vTaskDelay(1000);
-  // log_d("[%d %d]", serial_bus.getMaximumStackUsage(), status_indicator.getMaximumStackUsage());
-  // main_.LOG("stack: %d %d", serial_bus.getMaximumStackUsage(), can_bus.getMaximumStackUsage());
+  status_indicator.update();
+  error_indicator.update();
+
 }
 
 

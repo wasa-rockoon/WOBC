@@ -26,21 +26,52 @@ protected:
 template<typename T>
 class WatchIndicator: public Indicator {
 public:
-  WatchIndicator(pin_t pin, const T& target, unsigned blink_ms = 1, bool invert = false)
-    : Indicator(pin, invert), target_(target), target_previous_(target), blink_ms_(blink_ms) {}
+  WatchIndicator(pin_t pin, const T& target, bool invert = false)
+    : Indicator(pin, invert), target_(target) {}
+
+  void blink_on_change(unsigned blink_ms = 1) {
+    mode_ = BLINK_ON_CHANGE;
+    blink_ms_ = blink_ms;
+    target_comparison_ = target_;
+  }
+  void on_while_equal_to(T value) {
+    mode_ = ON_WHILE_EQUAL;
+    target_comparison_ = value;
+  }
+  void on_while_not_equal_to(T value) {
+    mode_ = ON_WHILE_NOT_EQUAL;
+    target_comparison_ = value;
+  }
 
   virtual void update() override {
-    if (target_ != target_previous_) {
-      blink(blink_ms_);
-      target_previous_ = target_;
+    switch (mode_) {
+    case BLINK_ON_CHANGE:
+      if (target_ != target_comparison_) {
+        blink(blink_ms_);
+        target_comparison_ = target_;
+      }
+      break;
+    case ON_WHILE_EQUAL:
+      set(target_ == target_comparison_);
+      break;
+    case ON_WHILE_NOT_EQUAL:
+      set(target_ != target_comparison_);
+      break;
     }
     Indicator::update();
   }
 
 protected:
-
   const T& target_;
-  T target_previous_;
+
+  enum Mode {
+    MANUAL,
+    BLINK_ON_CHANGE,
+    ON_WHILE_EQUAL,
+    ON_WHILE_NOT_EQUAL,
+  } mode_ = MANUAL;
+
+  T target_comparison_;
   unsigned blink_ms_;
 };
 

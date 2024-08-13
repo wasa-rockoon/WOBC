@@ -14,13 +14,22 @@ void Process::listen(kernel::Listener &listener, unsigned queue_size, bool force
 }
 
 wcpp::Packet Process::newPacket(uint8_t size) {
-  return kernel::kernel_.allocPacket(size);
+  wcpp::Packet packet = kernel::kernel_.allocPacket(size);
+  if (packet.isNull()) {
+    error("pHOF", "packet heap overflow");
+  }
+  return packet;
 }
 
 wcpp::Packet Process::decodePacket(const uint8_t* buf) {
   uint8_t size = buf[0];
   wcpp::Packet packet = kernel::kernel_.allocPacket(size);
-  memcpy(packet.getBuf(), buf, size);
+  if (packet.isNull()) {
+    error("pHOF", "packet heap overflow");
+  }
+  else {
+    memcpy(packet.getBuf(), buf, size);
+  }
   return packet;
 }
 

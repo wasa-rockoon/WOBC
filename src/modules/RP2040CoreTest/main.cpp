@@ -5,7 +5,7 @@
 
 class Main: public process::Component {
 public:
-  Main(): process::Component("main", 0) {}
+  Main(): process::Component("main", 0x12) {}
 
   void setup() override {
     // printf("Start");
@@ -18,16 +18,16 @@ public:
     static unsigned i = 0;
     switch (i % 1) {
     case 0:
-      p.command('A', 0x12);
+      p.command('A', component_id());
       break;
     case 1:
-      p.command('B', 0x12, 0x22, 0x33, 12345);
+      p.command('B', component_id(), 0x22, 0x33, 12345);
       break;
     case 2:
-      p.telemetry('C', 0x12);
+      p.telemetry('C', component_id());
       break;
     case 3:
-      p.telemetry('D', 0x12, 0x22, 0x33, 12345);
+      p.telemetry('D', component_id(), 0x22, 0x33, 12345);
       break;
     }
     p.append("Nu").setNull();
@@ -46,13 +46,17 @@ public:
 
 core::CANBus can_bus(23, 22);
 core::SerialBus serial_bus(Serial);
-core::WatchIndicator<unsigned> status_indicator(25, kernel::packetCount());
-// core::WatchIndicator<unsigned> error_indicator(24, kernel::anomalyCount());
+interface::WatchIndicator<unsigned> status_indicator(25, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(24, kernel::errorCount());
 Main main_;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
+
+  status_indicator.begin();
+  error_indicator.begin();
+  error_indicator.set(true);
 
   delay(500);
   // enableCore1WDT();
@@ -66,16 +70,15 @@ void setup() {
 
   main_.begin();
 
-  pinMode(24, OUTPUT);
+  error_indicator.set(false);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-  digitalWrite(24, LOW);
-  vTaskDelay(1000);
-  digitalWrite(24, HIGH);
-  vTaskDelay(1000);
+  status_indicator.update();
+  error_indicator.update();
+
   // log_d("[%d %d]", serial_bus.getMaximumStackUsage(), status_indicator.getMaximumStackUsage());
   // main_.LOG("stack: %d %d %d", F_CPU, serial_bus.getMaximumStackUsage(), can_bus.getMaximumStackUsage());
 }

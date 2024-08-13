@@ -22,6 +22,7 @@ void Indicator::blink(unsigned ms) {
 
 void Indicator::begin() {
   pinMode(pin_, OUTPUT);
+  digitalWrite(pin_, invert_);
 }
 
 void Indicator::update() {

@@ -10,24 +10,21 @@ Kernel::Kernel()
 }
 
 wcpp::Packet Kernel::allocPacket(uint8_t size) {
-  while (true) {
-    enter();
-    uint8_t* buf = static_cast<uint8_t*>(packet_heap_.alloc(size));
-    exit();
+  enter();
+  uint8_t* buf = static_cast<uint8_t*>(packet_heap_.alloc(size));
+  exit();
 
-    if (buf != nullptr) {
-      memset(buf, 0, size);
-      return wcpp::Packet::empty(buf, size, refChangeStatic);
-    }
-    // Heap overflow
-    Serial.printf("HEAP OVERFLOW\n");
-    vTaskDelay(1 / portTICK_PERIOD_MS);
+  if (buf == nullptr) {
+    return wcpp::Packet::null(); 
   }
+  
+  memset(buf, 0, size);
+  return wcpp::Packet::empty(buf, size, refChangeStatic);
 }
 
 
 void Kernel::refChange(const wcpp::Packet& packet, int change) {
-  Serial.printf("change %d %d %d\n", packet.getBuf() - packet_heap_arena_, change, packet_heap_.getRefCount(packet.getBuf()));
+  // Serial.printf("change %d %d %d\n", packet.getBuf() - packet_heap_arena_, change, packet_heap_.getRefCount(packet.getBuf()));
   enter();
   while (change > 0) {
     packet_heap_.addRef(static_cast<const void*>(packet.getBuf()));
@@ -41,6 +38,11 @@ void Kernel::refChange(const wcpp::Packet& packet, int change) {
 }
 
 void Kernel::sendPacket(const wcpp::Packet& packet, const Listener* exclude) {
+
+  if (packet.packet_id() == packet_id_error) {
+    error_count_++;
+  } 
+
   if (packet_heap_.inHeap(packet.getBuf())) {
     ListenerArg arg = {packet.getBuf(), exclude};
     packet_listener_tree_.traverse(Listener::keyOf(packet), arg);

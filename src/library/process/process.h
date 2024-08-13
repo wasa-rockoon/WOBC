@@ -5,7 +5,7 @@
 
 namespace process {
 
-#define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__)
+#define LOG(format, ...) log( __FILE__, __LINE__, format, __VA_ARGS__)
 
 class Component;
 
@@ -33,10 +33,22 @@ public:
     char message[240];
     int len = snprintf(message, 240, format, args...);
     wcpp::Packet p = newPacket(4 + 2 + strlen(file) + 2 + 8 + 2 + len);
-    p.telemetry('#');
+    p.telemetry(packet_id_log, component_id());
     p.append("Fn").setString(file);
     p.append("Ln").setInt(line);
     p.append("Ms").setString(message);
+    sendPacket(p);
+  }
+
+  template <class... Args>
+  void error(const char* code, const char* format, Args... args) {
+    uint8_t buf[64];
+    wcpp::Packet p = wcpp::Packet::empty(buf, 64);
+    p.telemetry(packet_id_error, component_id());
+    p.append("Cd").setString(code);
+    auto e = p.append("Ms");
+    snprintf(reinterpret_cast<char*>(buf) + p.size(), 64 - p.size(), format, args...);
+    e.setString(reinterpret_cast<char*>(buf) + p.size());
     sendPacket(p);
   }
 
