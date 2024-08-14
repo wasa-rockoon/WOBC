@@ -3,6 +3,9 @@
 #include <Arduino.h>
 #include <library/wobc.h>
 
+core::CANBus can_bus(23, 22);
+core::SerialBus serial_bus(Serial);
+
 class Main: public process::Component {
 public:
   Main(): process::Component("main", 0x12) {}
@@ -44,8 +47,6 @@ public:
   }
 };
 
-core::CANBus can_bus(23, 22);
-core::SerialBus serial_bus(Serial);
 interface::WatchIndicator<unsigned> status_indicator(25, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(24, kernel::errorCount());
 Main main_;
@@ -54,23 +55,22 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
 
+  if (!kernel::begin(0xFE, 0xFF)) return;
+
   status_indicator.begin();
+  status_indicator.blink_on_change();
   error_indicator.begin();
   error_indicator.set(true);
 
   delay(500);
-  // enableCore1WDT();
 
   can_bus.begin();
-  // serial_bus.begin();
-  status_indicator.begin();
-  // error_indicator.begin();
-
-  delay(1000);
+  serial_bus.begin();
 
   main_.begin();
 
   error_indicator.set(false);
+  error_indicator.blink_on_change();
 }
 
 void loop() {

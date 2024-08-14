@@ -30,8 +30,8 @@ public:
   Listener& unit_dest(uint8_t id, uint8_t mask = 0xFF);
 
   unsigned available() const;
-  inline operator bool() const { return available() == 0; }
-  inline bool operator!() const { return available() != 0; }
+  inline operator bool() const { return available() != 0; }
+  inline bool operator!() const { return available() == 0; }
 
   const wcpp::Packet peek() const;
   const wcpp::Packet pop();

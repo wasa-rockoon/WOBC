@@ -27,7 +27,9 @@ void Component::entryPoint(void* instance) {
   for (;;) {
     while (component->command_listener_.available()) {
       const wcpp::Packet command = component->command_listener_.pop();
-      component->onCommand(command);
+      if (command.dest_unit_id() == unit_id_local || command.dest_unit_id() == kernel::unit_id()) {
+        component->onCommand(command);
+      }
     }
     component->loop();
     vTaskDelay(1 / portTICK_PERIOD_MS);

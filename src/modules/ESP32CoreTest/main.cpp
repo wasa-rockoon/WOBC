@@ -6,7 +6,6 @@
 core::CANBus can_bus(44, 43);
 core::SerialBus serial_bus(Serial);
 
-
 class Main: public process::Component {
 public:
   Main(): process::Component("main", 0x11) {}
@@ -58,8 +57,7 @@ void setup() {
   Serial.begin(115200);
   Serial0.setPins(2, 1);
 
-  kernel::set_unit_id(0xFF);
-  kernel::set_module_id(0xFE);
+  if (!kernel::begin(0xFE, 0xFF)) return;
 
   status_indicator.begin();
   status_indicator.blink_on_change();

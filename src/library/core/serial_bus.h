@@ -5,7 +5,7 @@
 namespace core {
 
 #ifndef WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE
-#define WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE 8
+#define WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE 16
 #endif
 
 #ifndef WOBC_SERIAL_BUS_PRIORITY
@@ -13,7 +13,7 @@ namespace core {
 #endif
 
 #ifndef WOBC_SERIAL_BUS_STACK_SIZE
-#define WOBC_SERIAL_BUS_STACK_SIZE 4024
+#define WOBC_SERIAL_BUS_STACK_SIZE 4048
 #endif
 
 class SerialBus: public process::CoreTask {
