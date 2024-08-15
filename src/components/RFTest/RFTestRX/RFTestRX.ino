@@ -4,7 +4,8 @@
 /* #define DEBUG */
 
 #define LORA_ADDR E220::BROADCAST
-#define LORA_CHANNEL 10
+#define LORA1_CHANNEL 10
+#define LORA2_CHANNEL 4
 
 #define LORA1_TX_PIN 1
 #define LORA1_RX_PIN 0
@@ -23,6 +24,7 @@
 #define LORA2_SW2 27
 
 #define STAT 25
+#define ERROR 24
 
 SerialPIO lora1_serial(LORA1_TX_PIN, LORA1_RX_PIN, 256);
 SerialPIO lora2_serial(LORA2_TX_PIN, LORA2_RX_PIN, 256);
@@ -33,6 +35,7 @@ E220 lora2(lora2_serial, LORA2_AUX_PIN, LORA2_M0_PIN, LORA2_M1_PIN);
 void setup() {
   Serial.begin(115200);
   pinMode(STAT, OUTPUT);
+  pinMode(ERROR, OUTPUT);
 
   pinMode(LORA1_SW1, OUTPUT);
   pinMode(LORA1_SW2, OUTPUT);
@@ -55,7 +58,7 @@ void setup() {
   ok1 &= lora1.setEnvRSSIEnable(true);
   ok1 &= lora1.setSendMode(E220::SendMode::TRANSPARENT);
   ok1 &= lora1.setModuleAddr(LORA_ADDR);
-  ok1 &= lora1.setChannel(LORA_CHANNEL);
+  ok1 &= lora1.setChannel(LORA1_CHANNEL);
   ok1 &= lora1.setRSSIEnable(true);
   ok1 &= lora1.setMode(E220::Mode::NORMAL);
   lora1_serial.flush();
@@ -75,7 +78,7 @@ void setup() {
   ok2 &= lora2.setEnvRSSIEnable(true);
   ok2 &= lora2.setSendMode(E220::SendMode::TRANSPARENT);
   ok2 &= lora2.setModuleAddr(LORA_ADDR);
-  ok2 &= lora2.setChannel(LORA_CHANNEL);
+  ok2 &= lora2.setChannel(LORA2_CHANNEL);
   ok2 &= lora2.setRSSIEnable(true);
   ok2 &= lora2.setMode(E220::Mode::NORMAL);
   lora2_serial.flush();
@@ -109,13 +112,14 @@ void loop() {
       }
     }*/
     Serial.println();
+    digitalWrite(STAT,LOW);
   }
 
   uint8_t rx2[256];
   unsigned len2 = lora2.receive(rx2);
-  digitalWrite(STAT, LOW);
+  digitalWrite(ERROR, LOW);
   if (len2 > 0) {
-    digitalWrite(STAT, HIGH);
+    digitalWrite(ERROR, HIGH);
     Serial.printf("message2 (%d byte, %d dB):\n", len2, lora2.getRSSI());
     
     Serial.print("Hex: ");
@@ -134,5 +138,6 @@ void loop() {
     }*/
     Serial.println();
     Serial.println("---------------------------------");
+    digitalWrite(ERROR, LOW);
   }
 }

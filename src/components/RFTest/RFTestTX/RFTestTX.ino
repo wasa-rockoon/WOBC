@@ -5,7 +5,7 @@
 /* #define DEBUG */
 
 #define LORA_ADDR E220::BROADCAST
-#define LORA_CHANNEL 10
+#define LORA_CHANNEL 4
 
 #define LORA_TX_PIN 38
 #define LORA_RX_PIN 39
@@ -53,8 +53,9 @@ void loop() {
   // メッセージを送信
   digitalWrite(STAT, HIGH);
   lora.sendTransparent(message, 100);
+  delay(1000);
   digitalWrite(STAT, LOW);
-  delay(5000);
+  delay(2000);
 }
 
 /*void loop1() {
