@@ -30,6 +30,9 @@ public:
 
   void addListener(Listener& listener);
 
+  bool storePacket(const wcpp::Packet& packet);
+  wcpp::Packet loadPacket(uint8_t packet_id, uint8_t component_id);
+
   inline void enter() { xSemaphoreTake(mutex_, portMAX_DELAY); }
   inline void exit()  { xSemaphoreGive(mutex_); }
 

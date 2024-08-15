@@ -41,4 +41,12 @@ void Process::sendPacket(const wcpp::Packet &packet, const Listener& exclude) {
 }
 
 
+wcpp::Packet Process::loadPacket(uint8_t packet_id) {
+  return kernel::kernel_.loadPacket(packet_id, component_id());
+}
+bool Process::storePacket(const wcpp::Packet& packet) {
+  return kernel::kernel_.storePacket(packet);
+}
+
+
 }

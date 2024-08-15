@@ -57,6 +57,8 @@ public:
     case ON_WHILE_NOT_EQUAL:
       set(target_ != target_comparison_);
       break;
+    default:
+      break;
     }
     Indicator::update();
   }

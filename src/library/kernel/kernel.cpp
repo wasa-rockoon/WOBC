@@ -111,5 +111,23 @@ void Kernel::addListener(Listener& listener) {
   exit();
 }
 
+
+bool Kernel::storePacket(const wcpp::Packet& packet) {
+  uint16_t kvs_key = (packet.packet_id() & wcpp::packet_id_mask) | ((uint16_t)packet.component_id() << 8);
+  return kvs_.write(kvs_key, packet.encode() + 3, packet.size() - 3);
+}
+
+wcpp::Packet Kernel::loadPacket(uint8_t packet_id, uint8_t component_id) {
+  uint16_t kvs_key = (packet_id & wcpp::packet_id_mask) | ((uint16_t)component_id << 8);
+  if (!kvs_.exists(kvs_key)) return wcpp::Packet::null();
+  uint8_t size = kvs_.sizeOf(kvs_key) + 3;
+  wcpp::Packet packet = allocPacket(size);
+  packet.getBuf()[0] = size;
+  packet.getBuf()[1] = packet_id;
+  packet.getBuf()[2] = component_id;
+  kvs_.read(kvs_key, packet.getBuf() + 3);
+  return packet;
+}
+
 }
 

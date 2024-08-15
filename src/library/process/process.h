@@ -28,6 +28,9 @@ public:
   void sendPacket(const wcpp::Packet &packet);
   void sendPacket(const wcpp::Packet &packet, const Listener& exclude);
 
+  wcpp::Packet loadPacket(uint8_t packet_id);
+  bool storePacket(const wcpp::Packet& packet);
+
   template <class... Args>
   void log(const char* file, unsigned line, const char* format, Args... args) {
     char message[240];

@@ -4,6 +4,7 @@ namespace driver {
 
 bool KVS::begin() {
   EEPROM.begin(total_size);
+  return true;
 }
 
 
