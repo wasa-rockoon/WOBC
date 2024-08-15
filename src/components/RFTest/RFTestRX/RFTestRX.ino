@@ -4,8 +4,8 @@
 /* #define DEBUG */
 
 #define LORA_ADDR E220::BROADCAST
-#define LORA1_CHANNEL 10
-#define LORA2_CHANNEL 4
+#define LORA1_CHANNEL 14
+#define LORA2_CHANNEL 0
 
 #define LORA1_TX_PIN 1
 #define LORA1_RX_PIN 0
@@ -90,54 +90,34 @@ void setup() {
 }
 
 void loop() {
+  // LoRaモジュール1の受信処理
   uint8_t rx1[256];
-  unsigned len1 = lora1.receive(rx1);
-  digitalWrite(STAT, LOW);
-  if (len1 > 0) {
+  unsigned len = lora1.receive(rx1);
+  if (len > 0) {
     digitalWrite(STAT, HIGH);
-    Serial.printf("message1 (%d byte, %d dB):\n", len1, lora1.getRSSI());
+    Serial.printf("message1 (%d byte, %d dB):\n", len, lora1.getRSSI());
     
     Serial.print("Hex: ");
-    for (unsigned i = 0; i < len1; i++) {
+    for (unsigned i = 0; i < len; i++) {
       Serial.printf("%02X", rx1[i]);  // 16進数で表示
     }
     Serial.println();
-
-    /*Serial.print("ASCII: ");
-    for (unsigned i = 0; i < len1; i++) {
-      if (rx1[i] >= 32 && rx1[i] <= 126) { // 表示可能なASCII文字のみ表示
-        Serial.write(rx1[i]);
-      } else {
-        Serial.print('.');
-      }
-    }*/
-    Serial.println();
-    digitalWrite(STAT,LOW);
+    digitalWrite(STAT, LOW);
   }
 
+  // LoRaモジュール2の受信処理
   uint8_t rx2[256];
-  unsigned len2 = lora2.receive(rx2);
-  digitalWrite(ERROR, LOW);
-  if (len2 > 0) {
+  len = lora2.receive(rx2);
+  if (len > 0) {
     digitalWrite(ERROR, HIGH);
-    Serial.printf("message2 (%d byte, %d dB):\n", len2, lora2.getRSSI());
+    Serial.printf("message2 (%d byte, %d dB):\n", len, lora2.getRSSI());
     
     Serial.print("Hex: ");
-    for (unsigned i = 0; i < len2; i++) {
+    for (unsigned i = 0; i < len; i++) {
       Serial.printf("%02X", rx2[i]);  // 16進数で表示
     }
     Serial.println();
-
-    /*Serial.print("ASCII: ");
-    for (unsigned i = 0; i < len2; i++) {
-      if (rx2[i] >= 32 && rx2[i] <= 126) { // 表示可能なASCII文字のみ表示
-        Serial.write(rx2[i]);
-      } else {
-        Serial.print('.');
-      }
-    }*/
-    Serial.println();
-    Serial.println("---------------------------------");
     digitalWrite(ERROR, LOW);
+    Serial.println("---------------------------------");
   }
 }

@@ -5,7 +5,7 @@
 /* #define DEBUG */
 
 #define LORA_ADDR E220::BROADCAST
-#define LORA_CHANNEL 4
+#define LORA_CHANNEL 0
 
 #define LORA_TX_PIN 38
 #define LORA_RX_PIN 39
@@ -31,7 +31,7 @@ void setup() {
 void loop() {
   uint8_t rx[256];
   unsigned len = lora.receive(rx);
-  while (lora.isBusy());
+  //while (lora.isBusy());
 
   if (len > 0) {
     Serial.printf("message (%d byte, %d dB): %.*s\n", len, lora.getRSSI(), len, rx);
