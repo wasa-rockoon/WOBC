@@ -177,6 +177,126 @@
 				)
 			)
 		)
+		(symbol "power:+BATT"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+BATT"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"+BATT\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power battery"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+BATT_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "+BATT_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers hide)
@@ -273,6 +393,12 @@
 				)
 			)
 		)
+	)
+	(junction
+		(at 148.59 152.4)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "34b48a45-7ddf-4443-8706-9f855c7543c0")
 	)
 	(bus_entry
 		(at 73.66 63.5)
@@ -1494,6 +1620,16 @@
 		)
 		(uuid "bf72c766-e15a-4bf2-8f37-c43799f262f9")
 	)
+	(wire
+		(pts
+			(xy 148.59 150.368) (xy 148.59 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c31f807c-af9d-4cd4-91c1-1d145a72ec37")
+	)
 	(bus
 		(pts
 			(xy 91.44 35.56) (xy 91.44 91.44)
@@ -1878,7 +2014,7 @@
 		)
 		(uuid "2ec5bc04-0047-4fd5-9546-cf22c290c74c")
 	)
-	(label "M0"
+	(label "M1"
 		(at 54.61 78.74 0)
 		(fields_autoplaced yes)
 		(effects
@@ -1911,7 +2047,7 @@
 		)
 		(uuid "3f150088-d737-42c0-aef5-1c507a1617c0")
 	)
-	(label "M1"
+	(label "M0"
 		(at 54.61 81.28 0)
 		(fields_autoplaced yes)
 		(effects
@@ -2405,6 +2541,72 @@
 			(project ""
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85"
 					(reference "BT101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+BATT")
+		(at 148.59 150.368 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a4da92dc-bb95-40d3-96a2-20dfb6e79e0f")
+		(property "Reference" "#PWR0170"
+			(at 148.59 154.178 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+BATT"
+			(at 148.59 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 148.59 150.368 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 148.59 150.368 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+BATT\""
+			(at 148.59 150.368 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "659f2e99-c419-4ae4-87da-c50ad0c0e1d0")
+		)
+		(instances
+			(project ""
+				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85"
+					(reference "#PWR0170")
 					(unit 1)
 				)
 			)

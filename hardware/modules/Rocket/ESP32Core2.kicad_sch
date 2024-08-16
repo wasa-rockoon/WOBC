@@ -832,6 +832,169 @@
 				)
 			)
 		)
+		(symbol "Device:D"
+			(pin_numbers hide)
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "D"
+				(at 0 -2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Device" "D"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "D_0_1"
+				(polyline
+					(pts
+						(xy -1.27 1.27) (xy -1.27 -1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "D_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:LED"
 			(pin_numbers hide)
 			(pin_names
@@ -2827,10 +2990,6 @@
 		(uuid "313e288e-d7ee-4704-b115-3c03bd06d342")
 	)
 	(no_connect
-		(at 248.92 71.12)
-		(uuid "365d9496-939a-4ad8-abba-9692467ac676")
-	)
-	(no_connect
 		(at 62.23 59.69)
 		(uuid "5aee828e-2892-4fa5-bd1c-6d954f2a2e07")
 	)
@@ -2924,6 +3083,16 @@
 	)
 	(wire
 		(pts
+			(xy 263.906 71.12) (xy 270.764 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "217f1fbc-acc6-4284-a04e-13c67a0004af")
+	)
+	(wire
+		(pts
 			(xy 272.415 109.22) (xy 270.51 109.22)
 		)
 		(stroke
@@ -2984,6 +3153,16 @@
 	)
 	(wire
 		(pts
+			(xy 270.764 71.12) (xy 270.764 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a1c421e-c8f0-4639-875b-7af652a5fb6c")
+	)
+	(wire
+		(pts
 			(xy 78.105 36.83) (xy 83.185 36.83)
 		)
 		(stroke
@@ -3001,6 +3180,16 @@
 			(type default)
 		)
 		(uuid "4e83151d-ed17-4b81-95a8-f1ba93c20750")
+	)
+	(wire
+		(pts
+			(xy 80.518 29.21) (xy 90.17 29.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "51b14627-b748-4113-9639-41abe0513c9b")
 	)
 	(wire
 		(pts
@@ -3094,7 +3283,7 @@
 	)
 	(wire
 		(pts
-			(xy 66.675 29.21) (xy 90.17 29.21)
+			(xy 66.675 29.21) (xy 72.898 29.21)
 		)
 		(stroke
 			(width 0)
@@ -3251,6 +3440,16 @@
 			(type default)
 		)
 		(uuid "c570fbc6-1577-40c5-aacc-6ad0eee0c122")
+	)
+	(wire
+		(pts
+			(xy 248.92 71.12) (xy 253.746 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7836713-c593-48d5-9afe-523b5917fed5")
 	)
 	(wire
 		(pts
@@ -3936,7 +4135,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-882"
+		(property "Footprint" "Diode_SMD:D_SOD-882D"
 			(at 72.39 58.42 0)
 			(effects
 				(font
@@ -4158,7 +4357,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-882"
+		(property "Footprint" "Diode_SMD:D_SOD-882D"
 			(at 66.675 58.42 0)
 			(effects
 				(font
@@ -4558,6 +4757,82 @@
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
 					(reference "#PWR0103")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 258.826 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "38d6b69d-68a7-4327-8aa7-17a792d3fdde")
+		(property "Reference" "SW201"
+			(at 265.176 66.294 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Boot_sw"
+			(at 265.684 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:TVAF06-A020B-R"
+			(at 258.826 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 258.826 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 258.826 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" ""
+			(at 258.826 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d0c94df5-b031-4322-a4d7-4c339f8a0a9f")
+		)
+		(pin "2"
+			(uuid "4fa1b275-f294-4320-9418-85b0c8d2b0ab")
+		)
+		(instances
+			(project "Rocket"
+				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
+					(reference "SW201")
 					(unit 1)
 				)
 			)
@@ -5259,6 +5534,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 270.764 73.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "85b8172f-82a3-4014-a59f-0638df83471e")
+		(property "Reference" "#PWR0201"
+			(at 270.764 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 270.764 78.105 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 270.764 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 270.764 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 270.764 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e8ca4e15-ae53-4999-81f1-6ef3d4aa79c2")
+		)
+		(instances
+			(project "Rocket"
+				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
+					(reference "#PWR0201")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED")
 		(at 130.81 91.44 90)
 		(unit 1)
@@ -5765,6 +6106,101 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:D")
+		(at 76.708 29.21 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bc3a2019-2f60-4ae5-9fc5-c0ae809be075")
+		(property "Reference" "D201"
+			(at 76.708 23.368 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "D"
+			(at 76.708 25.908 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-323"
+			(at 76.708 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 76.708 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Diode"
+			(at 76.708 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" "D"
+			(at 76.708 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Pins" "1=K 2=A"
+			(at 76.708 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C191023"
+			(at 76.708 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d31fb2de-45b7-4ad7-9cf5-bcde06fc498f")
+		)
+		(pin "2"
+			(uuid "c6045047-f7ec-484e-bf59-91b73d757b6e")
+		)
+		(instances
+			(project "Rocket"
+				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/e76c5276-18f2-4183-aadc-1a601896981d"
+					(reference "D201")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 130.81 95.25 0)
 		(unit 1)
@@ -6199,7 +6635,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-882"
+		(property "Footprint" "Diode_SMD:D_SOD-882D"
 			(at 78.105 58.42 0)
 			(effects
 				(font

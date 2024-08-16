@@ -5,185 +5,6 @@
 	(uuid "d7082856-f41c-4999-8dc7-1526a44cee57")
 	(paper "A4")
 	(lib_symbols
-		(symbol "Connector:Conn_Coaxial_Power"
-			(pin_names
-				(offset 1.016) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "J"
-				(at -5.08 -1.27 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "Conn_Coaxial_Power"
-				(at -3.175 -1.27 90)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 -1.27 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "coaxial connector (BNC, SMA, SMB, SMC, Cinch/RCA, LEMO, ...)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "BNC SMA SMB SMC LEMO coaxial connector CINCH RCA"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "*BNC* *SMA* *SMB* *SMC* *Cinch* *LEMO*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "Conn_Coaxial_Power_0_1"
-				(arc
-					(start -1.27 -1.27)
-					(mid 0 -2.5345)
-					(end 1.27 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start -1.016 -0.508)
-					(mid -1.2048 -0.8684)
-					(end -1.27 -1.27)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 0 -1.27)
-					(radius 0.508)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 -2.54) (xy 0 -3.048)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 1.27 -1.27)
-					(mid 1.2048 -0.8684)
-					(end 1.016 -0.508)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "Conn_Coaxial_Power_1_1"
-				(pin passive line
-					(at 0 2.54 270)
-					(length 2.54)
-					(name "In"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -5.08 90)
-					(length 2.54)
-					(name "Ext"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Device:C_Small"
 			(pin_numbers hide)
 			(pin_names
@@ -303,163 +124,6 @@
 					(at 0 -2.54 90)
 					(length 2.032)
 					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
-		(symbol "Diode:ESD9B5.0ST5G"
-			(pin_numbers hide)
-			(pin_names
-				(offset 1.016) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "D"
-				(at 0 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "ESD9B5.0ST5G"
-				(at 0 -2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "Diode_SMD:D_SOD-923"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "ESD protection diode, 5.0Vrwm, SOD-923"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "diode TVS ESD"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "D*SOD?923*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "ESD9B5.0ST5G_0_1"
-				(polyline
-					(pts
-						(xy 1.27 0) (xy -1.27 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -2.54 -1.27) (xy 0 0) (xy -2.54 1.27) (xy -2.54 -1.27)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.508 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.508 -1.27)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 1.27) (xy 2.54 -1.27) (xy 0 0) (xy 2.54 1.27)
-					)
-					(stroke
-						(width 0.2032)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "ESD9B5.0ST5G_1_1"
-				(pin passive line
-					(at -3.81 0 0)
-					(length 2.54)
-					(name "A1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 3.81 0 180)
-					(length 2.54)
-					(name "A2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -957,24 +621,6 @@
 		(color 0 0 0 0)
 		(uuid "2f36bcdf-c291-4c86-bd0b-b3db8b888098")
 	)
-	(junction
-		(at 138.0083 119.1178)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6d5832dd-e189-43b3-92a0-d9d52c2f7e8c")
-	)
-	(junction
-		(at 80.7747 97.866)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a96be551-fa2f-4b4c-9198-1bbebe1ccb8a")
-	)
-	(junction
-		(at 80.7747 112.1455)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b3e4fbc7-d7df-42d3-8819-9e7fc6414918")
-	)
 	(wire
 		(pts
 			(xy 169.7583 74.6678) (xy 177.3783 74.6678)
@@ -1037,46 +683,6 @@
 	)
 	(wire
 		(pts
-			(xy 80.7747 108.5857) (xy 80.7747 112.1455)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "53813046-bb3b-4a53-9a8e-d5f248f1f615")
-	)
-	(wire
-		(pts
-			(xy 135.89 72.39) (xy 135.89 72.1278)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5ec36be9-7e47-4076-8e10-70215bcf83ee")
-	)
-	(wire
-		(pts
-			(xy 135.89 72.1278) (xy 144.3583 72.1278)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "60cba9f1-7d5a-4abd-9050-8f458b1dece6")
-	)
-	(wire
-		(pts
-			(xy 91.2659 97.866) (xy 80.7747 97.866)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61bbe3a3-e3d1-4cc2-a2f6-645d818d11c8")
-	)
-	(wire
-		(pts
 			(xy 138.0083 119.1178) (xy 141.8183 119.1178)
 		)
 		(stroke
@@ -1117,16 +723,6 @@
 	)
 	(wire
 		(pts
-			(xy 80.7747 119.1178) (xy 138.0083 119.1178)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "71c004d4-d4fd-4ee8-9265-834c30b2a654")
-	)
-	(wire
-		(pts
 			(xy 157.0583 119.1178) (xy 157.0583 121.6578)
 		)
 		(stroke
@@ -1137,36 +733,6 @@
 	)
 	(wire
 		(pts
-			(xy 91.2659 100.8919) (xy 91.2659 97.866)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7cb37e90-7dd8-4ba3-995a-d4ea8eda0dab")
-	)
-	(wire
-		(pts
-			(xy 80.7747 74.93) (xy 107.95 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9531095d-edc0-43a7-89a4-8006eb489b3a")
-	)
-	(wire
-		(pts
-			(xy 91.2659 108.5119) (xy 91.2659 112.1455)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "96ba698b-1a82-45c0-86a1-11b81bbf1f0f")
-	)
-	(wire
-		(pts
 			(xy 157.0583 82.2878) (xy 157.0583 119.1178)
 		)
 		(stroke
@@ -1174,16 +740,6 @@
 			(type default)
 		)
 		(uuid "a69a38ca-acab-4f6b-a456-1930c77f79b3")
-	)
-	(wire
-		(pts
-			(xy 80.7747 97.866) (xy 80.7747 100.9657)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b4807fe3-c7b3-4a88-a7c6-00832b822d30")
 	)
 	(wire
 		(pts
@@ -1207,16 +763,6 @@
 	)
 	(wire
 		(pts
-			(xy 107.95 72.39) (xy 107.95 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d1a54529-2775-4fb3-8549-f90662fa7dfd")
-	)
-	(wire
-		(pts
 			(xy 141.8183 119.1178) (xy 157.0583 119.1178)
 		)
 		(stroke
@@ -1224,16 +770,6 @@
 			(type default)
 		)
 		(uuid "d1c8b33b-57a2-4cab-8c15-fcc6c993eac7")
-	)
-	(wire
-		(pts
-			(xy 91.2659 112.1455) (xy 80.7747 112.1455)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d9b27d47-8e45-48bd-aff2-0aecff65d490")
 	)
 	(wire
 		(pts
@@ -1254,46 +790,6 @@
 			(type default)
 		)
 		(uuid "dbc94fd0-d0d6-407a-a813-628faa0e2dcd")
-	)
-	(wire
-		(pts
-			(xy 80.7747 112.1455) (xy 80.7747 119.1178)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e05f0d9c-869b-408d-a422-f1594c0ffe25")
-	)
-	(wire
-		(pts
-			(xy 134.62 72.39) (xy 135.89 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e95dad2d-4530-495e-90d2-bb58f4a14338")
-	)
-	(wire
-		(pts
-			(xy 107.95 72.39) (xy 129.54 72.39)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "eb4b19c6-454e-4abb-bec6-cdac70464a5d")
-	)
-	(wire
-		(pts
-			(xy 80.7747 74.93) (xy 80.7747 97.866)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f07bb8b9-6460-47d1-98dc-38ba31926bb2")
 	)
 	(global_label "VDD"
 		(shape input)
@@ -1378,85 +874,6 @@
 		(uuid "cffc7872-5fb9-4c83-b478-39fe20ebf079")
 	)
 	(symbol
-		(lib_id "Connector:Conn_Coaxial_Power")
-		(at 80.7747 103.5057 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2be1ab2f-b3ee-47d4-8287-282d51fce87f")
-		(property "Reference" "J105"
-			(at 83.3147 103.7597 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "UFL"
-			(at 83.3147 106.2997 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Connector_Coaxial:U.FL_Molex_MCRF_73412-0110_Vertical"
-			(at 80.7747 104.7757 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 80.7747 104.7757 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 80.7747 103.5057 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C2693813"
-			(at 80.7747 103.5057 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ce175e5e-4370-44a7-a35d-415b444b076d")
-		)
-		(pin "2"
-			(uuid "d871cc47-29fc-4d49-a1bd-5529f3726f03")
-		)
-		(instances
-			(project "Rocket"
-				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/5dcd2f20-a8da-4479-88a8-9b875bc379c6"
-					(reference "J105")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 138.0083 54.3478 0)
 		(unit 1)
@@ -1474,7 +891,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10u"
+		(property "Value" "10uF"
 			(at 131.6583 55.6178 0)
 			(effects
 				(font
@@ -1529,82 +946,6 @@
 			(project "Rocket"
 				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/5dcd2f20-a8da-4479-88a8-9b875bc379c6"
 					(reference "C122")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 132.08 72.39 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "60d9d4a5-8d6a-4b7f-9c5f-72ca4300362b")
-		(property "Reference" "C121"
-			(at 133.35 66.04 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100p"
-			(at 134.62 68.58 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 132.08 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 132.08 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 132.08 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C14858"
-			(at 132.08 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4b1a97c0-db3d-478a-b78e-6a559884e37f")
-		)
-		(pin "2"
-			(uuid "360c2690-de05-4a6e-bd34-a9912d138b4e")
-		)
-		(instances
-			(project "Rocket"
-				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/5dcd2f20-a8da-4479-88a8-9b875bc379c6"
-					(reference "C121")
 					(unit 1)
 				)
 			)
@@ -1732,85 +1073,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:ESD9B5.0ST5G")
-		(at 91.2659 104.7019 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "9a9a03b9-c8b6-43e0-9714-7b497e1c5507")
-		(property "Reference" "D107"
-			(at 94.3726 103.4318 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "ESD9B5.0ST5G"
-			(at 94.3726 105.9718 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SOD-882"
-			(at 91.2659 104.7019 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF"
-			(at 91.2659 104.7019 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "ESD protection diode, 5.0Vrwm, SOD-923"
-			(at 91.2659 104.7019 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C7420372"
-			(at 91.2659 104.7019 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ef1d2913-5605-4d3c-aab5-eaf6e5bf753b")
-		)
-		(pin "2"
-			(uuid "0f559083-d1d4-4428-aa72-5b58e9cb3b6a")
-		)
-		(instances
-			(project "Rocket"
-				(path "/52d1bc60-6512-43cb-8972-9a300fe0bb85/5dcd2f20-a8da-4479-88a8-9b875bc379c6"
-					(reference "D107")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 141.8183 54.3478 0)
 		(unit 1)
@@ -1828,7 +1090,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 144.3583 55.6178 0)
 			(effects
 				(font
