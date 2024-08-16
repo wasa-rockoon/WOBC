@@ -4,6 +4,7 @@
 #include <components/Logger/logger.h>
 #include <components/LoRa/lora.h>
 #include <components/LiPoPower/lipo_power_simple.h>
+#include <components/Pressure/pressure.h> // テスト用
 
 constexpr uint8_t module_id = 0xF0; // TBD
 constexpr uint8_t unit_id = 0x01; // TBD
@@ -18,6 +19,7 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 component::Logger logger(SPI);
 component::LoRa lora(Serial1, 0, 0, 0); // TBD
 component::LiPoPowerSimple power(Wire);
+component::Pressure pressure(Wire);
 
 
 class Main: public process::Component {
@@ -59,6 +61,7 @@ void setup() {
   logger.begin();
   lora.begin();
   power.begin();
+  pressure.begin();
   main_.begin();
 
   error_indicator.set(false);
