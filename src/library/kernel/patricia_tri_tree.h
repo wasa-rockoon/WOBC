@@ -22,7 +22,7 @@ public:
 
   class Node {
   public:
-    Node(key_t key = 0, key_t mask = ~(key_t)0)
+    Node(key_t key = 0, key_t mask = (key_t)0)
       : key_(key), mask_(mask), label_(~(key_t)0),
         bit0_(nullptr), bit1_(nullptr), dontcare_(nullptr) {}
 
@@ -115,7 +115,7 @@ public:
   PatriciaTrieTree() : root_(nullptr) {}
 
   inline void traverse(key_t key, T arg) {
-    return root_->traverse(key, arg);
+    if (root_ != nullptr) root_->traverse(key, arg);
   };
 
 

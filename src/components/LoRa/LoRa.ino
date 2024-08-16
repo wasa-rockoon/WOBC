@@ -37,6 +37,7 @@ void setup() {
   ok &= lora.setChannel(LORA_CHANNEL);
   ok &= lora.setRSSIEnable(true);
   ok &= lora.setMode(E220::Mode::NORMAL);
+
   Serial1.flush();
   Serial1.begin(115200);
 
