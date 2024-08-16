@@ -55,7 +55,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
 
-  if (!kernel::begin(0xFE, 0xFF)) return;
+  if (!kernel::begin(0xFE, false)) return;
 
   status_indicator.begin();
   status_indicator.blink_on_change();

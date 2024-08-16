@@ -5,7 +5,7 @@
 
 namespace process {
 
-#define LOG(format, ...) log( __FILE__, __LINE__, format, __VA_ARGS__)
+#define LOG(...) log( __FILE__, __LINE__, __VA_ARGS__)
 
 class Component;
 

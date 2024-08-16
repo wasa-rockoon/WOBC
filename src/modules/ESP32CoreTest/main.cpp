@@ -57,7 +57,7 @@ void setup() {
   Serial.begin(115200);
   Serial0.setPins(2, 1);
 
-  if (!kernel::begin(0xFE, 0xFF)) return;
+  if (!kernel::begin(0xFE, false)) return;
 
   status_indicator.begin();
   status_indicator.blink_on_change();
