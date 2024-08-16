@@ -29,6 +29,7 @@ protected:
 private:
   xTaskHandle task_handle_;
   kernel::Listener command_listener_;
+  unsigned command_queue_size_;
   uint8_t store_command_ids[WOBC_COMPONENT_STORE_COMMANDS_MAX];
 
   bool onStart() override;

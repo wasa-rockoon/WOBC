@@ -4,14 +4,14 @@ namespace process {
 
 
 Component::Component(const char* name, uint8_t id, unsigned command_queue_size, unsigned stack_size)
-: Process(name), id_(id), stack_size_(stack_size) {
+: Process(name), id_(id), command_queue_size_(command_queue_size), stack_size_(stack_size) {
   component_id_ = id;
   command_listener_.command().component(id);
   memset(store_command_ids, 0x00, WOBC_COMPONENT_STORE_COMMANDS_MAX);
 }
 
 bool Component::begin() {
-  command_listener_.begin();
+  listen(command_listener_, command_queue_size_, true);
   return onStart();
 }
 
@@ -48,8 +48,8 @@ void Component::entryPoint(void* instance) {
           }
         }
 
-        component->onCommand(command);
       }
+      component->onCommand(command);
     }
     component->loop();
     vTaskDelay(1 / portTICK_PERIOD_MS);

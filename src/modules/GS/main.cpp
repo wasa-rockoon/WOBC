@@ -38,12 +38,11 @@ public:
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-
-
-  kernel::setUnitId(unit_id);
-  if (!kernel::begin(module_id)) return;
-
   Serial0.setPins(2, 1);
+
+  kernel::setUnitId(unit_id); // unit id を設定（mainモジュールのみ）
+  if (!kernel::begin(module_id, true)) return; // check module id
+
   // Wire.setPins();
   // SPI.begin(...)
 
@@ -71,6 +70,7 @@ void loop() {
 
   status_indicator.update();
   error_indicator.update();
+
 }
 
 

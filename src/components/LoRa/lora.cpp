@@ -3,13 +3,13 @@
 namespace component {
 
 LoRa::LoRa(Stream& stream, pin_t aux, pin_t m0, pin_t m1, unsigned number)
-  : process::Component("Logger", component_id_base + number),
+  : process::Component("LoRa", component_id_base + number),
     e220_(stream, aux, m0, m1),
     antenna_switch_(false) {
 }
 
 LoRa::LoRa(Stream& stream, pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, unsigned number)
-  : process::Component("Logger", component_id_base + number),
+  : process::Component("LoRa", component_id_base + number),
     e220_(stream, aux, m0, m1),
     antenna_switch_(true), antenna_A_(antenna_A), antenna_B_(antenna_B) {
 
@@ -51,6 +51,8 @@ void LoRa::onCommand(const wcpp::Packet& packet) {
 
     unsigned size = packet_to_send.size();
     const uint8_t* data = packet_to_send.encode();
+
+    LOG("LoRa send %d", packet_to_send.size());
 
     // TODO 送信(data, size)
   }

@@ -41,6 +41,7 @@ void SerialBus::loop() {
 
     if (b == 0) {     
       uint8_t size = rx_buf_[0];
+      if (size > rx_count_ - 2) continue;
       if (size != rx_count_ - 2) {
         error("sbSM", "serial bus, size mismatch. expected: %d, actual: %d", size, rx_count_ - 2);
         rx_count_ = 0;

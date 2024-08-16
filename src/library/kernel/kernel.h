@@ -23,7 +23,7 @@ class Kernel {
 public:
   Kernel();
 
-  bool begin(uint8_t module_id, bool overwrite_module_id = false);
+  bool begin(uint8_t module_id, bool check_module_id = true);
 
   wcpp::Packet allocPacket(uint8_t size);
   void sendPacket(const wcpp::Packet& packet, const Listener* exclude = nullptr);
@@ -52,6 +52,7 @@ private:
 
   uint8_t module_id_ = 0xFF;
   uint8_t unit_id_ = 0xFF;
+  bool unit_id_set_ = false;
 
   void refChange(const wcpp::Packet& packet, int change);
   static void refChangeStatic(const wcpp::Packet& packet, int change) { 
@@ -69,11 +70,14 @@ private:
 
 // System calls
 
-inline bool begin(uint8_t module_id, bool overwrite_module_id = false) { 
-  return kernel_.begin(module_id, overwrite_module_id); 
+inline bool begin(uint8_t module_id, bool check_module_id = true) { 
+  return kernel_.begin(module_id, check_module_id); 
   }
 
-inline void setUnitId(uint8_t unit_id) { kernel_.unit_id_ = unit_id; }
+inline void setUnitId(uint8_t unit_id) { 
+  kernel_.unit_id_ = unit_id; 
+  kernel_.unit_id_set_ = true;
+}
 
 inline const unsigned& packetCount() { return kernel_.packet_count_; }
 inline const unsigned& errorCount() { return kernel_.error_count_; }

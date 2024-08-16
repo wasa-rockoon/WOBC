@@ -45,13 +45,13 @@ public:
 
   template <class... Args>
   void error(const char* code, const char* format, Args... args) {
-    uint8_t buf[64];
-    wcpp::Packet p = wcpp::Packet::empty(buf, 64);
+    wcpp::Packet p = newPacket(64);
     p.telemetry(packet_id_error, component_id());
     p.append("Cd").setString(code);
     auto e = p.append("Ms");
-    snprintf(reinterpret_cast<char*>(buf) + p.size(), 64 - p.size(), format, args...);
-    e.setString(reinterpret_cast<char*>(buf) + p.size());
+    char buf[64];
+    snprintf(buf, 64, format, args...);
+    e.setString(buf);
     sendPacket(p);
   }
 
