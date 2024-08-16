@@ -1,8 +1,5 @@
 #pragma once
 
-#include <FreeRTOS.h>
-#include <timers.h>
-
 #include "process.h"
 
 namespace process {
@@ -12,9 +9,9 @@ public:
   Timer(const char* name, unsigned period_ms, bool auto_reload = true);
   ~Timer();
 
-  void stop();
-  void start();
-  void reset();
+  bool stop();
+  bool start();
+  bool reset();
 
   void setReload(bool auto_reload);
   void changePeriod(unsigned ms);
@@ -24,11 +21,11 @@ protected:
   virtual void callback() {} // Overwrite this
 
 private:
-  TimerHandle_t timer_handle_;
+  xTimerHandle timer_handle_;
 
-  void onStart() override;
+  bool onStart() override;
 
-  static void entryPoint(TimerHandle_t timer_handle);
+  static void entryPoint(xTimerHandle timer_handle);
 };
 
 }
