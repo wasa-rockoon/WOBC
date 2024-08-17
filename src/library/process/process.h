@@ -5,7 +5,7 @@
 
 namespace process {
 
-#define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__)
+#define LOG(...) log( __FILE__, __LINE__, __VA_ARGS__)
 
 class Component;
 
@@ -19,37 +19,50 @@ public:
 
   void listen(kernel::Listener &listener, unsigned queue_size = 1, bool force_push = true);
 
-  inline void start(Process& sub_process) { sub_process.startProcess(component_); };
+  inline void start(Process& sub_process) { sub_process.startProcess(component_id_); };
 
-  Component& component() const { return *component_; };
+  uint8_t component_id() const { return component_id_; };
 
   wcpp::Packet newPacket(uint8_t size);
   wcpp::Packet decodePacket(const uint8_t* buf);
   void sendPacket(const wcpp::Packet &packet);
   void sendPacket(const wcpp::Packet &packet, const Listener& exclude);
 
+  wcpp::Packet loadPacket(uint8_t packet_id);
+  bool storePacket(const wcpp::Packet& packet);
+
   template <class... Args>
   void log(const char* file, unsigned line, const char* format, Args... args) {
     char message[240];
     int len = snprintf(message, 240, format, args...);
     wcpp::Packet p = newPacket(4 + 2 + strlen(file) + 2 + 8 + 2 + len);
-    p.telemetry('#');
+    p.telemetry(packet_id_log, component_id());
     p.append("Fn").setString(file);
     p.append("Ln").setInt(line);
     p.append("Ms").setString(message);
     sendPacket(p);
   }
 
-  void enterCritical();
-  void exitCritical();
+  template <class... Args>
+  void error(const char* code, const char* format, Args... args) {
+    wcpp::Packet p = newPacket(64);
+    p.telemetry(packet_id_error, component_id());
+    p.append("Cd").setString(code);
+    auto e = p.append("Ms");
+    char buf[64];
+    snprintf(buf, 64, format, args...);
+    e.setString(buf);
+    sendPacket(p);
+  }
 
 protected:
   const char *name_;
-  Component* component_;
+  uint8_t component_id_ = 0xFF;
 
-  void startProcess(Component* component);
+  void startProcess(uint8_t component_id);
   virtual bool onStart() = 0;
 };
 
 }
+
 

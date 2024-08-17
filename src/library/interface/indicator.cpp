@@ -1,16 +1,7 @@
 #include "indicator.h"
 
-namespace core {
+namespace interface {
 
-Indicator::Indicator(pin_t pin, bool invert)
-  : Task("Indicator", WOBC_INDICATOR_STACK_SIZE, WOBC_INDICATOR_PRIORITY),
-   pin_(pin), invert_(invert) {
-
-}
-
-void Indicator::begin() {
-  startProcess(nullptr);
-}
 
 bool Indicator::get() {
   return millis() < on_until_ms_;
@@ -29,11 +20,12 @@ void Indicator::blink(unsigned ms) {
   digitalWrite(pin_, invert_ ? !get() : get());
 }
 
-void Indicator::setup() {
+void Indicator::begin() {
   pinMode(pin_, OUTPUT);
+  digitalWrite(pin_, invert_);
 }
 
-void Indicator::loop() {
+void Indicator::update() {
   digitalWrite(pin_, invert_ ? !get() : get());
   delay(1);
 }

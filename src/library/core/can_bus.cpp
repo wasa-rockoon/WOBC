@@ -2,11 +2,7 @@
 
 namespace core {
 
-CANBus::CANBus(pin_t rx, pin_t tx): Task("CANBus", WOBC_CAN_BUS_STACK_SIZE, WOBC_CAN_BUS_PRIORITY), can_(*this), rx_(rx), tx_(tx) {
-}
-
-void CANBus::begin() {
-  startProcess(nullptr);
+CANBus::CANBus(pin_t rx, pin_t tx): CoreTask("CANBus", WOBC_CAN_BUS_STACK_SIZE, WOBC_CAN_BUS_PRIORITY), can_(*this), rx_(rx), tx_(tx) {
 }
 
 void CANBus::setup() {
@@ -65,7 +61,8 @@ void CANBus::loop() {
 
         // printf("send %d %d %s\n", frame.id, frame.length, frame.data);
 
-        if (!can_.send(frame)) { // Send errror
+        if (!can_.send(frame)) {
+          error("cbSN", "CAN bus, send error");
           break;
         }
         frame.id++;
@@ -101,6 +98,7 @@ void CANBus::loop() {
             pool_[i].can_id = 0;
           }
           else if (pool_[i].size > pool_[i].packet.size()) { // wrong size
+            error("cbWS", "CAN bus, wrong size, expected: %d, actual: %d", pool_[i].size, pool_[i].packet.size());
             // printf("WRONG SIZE %d %d\n", pool_[i].size, pool_[i].packet.size());
             pool_[i].packet.clear();
             pool_[i].can_id = 0;
@@ -123,14 +121,18 @@ void CANBus::loop() {
       //first frame
 
       if ((item.can_id & 0xFF) != 0) { // missing previous frame
+        error("cbDF", "CAN bus, drop %dth frame", item.can_id & 0xFF);
         return;
       }
 
       if (pool_[oldest].can_id != 0) { // lost frame
-
+        error("cbLF", "CAN bus, lost frame");
       }
 
-      if (item.length < 1) return;
+      if (item.length < 1) {
+        error("cbEF", "CAN bus, empty frame");
+        return;
+      }
 
       uint8_t packet_id      = 0xFF & (item.can_id >> 21);
       uint8_t component_id   = 0xFF & (item.can_id >> 13);
@@ -168,7 +170,7 @@ void CANBus::onReceive(const driver::CAN::Frame& frame) {
 }
 
 void CANBus::onError() {
-
+  error("cbER", "CAN bus, can error");
 }
 
 }

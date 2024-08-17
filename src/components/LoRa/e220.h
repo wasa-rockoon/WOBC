@@ -1,12 +1,6 @@
 #pragma once
 
-#ifdef ARDUINO
-#include <Arduino.h>
-#else
-#include <stdlib.h>
-#endif
-
-using pin_t = uint8_t;
+#include <library/common.h>
 
 class E220 {
 public:

@@ -25,4 +25,11 @@ protected:
   static void entryPoint(void* instance);
 };
 
+class CoreTask: public Task {
+public:
+  using Task::Task;
+
+  inline void begin() { startProcess(kernel::module_id()); }
+};
+
 }

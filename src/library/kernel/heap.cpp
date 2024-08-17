@@ -1,5 +1,7 @@
 #include "heap.h"
 #include <cstring>
+#include <cassert>
+#include <stdio.h>
 
 namespace kernel {
 

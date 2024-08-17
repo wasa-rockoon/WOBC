@@ -23,15 +23,15 @@ Listener& Listener::packet(uint8_t id, uint8_t mask) {
   return *this;
 }
 Listener& Listener::component(uint8_t id, uint8_t mask) {
-  updateKey(id << 8, mask << 8);
+  updateKey((key_t)id << 8, (key_t)mask << 8);
   return *this;
 }
 Listener& Listener::unit_origin(uint8_t id, uint8_t mask) {
-  updateKey(id << 16, mask << 16);
+  updateKey((key_t)id << 16, (key_t)mask << 16);
   return *this;
 }
 Listener& Listener::unit_dest(uint8_t id, uint8_t mask) {
-  updateKey(id << 24, mask << 24);
+  updateKey((key_t)id << 24, (key_t)mask << 24);
   return *this;
 }
 
