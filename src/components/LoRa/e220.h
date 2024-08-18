@@ -2,6 +2,14 @@
 
 #include <library/common.h>
 
+#ifndef E220_REGISTER_TIMEOUT_MS 
+#define E220_REGISTER_TIMEOUT_MS 100
+#endif
+
+#ifndef E220_RECEIVE_TIMEOUT_MS 
+#define E220_RECEIVE_TIMEOUT_MS 100
+#endif
+
 class E220 {
 public:
   static const uint16_t BROADCAST = 0xFFFF;
@@ -87,7 +95,9 @@ private:
   pin_t aux_;
   pin_t m0_;
   pin_t m1_;
-  unsigned timeout_ms_ = 100;
+
+  unsigned long last_received_ms_;
+  unsigned last_received_len_;
 
   bool RSSI_enabled_;
   unsigned baud_;

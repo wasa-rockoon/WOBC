@@ -5,6 +5,7 @@ E220::E220(Stream& stream, pin_t aux, pin_t m0, pin_t m1)
   baud_ = 9600;
   RSSI_enabled_ = false;
   rssi_ = -255;
+  last_received_len_ = 0;
 }
 
 bool E220::begin() {
@@ -45,27 +46,48 @@ bool E220::send(uint16_t addr, uint8_t channel, const uint8_t* data, unsigned le
 
 unsigned E220::receive(uint8_t* data, unsigned max_len) {
   if (stream_.available() == 0) return 0;
+
   uint8_t len = stream_.peek();
+  if (len != last_received_len_) {
+    last_received_ms_ = millis();
+    last_received_len_ = len;
+  }
 
   if (RSSI_enabled_) {
-    if ((int)stream_.available() < len + 2) return 0;
-    if (max_len > 0 && len > max_len) {
-      for (int i = 0; i < len + 2; i++) stream_.read();
+    if (millis() - last_received_ms_ > E220_RECEIVE_TIMEOUT_MS) { // Receive timeout
+      while (stream_.available()) stream_.read();
+      last_received_len_ = 0;
       return 0;
     }
+    if ((int)stream_.available() < len + 2) return 0; // Wait
+    if (max_len > 0 && len > max_len) { // Over length
+      for (int i = 0; i < len + 2; i++) stream_.read();
+      last_received_len_ = 0;
+      return 0;
+    }
+    // Complete data
     len = stream_.read();
     stream_.readBytes(data, len);
     rssi_ = - ((int)256 - (uint8_t)stream_.read());
+    last_received_len_ = 0;
     return len;
   }
   else {
-    if ((int)stream_.available() < len + 1) return 0;
-    if (max_len > 0 && len > max_len) {
-      for (int i = 0; i < len + 1; i++) stream_.read();
+    if (millis() - last_received_ms_ > E220_RECEIVE_TIMEOUT_MS) { // Receive timeout
+      while (stream_.available()) stream_.read();
+      last_received_len_ = 0;
       return 0;
     }
+    if ((int)stream_.available() < len + 1) return 0; // Wait
+    if (max_len > 0 && len > max_len) { // Over length
+      for (int i = 0; i < len + 1; i++) stream_.read();
+      last_received_len_ = 0;
+      return 0;
+    }
+    // Complete data
     len = stream_.read();
     stream_.readBytes(data, len);
+    last_received_len_ = 0;
     return len;
   }
 }
@@ -159,7 +181,7 @@ int E220::getEnvRSSI() {
 
   unsigned long ms = millis();
   while (isBusy() || (int)stream_.available() < 5) {
-    if (millis() - ms > timeout_ms_) return -255;
+    if (millis() - ms > E220_REGISTER_TIMEOUT_MS) return -255;
   }
 
   uint8_t rx[5];
@@ -187,7 +209,7 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
 
   unsigned long ms = millis();
   while (isBusy() || (int)stream_.available() < 3 + len) {
-    if (millis() - ms > timeout_ms_) return false;
+    if (millis() - ms > E220_REGISTER_TIMEOUT_MS) return false;
   }
 
   uint8_t rx[16];
@@ -220,7 +242,7 @@ bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
 
   unsigned long ms = millis();
   while ((int)stream_.available() < 3 + len) {
-    if (millis() - ms > timeout_ms_) return false;
+    if (millis() - ms > E220_REGISTER_TIMEOUT_MS) return false;
   }
 
   uint8_t rx[16];
@@ -231,7 +253,7 @@ bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
 
   ms = millis();
   while (isBusy()) {
-    if (millis() - ms > timeout_ms_) return false;
+    if (millis() - ms > E220_REGISTER_TIMEOUT_MS) return false;
   }
   stream_.flush();
 
