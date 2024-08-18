@@ -685,10 +685,6 @@
 		(uuid "a333a77e-c0ca-4c59-8e41-12e5fad35879")
 	)
 	(no_connect
-		(at 133.35 60.96)
-		(uuid "abb64b64-b4a7-4e55-b118-1fc3ac1e3615")
-	)
-	(no_connect
 		(at 133.35 83.82)
 		(uuid "d67a0be1-e680-44ce-887d-6023acd3c0e8")
 	)
@@ -726,6 +722,15 @@
 		(uuid "089e702c-a15a-48cf-8511-cbc082fa98b8")
 	)
 	(bus_entry
+		(at 123.19 63.5)
+		(size 2.54 -2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09b697b8-0475-4d05-a02c-adf6a6d1dcb8")
+	)
+	(bus_entry
 		(at 123.19 92.71)
 		(size 2.54 2.54)
 		(stroke
@@ -760,6 +765,15 @@
 			(type default)
 		)
 		(uuid "2351c3bd-da73-4b8d-9527-476bb5b8bd7c")
+	)
+	(bus_entry
+		(at 101.6 67.945)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3c5082de-8aef-4882-9ac5-84a0ffaa87c3")
 	)
 	(bus_entry
 		(at 123.19 95.25)
@@ -808,7 +822,7 @@
 	)
 	(bus
 		(pts
-			(xy 123.19 60.96) (xy 123.19 92.71)
+			(xy 123.19 60.96) (xy 123.19 63.5)
 		)
 		(stroke
 			(width 0)
@@ -998,7 +1012,7 @@
 	)
 	(bus
 		(pts
-			(xy 104.14 64.77) (xy 104.14 76.835)
+			(xy 104.14 64.77) (xy 104.14 70.485)
 		)
 		(stroke
 			(width 0)
@@ -1015,6 +1029,16 @@
 			(type default)
 		)
 		(uuid "7a00d716-7970-4808-8461-80ab851887c1")
+	)
+	(wire
+		(pts
+			(xy 93.98 67.945) (xy 101.6 67.945)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "83dcb6c8-3560-4ee4-bbdf-6610e16d85ae")
 	)
 	(wire
 		(pts
@@ -1128,6 +1152,16 @@
 	)
 	(wire
 		(pts
+			(xy 125.73 60.96) (xy 133.35 60.96)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bedbf2cd-516f-47b0-bcaa-7dbad6fa42f4")
+	)
+	(wire
+		(pts
 			(xy 197.485 94.615) (xy 200.025 94.615)
 		)
 		(stroke
@@ -1165,6 +1199,16 @@
 			(type default)
 		)
 		(uuid "d17e8dc8-4cae-4a5b-b99c-6729c6928e1a")
+	)
+	(bus
+		(pts
+			(xy 104.14 70.485) (xy 104.14 76.835)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8846aef-ea9f-416d-84db-f188703e1c32")
 	)
 	(wire
 		(pts
@@ -1225,6 +1269,16 @@
 			(type default)
 		)
 		(uuid "e5367386-34b8-4add-bba0-f6d08a7e30b0")
+	)
+	(bus
+		(pts
+			(xy 123.19 63.5) (xy 123.19 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e8da8e83-c767-4b24-9c10-245a6d70a532")
 	)
 	(wire
 		(pts
@@ -1289,6 +1343,17 @@
 		)
 		(uuid "258414a9-9393-4fe8-abc2-af0e0864c4c5")
 	)
+	(label "Normal"
+		(at 125.73 60.96 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "3a48425b-7eaa-4851-8610-c067500fe8b4")
+	)
 	(label "LOW"
 		(at 95.25 76.835 0)
 		(fields_autoplaced yes)
@@ -1299,6 +1364,17 @@
 			(justify left bottom)
 		)
 		(uuid "421d54fe-4a3e-454a-89fc-8c8efa012826")
+	)
+	(label "Normal"
+		(at 94.615 67.945 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "44d5ed7a-8082-4249-95b2-a4033bd4faec")
 	)
 	(label "LOW"
 		(at 127 55.88 0)
@@ -2089,6 +2165,16 @@
 				(justify right)
 			)
 			(uuid "a54762a8-fd19-4eb5-bb29-b2464708fa9f")
+		)
+		(pin "NORM" input
+			(at 93.98 67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "ae08d204-c4be-4cc5-8b42-7895fc8aebec")
 		)
 		(instances
 			(project "IGN"

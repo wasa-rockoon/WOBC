@@ -2845,6 +2845,16 @@
 	)
 	(wire
 		(pts
+			(xy 219.71 114.3) (xy 219.71 116.205)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1485fc1c-8fb1-4675-930f-fc05284d74d3")
+	)
+	(wire
+		(pts
 			(xy 174.625 64.135) (xy 182.245 64.135)
 		)
 		(stroke
@@ -3485,6 +3495,16 @@
 	)
 	(wire
 		(pts
+			(xy 219.71 94.615) (xy 219.71 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e46b337b-01b2-4bdf-87c5-947e52486510")
+	)
+	(wire
+		(pts
 			(xy 92.71 64.135) (xy 92.71 76.2)
 		)
 		(stroke
@@ -3653,6 +3673,18 @@
 		)
 		(uuid "4925d9a2-4c97-4823-8fad-f0fb83aed160")
 	)
+	(hierarchical_label "NORM"
+		(shape input)
+		(at 219.71 94.615 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "4928e0fb-fc20-42a1-8ea5-e731cc3f57d1")
+	)
 	(hierarchical_label "VS"
 		(shape input)
 		(at 73.66 90.805 180)
@@ -3775,7 +3807,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "12dadc38-4673-4acb-bc8d-6e529a516755")
-		(property "Reference" "LED203"
+		(property "Reference" "D205"
 			(at 202.057 151.638 0)
 			(effects
 				(font
@@ -3838,7 +3870,7 @@
 		(instances
 			(project ""
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
-					(reference "LED203")
+					(reference "D205")
 					(unit 1)
 				)
 			)
@@ -4860,6 +4892,85 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:LED")
+		(at 219.71 110.49 270)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6e6d0f94-abe4-444a-9464-1edb3a3ed346")
+		(property "Reference" "D206"
+			(at 227.584 109.982 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "NORMAL"
+			(at 228.854 112.014 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+			(at 219.71 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 219.71 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 219.71 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2297"
+			(at 219.71 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7d2addef-c941-4f39-b9c9-fe01e9b3885a")
+		)
+		(pin "2"
+			(uuid "be07e2d5-0ccc-4309-84fe-9fa6ca9b4a82")
+		)
+		(instances
+			(project "IGN"
+				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
+					(reference "D206")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:PWR_FLAG")
 		(at 120.65 90.805 0)
 		(unit 1)
@@ -5013,8 +5124,8 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "76e5f71c-da8d-4b6e-b8ce-60ade7701c94")
-		(property "Reference" "LED201"
-			(at 100.838 69.596 0)
+		(property "Reference" "D201"
+			(at 99.822 69.596 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5076,7 +5187,7 @@
 		(instances
 			(project ""
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
-					(reference "LED201")
+					(reference "D201")
 					(unit 1)
 				)
 			)
@@ -5547,6 +5658,74 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 219.71 116.205 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a5faea3c-04f7-4c97-abc0-3eb892524f85")
+		(property "Reference" "#PWR0210"
+			(at 219.71 122.555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 221.615 117.4749 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 219.71 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 219.71 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 219.71 116.205 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2c9617d2-71db-4b74-b3aa-37e2cdc9a223")
+		)
+		(instances
+			(project "IGN"
+				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
+					(reference "#PWR0210")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Transistor_FET:AO3401A")
 		(at 163.195 157.48 180)
 		(unit 1)
@@ -5722,7 +5901,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bb4bfedf-b4e8-4a39-96d6-883ce0e9422a")
-		(property "Reference" "D202"
+		(property "Reference" "D204"
 			(at 175.895 143.51 0)
 			(effects
 				(font
@@ -5783,7 +5962,7 @@
 		(instances
 			(project ""
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
-					(reference "D202")
+					(reference "D204")
 					(unit 1)
 				)
 			)
@@ -6078,7 +6257,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "db9c65d9-c091-45cc-b9f1-3947095d8c46")
-		(property "Reference" "LED202"
+		(property "Reference" "D203"
 			(at 163.83 124.587 90)
 			(effects
 				(font
@@ -6141,7 +6320,7 @@
 		(instances
 			(project ""
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
-					(reference "LED202")
+					(reference "D203")
 					(unit 1)
 				)
 			)
@@ -6245,7 +6424,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e876ea30-e3b8-46ae-a2e1-2f4d8b3fda2e")
-		(property "Reference" "D201"
+		(property "Reference" "D202"
 			(at 153.162 139.7 90)
 			(effects
 				(font
@@ -6306,7 +6485,7 @@
 		(instances
 			(project ""
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
-					(reference "D201")
+					(reference "D202")
 					(unit 1)
 				)
 			)
@@ -6785,6 +6964,82 @@
 			(project "Ignite"
 				(path "/50809778-d831-469f-9d91-590686dcfaa3"
 					(reference "#PWR0101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 219.71 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fc32913b-12b7-4f57-ad30-6bb47b025603")
+		(property "Reference" "R211"
+			(at 223.52 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "1k"
+			(at 223.52 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 220.726 103.124 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 219.71 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 219.71 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25123"
+			(at 219.71 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b776ab68-6686-422b-b833-b4184838bbd4")
+		)
+		(pin "2"
+			(uuid "956ef6d6-f069-418a-9f8e-260cc2b3ed60")
+		)
+		(instances
+			(project "IGN"
+				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
+					(reference "R211")
 					(unit 1)
 				)
 			)
