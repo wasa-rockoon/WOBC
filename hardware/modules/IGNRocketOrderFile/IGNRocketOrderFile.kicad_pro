@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.762,
-          "height": 1.524,
-          "width": 1.524
+          "drill": 3.0,
+          "height": 6.3,
+          "width": 6.3
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -48,11 +48,24 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.2
         }
       },
-      "diff_pair_dimensions": [],
-      "drc_exclusions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
+      "drc_exclusions": [
+        "clearance|187471500|67771500|53e0f666-4316-4e4e-b387-2984d21a5f81|e47fcf81-183b-46d5-bfd0-00ce5cf23483",
+        "clearance|187971500|67771500|e47fcf81-183b-46d5-bfd0-00ce5cf23483|f9f37e6a-8467-4ff7-8d6e-4b9929554531",
+        "copper_edge_clearance|121000000|32500000|7f280632-6044-4ed1-b86c-ad1386f377b0|ec311966-8e74-41e3-90ec-3ded409eba4d",
+        "copper_edge_clearance|121000000|92500000|2b956b10-abce-422b-88eb-1580725a21fa|c0c1b9ae-9a0c-4d8c-9aad-41511bfc5f57",
+        "copper_edge_clearance|64500000|36000000|c2d26c6c-2864-411d-9484-94a848a0f2e0|13dbf7b0-79c4-4582-84de-9ddc0b1efc55",
+        "copper_edge_clearance|68000000|92500000|7fff7d80-9204-4c44-9bdd-42d1ee9dfda2|70603646-3fe1-4134-9fa5-c340d8388fa7"
+      ],
       "meta": {
         "version": 2
       },
@@ -171,7 +184,11 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0,
+        0.4,
+        1.0
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -198,7 +215,12 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -738,7 +760,7 @@
       "Logger2"
     ],
     [
-      "f2e548be-7cf0-4ed2-adbe-d4d22f48fad4",
+      "abd91558-609f-4eb2-9586-3b974577c91b",
       "IGN"
     ],
     [
