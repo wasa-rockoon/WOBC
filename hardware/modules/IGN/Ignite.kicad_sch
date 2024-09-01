@@ -2004,170 +2004,6 @@
 				)
 			)
 		)
-		(symbol "Switch:SW_SPDT"
-			(pin_names
-				(offset 0) hide)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "SW"
-				(at 0 4.318 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "SW_SPDT"
-				(at 0 -5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "~"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Switch, single pole double throw"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "switch single-pole double-throw spdt ON-ON"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "SW_SPDT_0_0"
-				(circle
-					(center -2.032 0)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.032 -2.54)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "SW_SPDT_0_1"
-				(polyline
-					(pts
-						(xy -1.524 0.254) (xy 1.651 2.286)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.032 2.54)
-					(radius 0.508)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "SW_SPDT_1_1"
-				(pin passive line
-					(at 5.08 2.54 180)
-					(length 2.54)
-					(name "A"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 5.08 -2.54 180)
-					(length 2.54)
-					(name "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Transistor_FET:AO3401A"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2764,22 +2600,8 @@
 		(uuid "efdbe3de-0a69-4822-ad17-bbbc5989d372")
 	)
 	(no_connect
-		(at 155.575 41.275)
-		(uuid "03dcf435-72ae-4314-abd6-b0313d7b347e")
-	)
-	(no_connect
 		(at 110.49 116.84)
 		(uuid "d9b52cce-dfd7-4249-9c04-02406236041a")
-	)
-	(wire
-		(pts
-			(xy 160.655 121.285) (xy 160.655 123.825)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "00f08a30-14bc-43c5-bcf1-f1166b5bdc2e")
 	)
 	(wire
 		(pts
@@ -2790,6 +2612,16 @@
 			(type default)
 		)
 		(uuid "016a33a1-3473-4f9b-bbea-5b587c8dd99c")
+	)
+	(wire
+		(pts
+			(xy 160.655 121.3262) (xy 160.655 123.825)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0850cb28-ebeb-4823-ba1d-c7a1710c2730")
 	)
 	(wire
 		(pts
@@ -2863,6 +2695,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.719 121.3262) (xy 160.655 121.3262)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20edbb4e-9869-4012-b026-927d5bdfa438")
+	)
+	(wire
+		(pts
 			(xy 104.775 76.2) (xy 106.68 76.2)
 		)
 		(stroke
@@ -2880,6 +2722,16 @@
 			(type default)
 		)
 		(uuid "29b4e490-245d-4d14-ae64-6bbfc7500397")
+	)
+	(wire
+		(pts
+			(xy 161.7795 36.2744) (xy 160.9015 36.2744)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2e58cd97-abe2-4bde-8dd6-463385bc27fe")
 	)
 	(wire
 		(pts
@@ -2943,17 +2795,7 @@
 	)
 	(wire
 		(pts
-			(xy 154.94 121.285) (xy 160.655 121.285)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4f49819b-d35b-4f87-935d-91121221f3d9")
-	)
-	(wire
-		(pts
-			(xy 170.18 31.115) (xy 170.18 31.75)
+			(xy 178.5427 30.7565) (xy 178.5427 31.7167)
 		)
 		(stroke
 			(width 0)
@@ -3040,6 +2882,16 @@
 			(type default)
 		)
 		(uuid "6962a17f-39ca-4d3a-8abc-528f6f8887ad")
+	)
+	(wire
+		(pts
+			(xy 161.719 118.7862) (xy 160.655 118.7862)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b385613-75ba-440a-9ad4-b62702f0a241")
 	)
 	(wire
 		(pts
@@ -3223,7 +3075,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.655 45.085) (xy 160.655 41.275)
+			(xy 160.655 45.085) (xy 160.655 38.8144)
 		)
 		(stroke
 			(width 0)
@@ -3243,7 +3095,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.655 114.3) (xy 160.655 118.745)
+			(xy 160.655 114.3) (xy 160.655 118.7862)
 		)
 		(stroke
 			(width 0)
@@ -3300,6 +3152,16 @@
 			(type default)
 		)
 		(uuid "c952d51c-3a74-4c12-99fe-54b0c301ced1")
+	)
+	(wire
+		(pts
+			(xy 160.9015 36.2744) (xy 160.9015 30.7565)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb19fc7c-0e2c-44b5-8eb9-031e4778589c")
 	)
 	(wire
 		(pts
@@ -3403,13 +3265,23 @@
 	)
 	(wire
 		(pts
-			(xy 160.655 31.115) (xy 170.18 31.115)
+			(xy 163.4415 30.7565) (xy 178.5427 30.7565)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "ecc63219-3130-4aa3-8496-7d3772cf0b67")
+	)
+	(wire
+		(pts
+			(xy 161.7795 38.8144) (xy 160.655 38.8144)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f0ea9e52-93b8-49c6-9dbd-ccdbc03fc6c6")
 	)
 	(wire
 		(pts
@@ -3450,16 +3322,6 @@
 			(type default)
 		)
 		(uuid "fe114448-e7a7-4dd3-86f4-1fbd38c3d7e6")
-	)
-	(wire
-		(pts
-			(xy 154.94 118.745) (xy 160.655 118.745)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ffef68b9-f0d6-4138-b911-1a4adbc6ca49")
 	)
 	(text "3.7V"
 		(exclude_from_sim no)
@@ -3659,7 +3521,7 @@
 			(uuid "570e5b19-0b7b-40c1-b216-4d786e611742")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "BZ201")
 					(unit 1)
@@ -3744,7 +3606,7 @@
 			(uuid "964aaad0-7ed9-491a-90d0-f241afceda9b")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "D205")
 					(unit 1)
@@ -3753,83 +3615,6 @@
 			(project "Ignite"
 				(path "/50809778-d831-469f-9d91-590686dcfaa3"
 					(reference "LED103")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_SPDT")
-		(at 158.115 36.195 90)
-		(mirror x)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "13ce1d84-62af-4369-9b13-d38e8fd7bacd")
-		(property "Reference" "SW201"
-			(at 150.368 37.592 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Power Switch"
-			(at 150.368 34.798 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Button_Switch_THT:SW_Slide_SPDT_Straight_CK_OS102011MS2Q"
-			(at 158.115 36.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 158.115 36.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 158.115 36.195 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "14e38b60-58ae-4d41-b0e8-43a7e6444006")
-		)
-		(pin "2"
-			(uuid "ddf761e1-8b32-47b7-ba8e-0a0f0acbc76f")
-		)
-		(pin "3"
-			(uuid "7d9bb6b3-f081-473e-bda5-21a84ac52137")
-		)
-		(instances
-			(project ""
-				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
-					(reference "SW201")
-					(unit 1)
-				)
-			)
-			(project "Ignite"
-				(path "/50809778-d831-469f-9d91-590686dcfaa3"
-					(reference "SW101")
 					(unit 1)
 				)
 			)
@@ -3937,7 +3722,7 @@
 			(uuid "c0a6a98e-3226-4838-8782-fea742c10490")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "Q203")
 					(unit 1)
@@ -3953,8 +3738,8 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
-		(at 149.86 118.745 0)
-		(mirror y)
+		(at 166.799 121.3262 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3962,7 +3747,7 @@
 		(dnp no)
 		(uuid "1c6b239c-6aef-4681-baea-e586805fa911")
 		(property "Reference" "J201"
-			(at 146.812 125.603 0)
+			(at 169.847 114.4682 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3971,7 +3756,7 @@
 			)
 		)
 		(property "Value" "IGNITER"
-			(at 146.812 123.063 0)
+			(at 169.847 117.0082 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3980,7 +3765,7 @@
 			)
 		)
 		(property "Footprint" "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal"
-			(at 149.86 118.745 0)
+			(at 166.799 121.3262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3989,7 +3774,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 149.86 118.745 0)
+			(at 166.799 121.3262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3998,7 +3783,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 149.86 118.745 0)
+			(at 166.799 121.3262 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4013,7 +3798,7 @@
 			(uuid "22a01a9e-ce1a-4989-bea1-f20da5615d7c")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "J201")
 					(unit 1)
@@ -4164,7 +3949,7 @@
 			(uuid "4e6759ee-fd05-4b37-ba24-4051a2840f7c")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R210")
 					(unit 1)
@@ -4248,7 +4033,7 @@
 			(uuid "ce0925e4-5d87-4e63-8cdb-40eaa6250d0f")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "C202")
 					(unit 1)
@@ -4319,7 +4104,7 @@
 			(uuid "126d8949-f5d0-4397-8b13-d34fd9518669")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0208")
 					(unit 1)
@@ -4402,7 +4187,7 @@
 			(uuid "d1c57217-7a96-46fa-b444-623d58d9e3db")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R207")
 					(unit 1)
@@ -4517,7 +4302,7 @@
 			(uuid "250ec3e3-67f1-48f9-88f0-567489eece8d")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "Q201")
 					(unit 1)
@@ -4600,7 +4385,7 @@
 			(uuid "550ab39c-719c-4a1c-a93f-1eed53ae7601")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R208")
 					(unit 1)
@@ -4684,9 +4469,79 @@
 			(uuid "b8362a54-d453-4e84-9280-84678d33b711")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 166.8595 36.2744 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6dc0a027-0830-4b6d-9810-723c2b29fc09")
+		(property "Reference" "J202"
+			(at 169.4911 36.2743 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "PowerSW"
+			(at 169.4911 38.8143 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical"
+			(at 166.8595 36.2744 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 166.8595 36.2744 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 166.8595 36.2744 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e8d0bcef-6c53-431b-8acc-2bb8fbc35bd9")
+		)
+		(pin "2"
+			(uuid "8b4567a7-9919-4dfd-b4e1-f78442877817")
+		)
+		(instances
+			(project "IGN"
+				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
+					(reference "J202")
 					(unit 1)
 				)
 			)
@@ -4829,7 +4684,7 @@
 			(uuid "758b526d-f60a-4235-9543-41f831e0fa93")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#FLG0201")
 					(unit 1)
@@ -4845,7 +4700,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 170.18 31.75 0)
+		(at 178.5427 31.7167 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4854,7 +4709,7 @@
 		(fields_autoplaced yes)
 		(uuid "7644ff06-9c4a-4044-81fe-12eae5484a34")
 		(property "Reference" "#PWR0207"
-			(at 170.18 38.1 0)
+			(at 178.5427 38.0667 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4863,7 +4718,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 170.18 36.195 0)
+			(at 178.5427 36.1617 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4871,7 +4726,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 170.18 31.75 0)
+			(at 178.5427 31.7167 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4880,7 +4735,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 170.18 31.75 0)
+			(at 178.5427 31.7167 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4889,7 +4744,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 170.18 31.75 0)
+			(at 178.5427 31.7167 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4901,7 +4756,7 @@
 			(uuid "13d60f62-53bb-48dc-bb01-61bbbf9829b7")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0207")
 					(unit 1)
@@ -4986,7 +4841,7 @@
 			(uuid "0f56feaa-c442-4357-a9d4-c2953e22baa0")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "D201")
 					(unit 1)
@@ -5060,7 +4915,7 @@
 			(uuid "a62fa472-223d-4335-85d2-da019bfc10f0")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0206")
 					(unit 1)
@@ -5132,7 +4987,7 @@
 			(uuid "1f5d9b43-fafb-4a91-96f3-0bc529fc7a27")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0202")
 					(unit 1)
@@ -5216,7 +5071,7 @@
 			(uuid "a2c3c044-8874-4b8c-8497-8348e83d5cef")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "C201")
 					(unit 1)
@@ -5298,7 +5153,7 @@
 			(uuid "0ae4faf9-ecf0-44bd-8935-7d671816afb4")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R203")
 					(unit 1)
@@ -5370,7 +5225,7 @@
 			(uuid "b8c7ce1f-6284-4d6f-82cc-94b839bb8c62")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0203")
 					(unit 1)
@@ -5444,7 +5299,7 @@
 			(uuid "5e6b2001-2185-4729-9333-5fe60dadec65")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0209")
 					(unit 1)
@@ -5602,7 +5457,7 @@
 			(uuid "85e89006-d486-48b8-ac30-761edb8578bf")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "Q202")
 					(unit 1)
@@ -5618,7 +5473,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x02")
-		(at 158.115 26.035 90)
+		(at 160.9015 25.6765 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5626,8 +5481,8 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b1dc84ce-2756-432d-853a-21250aa5280e")
-		(property "Reference" "J202"
-			(at 163.83 24.7649 90)
+		(property "Reference" "J203"
+			(at 166.6165 24.4064 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5636,7 +5491,7 @@
 			)
 		)
 		(property "Value" "LiPo 1 Cell"
-			(at 163.83 27.3049 90)
+			(at 166.6165 26.9464 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5644,8 +5499,8 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
-			(at 158.115 26.035 0)
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
+			(at 160.9015 25.6765 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5654,7 +5509,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 158.115 26.035 0)
+			(at 160.9015 25.6765 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5663,7 +5518,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 158.115 26.035 0)
+			(at 160.9015 25.6765 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5678,9 +5533,9 @@
 			(uuid "a934e969-b9b8-4a26-823d-a77266f2346e")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
-					(reference "J202")
+					(reference "J203")
 					(unit 1)
 				)
 			)
@@ -5761,7 +5616,7 @@
 			(uuid "562cf9a0-2704-45df-85bd-c0c974d0ce6f")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "D204")
 					(unit 1)
@@ -5844,7 +5699,7 @@
 			(uuid "e22a6c88-8b3c-4fc9-87a9-7cbb8cc7119b")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R206")
 					(unit 1)
@@ -5953,7 +5808,7 @@
 			(uuid "daee378d-e09a-4fad-806f-e27c8fd5f9ae")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "U201")
 					(unit 1)
@@ -6035,7 +5890,7 @@
 			(uuid "8bdecb6c-eedb-404e-80c4-9ede83b4ddba")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R211")
 					(unit 1)
@@ -6119,7 +5974,7 @@
 			(uuid "1a164890-c712-4a71-a55d-8996706daa9a")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "D203")
 					(unit 1)
@@ -6201,7 +6056,7 @@
 			(uuid "9b485124-0064-4df5-85d4-3f9505b2e29c")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R201")
 					(unit 1)
@@ -6284,7 +6139,7 @@
 			(uuid "fd91fbb2-27ad-4e9a-9470-c267ef85c973")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "D202")
 					(unit 1)
@@ -6369,7 +6224,7 @@
 			(uuid "765f1d36-998d-4667-8627-e72311a79e99")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "F201")
 					(unit 1)
@@ -6452,7 +6307,7 @@
 			(uuid "8b8738df-69de-4c51-b469-f79805674014")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R205")
 					(unit 1)
@@ -6601,7 +6456,7 @@
 			(uuid "98ecbff8-e559-49e3-825e-36f30c75bd66")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0204")
 					(unit 1)
@@ -6684,7 +6539,7 @@
 			(uuid "02251b74-5d71-4b51-b677-3da43d467b91")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "R209")
 					(unit 1)
@@ -6756,7 +6611,7 @@
 			(uuid "e30e16cd-cdbd-45ae-af0e-f3c9cbe420ec")
 		)
 		(instances
-			(project ""
+			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286/64a642d9-98f3-4b06-b19e-15459cb9d7b9"
 					(reference "#PWR0201")
 					(unit 1)
