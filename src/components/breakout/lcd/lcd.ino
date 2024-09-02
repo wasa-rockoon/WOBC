@@ -5,8 +5,18 @@
 #define DB6_PIN 10
 #define DB7_PIN 11
 
-#define SW1_PIN 16
-#define SW2_PIN 17
+#define SW1_PIN 21
+#define SW2_PIN 20
+
+#define raw1 5
+#define raw2 6
+#define raw3 18
+#define raw4 19
+
+#define col1 26
+#define col2 27
+#define col3 28
+#define col4 29
 
 bool SW1;
 bool SW2;
@@ -20,6 +30,27 @@ void setup() {
   SW2 = 1;
   pinMode(SW1_PIN, INPUT);
   pinMode(SW2_PIN, INPUT);
+
+  pinMode(raw1, OUTPUT);
+  pinMode(raw2, OUTPUT);
+  pinMode(raw3, OUTPUT);
+  pinMode(raw4, OUTPUT);
+
+  pinMode(col1, OUTPUT);
+  pinMode(col2, OUTPUT);
+  pinMode(col3, OUTPUT);
+  pinMode(col4, OUTPUT);
+
+  digitalWrite(col1, HIGH);
+  digitalWrite(col2, HIGH);
+  digitalWrite(col3, HIGH);
+  digitalWrite(col4, HIGH);
+
+  digitalWrite(raw1, LOW);
+  digitalWrite(raw2, LOW);
+  digitalWrite(raw3, LOW);
+  digitalWrite(raw4, LOW);
+
   lcd.begin(20,4);
   lcd.print("START");
   delay(3000);
