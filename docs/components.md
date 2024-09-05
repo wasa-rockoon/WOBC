@@ -203,7 +203,7 @@ ModuleIFと異なり，電源ON/OFFや電力測定機能はない．
 
 
 
-# Logger (?)
+# Logger (20)
 
 RTCにより絶対時刻を提供する．
 Micro SDカードにタイムスタンプ付きでログを記録する．
@@ -248,10 +248,22 @@ Micro SDカードにタイムスタンプ付きでログを記録する．
 | --- | --- | --- |
 | Ut | int | UNIX時間 UTC（ms）．|
 
+# GPS
 
+## GPSActive (21)
 
+## GPSPassive (23)
 
-## LCD (25)
+# Pressure (25)
 
+# IMU (30)
 
+# LCD (35)
 
+# Ignite (36)
+
+# RCS (37)
+
+# TankPressure (40)
+
+# HX711 (45)
