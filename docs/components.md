@@ -1,10 +1,10 @@
 # コンポーネント一覧
 
 # ESP32Core（0）
-
+※ESP32CoreではなくMainコンポーネントのidが0
 
 # RP2040Core (0)
-
+※RP2040CoreではなくMainコンポーネントのidが0
 
 # LiPoPower (1)
 
@@ -77,6 +77,7 @@ LiPoの温度を監視し，ヒーターで一定温度を保つ．
 ### LiPo状態（L）
 
 | Cg | bool | 充電中 |
+| --- | --- | --- |
 | Vl | int | LiPo電圧(mV) |
 | Il | int | LiPo電流(mA)，充電中は負の値 |
 | Pl | int | LiPo電力(mW)，充電中は負の値 |
