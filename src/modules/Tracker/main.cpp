@@ -23,13 +23,17 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 class Main: public process::Component {
 public:
   Main(): process::Component("main", 0x00) {}
+  Listener all_packets_;
 
   void setup() override {
+    listen(all_packets_, 8);
   }
 
   void loop() override {
-    wcpp::Packet p = newPacket(200);
-    p.telemetry('P', component_id());
+    while (all_packets_) {
+    const wcpp::Packet& packet = all_packets_.pop();
+    Serial.print(packet);
+  }
     delay(1000);
   }
 } main_;
