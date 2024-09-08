@@ -7,7 +7,7 @@ namespace component {
 class LiPoPower : public process::Component {
 public:
   static const uint8_t component_id = 0x01;
-  static const uint8_t Powertelemetry_id = 'P';
+  static const uint8_t Powertelemetry_id = 's';
   static const uint8_t LiPotelemetry_id = 'L';
   static const uint8_t Heatertelemetry_id = 'H';
 

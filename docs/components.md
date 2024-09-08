@@ -202,8 +202,6 @@ ModuleIFと異なり，電源ON/OFFや電力測定機能はない．
 
 # LoRa (11~18)
 
-
-
 # Logger (20)
 
 RTCにより絶対時刻を提供する．
@@ -253,11 +251,49 @@ Micro SDカードにタイムスタンプ付きでログを記録する．
 
 ## GPSActive (21)
 
+### 位置情報(M)
+| エントリ名 | データ型 | 内容 |
+| --- | --- | --- |
+|LA|double|緯度(°)|
+|LO|double|経度(°)|
+|AL|int|GPS高度(m)|
+|UT|int|Unix時間|
+
 ## GPSPassive (23)
+
+### 位置情報(M)
+| エントリ名 | データ型 | 内容 |
+| --- | --- | --- |
+|LA|double|緯度(°)|
+|LO|double|経度(°)|
+|AL|int|GPS高度(m)|
+|UT|int|Unix時間|
 
 # Pressure (25)
 
+## 環境情報(E)
+| エントリ名 | データ型 | 内容 |
+| --- | --- | --- |
+|PR|int|絶対気圧(hPa)|
+|TE|int|温度(℃)|
+|HU|int|湿度(％)|
+|PA|int|気圧高度(m)|
+
 # IMU (30)
+## 姿勢情報(D)
+| エントリ名 | データ型 | 内容 |
+| --- | --- | --- |
+|Ax|float32|x方向加速度(m/s^2)|
+|Ay|float32|y方向加速度(m/s^2)|
+|Az|float32|z方向加速度(m/s^2)|
+|Gx|float32|x軸周り角速度(deg/s)|
+|Gy|float32|y軸周り角速度(deg/s)|
+|Gz|float32|z軸周り角速度(deg/s)|
+|Mx|float32|x方向時速密度(G)|
+|My|float32|y方向時速密度(G)|
+|Mz|float32|z方向時速密度(G)|
+|PH|int|方角(°)|
+|SI|int|仰角(°)|
 
 # LCD (35)
 
@@ -266,5 +302,12 @@ Micro SDカードにタイムスタンプ付きでログを記録する．
 # RCS (37)
 
 # TankPressure (40)
+
+## タンク状況
+| エントリ名 | データ型 | 内容 |
+| --- | --- | --- |
+|TP|int|タンク内圧力(kPa)|
+|NP|int|スラスタ圧力(kPa)|
+|TT|int|タンク温度(℃)|
 
 # HX711 (45)

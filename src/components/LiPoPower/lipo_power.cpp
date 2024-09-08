@@ -31,8 +31,11 @@ void LiPoPower::setup() {
   pinMode(charge_led_pin_, OUTPUT);
 
   ina1.begin();
+  ina1.setMaxCurrentShunt(1, 0.05);
   ina2.begin();
+  ina2.setMaxCurrentShunt(1, 0.05);
   ina3.begin();
+  ina3.setMaxCurrentShunt(1, 0.05);
 }
 
 // SampleTimer コンストラクタに LiPoPower の参照を追加
@@ -44,11 +47,14 @@ LiPoPower::SampleTimer::SampleTimer(LiPoPower& lipo_power_ref, INA226& ina1_ref,
 void LiPoPower::SampleTimer::callback() {
   // INA226センサーのデータ取得
   int x1_mV = ina1_.getBusVoltage() * 1000;
-  int x1_mA = ina1_.getCurrent_mA();
+  int x1_mA = ina1_.getCurrent() * 1000;
+  int x1_mW = ina1_.getPower() * 1000;
   int x2_mV = ina2_.getBusVoltage() * 1000;
-  int x2_mA = ina2_.getCurrent_mA();
+  int x2_mA = ina2_.getCurrent() * 1000;
+  int x2_mW = ina2_.getPower() * 1000;
   int x3_mV = ina3_.getBusVoltage() * 1000;
-  int x3_mA = ina3_.getCurrent_mA();
+  int x3_mA = ina3_.getCurrent() * 1000;
+  int x3_mW = ina3_.getPower() * 1000;
 
   // LiPoPower クラスのピン番号を使ってデジタル入力を読み込む
   bool source = digitalRead(lipo_power_.st_pin_) ? 0 : 1;
@@ -64,15 +70,15 @@ void LiPoPower::SampleTimer::callback() {
   // Powertelemetry_id パケット送信
   wcpp::Packet packet1 = newPacket(64);
   packet1.telemetry(Powertelemetry_id, lipo_power_.component_id);
-
+  packet1.append("Pa");
   packet1.append("Sc").setBool(source);
   packet1.append("Vp").setInt(x1_mV);
   packet1.append("Ip").setInt(x1_mA);
   packet1.append("Vb").setInt(x2_mV);
-  packet1.append("Pp").setInt(x1_mA * x1_mV / 1000);
+  packet1.append("Pp").setInt(x1_mW);
   packet1.append("Vd").setInt(x3_mV);
   packet1.append("Id").setInt(x3_mA);
-  packet1.append("Pd").setInt(x3_mA * x3_mV / 1000);
+  packet1.append("Pd").setInt(x3_mW);
 
   sendPacket(packet1);
 
@@ -82,7 +88,7 @@ void LiPoPower::SampleTimer::callback() {
 
   packet2.append("Vl").setInt(x1_mV);
   packet2.append("Il").setInt(x1_mA);
-  packet2.append("Pl").setInt(x1_mA * x1_mV / 1000);
+  packet2.append("Pl").setInt(x1_mW);
 
   sendPacket(packet2);
 }
