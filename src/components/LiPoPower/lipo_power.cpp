@@ -68,9 +68,9 @@ void LiPoPower::SampleTimer::callback() {
   digitalWrite(lipo_power_.charge_led_pin_, charge);
 
   // Powertelemetry_id パケット送信
+
   wcpp::Packet packet1 = newPacket(64);
   packet1.telemetry(Powertelemetry_id, lipo_power_.component_id);
-  packet1.append("Pa");
   packet1.append("Sc").setBool(source);
   packet1.append("Vp").setInt(x1_mV);
   packet1.append("Ip").setInt(x1_mA);
@@ -79,7 +79,7 @@ void LiPoPower::SampleTimer::callback() {
   packet1.append("Vd").setInt(x3_mV);
   packet1.append("Id").setInt(x3_mA);
   packet1.append("Pd").setInt(x3_mW);
-
+  
   sendPacket(packet1);
 
   // LiPotelemetry_id パケット送信

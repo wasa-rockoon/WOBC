@@ -20,10 +20,10 @@
 #define LORA_M1_PIN 11
 
 HardwareSerial lora_serial(1);
-
 core::SerialBus serial_bus(Serial);
+
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
-component::LoRa lora(lora_serial, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL);
+component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 
 constexpr uint8_t module_id = 0x54;
 constexpr uint8_t unit_id = 0x61;
