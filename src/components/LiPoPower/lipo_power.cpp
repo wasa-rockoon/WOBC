@@ -83,14 +83,14 @@ void LiPoPower::SampleTimer::callback() {
   sendPacket(packet1);
 
   // LiPotelemetry_id パケット送信
-  wcpp::Packet packet2 = newPacket(64);
+  /*wcpp::Packet packet2 = newPacket(64);
   packet2.telemetry(LiPotelemetry_id, lipo_power_.component_id);
 
   packet2.append("Vl").setInt(x1_mV);
   packet2.append("Il").setInt(x1_mA);
   packet2.append("Pl").setInt(x1_mW);
 
-  sendPacket(packet2);
+  sendPacket(packet2);*/
 }
 
 }

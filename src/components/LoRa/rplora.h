@@ -25,11 +25,8 @@ protected:
   pin_t m1_pin_;
   uint8_t channel_;
 
-  kernel::Listener all_packets_; // リスナーをクラスメンバーとして定義
-
   void setup() override;
   void loop() override;
-  //void onCommand(const wcpp::Packet& packet) override;
 };
 
 }

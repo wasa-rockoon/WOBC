@@ -13,8 +13,7 @@ LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx, uint8_t channel, u
     aux_pin_(aux),
     m0_pin_(m0),
     m1_pin_(m1),
-    channel_(channel),
-    all_packets_() {  // リスナーの初期化
+    channel_(channel){
 }
 
 LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, pin_t tx, pin_t rx, uint8_t channel, unsigned number)
@@ -29,8 +28,8 @@ LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, pin_
     aux_pin_(aux),
     m0_pin_(m0),
     m1_pin_(m1),
-    channel_(channel),
-    all_packets_() {  // リスナーの初期化
+    channel_(channel)
+    {
 }
 
 void LoRa::setup() {
@@ -64,48 +63,54 @@ void LoRa::setup() {
   } else {
     Serial.println("LoRa setup error.");
   }
-
-  // リスナーの設定
-  listen(all_packets_, 8);  // キューサイズ 8 でリスナーを設定
 }
 
 void LoRa::loop() {
-  uint8_t data[256];
+  uint8_t data[255];
   unsigned len = e220_.receive(data);
-  if (len > 0) { 
-    uint8_t* data;
-    int rssi = e220_.getRSSI();
-    wcpp::Packet packet_received = newPacket(256);
-    packet_received = decodePacket(data);
-    wcpp::Packet packet = newPacket(packet_received.size() + 10);
-    //wcpp::Packet packet = newPacket(len + 10);
-    packet.copy(packet_received);
-    packet.append("Ss").setInt(rssi);
-    //sendPacket(packet_received);
-    sendPacket(packet);
+
+  while(e220_.isBusy()){}
+
+  if (len > 0) {
+    unsigned data_size = len - 1;
+    uint8_t received_checksum = data[data_size];
+    uint8_t* received_data = data;
+    wcpp::Packet packet_received = decodePacket(received_data);
+
+    uint8_t calculated_checksum = packet_received.checksum(received_data, data_size);
+
+    /*Serial.printf("size:%d\t", len);
+    for(int i = 0; i < len; i++) {
+      Serial.print(data[i], HEX);
+    }
+    Serial.printf("\t");*/
+
+    if (calculated_checksum == received_checksum) {
+      /*Serial.print(calculated_checksum,HEX);
+      Serial.printf("\t");
+      Serial.print(received_checksum,HEX);
+      Serial.printf("\t");
+      Serial.println("Checksum valid");*/
+
+      int rssi = e220_.getRSSI();
+      wcpp::Packet packet = newPacket(packet_received.size() + 10);
+      packet.copy(packet_received);
+      packet.append("Ss").setInt(rssi);
+
+      sendPacket(packet);
+    } else {
+      wcpp::Packet packet = newPacket(10);
+      packet.telemetry(0x00, 0x11);
+      packet.append("NG");
+      sendPacket(packet);
+
+      /*Serial.print(calculated_checksum,HEX);
+      Serial.printf("\t");
+      Serial.print(received_checksum,HEX);
+      Serial.printf("\t");
+      Serial.println("Checksum invalid");*/
+    }
   }
 }
-
-/*void LoRa::onCommand(const wcpp::Packet& packet) {
-  if (packet.packet_id() == send_command_id) { // 送信コマンド
-  
-    auto p = packet.find("Pa");
-    if (!p) return;
-    wcpp::Packet packet_to_send = (*p).getPacket();
-    if (!packet_to_send) return;
-
-    auto c = packet.find("Ch");
-    unsigned channel = 0;
-    if (c) channel = (*c).getInt();
-
-    unsigned size = packet_to_send.size();
-    const uint8_t* data = packet_to_send.encode();
-
-    LOG("LoRa send %d", packet_to_send.size());
-
-    // データを送信
-    e220_.sendTransparent(data, size);
-  }
-}*/
 
 }

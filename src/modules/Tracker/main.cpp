@@ -38,11 +38,20 @@ public:
     Main() : process::Component("main", 0x00) {}
 
     void setup() override {
-        // パケットのリスナーを設定
-        listen(all_packets_, 8);
     }
 
     void loop() override {
+        wcpp::Packet packet1 = newPacket(64);
+        packet1.telemetry('s', 0x01);
+        packet1.append("Sc").setBool(0);
+        packet1.append("Vp").setInt(4000);
+        packet1.append("Ip").setInt(100);
+        packet1.append("Vb").setInt(4000);
+        packet1.append("Pp").setInt(100);
+        packet1.append("Vd").setInt(3300);
+        packet1.append("Id").setInt(100);
+        packet1.append("Pd").setInt(100);
+        sendPacket(packet1);
     }
 
 } main_;
@@ -51,13 +60,13 @@ void setup() {
     // 初期化コード
     Serial.begin(115200);
 
-    kernel::setUnitId(unit_id); // ユニットIDを設定
-    if (!kernel::begin(module_id, true)) return; // モジュールIDをチェック
+    kernel::setUnitId(unit_id);
+    if (!kernel::begin(module_id, true)) return;
 
     Serial0.setPins(2, 1);
 
-    Wire.begin(17, 16); // I2C通信のピン設定
-    serial_bus.begin();  // シリアルバスの初期化
+    Wire.begin(17, 16);
+    //serial_bus.begin();
 
     delay(1000); // 1秒待機
 
@@ -67,9 +76,9 @@ void setup() {
     error_indicator.begin(); // エラーインジケータの初期化
     error_indicator.set(true); // エラーインジケータをONに設定
 
-    power.begin(); // LiPo電源モジュールの初期化
+    //power.begin(); // LiPo電源モジュールの初期化
     lora.begin();  // LoRaの初期化
-    main_.begin(); // メインモジュールの初期化
+    //main_.begin(); // メインモジュールの初期化
 
     error_indicator.set(false); // エラーインジケータをOFFに設定
     error_indicator.blink_on_change(100); // エラーインジケータの点滅を設定
