@@ -1,11 +1,11 @@
-#include "lora.h"
+#include "rplora.h"
 #define LORA_ADDR E220::BROADCAST
 
 namespace component {
 
 LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx, uint8_t channel, unsigned number)
   : process::Component("LoRa", component_id_base + number),
-    lora_serial_(1),  // HardwareSerial(1)
+    lora_serial_(tx, rx, 256),
     e220_(lora_serial_, aux, m0, m1),
     antenna_switch_(false),
     tx_pin_(tx),
@@ -19,7 +19,7 @@ LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx, uint8_t channel, u
 
 LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, pin_t tx, pin_t rx, uint8_t channel, unsigned number)
   : process::Component("LoRa", component_id_base + number),
-    lora_serial_(1),  // HardwareSerial(1)
+    lora_serial_(tx, rx, 256),
     e220_(lora_serial_, aux, m0, m1),
     antenna_switch_(true),
     antenna_A_(antenna_A),
@@ -39,8 +39,7 @@ void LoRa::setup() {
     pinMode(antenna_B_, OUTPUT);
   }
   
-  lora_serial_.begin(9600, SERIAL_8N1, rx_pin_, tx_pin_);
-
+  lora_serial_.begin(9800);
   e220_.begin();
   delay(1000);
   bool ok = true;
@@ -55,6 +54,7 @@ void LoRa::setup() {
   ok &= e220_.setRSSIEnable(true);
   ok &= e220_.setMode(E220::Mode::NORMAL);
   lora_serial_.flush();
+  lora_serial_.end();
   lora_serial_.begin(115200);
 
   delay(100);
@@ -70,21 +70,23 @@ void LoRa::setup() {
 }
 
 void LoRa::loop() {
-  // リスナーからパケットを取得して送信
-  while (all_packets_) {
-    wcpp::Packet packet = all_packets_.pop();
-    
-    if (!packet.isNull()) {
-      wcpp::Packet lorapacket = newPacket(64);
-      lorapacket.command(LoRa::send_command_id, LoRa::component_id_base + 0);
-      lorapacket.append("Pa").setPacket(packet);
-      onCommand(lorapacket);
-    }
-    delay(1000);
+  uint8_t data[256];
+  unsigned len = e220_.receive(data);
+  if (len > 0) { 
+    uint8_t* data;
+    int rssi = e220_.getRSSI();
+    wcpp::Packet packet_received = newPacket(256);
+    packet_received = decodePacket(data);
+    wcpp::Packet packet = newPacket(packet_received.size() + 10);
+    //wcpp::Packet packet = newPacket(len + 10);
+    packet.copy(packet_received);
+    packet.append("Ss").setInt(rssi);
+    //sendPacket(packet_received);
+    sendPacket(packet);
   }
 }
 
-void LoRa::onCommand(const wcpp::Packet& packet) {
+/*void LoRa::onCommand(const wcpp::Packet& packet) {
   if (packet.packet_id() == send_command_id) { // 送信コマンド
   
     auto p = packet.find("Pa");
@@ -104,6 +106,6 @@ void LoRa::onCommand(const wcpp::Packet& packet) {
     // データを送信
     e220_.sendTransparent(data, size);
   }
-}
+}*/
 
 }

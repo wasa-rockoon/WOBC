@@ -1,6 +1,14 @@
 #pragma once
 
-#include <library/common.h>
+#define E220_RECEIVE_TIMEOUT_MS 10000
+
+#ifdef ARDUINO
+#include <Arduino.h>
+#else
+#include <stdlib.h>
+#endif
+
+using pin_t = uint8_t;
 
 class E220 {
 public:
@@ -88,6 +96,9 @@ private:
   pin_t m0_;
   pin_t m1_;
   unsigned timeout_ms_ = 100;
+  
+  unsigned long last_received_ms_;
+  unsigned last_received_len_;
 
   bool RSSI_enabled_;
   unsigned baud_;
