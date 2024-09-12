@@ -41,6 +41,7 @@ public:
     }
 
     void loop() override {
+        delay(1000);
         wcpp::Packet packet1 = newPacket(64);
         packet1.telemetry('s', 0x01);
         packet1.append("Sc").setBool(0);
@@ -78,7 +79,7 @@ void setup() {
 
     //power.begin(); // LiPo電源モジュールの初期化
     lora.begin();  // LoRaの初期化
-    //main_.begin(); // メインモジュールの初期化
+    main_.begin(); // メインモジュールの初期化
 
     error_indicator.set(false); // エラーインジケータをOFFに設定
     error_indicator.blink_on_change(100); // エラーインジケータの点滅を設定
