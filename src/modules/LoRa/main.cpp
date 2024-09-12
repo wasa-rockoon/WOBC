@@ -13,6 +13,9 @@
 #define LORA_SW_A1 10
 #define LORA_SW_A2 11
 
+constexpr uint8_t module_id = 0x4C;
+constexpr uint8_t unit_id = 0x64; // 書き込むユニットごとに変える
+
 core::CANBus can_bus(23, 22);
 core::SerialBus serial_bus(Serial);
 
@@ -48,7 +51,7 @@ void setup() {
 
   delay(1000);
   
-  //serial_bus.begin();
+  serial_bus.begin();
   main_.begin();
 
   error_indicator.set(false);
