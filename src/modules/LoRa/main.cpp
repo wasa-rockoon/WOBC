@@ -34,7 +34,7 @@ Main main_;
 
 void setup() {
   // put your setup code here, to run once:
-  //Serial.begin(115200);
+  Serial.begin(115200);
 
   if (!kernel::begin(0xFE, false)) return;
 
@@ -44,14 +44,12 @@ void setup() {
   error_indicator.set(true);
 
   lora.begin();
-  //can_bus.begin();
+  can_bus.begin();
 
   delay(1000);
-
   
-  serial_bus.begin();
-
-  //main_.begin();
+  //serial_bus.begin();
+  main_.begin();
 
   error_indicator.set(false);
   error_indicator.blink_on_change();
