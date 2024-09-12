@@ -14,7 +14,6 @@
 #define LORA_SW_A2 11
 
 constexpr uint8_t module_id = 0x4C;
-constexpr uint8_t unit_id = 0x64; // 書き込むユニットごとに変える
 
 core::CANBus can_bus(23, 22);
 core::SerialBus serial_bus(Serial);
@@ -28,6 +27,8 @@ public:
   void setup() override {
   }
   void loop() override {
+    delay(1000);
+    LOG("LoRa working");
   }
 };
 
@@ -39,18 +40,17 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
 
-  if (!kernel::begin(0xFE, false)) return;
+  if (!kernel::begin(module_id, false)) return;
 
   status_indicator.begin();
   status_indicator.blink_on_change();
   error_indicator.begin();
   error_indicator.set(true);
 
+  delay(1000);
+
   lora.begin();
   can_bus.begin();
-
-  delay(1000);
-  
   serial_bus.begin();
   main_.begin();
 

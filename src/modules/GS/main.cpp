@@ -48,10 +48,10 @@ void setup() {
   error_indicator.begin();
   error_indicator.set(true);
 
+  delay(1000);
+
   can_bus.begin();
   serial_bus.begin();
-
-  delay(1000);
 
   //logger.begin();
   //power.begin();
