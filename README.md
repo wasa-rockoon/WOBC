@@ -54,3 +54,4 @@ WOBCは，WASAロケットプロジェクトにおける電装関連の共通基
 - [components](docs/components.md): コンポーネントとその機能，インターフェースの一覧
 - [modules](docs/modules.md): モジュールとその機能，構成コンポーネントの一覧
 - [unit](docs/unit.md): ユニット一覧
+- [library](docs/library.md): WOBCライブラリの使い方
