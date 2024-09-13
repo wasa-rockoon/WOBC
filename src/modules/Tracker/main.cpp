@@ -3,6 +3,7 @@
 #include <library/wobc.h>
 #include <components/LiPoPower/lipo_power.h>
 #include <components/LoRa/lora.h>
+#include <components/Pressure/pressure.h>
 
 #define ST 6
 #define PG 10
@@ -12,7 +13,7 @@
 #define CHARGELED 8
 #define TEMP 7
 
-#define LORA_CHANNEL 10
+#define LORA_CHANNEL 5
 #define LORA_TX_PIN 38
 #define LORA_RX_PIN 39
 #define LORA_AUX_PIN 40
@@ -24,11 +25,10 @@ core::SerialBus serial_bus(Serial);
 
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
+component::Pressure pressure(Wire);
 
 constexpr uint8_t module_id = 0x54;
 constexpr uint8_t unit_id = 0x61;
-
-kernel::Listener all_packets_;
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -36,56 +36,54 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
+    kernel::Listener my_listener_;
 
     void setup() override {
+        my_listener_.packet(power.Powertelemetry_id); 
+        listen(my_listener_, 8);
     }
 
     void loop() override {
-        delay(1000);
-        wcpp::Packet packet1 = newPacket(64);
-        packet1.telemetry('s', 0x01);
-        packet1.append("Sc").setBool(0);
-        packet1.append("Vp").setInt(4000);
-        packet1.append("Ip").setInt(100);
-        packet1.append("Vb").setInt(4000);
-        packet1.append("Pp").setInt(100);
-        packet1.append("Vd").setInt(3300);
-        packet1.append("Id").setInt(100);
-        packet1.append("Pd").setInt(100);
-        sendPacket(packet1);
+        while (my_listener_) {
+            wcpp::Packet packet = my_listener_.pop();
+            if (!packet.isNull()) {
+            wcpp::Packet lorapacket = newPacket(64);
+            lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+            lorapacket.append("Pa").setPacket(packet);
+            sendPacket(lorapacket);
+            }
+        }
     }
 
 } main_;
 
 void setup() {
-    // 初期化コード
     Serial.begin(115200);
-
     kernel::setUnitId(unit_id);
     if (!kernel::begin(module_id, true)) return;
 
     Serial0.setPins(2, 1);
-
     Wire.begin(17, 16);
-    //serial_bus.begin();
+    serial_bus.begin();
 
-    delay(1000); // 1秒待機
+    delay(1000); 
 
-    status_indicator.begin(); // ステータスインジケータの初期化
-    status_indicator.blink_on_change(); // ステータスインジケータの点滅
+    status_indicator.begin();
+    status_indicator.blink_on_change();
 
-    error_indicator.begin(); // エラーインジケータの初期化
-    error_indicator.set(true); // エラーインジケータをONに設定
+    error_indicator.begin();
+    error_indicator.set(true);
 
-    //power.begin(); // LiPo電源モジュールの初期化
-    lora.begin();  // LoRaの初期化
-    main_.begin(); // メインモジュールの初期化
+    power.begin();
+    lora.begin();
+    pressure.begin();
+    main_.begin();
 
-    error_indicator.set(false); // エラーインジケータをOFFに設定
-    error_indicator.blink_on_change(100); // エラーインジケータの点滅を設定
+    error_indicator.set(false);
+    error_indicator.blink_on_change(100);
 }
 
 void loop() {
-    status_indicator.update(); // ステータスインジケータの更新
-    error_indicator.update();  // エラーインジケータの更新
+    status_indicator.update();
+    error_indicator.update();
 }

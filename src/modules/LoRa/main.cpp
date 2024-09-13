@@ -4,7 +4,7 @@
 #include <library/wobc.h>
 #include <components/LoRa/rplora.h>
 
-#define LORA_CHANNEL 10
+#define LORA_CHANNEL 5
 #define LORA_TX_PIN 1
 #define LORA_RX_PIN 0
 #define LORA_AUX_PIN 14

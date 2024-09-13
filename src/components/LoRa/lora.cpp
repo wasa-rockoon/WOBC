@@ -70,29 +70,6 @@ void LoRa::setup() {
 }
 
 void LoRa::loop() {
-  // リスナーからパケットを取得して送信
-  while (all_packets_) {
-    wcpp::Packet packet = all_packets_.pop();
-    
-    if (!packet.isNull()) {
-      wcpp::Packet lorapacket = newPacket(64);
-      lorapacket.command(LoRa::send_command_id, LoRa::component_id_base + 0);
-      lorapacket.append("Pa").setPacket(packet);
-      onCommand(lorapacket);
-    }
-    delay(1000);
-  }
-  /*uint8_t data[100];
-  for(int i = 0; i < 100; i++){
-      data[i] = i;
-  }
-  Serial.printf("size:%d\t", sizeof(data));
-  for(int i = 0; i < sizeof(data); i++){
-      Serial.print(data[i], HEX);
-  }
-  Serial.println();
-  e220_.sendTransparent(data, sizeof(data));
-  delay(1000);*/
 }
 
 void LoRa::onCommand(const wcpp::Packet& packet) {
@@ -117,15 +94,6 @@ void LoRa::onCommand(const wcpp::Packet& packet) {
     data_with_checksum[size] = checksum_value;
 
     LOG("LoRa send %d", size + 1);
-
-    Serial.printf("size:%d\t", size + 1);
-    for(int i = 0; i < size + 1; i++) {
-      Serial.print(data_with_checksum[i], HEX);
-    }
-    Serial.printf("\t");
-    Serial.print(checksum_value, HEX);
-    Serial.println();
-
     // データを送信
     e220_.sendTransparent(data_with_checksum, size + 1);
   }

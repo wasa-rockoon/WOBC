@@ -76,39 +76,16 @@ void LoRa::loop() {
     uint8_t received_checksum = data[data_size];
     uint8_t* received_data = data;
     wcpp::Packet packet_received = decodePacket(received_data);
-
     uint8_t calculated_checksum = packet_received.checksum(received_data, data_size);
 
-    /*Serial.printf("size:%d\t", len);
-    for(int i = 0; i < len; i++) {
-      Serial.print(data[i], HEX);
-    }
-    Serial.printf("\t");*/
-
     if (calculated_checksum == received_checksum) {
-      /*Serial.print(calculated_checksum,HEX);
-      Serial.printf("\t");
-      Serial.print(received_checksum,HEX);
-      Serial.printf("\t");
-      Serial.println("Checksum valid");*/
-
       int rssi = e220_.getRSSI();
       wcpp::Packet packet = newPacket(packet_received.size() + 10);
       packet.copy(packet_received);
       packet.append("Ss").setInt(rssi);
-
       sendPacket(packet);
     } else {
-      wcpp::Packet packet = newPacket(10);
-      packet.telemetry(0x00, 0x11);
-      packet.append("NG");
-      sendPacket(packet);
-
-      /*Serial.print(calculated_checksum,HEX);
-      Serial.printf("\t");
-      Serial.print(received_checksum,HEX);
-      Serial.printf("\t");
-      Serial.println("Checksum invalid");*/
+      LOG("fail to receive");
     }
   }
 }
