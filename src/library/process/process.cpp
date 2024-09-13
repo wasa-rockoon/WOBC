@@ -4,7 +4,8 @@ namespace process {
 
 void Process::startProcess(uint8_t component_id) { 
   component_id_ = component_id;
-  onStart(); 
+  bool ok = onStart(); 
+  if (!ok) error("pSTF", "process start failed");
 }
 
 
