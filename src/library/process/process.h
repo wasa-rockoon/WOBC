@@ -55,6 +55,19 @@ public:
     sendPacket(p);
   }
 
+  template <class... Args>
+  void error_(const Listener& exclude, const char* code, const char* format, Args... args) {
+    wcpp::Packet p = newPacket(64);
+    p.telemetry(packet_id_error, component_id());
+    p.append("Cd").setString(code);
+    auto e = p.append("Ms");
+    char buf[64];
+    snprintf(buf, 64, format, args...);
+    e.setString(buf);
+    sendPacket(p, exclude);
+  }
+
+
 protected:
   const char *name_;
   uint8_t component_id_ = 0xFF;
