@@ -12,6 +12,7 @@
 #define CHARGELED 8
 #define TEMP 7
 
+// Pins
 #define LORA_CHANNEL 10
 #define LORA_TX_PIN 38
 #define LORA_RX_PIN 39
@@ -19,19 +20,25 @@
 #define LORA_M0_PIN 12
 #define LORA_M1_PIN 11
 
-HardwareSerial lora_serial(1);
-core::SerialBus serial_bus(Serial);
-
-component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
-component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
-
+// Settings
 constexpr uint8_t module_id = 0x54;
 constexpr uint8_t unit_id = 0x61;
 
-kernel::Listener all_packets_;
+// IO
+driver::GenericSerial<HardwareSerial> lora_serial(Serial1);
 
+// Core
+core::SerialBus serial_bus(Serial);
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
+
+
+// Components
+component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
+component::LoRa lora(lora_serial, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_CHANNEL, 0);
+
+
+kernel::Listener all_packets_;
 
 class Main : public process::Component {
 public:
@@ -65,6 +72,7 @@ void setup() {
     if (!kernel::begin(module_id, true)) return;
 
     Serial0.setPins(2, 1);
+    Serial1.setPins(LORA_RX_PIN, LORA_TX_PIN);
 
     Wire.begin(17, 16);
     //serial_bus.begin();
