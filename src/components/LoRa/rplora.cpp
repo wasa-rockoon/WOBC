@@ -39,12 +39,14 @@ void LoRa::setup() {
   }
   
   lora_serial_.begin(9800);
-  e220_.begin();
-  delay(1000);
+  
+
   bool ok = true;
+  ok &= e220_.begin();
+  delay(1000);
   ok &= e220_.setMode(E220::Mode::CONFIG_DS);
   ok &= e220_.setParametersToDefault();
-  ok &= e220_.setSerialBaudRate(115200);
+  ok &= e220_.setSerialBaudRate(9600);
   ok &= e220_.setDataRate(E220::SF::SF9, E220::BW::BW125kHz);
   ok &= e220_.setEnvRSSIEnable(true);
   ok &= e220_.setSendMode(E220::SendMode::TRANSPARENT);
@@ -52,16 +54,16 @@ void LoRa::setup() {
   ok &= e220_.setChannel(channel_);
   ok &= e220_.setRSSIEnable(true);
   ok &= e220_.setMode(E220::Mode::NORMAL);
-  lora_serial_.flush();
-  lora_serial_.end();
-  lora_serial_.begin(115200);
+  //lora_serial_.flush();
+  //lora_serial_.end();
+  //lora_serial_.begin(115200);
 
   delay(100);
 
   if (ok) {
-    Serial.println("LoRa setup complete.");
+    LOG("LoRa setup complete.");
   } else {
-    Serial.println("LoRa setup error.");
+    LOG("LoRa setup error.");
   }
 }
 

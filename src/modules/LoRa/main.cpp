@@ -5,13 +5,13 @@
 #include <components/LoRa/rplora.h>
 
 #define LORA_CHANNEL 5
-#define LORA_TX_PIN 1
-#define LORA_RX_PIN 0
-#define LORA_AUX_PIN 14
-#define LORA_M0_PIN 12
-#define LORA_M1_PIN 13
-#define LORA_SW_A1 10
-#define LORA_SW_A2 11
+#define LORA_TX_PIN 28
+#define LORA_RX_PIN 29
+#define LORA_AUX_PIN 20
+#define LORA_M0_PIN 18
+#define LORA_M1_PIN 19
+#define LORA_SW_A1 26
+#define LORA_SW_A2 27
 
 constexpr uint8_t module_id = 0x4C;
 
@@ -22,7 +22,7 @@ component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_SW_A1, LORA_SW
 
 class Main: public process::Component {
 public:
-  Main(): process::Component("main", 0x11) {}
+  Main(): process::Component("main", 0x12) {}
 
   void setup() override {
   }
@@ -47,12 +47,15 @@ void setup() {
   error_indicator.begin();
   error_indicator.set(true);
 
-  delay(1000);
+  delay(500);
 
-  lora.begin();
   can_bus.begin();
   serial_bus.begin();
   main_.begin();
+
+  delay(1000);
+  lora.begin();
+  
 
   error_indicator.set(false);
   error_indicator.blink_on_change();
