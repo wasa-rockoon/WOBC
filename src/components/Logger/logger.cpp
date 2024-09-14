@@ -53,6 +53,7 @@ void Logger::loop() {
     else {
       packets_wrote_++;
       bytes_wrote_ += packet_log.size() + 2;
+      file_.flush();
     }
   }
 }

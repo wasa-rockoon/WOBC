@@ -6,11 +6,11 @@ CAN* CAN_instance = nullptr;
 
 bool CAN::begin(unsigned baudrate, pin_t rx, pin_t tx) {
   CAN_instance = this;
-  can2040_setup(&cbus, 0);
+  can2040_setup(&cbus, 1);
   can2040_callback_config(&cbus, callback);
-  irq_set_exclusive_handler(PIO0_IRQ_0_IRQn, PIOx_IRQHandler);
-  NVIC_SetPriority(PIO0_IRQ_0_IRQn, 1);
-  NVIC_EnableIRQ(PIO0_IRQ_0_IRQn);
+  irq_set_exclusive_handler(PIO1_IRQ_0_IRQn, PIOx_IRQHandler);
+  NVIC_SetPriority(PIO1_IRQ_0_IRQn, 1);
+  NVIC_EnableIRQ(PIO1_IRQ_0_IRQn);
 
   can2040_start(&cbus, configCPU_CLOCK_HZ, baudrate, rx, tx);
   return true;

@@ -1,4 +1,4 @@
-#include "e220.h"
+#include "E220.h"
 
 E220::E220(Stream& stream, pin_t aux, pin_t m0, pin_t m1)
   : stream_(stream), aux_(aux), m0_(m0), m1_(m1) {
@@ -13,8 +13,12 @@ bool E220::begin() {
   pinMode(m1_, OUTPUT);
 
   setMode(Mode::NORMAL);
-  while (isBusy()) vTaskDelay(1);
-  vTaskDelay(200);
+
+  unsigned long ms = millis();
+  while (isBusy()) {
+    if (millis() - ms > timeout_ms_ * 50) return false;
+  }
+  delay(200);
   return true;
 }
 
@@ -25,21 +29,23 @@ bool E220::isBusy() {
 bool E220::sendTransparent(const uint8_t* data, unsigned len) {
   if (isBusy()) return false;
 
-  stream_.write(len);
-  stream_.write(data, len);
+  uint8_t buf[256];
+  buf[0] = len;
+  memcpy(buf + 1, data, len);
+  stream_.write(buf, len + 1);
   return true;
 }
 
 bool E220::send(uint16_t addr, uint8_t channel, const uint8_t* data, unsigned len) {
   if (isBusy()) return false;
 
-  uint8_t header[4];
-  header[0] = (uint8_t)(addr >> 8);
-  header[1] = (uint8_t)addr;
-  header[2] = channel;
-  header[3] = len;
-  stream_.write(header, 4);
-  stream_.write(data, len);
+  uint8_t buf[260];
+  buf[0] = (uint8_t)(addr >> 8);
+  buf[1] = (uint8_t)addr;
+  buf[2] = channel;
+  buf[3] = len;
+  memcpy(buf + 4, data, len);
+  stream_.write(buf, 4 + len);
   return true;
 }
 
@@ -47,7 +53,18 @@ unsigned E220::receive(uint8_t* data, unsigned max_len) {
   if (stream_.available() == 0) return 0;
   uint8_t len = stream_.peek();
 
+  if (len != last_received_len_) {
+    last_received_ms_ = millis();
+    last_received_len_ = len;
+  }
+
   if (RSSI_enabled_) {
+    if (millis() - last_received_ms_ > E220_RECEIVE_TIMEOUT_MS) { // Receive timeout
+      while (stream_.available()) stream_.read();
+      last_received_len_ = 0;
+      return 0;
+    }
+    
     if ((int)stream_.available() < len + 2) return 0;
     if (max_len > 0 && len > max_len) {
       for (int i = 0; i < len + 2; i++) stream_.read();
@@ -72,10 +89,18 @@ unsigned E220::receive(uint8_t* data, unsigned max_len) {
 
 
 bool E220::setMode(Mode mode) {
+  unsigned long ms = millis();
+  while (isBusy()) {
+    if (millis() - ms > timeout_ms_ * 50) return false;
+  }
   digitalWrite(m0_, static_cast<uint8_t>(mode) & 0b01 ? HIGH : LOW);
   digitalWrite(m1_, static_cast<uint8_t>(mode) & 0b10 ? HIGH : LOW);
-  vTaskDelay(100);
-  while (isBusy());
+  delay(100);
+
+  ms = millis();
+  while (isBusy()) {
+    if (millis() - ms > timeout_ms_ * 50) return false;
+  }
   stream_.flush();
 
   return true;
@@ -134,7 +159,12 @@ bool E220::setEnvRSSIEnable(bool enable) {
 }
 
 bool E220::setPower(Power power) {
-  return writeRegisterWithMask(ADDR::REG1, 0b00000011, static_cast<uint8_t>(power));
+  bool ok = true;
+  uint8_t reg1;
+  ok &= readRegister(ADDR::REG1, &reg1);
+  reg1 = (reg1 & 0b00000011) | static_cast<uint8_t>(power);
+  ok &= writeRegister(ADDR::REG1, &reg1);
+  return ok;
 }
 
 bool E220::setChannel(uint8_t channel) {
@@ -178,12 +208,12 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
 
   stream_.flush();
 
-  uint8_t cmd[3];
+  uint8_t cmd[10];
   cmd[0] = 0xC0;
   cmd[1] = static_cast<uint8_t>(addr);
   cmd[2] = len;
-  stream_.write(cmd, 3);
-  stream_.write(parameters, len);
+  memcpy(cmd + 3, parameters, len);
+  stream_.write(cmd, 3 + len);
 
   unsigned long ms = millis();
   while (isBusy() || (int)stream_.available() < 3 + len) {
@@ -197,7 +227,7 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
   ok &= memcmp(cmd, rx, 3) == 0;
   ok &= memcmp(parameters, rx + 3, len) == 0;
 //  ok &= memcmp(parameters, rx + 3, len) == 0;
-  vTaskDelay(10);
+  delay(10);
   return ok;
 }
 
@@ -235,7 +265,7 @@ bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
   }
   stream_.flush();
 
-  vTaskDelay(10);
+  delay(10);
 
   return ok;
 }
