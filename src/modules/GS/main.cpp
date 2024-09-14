@@ -2,8 +2,20 @@
 
 #include <library/wobc.h>
 #include <components/Telemeter/telemeter.h>
-//#include <components/Logger/logger.h>
+#include <components/Logger/logger.h>
 //#include <components/LiPoPower/lipo_power_simple.h>
+#include <SPI.h>
+
+#define SPI0_SCK_PIN 12
+#define SPI0_MOSI_PIN 11
+#define SPI0_MISO_PIN 13
+#define SPI0_CS_PIN 10
+
+#define SD_INSERTED_PIN 9
+#define SDCARD_MOSI_PIN SPI0_MOSI_PIN
+#define SDCARD_MISO_PIN SPI0_MISO_PIN
+#define SDCARD_SS_PIN SPI0_CS_PIN
+#define SDCARD_SCK_PIN SPI0_SCK_PIN
 
 constexpr uint8_t module_id = 0x47;
 constexpr uint8_t unit_id = 0x64; // 書き込むユニットごとに変える
@@ -15,7 +27,7 @@ interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 
 // Components
-//component::Logger logger(SPI);
+component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 //component::LiPoPowerSimple power(Wire);
 component::Telemeter telemeter;
 
@@ -56,7 +68,7 @@ void setup() {
   if (!kernel::begin(module_id, true)) return; // check module id
 
   //Wire.setPins();
-  // SPI.begin(...)
+  SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
   status_indicator.begin();
   status_indicator.blink_on_change();
@@ -68,7 +80,7 @@ void setup() {
   can_bus.begin();
   serial_bus.begin();
 
-  //logger.begin();
+  logger.begin();
   //power.begin();
   telemeter.begin();
   main_.begin();
