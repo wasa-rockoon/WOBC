@@ -58,14 +58,8 @@ void Telemeter::setup() {
 }
 
 void Telemeter::loop() {
-    if(!webSocket_.isConnected()){
-        LOG("mistake connect server");
-        webSocket_.begin("54.248.18.111", 80, "http://54.248.18.111/ws");
-        delay(1000);
-    }
-
+  webSocket_.loop();
   while (up_packets_) {
-
     const wcpp::Packet packet = up_packets_.pop();
     uint8_t buf[wcpp::size_max];
     wcpp::Packet packet_tele = wcpp::Packet::empty(buf, wcpp::size_max);
