@@ -4,6 +4,7 @@
 #include <components/LiPoPower/lipo_power.h>
 #include <components/LoRa/lora.h>
 #include <components/Pressure/pressure.h>
+#include <components/GPS/gps.h>
 
 #define ST 6
 #define PG 10
@@ -26,6 +27,7 @@ core::SerialBus serial_bus(Serial);
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::Pressure pressure(Wire);
+component::GPS gps(47, 48, 115200);
 
 constexpr uint8_t module_id = 0x54;
 constexpr uint8_t unit_id = 0x61;
@@ -77,6 +79,7 @@ void setup() {
     power.begin();
     lora.begin();
     pressure.begin();
+    gps.begin();
     main_.begin();
 
     error_indicator.set(false);
