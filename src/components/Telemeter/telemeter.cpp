@@ -32,11 +32,11 @@ void Telemeter::webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
 }
 
 void Telemeter::setup() {
-    //up_packets_.telemetry();
-    up_packets_.packet('A');
-    listen(up_packets_, 8);
+  //up_packets_.telemetry();
+  up_packets_.unit_origin('A');
+  listen(up_packets_, 8);
 
-    delay(5000);
+  delay(5000);
 
   WiFiMulti_.addAP("Redmi 9T", "1ea4c967d163p");
 
@@ -79,7 +79,7 @@ void Telemeter::loop() {
 
     packet_tele.append("Ts").setInt(millis()); // Add timestamp in ms
 
-    bool ok = webSocket_.sendBIN(packet_tele.encode(), packet_tele.size());
+    bool ok = webSocket_.sendBIN(packet.encode(), packet.size());
 
     if(ok) LOG("UP server");
     else LOG("Mistake up");

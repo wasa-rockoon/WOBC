@@ -48,7 +48,7 @@ public:
             wcpp::Packet packet = my_listener_.pop();
             if (!packet.isNull()) {
             wcpp::Packet lorapacket = newPacket(64);
-            lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+            lorapacket.command(lora.send_command_id, lora.component_id_base + 0,);
             lorapacket.append("Pa").setPacket(packet);
             sendPacket(lorapacket);
             }
