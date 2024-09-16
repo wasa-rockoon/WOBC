@@ -9,7 +9,7 @@ public:
     static const uint8_t telemetry_id = 'M';
 
   public:
-    GPS(int rxPin, int txPin, uint32_t gpsBaud, unsigned sample_freq_hz = 1);
+    GPS(int rxPin, int txPin, uint32_t gpsBaud, uint8_t unit_id, unsigned sample_freq_hz = 1);
 
     void setup() override;
 
@@ -19,10 +19,11 @@ public:
     uint32_t gpsBaud_;
     TinyGPSPlus gps_;
     HardwareSerial ss_;
+    uint8_t unit_id_;
 
     class SampleTimer: public process::Timer {
   public:
-    SampleTimer(HardwareSerial& ss_ref, GPS& gps_ref, TinyGPSPlus& tinygps_ref, unsigned interval_ms);
+    SampleTimer(HardwareSerial& ss_ref, GPS& gps_ref, TinyGPSPlus& tinygps_ref, uint8_t unit_id_ref, unsigned interval_ms);
 
   protected:
     void callback() override;
@@ -31,6 +32,7 @@ public:
     TinyGPSPlus& gps_;
     GPS& GPS_;
     HardwareSerial& ss_;
+    uint8_t unit_id_;
     } sample_timer_;
 };
 }

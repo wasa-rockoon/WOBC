@@ -2,10 +2,11 @@
 
 namespace component {
 
-Pressure::Pressure(TwoWire& wire, unsigned sample_freq_hz)
+Pressure::Pressure(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz)
   : process::Component("Pressure", component_id),
     wire_(wire),
-    sample_timer_(*this, bme, 1000 / sample_freq_hz) {
+    unit_id_(unit_id),
+    sample_timer_(*this, bme, unit_id, 1000 / sample_freq_hz) {
 }
 
 void Pressure::setup() {
@@ -18,9 +19,9 @@ void Pressure::setup() {
   }
 }
 
-Pressure::SampleTimer::SampleTimer(Pressure& pressure_ref, BME280I2C& bme_ref, unsigned interval_ms)
+Pressure::SampleTimer::SampleTimer(Pressure& pressure_ref, BME280I2C& bme_ref, uint8_t unit_id_ref, unsigned interval_ms)
   : process::Timer("Pressure", interval_ms),
-    bme_(bme_ref), pressure_(pressure_ref) { 
+    bme_(bme_ref), unit_id_(unit_id_ref), pressure_(pressure_ref) { 
 }
 
 void Pressure::SampleTimer::callback() { // Timerで定期的に実行される関数
@@ -40,7 +41,7 @@ void Pressure::SampleTimer::callback() { // Timerで定期的に実行される�
   double pressureAlt = (pow((sealevel_Pa/pres),(1.0/5.257))-1.0)*(temp+273.15)/0.0065;
 
   wcpp::Packet packet = newPacket(64);
-  packet.telemetry(telemetry_id, component_id());
+  packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
   packet.append("Sp").setInt((int)sealevel_Pa);
   packet.append("PR").setInt((int)pres);
   packet.append("TE").setInt((int)temp);

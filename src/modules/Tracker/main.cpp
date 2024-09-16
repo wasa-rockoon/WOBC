@@ -34,17 +34,18 @@
 #define LORA_M0_PIN 12
 #define LORA_M1_PIN 11
 
+constexpr uint8_t module_id = 0x54;
+constexpr uint8_t unit_id = 0x61;
+
 HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
 
-component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
+component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
-component::Pressure pressure(Wire);
-component::GPS gps(47, 48, 115200);
+component::Pressure pressure(Wire, unit_id);
+component::GPS gps(47, 48, 115200, unit_id);
 
-constexpr uint8_t module_id = 0x54;
-constexpr uint8_t unit_id = 0x61;
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -66,7 +67,7 @@ public:
         while (my_listener_) {
             wcpp::Packet packet = my_listener_.pop();
                 wcpp::Packet lorapacket = newPacket(64);
-                lorapacket.command(lora.send_command_id, lora.component_id_base + 0, unit_id, 0xFF, 1234);
+                lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
                 lorapacket.append("Pa").setPacket(packet);
                 sendPacket(lorapacket);
             }
