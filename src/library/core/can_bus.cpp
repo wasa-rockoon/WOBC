@@ -120,8 +120,8 @@ void CANBus::loop() {
 
       //first frame
 
-      if ((item.can_id & 0xFF) != 0) { // missing previous frame
-        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0xFF);
+      if ((item.can_id & 0b11111) != 0) { // missing previous frame
+        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0b11111);
         return;
       }
 

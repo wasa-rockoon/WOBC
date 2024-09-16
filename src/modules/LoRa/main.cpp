@@ -56,7 +56,6 @@ void setup() {
   delay(1000);
   lora.begin();
   
-
   error_indicator.set(false);
   error_indicator.blink_on_change();
 }
