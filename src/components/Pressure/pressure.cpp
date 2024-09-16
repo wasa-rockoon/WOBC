@@ -26,7 +26,7 @@ Pressure::SampleTimer::SampleTimer(Pressure& pressure_ref, BME280I2C& bme_ref, u
 void Pressure::SampleTimer::callback() { // Timerで定期的に実行される関数
 
   // 高度規正値を不揮発メモリから読み込み
-  float sealevel_Pa = 1013.0;
+  double sealevel_Pa = 1013.0;
   wcpp::Packet qnh = loadPacket('Q'); 
   if (qnh) {
     auto e = qnh.find("Sp");
@@ -37,14 +37,15 @@ void Pressure::SampleTimer::callback() { // Timerで定期的に実行される�
   BME280::TempUnit tempUnit(BME280::TempUnit_Celsius);
   BME280::PresUnit presUnit(BME280::PresUnit_Pa);
   bme_.read(pres, temp, hum, tempUnit, presUnit);
+  double pressureAlt = (pow((sealevel_Pa/pres),(1.0/5.257))-1.0)*(temp+273.15)/0.0065;
 
   wcpp::Packet packet = newPacket(64);
   packet.telemetry(telemetry_id, component_id());
-  packet.append("Sp").setFloat32(sealevel_Pa);
-  packet.append("PR").setFloat32(pres);
-  packet.append("TE").setFloat32(temp);
-  packet.append("HU").setFloat32(hum);
-  //packet.append("PA").setFloat32();
+  packet.append("Sp").setInt((int)sealevel_Pa);
+  packet.append("PR").setInt((int)pres);
+  packet.append("TE").setInt((int)temp);
+  packet.append("HU").setInt((int)hum);
+  packet.append("PA").setInt((int)pressureAlt);
   // ... TODO
   sendPacket(packet);
 }

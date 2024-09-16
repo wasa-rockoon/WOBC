@@ -5,6 +5,19 @@
 #include <components/LoRa/lora.h>
 #include <components/Pressure/pressure.h>
 #include <components/GPS/gps.h>
+#include <components/Logger/logger.h>
+#include <SPI.h>
+
+#define SPI0_SCK_PIN 1
+#define SPI0_MOSI_PIN 4
+#define SPI0_MISO_PIN 3
+#define SPI0_CS_PIN 2
+
+#define SD_INSERTED_PIN 5
+#define SDCARD_MOSI_PIN SPI0_MOSI_PIN
+#define SDCARD_MISO_PIN SPI0_MISO_PIN
+#define SDCARD_SS_PIN SPI0_CS_PIN
+#define SDCARD_SCK_PIN SPI0_SCK_PIN
 
 #define ST 6
 #define PG 10
@@ -26,6 +39,7 @@ core::SerialBus serial_bus(Serial);
 
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
+component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire);
 component::GPS gps(47, 48, 115200);
 
@@ -39,25 +53,25 @@ class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
     kernel::Listener my_listener_;
+    kernel::Listener heartbeat_;
 
     void setup() override {
-        my_listener_.packet(power.Powertelemetry_id); 
+        my_listener_.telemetry(); 
         listen(my_listener_, 8);
+        heartbeat_.component(0x54);
+        listen(heartbeat_,1);
     }
 
     void loop() override {
         while (my_listener_) {
             wcpp::Packet packet = my_listener_.pop();
-            if (!packet.isNull()) {
-            wcpp::Packet lorapacket = newPacket(64);
-            lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
-            lorapacket.append("Pa").setPacket(packet);
-            sendPacket(lorapacket);
+                wcpp::Packet lorapacket = newPacket(64);
+                lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+                lorapacket.append("Pa").setPacket(packet);
+                sendPacket(lorapacket);
             }
         }
-    }
-
-} main_;
+    }main_;
 
 void setup() {
     Serial.begin(115200);
@@ -67,6 +81,8 @@ void setup() {
     Serial0.setPins(2, 1);
     Wire.begin(17, 16);
     serial_bus.begin();
+
+    SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
     delay(1000); 
 
@@ -80,6 +96,7 @@ void setup() {
     lora.begin();
     pressure.begin();
     gps.begin();
+    logger.begin();
     main_.begin();
 
     error_indicator.set(false);
