@@ -24,15 +24,16 @@ GPS::SampleTimer::SampleTimer(HardwareSerial& ss_ref, GPS& gps_ref, TinyGPSPlus&
 }
 
 void GPS::SampleTimer::callback(){
-    wcpp::Packet packet = newPacket(64);
-    if(ss_.available()){
+    int start = millis();
+    while(ss_.available() && millis()-start<500){
         gps_.encode(ss_.read());
-        packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
-        packet.append("LA").setFloat64(gps_.location.lat());
-        packet.append("LO").setFloat64(gps_.location.lng());
-        packet.append("AL").setFloat32(gps_.altitude.meters());
-        //packet.append("UT").setint();
-        sendPacket(packet);
     }
-}
+    wcpp::Packet packet = newPacket(64);
+    packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
+    packet.append("LA").setFloat64(gps_.location.lat());
+    packet.append("LO").setFloat64(gps_.location.lng());
+    packet.append("AL").setFloat32(gps_.altitude.meters());
+    //packet.append("UT").setint();
+    sendPacket(packet);
+    }
 }

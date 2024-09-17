@@ -27,7 +27,7 @@
 #define CHARGELED 8
 #define TEMP 7
 
-#define LORA_CHANNEL 5
+#define LORA_CHANNEL 3
 #define LORA_TX_PIN 38
 #define LORA_RX_PIN 39
 #define LORA_AUX_PIN 40
@@ -98,9 +98,9 @@ void setup() {
 
     power.begin();
     lora.begin();
-    //pressure.begin();
-    //gps.begin();
-    //logger.begin();
+    pressure.begin();
+    gps.begin();
+    logger.begin();
     main_.begin();
 
     error_indicator.set(false);
