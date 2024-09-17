@@ -28,7 +28,6 @@ public:
   }
   void loop() override {
     delay(1000);
-    LOG("LoRa working");
   }
 };
 

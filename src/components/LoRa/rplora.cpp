@@ -36,6 +36,8 @@ void LoRa::setup() {
   if (antenna_switch_) {
     pinMode(antenna_A_, OUTPUT);
     pinMode(antenna_B_, OUTPUT);
+    digitalWrite(antenna_A_, HIGH);
+    digitalWrite(antenna_B_, LOW);
   }
   
   lora_serial_.begin(9800);
