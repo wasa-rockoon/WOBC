@@ -5,12 +5,11 @@ namespace component {
 Logger::Logger(SPIClass& spi, pin_t SD_cs, pin_t SD_inserted, float clock_freq)
   : process::Component("Logger", component_id),
     clock_(*this, clock_freq),
-    spi_(spi), SD_cs_(SD_cs), SD_inserted_(SD_inserted) {
+    spi_(spi), SD_cs_(SD_cs), SD_inserted_(SD_inserted){
 }
 
 void Logger::setup() {
   listen(all_packets_, WOBC_LOGGER_PACKET_QUEUE_SIZE);
-
   pinMode(SD_inserted_, INPUT_PULLUP);
   openFile();
 }
@@ -28,8 +27,7 @@ void Logger::loop() {
       if (packet.isCommand()) {
         packet_log.command(
           packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
-      }
-      else {
+      }else {
         packet_log.telemetry(
           packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
       }
@@ -57,7 +55,6 @@ void Logger::loop() {
     }
   }
 }
-
 
 bool Logger::openFile() {
   if (file_) {
@@ -111,7 +108,7 @@ void Logger::sendLog() {
   log.append("Fo").setBool(!!file_);
   log.append("Bw").setInt(bytes_wrote_);
   log.append("Pw").setInt(packets_wrote_);
-  sendPacket(log);
+  // sendPacket(log);
 }
 
 Logger::Clock::Clock(Logger& logger, float freq)
