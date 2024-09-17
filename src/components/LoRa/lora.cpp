@@ -59,20 +59,20 @@ void LoRa::setup() {
 
   delay(100);
 
-  if (ok) {
-    Serial.println("LoRa setup complete.");
+  /*if (ok) {
+    LOG("LoRa setup complete.");
   } else {
-    Serial.println("LoRa setup error.");
-  }
-
-  // リスナーの設定
-  listen(all_packets_, 8);  // キューサイズ 8 でリスナーを設定
+    LOG("LoRa setup error.");
+  }*/
 }
 
 void LoRa::loop() {
 }
 
 void LoRa::onCommand(const wcpp::Packet& packet) {
+  while(e220_.isBusy());
+  delay(100);
+  
   if (packet.packet_id() == send_command_id) { 
   
     auto p = packet.find("Pa");
@@ -93,8 +93,7 @@ void LoRa::onCommand(const wcpp::Packet& packet) {
     memcpy(data_with_checksum, data, size);
     data_with_checksum[size] = checksum_value;
 
-    LOG("LoRa send %d", size + 1);
-    // データを送信
+    //LOG("LoRa send %d", size + 1);
     e220_.sendTransparent(data_with_checksum, size + 1);
   }
 }
