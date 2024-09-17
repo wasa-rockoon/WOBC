@@ -32,7 +32,7 @@ void GPS::SampleTimer::callback(){
     packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
     packet.append("LA").setFloat64(gps_.location.lat());
     packet.append("LO").setFloat64(gps_.location.lng());
-    packet.append("AL").setFloat32(gps_.altitude.meters());
+    packet.append("AL").setInt((int)gps_.altitude.meters());
     //packet.append("UT").setint();
     sendPacket(packet);
     }
