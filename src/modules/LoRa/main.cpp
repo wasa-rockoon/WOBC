@@ -4,7 +4,7 @@
 #include <library/wobc.h>
 #include <components/LoRa/rplora.h>
 
-#define LORA_CHANNEL 5
+#define LORA_CHANNEL 3
 #define LORA_TX_PIN 28
 #define LORA_RX_PIN 29
 #define LORA_AUX_PIN 20
@@ -56,7 +56,6 @@ void setup() {
   delay(1000);
   lora.begin();
   
-
   error_indicator.set(false);
   error_indicator.blink_on_change();
 }

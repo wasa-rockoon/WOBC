@@ -42,20 +42,33 @@ public:
   void loop() override {
     delay(1000);
     LOG("GS working");
-    wcpp::Packet p = newPacket(64);
-    p.telemetry('A', 0x11, 0x22, 0x33, 12345);
-    p.append("La").setInt(1351234);
-    p.append("Lo").setInt(351234);
-    p.append("Al").setInt(1234);
-    p.append("Ti").setInt(1234);
-    p.append("Va").setInt(1111);
-    p.append("Vb").setInt(1112);
-    p.append("Vc").setInt(1113);
-    p.append("Pr").setFloat32(1013.12);
-    p.append("Te").setInt(29);
-    p.append("Hu").setInt(78);
-    p.append("Pa").setFloat32(1013.12);
-    sendPacket(p);
+    /*uint8_t buf[255];
+    memset(buf, 0, 255);
+
+    wcpp::Packet tracker_packet = wcpp::Packet::empty(buf, 255);
+    tracker_packet.telemetry('A', 0x11, 'a', 0x11, 12345);
+    tracker_packet.append("La").setFloat64(35.7087377); 
+    tracker_packet.append("Lo").setFloat64(139.7170736);
+    tracker_packet.append("Al").setInt(1234);
+
+    // Time
+    tracker_packet.append("Ut").setInt(1234);
+    tracker_packet.append("Ts").setInt(1234);
+
+    // Power
+    tracker_packet.append("Vb").setInt(1111);
+    tracker_packet.append("Vp").setInt(1112);
+    tracker_packet.append("Vd").setInt(1113);
+    tracker_packet.append("Ip").setInt(2111);
+    tracker_packet.append("Id").setInt(2112);
+
+    // Environment
+    tracker_packet.append("Pr").setInt(1013);
+    tracker_packet.append("Te").setInt(29);
+    tracker_packet.append("Hu").setInt(78);
+    tracker_packet.append("Pa").setInt(100000);
+    
+    sendPacket(tracker_packet);*/
   }
 } main_;
 
