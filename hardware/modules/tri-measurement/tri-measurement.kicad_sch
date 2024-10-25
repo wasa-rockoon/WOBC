@@ -1,5 +1,799 @@
-(kicad_sch (version 20231120) (generator "eeschema") (generator_version "8.0")
-  (paper "A4")
-  (lib_symbols)
-  (symbol_instances)
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "09ffad5f-d798-427b-afb7-94e9cea30a78")
+	(paper "A4")
+	(lib_symbols)
+	(sheet
+		(at 121.285 61.595)
+		(size 15.875 22.225)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "371b9fab-2c38-4ddb-b7b9-207fdf0685c9")
+		(property "Sheetname" "LoRa"
+			(at 121.285 60.8834 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "LoRa.kicad_sch"
+			(at 121.285 84.4046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "RF_switch2" input
+			(at 137.16 67.945 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c65c85e1-c509-4299-bb0a-d5d430ea4b7a")
+		)
+		(pin "RF_switch1" input
+			(at 137.16 65.405 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3faea304-2166-4009-a353-c10fce93b023")
+		)
+		(pin "LoRa_M0" output
+			(at 137.16 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "56bf9319-1adf-43bc-b89f-f2d0328be66e")
+		)
+		(pin "LoRa_AUX" output
+			(at 137.16 75.565 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c39434c1-b419-4bce-a678-eb75a0e87df5")
+		)
+		(pin "LoRa_M1" output
+			(at 137.16 73.025 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c02a539f-1dd3-4258-8f66-139f61d9aca9")
+		)
+		(pin "LoRa_RTX" output
+			(at 137.16 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "804bc9b2-a93e-404a-89ac-14b464990df4")
+		)
+		(pin "LoRa_TRX" input
+			(at 137.16 80.645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "eb5e6528-8e5a-42a2-a359-aafa7a160351")
+		)
+		(instances
+			(project "tri-measurement"
+				(path "/09ffad5f-d798-427b-afb7-94e9cea30a78"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 121.285 33.02)
+		(size 15.875 22.225)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "71f191a0-ae72-46c9-a8f5-926308a69c87")
+		(property "Sheetname" "Logger"
+			(at 121.285 32.3084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Logger.kicad_sch"
+			(at 121.285 55.8296 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "SD_DET" output
+			(at 137.16 35.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "82205120-d63d-4933-aa2e-07c012098cfb")
+		)
+		(pin "SD_MOSI" input
+			(at 137.16 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8b3567f1-9167-4f90-85e8-e3519c15c337")
+		)
+		(pin "SD_MISO" output
+			(at 137.16 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "fb2fade7-4ce9-4b59-a535-9ec275e84edb")
+		)
+		(pin "SD_SS" input
+			(at 137.16 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "1e1ae774-543a-4491-b83e-d603666dcecc")
+		)
+		(pin "SD_CLK" input
+			(at 137.16 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "f2470f80-7430-4a41-9888-eefbe24a707c")
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 137.16 52.705 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "25c08f8b-86da-41d3-b808-b3b4f418e90b")
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 137.16 50.165 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "ad6a99dd-2b8a-4632-8741-b072e5be147f")
+		)
+		(instances
+			(project "tri-measurement"
+				(path "/09ffad5f-d798-427b-afb7-94e9cea30a78"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 121.285 91.44)
+		(size 16.51 20.32)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "72b5d682-ff11-4742-a93c-04bf0fd29476")
+		(property "Sheetname" "GPSActive"
+			(at 121.285 90.7284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "GPSActive.kicad_sch"
+			(at 121.285 112.3446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "TX" output
+			(at 137.795 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "26f69f44-7cc7-495d-ab39-db944b11a4bc")
+		)
+		(pin "RESET" input
+			(at 137.795 94.615 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8a8901bc-4332-4941-9141-7100699a3989")
+		)
+		(pin "TIMEPULSE" input
+			(at 137.795 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "1440a3bf-b9d1-4f7e-9103-7a02d527659a")
+		)
+		(pin "+BATT" input
+			(at 137.795 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "46a4ec53-794d-4cdf-acc5-1e58ebb3c506")
+		)
+		(pin "RX" input
+			(at 137.795 104.775 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8ef2b0e6-ac7a-4a76-92be-e30a891918bf")
+		)
+		(instances
+			(project "tri-measurement"
+				(path "/09ffad5f-d798-427b-afb7-94e9cea30a78"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 173.355 58.42)
+		(size 56.515 52.705)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "79b2b908-6cd5-4c44-a29c-23eb70a47c31")
+		(property "Sheetname" "ESP32S3"
+			(at 173.355 57.7084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ESP32Core.kicad_sch"
+			(at 173.355 111.7096 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "GPIO3{slash}ADC1_CH2" bidirectional
+			(at 173.355 94.615 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6b3094e3-b949-49c3-8bd8-285c154e1e21")
+		)
+		(pin "GPIO2{slash}ADC1_CH1" bidirectional
+			(at 229.87 66.675 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "6db3b1e3-1679-41e2-b359-ed1ca234802d")
+		)
+		(pin "GPIO5{slash}ADC1_CH4" bidirectional
+			(at 173.355 69.215 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "5d6a7a1d-a5e5-440e-9bd9-513df0921c32")
+		)
+		(pin "GPIO4{slash}ADC1_CH3" bidirectional
+			(at 173.355 66.675 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "6d58c9b6-35b4-4cc2-8a3c-e6a8f8b1db9c")
+		)
+		(pin "GPIO1{slash}ADC1_CH0" bidirectional
+			(at 229.87 64.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "8097ab97-3769-4ba6-ba74-8c174aaf136c")
+		)
+		(pin "GPIO6{slash}ADC1_CH5" bidirectional
+			(at 173.355 71.755 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "125d4028-5a0d-4c25-9915-d38f753e0b6b")
+		)
+		(pin "GPIO7{slash}ADC1_CH6" bidirectional
+			(at 173.355 74.295 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "8cc0d30d-40d3-49ee-872b-af844decab14")
+		)
+		(pin "VUSB" output
+			(at 173.355 60.96 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "7670f563-17bc-4265-ae78-45d7fadbf9f5")
+		)
+		(pin "CANL" bidirectional
+			(at 229.87 71.755 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c858a575-41d6-4c70-8fec-2a1ed62502e0")
+		)
+		(pin "CANH" bidirectional
+			(at 229.87 69.215 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d36dd630-8d2a-48bd-92e4-4af241fcdd73")
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 173.355 79.375 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "16330e4c-a1e5-421c-8dd2-dbbc8f6ca43d")
+		)
+		(pin "GPIO40" bidirectional
+			(at 229.87 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "a9b1b8c6-befd-4ae9-a4aa-c6b62ffa2933")
+		)
+		(pin "GPIO39" bidirectional
+			(at 229.87 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "0fcb7334-a09a-4be0-9fd0-bcac5bbb93da")
+		)
+		(pin "GPIO13" bidirectional
+			(at 229.87 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "598e04c9-bad2-4aaa-a19a-43bc6b94a50d")
+		)
+		(pin "GPIO12" bidirectional
+			(at 173.355 106.68 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "074d2ad1-ed17-405e-a1f9-b78e6547d3fb")
+		)
+		(pin "GPIO8{slash}ADC1_CH7" bidirectional
+			(at 173.355 86.36 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "fdcc0e01-db98-4f3f-aa8e-1f34029fd556")
+		)
+		(pin "GPIO9{slash}ADC1_CH8" bidirectional
+			(at 173.355 99.06 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "bfd3c9fd-e91f-4798-a7db-2066a38b205c")
+		)
+		(pin "GPIO10{slash}ADC1_CH9" bidirectional
+			(at 173.355 101.6 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "5c97b281-b0eb-4bbc-b2cc-205a9c078f80")
+		)
+		(pin "GPIO11" bidirectional
+			(at 173.355 104.14 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "42310358-eda7-44df-bd35-2b948d864134")
+		)
+		(pin "GPIO48" bidirectional
+			(at 229.87 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "083f049b-aaa3-4703-9d01-59bf3ebbedb5")
+		)
+		(pin "GPIO47" bidirectional
+			(at 229.87 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "b5b60ea6-b424-464a-8cb4-ee492c5af8f9")
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 173.355 81.28 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "cf4b31f1-e6eb-4e65-8613-a4439a51572a")
+		)
+		(pin "GPIO18" bidirectional
+			(at 173.355 83.82 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "42dab70c-057f-42f8-a2fc-a2bf0a402f60")
+		)
+		(pin "GPIO21" bidirectional
+			(at 229.87 101.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "b8322878-6ff0-4b54-b466-f1c7493b5988")
+		)
+		(pin "GPIO14" bidirectional
+			(at 229.87 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "03bfaec4-821a-4e99-8199-2af8af4c7ab2")
+		)
+		(pin "GPIO38" bidirectional
+			(at 229.87 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "dcd539ed-ef5c-4a25-b528-966575bd2776")
+		)
+		(instances
+			(project "tri-measurement"
+				(path "/09ffad5f-d798-427b-afb7-94e9cea30a78"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 83.82 74.295)
+		(size 16.51 14.605)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "8482df07-bac4-493e-96e6-eb783cc634cb")
+		(property "Sheetname" "IMU"
+			(at 83.82 73.5834 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "IMU.kicad_sch"
+			(at 83.82 89.4846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 100.33 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d827cfa3-cfbb-48cb-87bf-41791f38d24d")
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 100.33 83.185 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "870a8ab0-651a-4724-9d8f-b61da546d721")
+		)
+		(instances
+			(project "tri-measurement"
+				(path "/09ffad5f-d798-427b-afb7-94e9cea30a78"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 83.82 121.285)
+		(size 16.51 15.24)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b70cca1e-52d2-4c2e-8090-0c3b02bbb4bc")
+		(property "Sheetname" "IFSimple"
+			(at 83.82 120.5734 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ModuleIFSimple.kicad_sch"
+			(at 83.82 137.1096 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "CANL" bidirectional
+			(at 100.33 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "2bec8e18-2184-4620-87cb-d605b72b87c5")
+		)
+		(pin "VIO" bidirectional
+			(at 100.33 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3d5f6785-ce99-4eb8-8789-d6b1fe79d516")
+		)
+		(pin "CANH" bidirectional
+			(at 100.33 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5f3fa2e0-0280-437f-b50c-3551576c55f7")
+		)
+		(instances
+			(project "tri-measurement"
+				(path "/09ffad5f-d798-427b-afb7-94e9cea30a78"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 83.82 95.25)
+		(size 16.51 13.97)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "fed7b5e5-0cf8-4f36-b77c-4bbd1eb1c12f")
+		(property "Sheetname" "Pressure"
+			(at 83.82 94.5384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Pressure.kicad_sch"
+			(at 83.82 109.8046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 100.33 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "4a8be0e1-86d7-4ea5-a7b5-67b0920f64e5")
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 100.33 100.965 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c2e872c2-03d7-4842-8b71-69c0d7711e15")
+		)
+		(instances
+			(project "tri-measurement"
+				(path "/09ffad5f-d798-427b-afb7-94e9cea30a78"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
 )
