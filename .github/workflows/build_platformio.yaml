@@ -21,7 +21,7 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: Build PlatformIO Projects
-        run: 
+        run: |
           git submodule update --init --recursive
           pio ci --project-conf platformio.ini $(awk -F "=" '/default_envs/ {print $2}' platformio.ini | sed 's/, */ -e /g' | sed 's/^/-e /')
         env:
