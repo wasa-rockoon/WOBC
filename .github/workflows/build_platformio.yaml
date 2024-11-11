@@ -1,0 +1,26 @@
+name: PlatformIO CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+
+      - name: Build PlatformIO Projects
+        run: pio ci --project-conf platformio.ini $(awk -F "=" '/default_envs/ {print $2}' platformio.ini | sed 's/, */ -e /g' | sed 's/^/-e /')
+        env:
+          PLATFORMIO_CI_SRC: src
