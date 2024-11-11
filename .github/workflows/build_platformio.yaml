@@ -1,6 +1,6 @@
 name: PlatformIO CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -21,6 +21,8 @@ jobs:
         run: pip install --upgrade platformio
 
       - name: Build PlatformIO Projects
-        run: pio ci --project-conf platformio.ini $(awk -F "=" '/default_envs/ {print $2}' platformio.ini | sed 's/, */ -e /g' | sed 's/^/-e /')
+        run: 
+          git submodule update --init --recursive
+          pio ci --project-conf platformio.ini $(awk -F "=" '/default_envs/ {print $2}' platformio.ini | sed 's/, */ -e /g' | sed 's/^/-e /')
         env:
           PLATFORMIO_CI_SRC: src
