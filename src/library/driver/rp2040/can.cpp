@@ -1,6 +1,6 @@
 #include "can.h"
 
-#include "rp2040.h"
+#include "RP2040.h"
 
 namespace driver {
 
