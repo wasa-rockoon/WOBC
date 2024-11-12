@@ -11,6 +11,8 @@
 
 using pin_t = byte;
 
+constexpr pin_t no_pin = 255;
+
 constexpr uint8_t packet_id_error = '!';
 constexpr uint8_t packet_id_heartbeat = '"';
 constexpr uint8_t packet_id_log = '#';

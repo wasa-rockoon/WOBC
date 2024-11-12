@@ -6,6 +6,7 @@ namespace driver {
 
 class GenericSerialClass: public Stream {
 public:
+  GenericSerialClass(): Stream() {}
   virtual void begin(unsigned baud) = 0;
   virtual void end() = 0;
 };
@@ -13,7 +14,7 @@ public:
 template <class SerialClass>
 class GenericSerial: public GenericSerialClass {
 public:
-  GenericSerial(SerialClass& serial): serial_(serial) {}
+  GenericSerial(SerialClass& serial): GenericSerialClass(), serial_(serial) {}
 
   inline void begin(unsigned baud) override { serial_.begin(baud); }
   inline void end() override { serial_.end(); }

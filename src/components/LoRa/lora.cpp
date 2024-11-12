@@ -16,7 +16,7 @@ LoRa::LoRa(driver::GenericSerialClass& serial, pin_t aux, pin_t m0, pin_t m1, ui
 
 LoRa::LoRa(driver::GenericSerialClass& serial, pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, uint8_t channel, unsigned number)
   : process::Component("LoRa", component_id_base + number),
-    serial_(serial),  // HardwareSerial(1)
+    serial_(serial),
     e220_(serial, aux, m0, m1),
     antenna_switch_(true),
     antenna_A_(antenna_A),
@@ -40,7 +40,7 @@ void LoRa::setup() {
   bool ok = true;
   ok &= e220_.setMode(E220::Mode::CONFIG_DS);
   ok &= e220_.setParametersToDefault();
-  ok &= e220_.setSerialBaudRate(115200);
+  ok &= e220_.setSerialBaudRate(9600);
   ok &= e220_.setDataRate(E220::SF::SF9, E220::BW::BW125kHz);
   ok &= e220_.setEnvRSSIEnable(true);
   ok &= e220_.setSendMode(E220::SendMode::TRANSPARENT);
@@ -48,9 +48,9 @@ void LoRa::setup() {
   ok &= e220_.setChannel(channel_);
   ok &= e220_.setRSSIEnable(true);
   ok &= e220_.setMode(E220::Mode::NORMAL);
-  serial_.flush();
-  serial_.end();
-  serial_.begin(115200);
+  // serial_.flush();
+  // serial_.end();
+  // serial_.begin(115200);
 
   delay(100);
 
@@ -62,10 +62,10 @@ void LoRa::setup() {
 }
 
 void LoRa::loop() {
-  uint8_t data[255];
+  uint8_t data[256];
   unsigned len = e220_.receive(data);
 
-  while(e220_.isBusy()){ vTaskDelay(1); }
+  while(e220_.isBusy()){ delay(1); }
 
   if (len > 0) {
     unsigned data_size = len - 1;
@@ -102,6 +102,10 @@ void LoRa::loop() {
 }
 
 void LoRa::onCommand(const wcpp::Packet& packet) {
+  while(e220_.isBusy());
+  delay(100);
+  
+  if (packet.packet_id() != send_command_id) return;
   
   auto p = packet.find("Pa");
   if (!p) return;

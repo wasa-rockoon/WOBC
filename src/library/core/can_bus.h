@@ -7,7 +7,7 @@
 namespace core {
 
 #ifndef WOBC_CAN_BUS_BAUDRATE
-#define WOBC_CAN_BUS_BAUDRATE 1000000
+#define WOBC_CAN_BUS_BAUDRATE 125000
 #endif
 #ifndef WOBC_CAN_BUS_POOL_SIZE
 #define WOBC_CAN_BUS_POOL_SIZE 4

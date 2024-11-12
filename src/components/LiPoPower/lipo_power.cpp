@@ -3,7 +3,7 @@
 namespace component {
 
 // コンストラクタにピン番号を引数として追加
-LiPoPower::LiPoPower(TwoWire& wire, int st_pin, int pg_pin, int stat1_pin, int stat2_pin, int heat_pin, int charge_led_pin, int temp_pin, unsigned sample_freq_hz)
+LiPoPower::LiPoPower(TwoWire& wire, int st_pin, int pg_pin, int stat1_pin, int stat2_pin, int heat_pin, int charge_led_pin, int temp_pin, uint8_t unit_id, unsigned sample_freq_hz)
   : process::Component("LiPoPower", component_id),
     wire_(wire),
     ina1(0x4F),
@@ -16,8 +16,9 @@ LiPoPower::LiPoPower(TwoWire& wire, int st_pin, int pg_pin, int stat1_pin, int s
     heat_pin_(heat_pin),
     charge_led_pin_(charge_led_pin),
     temp_pin_(temp_pin),
+    unit_id_(unit_id),
     // SampleTimer に LiPoPower の参照を渡す
-    sample_timer_(*this, ina1, ina2, ina3, 1000 / sample_freq_hz) {
+    sample_timer_(*this, ina1, ina2, ina3, unit_id, 1000 / sample_freq_hz) {
 }
 
 void LiPoPower::setup() {
@@ -39,9 +40,9 @@ void LiPoPower::setup() {
 }
 
 // SampleTimer コンストラクタに LiPoPower の参照を追加
-LiPoPower::SampleTimer::SampleTimer(LiPoPower& lipo_power_ref, INA226& ina1_ref, INA226& ina2_ref, INA226& ina3_ref, unsigned interval_ms)
+LiPoPower::SampleTimer::SampleTimer(LiPoPower& lipo_power_ref, INA226& ina1_ref, INA226& ina2_ref, INA226& ina3_ref, uint8_t unit_id_ref, unsigned interval_ms)
   : process::Timer("LiPoPowerTimer", interval_ms),
-    ina1_(ina1_ref), ina2_(ina2_ref), ina3_(ina3_ref), lipo_power_(lipo_power_ref) {  // LiPoPower への参照を保存
+    ina1_(ina1_ref), ina2_(ina2_ref), ina3_(ina3_ref), unit_id_(unit_id_ref), lipo_power_(lipo_power_ref) {  // LiPoPower への参照を保存
 }
 
 void LiPoPower::SampleTimer::callback() {
@@ -70,7 +71,7 @@ void LiPoPower::SampleTimer::callback() {
   // Powertelemetry_id パケット送信
 
   wcpp::Packet packet1 = newPacket(64);
-  packet1.telemetry(Powertelemetry_id, lipo_power_.component_id);
+  packet1.telemetry(Powertelemetry_id, lipo_power_.component_id, unit_id_, 0xFF, 1234);
   packet1.append("Sc").setBool(source);
   packet1.append("Vp").setInt(x1_mV);
   packet1.append("Ip").setInt(x1_mA);
