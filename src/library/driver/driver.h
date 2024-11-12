@@ -1,5 +1,7 @@
 #pragma once
 
+#include "generic_serial.h"
+
 #ifdef ARDUINO_ARCH_ESP32
 #include "esp32/can.h"
 #include "esp32/kvs.h"

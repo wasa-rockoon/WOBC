@@ -2,8 +2,9 @@
 
 #include <Arduino.h>
 #include <library/wobc.h>
-#include <components/LoRa/rplora.h>
+#include <components/LoRa/lora.h>
 
+// Pins
 #define LORA_CHANNEL 3
 #define LORA_TX_PIN 28
 #define LORA_RX_PIN 29
@@ -13,12 +14,22 @@
 #define LORA_SW_A1 26
 #define LORA_SW_A2 27
 
+// Settings
 constexpr uint8_t module_id = 0x4C;
 
+// IO
+SerialPIO serial1(LORA_TX_PIN, LORA_RX_PIN, 256);
+driver::GenericSerial<SerialPIO> lora_serial1(serial1);
+
+// Core
 core::CANBus can_bus(23, 22);
 core::SerialBus serial_bus(Serial);
+interface::WatchIndicator<unsigned> status_indicator(25, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(24, kernel::errorCount());
 
-component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_SW_A1, LORA_SW_A2, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL);
+// Components
+
+component::LoRa lora(lora_serial1, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_SW_A1, LORA_SW_A2, LORA_CHANNEL);
 
 class Main: public process::Component {
 public:
@@ -30,11 +41,8 @@ public:
     delay(1000);
     LOG("LoRa working");
   }
-};
+} main_;
 
-interface::WatchIndicator<unsigned> status_indicator(25, kernel::packetCount());
-interface::WatchIndicator<unsigned> error_indicator(24, kernel::errorCount());
-Main main_;
 
 void setup() {
   // put your setup code here, to run once:

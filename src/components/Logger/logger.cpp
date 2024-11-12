@@ -80,7 +80,11 @@ bool Logger::openFile() {
   char file_name[16];
   snprintf(file_name, sizeof(file_name), "/log_%4d.bin", file_number);
 
+#if defined(ARDUINO_ARCH_ESP32)
   file_ = SD.open(file_name, FILE_APPEND);
+#elif defined(ARDUINO_ARCH_RP2040)
+  file_ = SD.open(file_name, O_APPEND);
+#endif
 
   if (!file_) {
     error("cOF", "failed to open file: %s", file_name);
