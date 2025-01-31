@@ -1235,10 +1235,6 @@
 		(uuid "49fce977-bd43-43a5-9173-eea0c1e084ac")
 	)
 	(no_connect
-		(at 156.845 74.295)
-		(uuid "9a8d9f27-9a3a-4d56-866d-a936ec92d2bb")
-	)
-	(no_connect
 		(at 156.845 71.755)
 		(uuid "a0b9d2c1-857a-4bb1-80e4-dcbc7169563d")
 	)
@@ -1784,6 +1780,16 @@
 	)
 	(wire
 		(pts
+			(xy 178.435 74.295) (xy 178.435 67.945)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c23cd4f-57f2-4348-8a65-532594dcfdd4")
+	)
+	(wire
+		(pts
 			(xy 189.23 113.03) (xy 197.485 113.03)
 		)
 		(stroke
@@ -1871,6 +1877,16 @@
 			(type default)
 		)
 		(uuid "80107971-6489-4a5f-b885-96dc0633335f")
+	)
+	(wire
+		(pts
+			(xy 178.435 67.945) (xy 197.485 67.945)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "82f468c7-f375-4f2b-ba5b-f2b8600aa251")
 	)
 	(wire
 		(pts
@@ -2271,6 +2287,16 @@
 			(type default)
 		)
 		(uuid "fb1d7672-b5c8-4c8b-bf59-cf05488a712f")
+	)
+	(wire
+		(pts
+			(xy 156.845 74.295) (xy 178.435 74.295)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd6fa870-dcdd-4713-b865-724c6a60de28")
 	)
 	(label "CANL"
 		(at 158.75 79.375 0)
@@ -3884,16 +3910,6 @@
 			)
 			(uuid "99350a8b-df5a-4fc7-9369-910a635b4771")
 		)
-		(pin "VOUT" output
-			(at 197.485 80.645 180)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-			(uuid "8ed5f7aa-8fc5-4989-98c1-95f33690ab97")
-		)
 		(pin "I2C_SCL" bidirectional
 			(at 197.485 84.455 180)
 			(effects
@@ -3913,6 +3929,26 @@
 				(justify left)
 			)
 			(uuid "a8d24023-03cc-4724-99d9-5e522c87e1fe")
+		)
+		(pin "VIN" input
+			(at 197.485 80.645 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "7f776568-4dcd-4782-90e3-4f9e6940dcec")
+		)
+		(pin "EN" input
+			(at 197.485 67.945 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "472419a8-c3ee-489c-ae5c-0b18e3f5b060")
 		)
 		(instances
 			(project "Tri.Ctrl1"
