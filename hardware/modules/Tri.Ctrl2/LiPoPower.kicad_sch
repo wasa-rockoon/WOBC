@@ -2162,6 +2162,126 @@
 				)
 			)
 		)
+		(symbol "VDD_3"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VDD"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VDD\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VDD_3_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VDD_3_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "WOBCLibrary:TPS63070RNMR"
 			(pin_names
 				(offset 1.016)
@@ -2900,12 +3020,6 @@
 		(uuid "209e14af-ca53-4f4d-95ae-ecddd49561cc")
 	)
 	(junction
-		(at 248.92 37.465)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "20cede9f-8128-4dfb-84ad-dd6b0d610d72")
-	)
-	(junction
 		(at 231.14 46.355)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2964,6 +3078,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "45a6d24a-4129-4ff8-b382-afcd3c38da88")
+	)
+	(junction
+		(at 248.92 39.37)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4a648aac-47b5-4442-a33b-22467c91dc41")
 	)
 	(junction
 		(at 32.385 101.6)
@@ -3158,12 +3278,6 @@
 		(uuid "ecae7da2-fc7b-45b7-b9a9-0cfadbf4fd54")
 	)
 	(junction
-		(at 248.92 39.37)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "edd7d844-a29b-4925-839c-bdc564d83b2c")
-	)
-	(junction
 		(at 177.8 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3196,6 +3310,16 @@
 			(type default)
 		)
 		(uuid "03c51101-ecd7-47ee-82c5-a0ffef796524")
+	)
+	(wire
+		(pts
+			(xy 248.92 34.29) (xy 248.92 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "05a71a72-47e3-452d-a1fd-88acd8fae2ea")
 	)
 	(wire
 		(pts
@@ -3526,16 +3650,6 @@
 			(type default)
 		)
 		(uuid "2b6cec48-5741-493d-9458-d8cbfc83974c")
-	)
-	(wire
-		(pts
-			(xy 248.92 37.465) (xy 260.35 37.465)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2b91d5cc-ecea-4666-bd4f-aa7dc91c7f5e")
 	)
 	(wire
 		(pts
@@ -3986,16 +4100,6 @@
 			(type default)
 		)
 		(uuid "693a439a-a4bf-4d1d-8f3d-3c9fb6468df1")
-	)
-	(wire
-		(pts
-			(xy 248.92 37.465) (xy 248.92 39.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6a28cefe-20b2-4a09-bed6-282a26d0f8bd")
 	)
 	(wire
 		(pts
@@ -4769,7 +4873,7 @@
 	)
 	(wire
 		(pts
-			(xy 241.3 37.465) (xy 248.92 37.465)
+			(xy 241.3 37.465) (xy 260.35 37.465)
 		)
 		(stroke
 			(width 0)
@@ -6351,7 +6455,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
+		(property "Footprint" "Connector_JST:JST_XA_S02B-XASK-1N-BN_1x02_P2.50mm_Horizontal"
 			(at 205.74 109.22 0)
 			(effects
 				(font
@@ -8623,6 +8727,73 @@
 		)
 	)
 	(symbol
+		(lib_name "VDD_3")
+		(lib_id "power:VDD")
+		(at 248.92 34.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9e16577d-f41a-4294-9c8f-249cad24196f")
+		(property "Reference" "#PWR0431"
+			(at 248.92 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VDD"
+			(at 248.92 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 248.92 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 248.92 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VDD\""
+			(at 248.92 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a72d2652-e8b1-47bb-b03a-2d210b3f5e10")
+		)
+		(instances
+			(project ""
+				(path "/80fbddc6-aa50-4ba3-b7b9-21fad44f05f1/aff5d149-7d1f-44c5-87f1-7b19a74f6f79"
+					(reference "#PWR0431")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VDD")
 		(at 276.225 37.465 270)
 		(unit 1)
@@ -10710,7 +10881,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "\nWide input voltage (2V-16V) buck-boost converter\n"
+		(property "Description" "Wide input voltage (2V-16V) buck-boost converter"
 			(at 184.15 -2.175 0)
 			(effects
 				(font
@@ -11101,7 +11272,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Button_Switch_THT:SW_CuK_OS102011MA1QN1_SPDT_Angled"
+		(property "Footprint" "Button_Switch_THT:SW_Slide_SPDT_Straight_CK_OS102011MS2Q"
 			(at 146.685 48.895 0)
 			(effects
 				(font

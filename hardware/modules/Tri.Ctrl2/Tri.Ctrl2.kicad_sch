@@ -5,6 +5,160 @@
 	(uuid "80fbddc6-aa50-4ba3-b7b9-21fad44f05f1")
 	(paper "A4")
 	(lib_symbols
+		(symbol "WOBCLibrary:Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Board_0_1"
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Board_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "power:VBUS"
 			(power)
 			(pin_numbers hide)
@@ -127,8 +281,56 @@
 		)
 	)
 	(no_connect
+		(at 173.99 70.485)
+		(uuid "184fbf63-2fa8-4dcd-b67d-ff5d06cc9a2a")
+	)
+	(no_connect
+		(at 101.6 130.175)
+		(uuid "229e4bf6-7d6e-4aa1-b878-caa77d687485")
+	)
+	(no_connect
+		(at 173.99 114.935)
+		(uuid "244396b9-7bed-4bb7-b765-4c3367df6dbe")
+	)
+	(no_connect
+		(at 173.99 120.015)
+		(uuid "42b1f9e4-2cdd-4601-b708-ff1355487c9d")
+	)
+	(no_connect
+		(at 101.6 80.01)
+		(uuid "4364bb39-166b-4dbe-bba0-d15d79aa9568")
+	)
+	(no_connect
+		(at 173.99 112.395)
+		(uuid "5166f447-4470-404e-85be-293e9a8a9eb8")
+	)
+	(no_connect
+		(at 101.6 77.47)
+		(uuid "7b3b4cdf-52c0-44f4-aecf-c3d26f88857a")
+	)
+	(no_connect
 		(at 74.295 129.54)
 		(uuid "7d6c7861-dd99-4c33-b98d-8c3eac52c05b")
+	)
+	(no_connect
+		(at 173.99 117.475)
+		(uuid "971501c3-0ac8-4f4f-92dd-d19c835dff75")
+	)
+	(no_connect
+		(at 101.6 100.965)
+		(uuid "a5b78aaa-6dc4-4b05-a538-05e7a7e23880")
+	)
+	(no_connect
+		(at 101.6 74.93)
+		(uuid "b1e361b7-f746-4cbd-97d3-f3b71064929f")
+	)
+	(no_connect
+		(at 101.6 72.39)
+		(uuid "b6dc21de-4a51-455d-9cdf-07d516677f94")
+	)
+	(no_connect
+		(at 173.99 73.025)
+		(uuid "d8dd33ce-15ea-472c-8f7e-f6e39eadc021")
 	)
 	(bus_entry
 		(at 90.805 86.995)
@@ -745,6 +947,17 @@
 		)
 		(uuid "3964f607-1c6a-499f-8890-956a8d4da1b2")
 	)
+	(label "STAT2"
+		(at 175.895 88.265 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "52d17695-019f-4c48-b9c1-142d4cf8159a")
+	)
 	(label "RX"
 		(at 95.25 116.84 0)
 		(fields_autoplaced yes)
@@ -844,6 +1057,28 @@
 		)
 		(uuid "c5199485-ad58-4feb-8c64-51e5e5ee3d6e")
 	)
+	(label "STAT1"
+		(at 175.895 90.805 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c5b8530b-d0c0-4a09-8aaa-b0e89d46dd6f")
+	)
+	(label "PG"
+		(at 175.895 85.725 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cc52a0cc-9fc7-4c4b-a598-9fd99ab6663a")
+	)
 	(label "STAT2"
 		(at 81.28 83.82 0)
 		(fields_autoplaced yes)
@@ -887,7 +1122,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aea1d47d-e2a6-4ae4-939e-1a37133d18f0")
-		(property "Reference" "#PWR0102"
+		(property "Reference" "#PWR0101"
 			(at 97.79 69.85 0)
 			(effects
 				(font
@@ -937,7 +1172,74 @@
 		(instances
 			(project ""
 				(path "/80fbddc6-aa50-4ba3-b7b9-21fad44f05f1"
-					(reference "#PWR0102")
+					(reference "#PWR0101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "WOBCLibrary:Board")
+		(at 139.065 34.925 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d22f3159-9c22-4f75-aac2-0b5dd583617f")
+		(property "Reference" "B101"
+			(at 140.97 35.3567 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 140.97 37.2618 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:Board_1U_60x60"
+			(at 139.065 34.925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.065 34.925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 139.065 34.925 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "GND"
+			(uuid "0b459a04-e20e-48ee-9978-f33e38fa7cd9")
+		)
+		(instances
+			(project ""
+				(path "/80fbddc6-aa50-4ba3-b7b9-21fad44f05f1"
+					(reference "B101")
 					(unit 1)
 				)
 			)
