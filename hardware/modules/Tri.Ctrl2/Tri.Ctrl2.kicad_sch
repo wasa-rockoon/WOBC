@@ -313,6 +313,10 @@
 		(uuid "7d6c7861-dd99-4c33-b98d-8c3eac52c05b")
 	)
 	(no_connect
+		(at 101.6 119.38)
+		(uuid "88ea6c01-bf87-456c-b457-49d522cd2b26")
+	)
+	(no_connect
 		(at 173.99 117.475)
 		(uuid "971501c3-0ac8-4f4f-92dd-d19c835dff75")
 	)
@@ -360,7 +364,7 @@
 		(uuid "061589e9-6a5e-43b0-8f88-68e1c98d01db")
 	)
 	(bus_entry
-		(at 91.44 119.38)
+		(at 91.44 116.84)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -423,7 +427,7 @@
 		(uuid "9f47cecd-a615-493c-aece-4a96799af1e8")
 	)
 	(bus_entry
-		(at 91.44 116.84)
+		(at 91.44 109.855)
 		(size -2.54 2.54)
 		(stroke
 			(width 0)
@@ -506,7 +510,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 116.84) (xy 101.6 116.84)
+			(xy 91.44 109.855) (xy 101.6 109.855)
 		)
 		(stroke
 			(width 0)
@@ -616,7 +620,7 @@
 	)
 	(bus
 		(pts
-			(xy 88.9 121.92) (xy 88.9 134.62)
+			(xy 88.9 119.38) (xy 88.9 134.62)
 		)
 		(stroke
 			(width 0)
@@ -666,7 +670,7 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 119.38) (xy 101.6 119.38)
+			(xy 91.44 116.84) (xy 101.6 116.84)
 		)
 		(stroke
 			(width 0)
@@ -796,7 +800,7 @@
 	)
 	(bus
 		(pts
-			(xy 88.9 119.38) (xy 88.9 121.92)
+			(xy 88.9 112.395) (xy 88.9 119.38)
 		)
 		(stroke
 			(width 0)
@@ -926,6 +930,17 @@
 		(uuid "05b43a8b-f5ed-4f03-a401-ed5c1bd44fd8")
 	)
 	(label "STAT1"
+		(at 175.895 85.725 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1b7f26ae-5d55-406d-885a-95990b8a63c1")
+	)
+	(label "STAT1"
 		(at 81.28 86.36 0)
 		(fields_autoplaced yes)
 		(effects
@@ -958,17 +973,6 @@
 		)
 		(uuid "52d17695-019f-4c48-b9c1-142d4cf8159a")
 	)
-	(label "RX"
-		(at 95.25 116.84 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "59c547b4-cd2f-4b60-ae42-5f1f92a24e08")
-	)
 	(label "SDA"
 		(at 81.28 74.93 0)
 		(fields_autoplaced yes)
@@ -979,6 +983,17 @@
 			(justify left bottom)
 		)
 		(uuid "59c76a85-0f13-4089-ab72-d7b8964f629a")
+	)
+	(label "PG"
+		(at 175.895 90.805 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6a1ada13-5f2d-435a-9d50-823c1dee9d7d")
 	)
 	(label "SCL"
 		(at 95.25 86.995 0)
@@ -1002,6 +1017,17 @@
 		)
 		(uuid "9fc2708e-3a9a-4ad9-8ac2-b7d916e6b3f9")
 	)
+	(label "TX"
+		(at 95.25 109.855 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ff47be3-b7b7-4320-99ad-33ad62e0a79d")
+	)
 	(label "CANH"
 		(at 196.85 71.12 0)
 		(fields_autoplaced yes)
@@ -1013,8 +1039,8 @@
 		)
 		(uuid "a0512117-7f2b-464e-989d-56d850d56bef")
 	)
-	(label "TX"
-		(at 95.25 119.38 0)
+	(label "RX"
+		(at 95.25 116.84 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1022,7 +1048,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "b0453684-bd56-4505-a966-9c545776c1c4")
+		(uuid "a222d7d5-611a-44b7-b117-6bd8e9d4211f")
 	)
 	(label "CANL"
 		(at 196.85 73.66 0)
@@ -1056,28 +1082,6 @@
 			(justify left bottom)
 		)
 		(uuid "c5199485-ad58-4feb-8c64-51e5e5ee3d6e")
-	)
-	(label "STAT1"
-		(at 175.895 90.805 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "c5b8530b-d0c0-4a09-8aaa-b0e89d46dd6f")
-	)
-	(label "PG"
-		(at 175.895 85.725 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "cc52a0cc-9fc7-4c4b-a598-9fd99ab6663a")
 	)
 	(label "STAT2"
 		(at 81.28 83.82 0)
