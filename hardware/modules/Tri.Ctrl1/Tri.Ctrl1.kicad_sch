@@ -1250,6 +1250,10 @@
 		(at 92.075 123.825)
 		(uuid "cfddbd2d-1621-4342-96a1-b7e76f694275")
 	)
+	(no_connect
+		(at 92.075 78.105)
+		(uuid "d9327fca-cbb2-4dd8-ad79-fdc73f77f92b")
+	)
 	(bus_entry
 		(at 165.1 93.345)
 		(size 2.54 -2.54)
@@ -1561,16 +1565,6 @@
 			(type default)
 		)
 		(uuid "0eb11c74-8698-412e-8ad3-6ac0538dcb1b")
-	)
-	(wire
-		(pts
-			(xy 86.995 78.105) (xy 86.995 60.325)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0f55ba19-2dd0-4988-a526-2f66e4932124")
 	)
 	(wire
 		(pts
@@ -2022,16 +2016,6 @@
 		)
 		(uuid "87b4a94c-3ae3-4697-8de1-c2046080d7e1")
 	)
-	(wire
-		(pts
-			(xy 92.075 78.105) (xy 86.995 78.105)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "89eec1b7-8721-4530-89e2-e4a090fc1eae")
-	)
 	(bus
 		(pts
 			(xy 186.69 110.49) (xy 186.69 113.03)
@@ -2061,16 +2045,6 @@
 			(type default)
 		)
 		(uuid "9322f9f4-26c4-4fac-8b1a-d9b70208b8ee")
-	)
-	(wire
-		(pts
-			(xy 86.995 60.325) (xy 164.465 60.325)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "952f7ae4-03b5-4af9-9feb-31a23253383b")
 	)
 	(bus
 		(pts
@@ -2324,16 +2298,6 @@
 	)
 	(wire
 		(pts
-			(xy 164.465 60.325) (xy 164.465 67.945)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cfd78c1b-b74d-4838-b7d2-60b65f878918")
-	)
-	(wire
-		(pts
 			(xy 83.82 118.745) (xy 92.075 118.745)
 		)
 		(stroke
@@ -2481,16 +2445,6 @@
 			(type default)
 		)
 		(uuid "fec5aa2d-da78-4550-9a30-8c0e52e12121")
-	)
-	(wire
-		(pts
-			(xy 164.465 67.945) (xy 197.485 67.945)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ffb603f6-75c1-4c18-ab19-f292ef2d8c11")
 	)
 	(label "PG"
 		(at 159.385 93.345 0)
@@ -2875,7 +2829,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "39626bc3-0584-441b-af03-dc2eaf4f9cd9")
-		(property "Reference" "J103"
+		(property "Reference" "J104"
 			(at 144.145 146.05 0)
 			(effects
 				(font
@@ -2930,7 +2884,7 @@
 		(instances
 			(project ""
 				(path "/39a3f286-a766-4612-a8bf-4e53d682d5ae"
-					(reference "J103")
+					(reference "J104")
 					(unit 1)
 				)
 			)
@@ -3153,7 +3107,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "822dca3d-1870-4822-a92b-c96abca24f83")
-		(property "Reference" "#PWR0106"
+		(property "Reference" "#PWR0109"
 			(at 151.13 161.925 0)
 			(effects
 				(font
@@ -3203,7 +3157,7 @@
 		(instances
 			(project ""
 				(path "/39a3f286-a766-4612-a8bf-4e53d682d5ae"
-					(reference "#PWR0106")
+					(reference "#PWR0109")
 					(unit 1)
 				)
 			)
@@ -3219,7 +3173,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a08afa36-7cf1-4fe0-8caa-f8aaef1d5326")
-		(property "Reference" "#PWR0108"
+		(property "Reference" "#PWR0106"
 			(at 56.515 160.655 0)
 			(effects
 				(font
@@ -3269,7 +3223,7 @@
 		(instances
 			(project ""
 				(path "/39a3f286-a766-4612-a8bf-4e53d682d5ae"
-					(reference "#PWR0108")
+					(reference "#PWR0106")
 					(unit 1)
 				)
 			)
@@ -3425,7 +3379,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c4725916-4300-4384-b021-71af466dc747")
-		(property "Reference" "#PWR0105"
+		(property "Reference" "#PWR0107"
 			(at 74.93 72.39 0)
 			(effects
 				(font
@@ -3475,7 +3429,7 @@
 		(instances
 			(project "Tri.Ctrl1"
 				(path "/39a3f286-a766-4612-a8bf-4e53d682d5ae"
-					(reference "#PWR0105")
+					(reference "#PWR0107")
 					(unit 1)
 				)
 			)
@@ -3491,7 +3445,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cec2fcca-d128-48ef-a70b-f1dd30f60b45")
-		(property "Reference" "J104"
+		(property "Reference" "J103"
 			(at 43.18 146.685 0)
 			(effects
 				(font
@@ -3552,7 +3506,7 @@
 		(instances
 			(project ""
 				(path "/39a3f286-a766-4612-a8bf-4e53d682d5ae"
-					(reference "J104")
+					(reference "J103")
 					(unit 1)
 				)
 			)
@@ -3700,7 +3654,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eeada74d-eca1-42ce-a274-9fbc606fa22e")
-		(property "Reference" "#PWR0109"
+		(property "Reference" "#PWR0108"
 			(at 90.17 71.12 0)
 			(effects
 				(font
@@ -3750,7 +3704,7 @@
 		(instances
 			(project ""
 				(path "/39a3f286-a766-4612-a8bf-4e53d682d5ae"
-					(reference "#PWR0109")
+					(reference "#PWR0108")
 					(unit 1)
 				)
 			)
@@ -3766,7 +3720,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ef8965df-77cd-4f2b-a293-5583a8145e88")
-		(property "Reference" "#PWR0107"
+		(property "Reference" "#PWR0105"
 			(at 56.515 155.575 0)
 			(effects
 				(font
@@ -3816,7 +3770,7 @@
 		(instances
 			(project ""
 				(path "/39a3f286-a766-4612-a8bf-4e53d682d5ae"
-					(reference "#PWR0107")
+					(reference "#PWR0105")
 					(unit 1)
 				)
 			)
@@ -4198,16 +4152,6 @@
 				(justify left)
 			)
 			(uuid "7f776568-4dcd-4782-90e3-4f9e6940dcec")
-		)
-		(pin "EN" input
-			(at 197.485 67.945 180)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-			(uuid "472419a8-c3ee-489c-ae5c-0b18e3f5b060")
 		)
 		(instances
 			(project "Tri.Ctrl1"
