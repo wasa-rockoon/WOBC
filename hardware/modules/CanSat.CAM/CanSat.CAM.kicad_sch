@@ -4,10 +4,252 @@
 	(generator_version "8.0")
 	(uuid "57773364-f25c-46b7-83c2-7d033b04af1f")
 	(paper "A4")
-	(lib_symbols)
+	(lib_symbols
+		(symbol "WOBCLibrary:Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Board_0_1"
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Board_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 134.62 77.47) (xy 152.4 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d2292e70-a006-4077-a219-df83c61519a6")
+	)
+	(wire
+		(pts
+			(xy 134.62 81.28) (xy 152.4 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ddde970a-70c6-4905-81e7-76163cbdd3c9")
+	)
+	(symbol
+		(lib_id "WOBCLibrary:Board")
+		(at 142.875 55.245 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "db632608-da1d-4258-8c84-eca3bb8718a7")
+		(property "Reference" "B101"
+			(at 144.78 55.6767 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 144.78 57.5818 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:Board_0.5U_60x40"
+			(at 142.875 55.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 142.875 55.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 142.875 55.245 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "GND"
+			(uuid "54962f10-885e-48e6-9ba0-746e5482a30c")
+		)
+		(instances
+			(project ""
+				(path "/57773364-f25c-46b7-83c2-7d033b04af1f"
+					(reference "B101")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(sheet
 		(at 100.965 66.04)
-		(size 81.915 67.31)
+		(size 33.655 26.035)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -27,7 +269,7 @@
 			)
 		)
 		(property "Sheetfile" "ESP32Camera.kicad_sch"
-			(at 100.965 133.9346 0)
+			(at 100.965 92.6596 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -35,10 +277,88 @@
 				(justify left top)
 			)
 		)
+		(pin "CANH" bidirectional
+			(at 134.62 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "3aa6a3b7-3cdb-4b4a-91b1-23447a5d6471")
+		)
+		(pin "CANL" bidirectional
+			(at 134.62 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "f341784e-a5d3-4dd7-9df1-9202fa4efd5a")
+		)
 		(instances
 			(project "CanSat.CAM"
 				(path "/57773364-f25c-46b7-83c2-7d033b04af1f"
 					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 152.4 66.04)
+		(size 29.21 25.4)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6fedbb50-9564-4769-96c8-4c5968f1d4d8")
+		(property "Sheetname" "IF-Drive"
+			(at 152.4 65.3284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ModuleIFSimple.kicad_sch"
+			(at 152.4 92.0246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "CANH" bidirectional
+			(at 152.4 81.28 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "7b0df8d1-fc91-4dd0-b5e6-d7535c3f883e")
+		)
+		(pin "CANL" bidirectional
+			(at 152.4 77.47 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "8c622ef5-ce98-46ff-b40a-30e8a0d6ae23")
+		)
+		(instances
+			(project "CanSat.CAM"
+				(path "/57773364-f25c-46b7-83c2-7d033b04af1f"
+					(page "3")
 				)
 			)
 		)
