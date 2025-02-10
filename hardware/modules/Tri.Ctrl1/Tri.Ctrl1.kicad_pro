@@ -48,10 +48,16 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.25
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -171,7 +177,15 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0,
+        0.2,
+        0.25,
+        0.3,
+        0.4,
+        0.6,
+        0.8
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -198,7 +212,16 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        },
+        {
+          "diameter": 0.5,
+          "drill": 0.3
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -431,7 +454,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "CanSat.CAM.kicad_pro",
+    "filename": "Tri.Ctrl1.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -578,6 +601,12 @@
         },
         {
           "group_by": false,
+          "label": "Purchase-URL",
+          "name": "Purchase-URL",
+          "show": false
+        },
+        {
+          "group_by": false,
           "label": "SnapEDA_Link",
           "name": "SnapEDA_Link",
           "show": false
@@ -586,12 +615,6 @@
           "group_by": false,
           "label": "説明",
           "name": "Description",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "フィールド5",
-          "name": "フィールド5",
           "show": false
         }
       ],
@@ -642,16 +665,24 @@
   },
   "sheets": [
     [
-      "57773364-f25c-46b7-83c2-7d033b04af1f",
+      "39a3f286-a766-4612-a8bf-4e53d682d5ae",
       "ルート"
     ],
     [
-      "6fd13dc6-3d7d-47fc-a6f1-0482b517c640",
-      "ESP32CAM"
+      "1898ea38-721a-49a2-9aa0-3e0296a93858",
+      "ESP32Core"
     ],
     [
-      "6fedbb50-9564-4769-96c8-4c5968f1d4d8",
-      "IF-Drive"
+      "1917b303-3de0-4f5d-869e-635a906a89ff",
+      "IF-MR"
+    ],
+    [
+      "d44cce1d-2938-4a58-8e9d-9f2520660305",
+      "IF-Ctrl2"
+    ],
+    [
+      "c86743f2-0fd6-4202-a711-69fbd2587357",
+      "Power"
     ]
   ],
   "text_variables": {}
