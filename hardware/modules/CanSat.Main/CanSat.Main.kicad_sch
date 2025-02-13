@@ -4,7 +4,621 @@
 	(generator_version "8.0")
 	(uuid "bbee8c47-266c-4026-940d-10a37b262ebb")
 	(paper "A4")
-	(lib_symbols)
+	(lib_symbols
+		(symbol "WOBCLibrary:Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Board_0_1"
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Board_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "power:VBUS"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VBUS"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VBUS\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VBUS_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VBUS_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "power:VDD"
+			(power)
+			(pin_numbers hide)
+			(pin_names
+				(offset 0) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VDD"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VDD\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VDD_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VDD_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 117.475 60.325) (xy 120.015 60.325)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5105d1dc-ebb5-4469-810d-f4b846055463")
+	)
+	(wire
+		(pts
+			(xy 102.235 38.735) (xy 105.41 38.735)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5b63174f-f421-459d-a29c-002999dc60a1")
+	)
+	(symbol
+		(lib_id "WOBCLibrary:Board")
+		(at 144.145 21.59 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1d05acdc-67e9-4df6-8f73-9c80b4fa3b53")
+		(property "Reference" "B101"
+			(at 146.05 22.0217 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 146.05 23.9268 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:Board_1U_100x40"
+			(at 144.145 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 144.145 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 144.145 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "GND"
+			(uuid "bb5f121a-7e53-4d2e-9b9f-6950b79c4f70")
+		)
+		(instances
+			(project ""
+				(path "/bbee8c47-266c-4026-940d-10a37b262ebb"
+					(reference "B101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VDD")
+		(at 105.41 38.735 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "49dd457a-f7e4-426e-bcd4-52318a72c5be")
+		(property "Reference" "#PWR0111"
+			(at 105.41 42.545 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VDD"
+			(at 105.41 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 105.41 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 105.41 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VDD\""
+			(at 105.41 38.735 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "def51532-7e5c-46c2-940c-11587637389a")
+		)
+		(instances
+			(project ""
+				(path "/bbee8c47-266c-4026-940d-10a37b262ebb"
+					(reference "#PWR0111")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VBUS")
+		(at 117.475 60.325 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "e8de1a1f-edb9-4dc5-982b-b82f569bcce0")
+		(property "Reference" "#PWR0109"
+			(at 117.475 64.135 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VBUS"
+			(at 117.475 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 117.475 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 117.475 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VBUS\""
+			(at 117.475 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e95f9694-1f3b-4b49-8a0a-5fd9570685c3")
+		)
+		(instances
+			(project ""
+				(path "/bbee8c47-266c-4026-940d-10a37b262ebb"
+					(reference "#PWR0109")
+					(unit 1)
+				)
+			)
+		)
+	)
 	(sheet
 		(at 185.42 51.435)
 		(size 25.4 20.955)
@@ -460,7 +1074,65 @@
 		)
 	)
 	(sheet
-		(at 76.835 38.1)
+		(at 76.835 91.44)
+		(size 25.4 16.51)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "7270b3b2-1dcd-4610-86f3-bea0fccfded2")
+		(property "Sheetname" "Pressure"
+			(at 76.835 90.7284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Pressure.kicad_sch"
+			(at 76.835 108.5346 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 102.235 97.155 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "141acb2e-9005-4d3b-85bd-5438891ee3be")
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 102.235 99.695 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "6d144c18-5093-4cc6-8244-e79c8cfe5a54")
+		)
+		(instances
+			(project "CanSat.Main"
+				(path "/bbee8c47-266c-4026-940d-10a37b262ebb"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.835 36.83)
 		(size 25.4 20.955)
 		(fields_autoplaced yes)
 		(stroke
@@ -472,7 +1144,7 @@
 		)
 		(uuid "9dee52f3-e3e0-4ff7-8195-21fc5e633e27")
 		(property "Sheetname" "Power"
-			(at 76.835 37.3884 0)
+			(at 76.835 36.1184 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -481,7 +1153,7 @@
 			)
 		)
 		(property "Sheetfile" "LiPoPower.kicad_sch"
-			(at 76.835 59.6396 0)
+			(at 76.835 58.3696 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -490,7 +1162,7 @@
 			)
 		)
 		(pin "I2C_SCL" bidirectional
-			(at 102.235 43.18 0)
+			(at 102.235 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -500,7 +1172,7 @@
 			(uuid "d2d2ec9b-d98c-413b-bb37-187590f82782")
 		)
 		(pin "I2C_SDA" bidirectional
-			(at 102.235 45.72 0)
+			(at 102.235 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -510,7 +1182,7 @@
 			(uuid "98b4eb80-d09d-4ad8-aa2b-ea61397f1e24")
 		)
 		(pin "VDD_BUS" output
-			(at 102.235 40.005 0)
+			(at 102.235 38.735 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -520,7 +1192,7 @@
 			(uuid "99836110-5d6f-47ab-b4a0-32e526a79f7c")
 		)
 		(pin "STAT2" output
-			(at 102.235 51.435 0)
+			(at 102.235 50.165 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -530,7 +1202,7 @@
 			(uuid "40b11572-4d41-4e91-a502-1a92bd9c74a5")
 		)
 		(pin "STAT1" output
-			(at 102.235 48.895 0)
+			(at 102.235 47.625 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -540,7 +1212,7 @@
 			(uuid "d672d56d-1aa8-4a37-8a1f-2666437a59cb")
 		)
 		(pin "PG" output
-			(at 102.235 53.975 0)
+			(at 102.235 52.705 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -550,7 +1222,7 @@
 			(uuid "d2521be5-b49a-4d30-89e8-c80ad4f7b535")
 		)
 		(pin "CHARGE_IND" input
-			(at 102.235 57.15 0)
+			(at 102.235 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -729,6 +1401,94 @@
 			(project "CanSat.Main"
 				(path "/bbee8c47-266c-4026-940d-10a37b262ebb"
 					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.835 114.3)
+		(size 25.4 22.225)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "f2f48f5a-f359-4bf7-a88a-7e2abeffc666")
+		(property "Sheetname" "TWELITE"
+			(at 76.835 113.5884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "TWELITE.kicad_sch"
+			(at 76.835 137.1096 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "SET" input
+			(at 102.235 122.555 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "38779b2c-beb8-4df5-a256-3f8fa2c3aabe")
+		)
+		(pin "RST" input
+			(at 102.235 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "4bf2578e-2df7-4f18-ae2c-0e09e8ee8586")
+		)
+		(pin "RXD" input
+			(at 102.235 128.905 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "c65120a9-6a3f-4a99-b672-4fccf0c13b7d")
+		)
+		(pin "PRG" input
+			(at 102.235 118.745 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "03adbe64-f01d-4ced-b384-f8693abb3d83")
+		)
+		(pin "TXD" output
+			(at 102.235 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "16944283-896e-4b5a-93d5-a2daf82e319f")
+		)
+		(instances
+			(project "CanSat.Main"
+				(path "/bbee8c47-266c-4026-940d-10a37b262ebb"
+					(page "8")
 				)
 			)
 		)
