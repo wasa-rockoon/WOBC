@@ -1122,6 +1122,16 @@
 	)
 	(wire
 		(pts
+			(xy 191.77 139.7) (xy 203.835 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "07db8777-d1d9-43f3-8581-6e1e1d386977")
+	)
+	(wire
+		(pts
 			(xy 173.355 95.885) (xy 186.69 95.885)
 		)
 		(stroke
@@ -1730,16 +1740,6 @@
 		)
 		(uuid "a4dbd2cc-f6ec-48ce-a8ef-7780fb96ed93")
 	)
-	(wire
-		(pts
-			(xy 187.96 139.7) (xy 203.835 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a659461d-bbf5-403c-96ed-f005aa2456ce")
-	)
 	(bus
 		(pts
 			(xy 108.585 158.75) (xy 108.585 161.925)
@@ -2032,6 +2032,16 @@
 	)
 	(wire
 		(pts
+			(xy 88.265 138.43) (xy 112.395 138.43)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f40fec97-b591-4d7e-991e-6b917a2f346c")
+	)
+	(wire
+		(pts
 			(xy 94.615 57.785) (xy 88.265 57.785)
 		)
 		(stroke
@@ -2102,17 +2112,6 @@
 		)
 		(uuid "095cf676-0b9e-4a0c-b9b8-b58215d675f1")
 	)
-	(label "SD_MISO"
-		(at 112.395 99.06 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0ec1b328-10f3-4306-987e-9b8f8dae1d12")
-	)
 	(label "I2C_SCL"
 		(at 102.87 142.24 180)
 		(fields_autoplaced yes)
@@ -2124,8 +2123,8 @@
 		)
 		(uuid "0ee68fab-5c15-4af3-b3bd-be221a08c5c4")
 	)
-	(label "TIMEPULSE"
-		(at 175.895 90.805 0)
+	(label "SD_SS"
+		(at 112.395 93.98 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2133,7 +2132,18 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "141dd2ad-8386-4caa-8134-1acf5970313b")
+		(uuid "0fbbb975-8298-4b13-af0b-5843e7e507b9")
+	)
+	(label "RESET"
+		(at 175.895 95.885 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "11ff4d24-0a7c-415c-a44a-29a76654a23e")
 	)
 	(label "PRG"
 		(at 95.25 158.115 0)
@@ -2234,6 +2244,17 @@
 		)
 		(uuid "4321f22d-be94-44a6-8aee-b5f46f45e8f7")
 	)
+	(label "SD_MOSI"
+		(at 112.395 96.52 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4a578bfa-b83b-4bfa-b33b-bef3329c2dfa")
+	)
 	(label "TX"
 		(at 192.405 132.715 0)
 		(fields_autoplaced yes)
@@ -2278,6 +2299,28 @@
 		)
 		(uuid "629a6390-f8ab-4719-8c0a-55a9401488bb")
 	)
+	(label "SD_MISO"
+		(at 112.395 101.6 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "67c7e2ef-659d-4565-8626-080494a2444a")
+	)
+	(label "TIMEPULSE"
+		(at 175.895 98.425 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6bb56258-15d5-4064-acdd-c43ea302195e")
+	)
 	(label "RXD"
 		(at 95.25 167.64 0)
 		(fields_autoplaced yes)
@@ -2288,17 +2331,6 @@
 			(justify left bottom)
 		)
 		(uuid "6f464948-c520-495e-98e2-d8f356f4993a")
-	)
-	(label "RESET"
-		(at 175.895 93.345 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "73902f7c-65de-4af0-b5b4-a3c3be4982bb")
 	)
 	(label "SD_DET"
 		(at 112.395 104.14 0)
@@ -2311,6 +2343,17 @@
 		)
 		(uuid "78adab8c-807b-4cd1-bc9b-36c7f578c5b5")
 	)
+	(label "SD_CLK"
+		(at 112.395 99.06 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7e74180d-c0bc-4fb3-b370-424c4ee2a532")
+	)
 	(label "TXD"
 		(at 111.76 86.36 0)
 		(fields_autoplaced yes)
@@ -2321,17 +2364,6 @@
 			(justify left bottom)
 		)
 		(uuid "7f777676-a2d7-4e6f-83a9-15d7d62734f6")
-	)
-	(label "SD_SS"
-		(at 112.395 96.52 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "8907b258-8f76-4ca2-b100-1100832ef815")
 	)
 	(label "STAT2"
 		(at 174.625 79.375 0)
@@ -2377,17 +2409,6 @@
 		)
 		(uuid "981cdf58-7551-4447-a1dd-4917b324f500")
 	)
-	(label "TX"
-		(at 175.895 95.885 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9c4f4c94-1c16-44a1-85bf-447fc4ec67d7")
-	)
 	(label "I2C_SCL"
 		(at 95.885 99.06 0)
 		(fields_autoplaced yes)
@@ -2398,6 +2419,17 @@
 			(justify left bottom)
 		)
 		(uuid "9e75a709-907e-4d51-b666-8fc7fc96253f")
+	)
+	(label "TX"
+		(at 175.895 90.805 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a90491ad-7b08-49ee-a04f-c6d25b1a6eca")
 	)
 	(label "I2C_SDA"
 		(at 111.76 80.01 0)
@@ -2420,17 +2452,6 @@
 			(justify left bottom)
 		)
 		(uuid "b6a8f7e9-cedb-4f90-a8b1-d946a8fd46c5")
-	)
-	(label "SD_MOSI"
-		(at 112.395 101.6 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b92ae4b3-967d-403a-82c0-23a1669a0350")
 	)
 	(label "I2C_SDA"
 		(at 95.885 101.6 0)
@@ -2542,17 +2563,6 @@
 		)
 		(uuid "d9910189-b796-4b7a-b4ee-857a76c2f9e4")
 	)
-	(label "RX"
-		(at 175.895 98.425 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "de00fd56-e25e-4a5c-982c-460f7880b9cf")
-	)
 	(label "CANH"
 		(at 190.5 55.245 0)
 		(fields_autoplaced yes)
@@ -2597,8 +2607,8 @@
 		)
 		(uuid "e55f95c1-a9c8-4d03-b3c1-b356b0d9908b")
 	)
-	(label "SD_CLK"
-		(at 112.395 93.98 0)
+	(label "RX"
+		(at 175.895 93.345 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2606,7 +2616,73 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "e62d71da-6f3a-4aba-959c-4e5456c4d75f")
+		(uuid "f1b072b3-0f33-4c7c-bb93-55b56a080e82")
+	)
+	(global_label "+BATT"
+		(shape input)
+		(at 112.395 138.43 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "00859bd7-921a-401f-84fa-068741fff93f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 121.2464 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "+BATT"
+		(shape input)
+		(at 147.955 131.445 90)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "641441fb-a508-488d-8d76-d305d86f5594")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 147.955 122.5936 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "+BATT"
+		(shape input)
+		(at 191.77 139.7 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "ff81e4ee-6d83-490c-b076-69d3894d4c2b")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 182.9186 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
 	)
 	(symbol
 		(lib_id "WOBCLibrary:Board")
@@ -2809,7 +2885,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 187.96 147.32 0)
+		(at 147.955 139.065 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2818,7 +2894,7 @@
 		(fields_autoplaced yes)
 		(uuid "7e677145-b2c5-40fc-bd6a-844baca44535")
 		(property "Reference" "#PWR0103"
-			(at 187.96 153.67 0)
+			(at 147.955 145.415 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2827,7 +2903,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 187.96 151.765 0)
+			(at 147.955 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2835,7 +2911,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 187.96 147.32 0)
+			(at 147.955 139.065 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2844,7 +2920,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 187.96 147.32 0)
+			(at 147.955 139.065 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2853,7 +2929,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 187.96 147.32 0)
+			(at 147.955 139.065 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2941,7 +3017,7 @@
 	)
 	(symbol
 		(lib_id "Device:Battery_Cell")
-		(at 187.96 144.78 0)
+		(at 147.955 136.525 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2950,7 +3026,7 @@
 		(fields_autoplaced yes)
 		(uuid "eb9eb356-f760-4263-84e5-5fda5db4c6fe")
 		(property "Reference" "BT101"
-			(at 191.77 141.6684 0)
+			(at 151.765 133.4134 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2959,7 +3035,7 @@
 			)
 		)
 		(property "Value" "Battery_Cell"
-			(at 191.77 144.2084 0)
+			(at 151.765 135.9534 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2968,7 +3044,7 @@
 			)
 		)
 		(property "Footprint" "WOBCLibrary:cr1220"
-			(at 187.96 143.256 90)
+			(at 147.955 135.001 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2977,7 +3053,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 187.96 143.256 90)
+			(at 147.955 135.001 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2986,7 +3062,7 @@
 			)
 		)
 		(property "Description" "Single-cell battery"
-			(at 187.96 144.78 0)
+			(at 147.955 136.525 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3786,6 +3862,16 @@
 				(justify right)
 			)
 			(uuid "8d1cca2b-e0ef-4f2b-8e6f-f737c66b3656")
+		)
+		(pin "VBATT+" input
+			(at 88.265 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "5072f7a7-5fea-40c9-8abc-7dded6e5bf3a")
 		)
 		(instances
 			(project "CanSat.Main"
