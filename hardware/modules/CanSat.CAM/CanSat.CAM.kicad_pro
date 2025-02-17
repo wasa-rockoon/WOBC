@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.2
+          "min_clearance": 0.25
         }
       },
       "diff_pair_dimensions": [
@@ -185,9 +185,7 @@
         0.35,
         0.4,
         0.6,
-        0.8,
-        1.0,
-        1.5
+        0.8
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -457,7 +455,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "CanSat.Main.kicad_pro",
+    "filename": "CanSat.CAM.kicad_pro",
     "version": 1
   },
   "net_settings": {
@@ -574,12 +572,6 @@
         },
         {
           "group_by": false,
-          "label": "Height",
-          "name": "Height",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "LCSC",
           "name": "LCSC",
           "show": true
@@ -598,18 +590,6 @@
         },
         {
           "group_by": false,
-          "label": "Manufacturer_Name",
-          "name": "Manufacturer_Name",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Manufacturer_Part_Number",
-          "name": "Manufacturer_Part_Number",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Package",
           "name": "Package",
           "show": false
@@ -622,56 +602,20 @@
         },
         {
           "group_by": false,
-          "label": "Purchase-URL",
-          "name": "Purchase-URL",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "RS Part Number",
-          "name": "RS Part Number",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "RS Price/Stock",
-          "name": "RS Price/Stock",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Sim.Device",
-          "name": "Sim.Device",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Sim.Pins",
-          "name": "Sim.Pins",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "SnapEDA_Link",
           "name": "SnapEDA_Link",
           "show": false
         },
         {
           "group_by": false,
-          "label": "シンボル名",
-          "name": "シンボル名",
+          "label": "説明",
+          "name": "Description",
           "show": false
         },
         {
           "group_by": false,
           "label": "フィールド5",
           "name": "フィールド5",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "説明",
-          "name": "Description",
           "show": false
         }
       ],
@@ -722,40 +666,16 @@
   },
   "sheets": [
     [
-      "bbee8c47-266c-4026-940d-10a37b262ebb",
+      "57773364-f25c-46b7-83c2-7d033b04af1f",
       "ルート"
     ],
     [
-      "4099a030-41d2-4450-a474-813417a8166b",
-      "ESP32Core"
+      "6fd13dc6-3d7d-47fc-a6f1-0482b517c640",
+      "ESP32CAM"
     ],
     [
-      "9dee52f3-e3e0-4ff7-8195-21fc5e633e27",
-      "Power"
-    ],
-    [
-      "d06d8ea6-591b-4b14-9ff0-14d1b72b4b8b",
-      "Logger"
-    ],
-    [
-      "a9e58fe8-3005-48a2-8de2-c35dfce3404c",
-      "IMU"
-    ],
-    [
-      "3581401d-2aa9-4ec6-9247-ee694525beea",
-      "ModuleIFSimple"
-    ],
-    [
-      "4b90791a-8d7f-4620-926a-57dc74f8fc96",
-      "GPS"
-    ],
-    [
-      "f2f48f5a-f359-4bf7-a88a-7e2abeffc666",
-      "TWELITE"
-    ],
-    [
-      "7270b3b2-1dcd-4610-86f3-bea0fccfded2",
-      "Pressure"
+      "6fedbb50-9564-4769-96c8-4c5968f1d4d8",
+      "IF-Drive"
     ]
   ],
   "text_variables": {}
