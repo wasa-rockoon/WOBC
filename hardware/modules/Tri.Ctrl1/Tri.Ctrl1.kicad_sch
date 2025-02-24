@@ -1,13 +1,15 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "39a3f286-a766-4612-a8bf-4e53d682d5ae")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Connector:Conn_01x03_Pin"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -81,9 +83,42 @@
 				)
 			)
 			(symbol "Conn_01x03_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(polyline
 					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+						(xy 1.27 2.54) (xy 0.8636 2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -107,7 +142,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -115,39 +150,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(pin passive line
@@ -205,10 +207,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Connector:Conn_01x04_Pin"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -282,21 +287,53 @@
 				)
 			)
 			(symbol "Conn_01x04_Pin_1_1"
-				(polyline
-					(pts
-						(xy 1.27 -5.08) (xy 0.8636 -5.08)
-					)
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
 					)
 				)
 				(polyline
 					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+						(xy 1.27 2.54) (xy 0.8636 2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -320,7 +357,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 2.54) (xy 0.8636 2.54)
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
 					)
 					(stroke
 						(width 0.1524)
@@ -330,48 +367,16 @@
 						(type none)
 					)
 				)
-				(rectangle
-					(start 0.8636 -4.953)
-					(end 0 -5.207)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 0.8636 -5.08)
+					)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(pin passive line
@@ -447,10 +452,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Connector:Conn_01x05_Pin"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -524,33 +532,64 @@
 				)
 			)
 			(symbol "Conn_01x05_Pin_1_1"
-				(polyline
-					(pts
-						(xy 1.27 -5.08) (xy 0.8636 -5.08)
-					)
+				(rectangle
+					(start 0.8636 5.207)
+					(end 0 4.953)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
 					)
 				)
-				(polyline
-					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
-					)
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
 					)
 				)
 				(polyline
 					(pts
-						(xy 1.27 0) (xy 0.8636 0)
+						(xy 1.27 5.08) (xy 0.8636 5.08)
 					)
 					(stroke
 						(width 0.1524)
@@ -574,7 +613,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 5.08) (xy 0.8636 5.08)
+						(xy 1.27 0) (xy 0.8636 0)
 					)
 					(stroke
 						(width 0.1524)
@@ -584,59 +623,28 @@
 						(type none)
 					)
 				)
-				(rectangle
-					(start 0.8636 -4.953)
-					(end 0 -5.207)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type outline)
+						(type none)
 					)
 				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 0.8636 -5.08)
+					)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 2.667)
-					(end 0 2.413)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 5.207)
-					(end 0 4.953)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(pin passive line
@@ -730,6 +738,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "WOBCLibrary:Board"
 			(exclude_from_sim no)
@@ -781,18 +790,6 @@
 			(symbol "Board_0_1"
 				(polyline
 					(pts
-						(xy 0 -1.27) (xy 0 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032)
 					)
 					(stroke
@@ -809,6 +806,18 @@
 					)
 					(stroke
 						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -867,7 +876,8 @@
 			(symbol "Board_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -884,12 +894,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -980,12 +995,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VBUS"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1057,7 +1077,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -1069,7 +1089,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -1100,12 +1120,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VDD"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1177,7 +1202,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -1189,7 +1214,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -1220,6 +1245,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(no_connect
@@ -2448,7 +2474,6 @@
 	)
 	(label "PG"
 		(at 159.385 93.345 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2459,7 +2484,6 @@
 	)
 	(label "STAT2"
 		(at 159.385 90.805 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2470,7 +2494,6 @@
 	)
 	(label "CANL"
 		(at 158.75 79.375 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2481,7 +2504,6 @@
 	)
 	(label "STAT1"
 		(at 73.025 80.01 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2492,7 +2514,6 @@
 	)
 	(label "SDA"
 		(at 191.77 86.995 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2503,7 +2524,6 @@
 	)
 	(label "CANH"
 		(at 191.77 71.755 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2514,7 +2534,6 @@
 	)
 	(label "DOWN"
 		(at 158.75 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2525,7 +2544,6 @@
 	)
 	(label "LATCH"
 		(at 62.23 167.005 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2536,7 +2554,6 @@
 	)
 	(label "SCK"
 		(at 85.09 118.745 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2547,7 +2564,6 @@
 	)
 	(label "LATCH"
 		(at 85.09 116.205 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2558,7 +2574,6 @@
 	)
 	(label "SDA"
 		(at 86.995 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2569,7 +2584,6 @@
 	)
 	(label "SCL"
 		(at 191.77 84.455 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2580,7 +2594,6 @@
 	)
 	(label "SCK"
 		(at 62.23 164.465 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2591,7 +2604,6 @@
 	)
 	(label "PG"
 		(at 73.025 85.09 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2602,7 +2614,6 @@
 	)
 	(label "SDA"
 		(at 73.025 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2613,7 +2624,6 @@
 	)
 	(label "SCL"
 		(at 86.995 88.9 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2624,7 +2634,6 @@
 	)
 	(label "CANL"
 		(at 191.77 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2635,7 +2644,6 @@
 	)
 	(label "SCL"
 		(at 73.025 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2646,7 +2654,6 @@
 	)
 	(label "SDI"
 		(at 62.23 161.925 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2657,7 +2664,6 @@
 	)
 	(label "UP"
 		(at 155.575 150.495 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2668,7 +2674,6 @@
 	)
 	(label "STAT2"
 		(at 73.025 82.55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2679,7 +2684,6 @@
 	)
 	(label "CANL"
 		(at 191.77 74.295 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2690,7 +2694,6 @@
 	)
 	(label "DOWN"
 		(at 155.575 153.035 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2701,7 +2704,6 @@
 	)
 	(label "SDI"
 		(at 85.09 121.285 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2712,7 +2714,6 @@
 	)
 	(label "STAT1"
 		(at 159.385 88.265 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2723,7 +2724,6 @@
 	)
 	(label "CANH"
 		(at 191.77 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2734,7 +2734,6 @@
 	)
 	(label "CANH"
 		(at 158.75 76.835 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2745,7 +2744,6 @@
 	)
 	(label "UP"
 		(at 158.75 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3779,6 +3777,10 @@
 	(sheet
 		(at 92.075 63.5)
 		(size 64.77 64.77)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(stroke
 			(width 0.1524)
 			(type solid)
@@ -3807,263 +3809,263 @@
 		)
 		(pin "GPIO3{slash}ADC1_CH2" bidirectional
 			(at 92.075 106.045 180)
+			(uuid "81ece415-b0fd-49f7-9c93-7ffcecfc92b1")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "81ece415-b0fd-49f7-9c93-7ffcecfc92b1")
 		)
 		(pin "GPIO2{slash}ADC1_CH1" bidirectional
 			(at 156.845 74.295 0)
+			(uuid "bad77f9d-f78b-4144-9078-6c51e954ccbd")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "bad77f9d-f78b-4144-9078-6c51e954ccbd")
 		)
 		(pin "GPIO5{slash}ADC1_CH4" bidirectional
 			(at 92.075 75.565 180)
+			(uuid "e572ca92-2a33-43e1-92a1-a81db0e44060")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "e572ca92-2a33-43e1-92a1-a81db0e44060")
 		)
 		(pin "GPIO4{slash}ADC1_CH3" bidirectional
 			(at 92.075 73.025 180)
+			(uuid "f585bc20-a91e-4765-8362-dfd600b6d0d9")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "f585bc20-a91e-4765-8362-dfd600b6d0d9")
 		)
 		(pin "GPIO1{slash}ADC1_CH0" bidirectional
 			(at 156.845 71.755 0)
+			(uuid "652e6320-52f8-4799-8e2e-c2c62607af76")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "652e6320-52f8-4799-8e2e-c2c62607af76")
 		)
 		(pin "GPIO6{slash}ADC1_CH5" bidirectional
 			(at 92.075 78.105 180)
+			(uuid "e10b6810-e4fe-4b50-99ac-5fc3456b3e27")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "e10b6810-e4fe-4b50-99ac-5fc3456b3e27")
 		)
 		(pin "GPIO7{slash}ADC1_CH6" bidirectional
 			(at 92.075 80.645 180)
+			(uuid "dd99101d-557d-408b-924a-e02768b101fa")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "dd99101d-557d-408b-924a-e02768b101fa")
 		)
 		(pin "VUSB" output
 			(at 92.075 67.31 180)
+			(uuid "2c3b7cf2-31b6-4889-9ec7-be2de1c8f017")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "2c3b7cf2-31b6-4889-9ec7-be2de1c8f017")
 		)
 		(pin "CANL" bidirectional
 			(at 156.845 79.375 0)
+			(uuid "f92ce815-a0b6-48b7-a9cc-4ed5093ccab6")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "f92ce815-a0b6-48b7-a9cc-4ed5093ccab6")
 		)
 		(pin "CANH" bidirectional
 			(at 156.845 76.835 0)
+			(uuid "8bdaa359-1a79-47c4-805a-facb6669f237")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "8bdaa359-1a79-47c4-805a-facb6669f237")
 		)
 		(pin "I2C_SCL" bidirectional
 			(at 92.075 88.9 180)
+			(uuid "dfea97f8-6d9f-4ebe-83f5-2cf6a47234e8")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "dfea97f8-6d9f-4ebe-83f5-2cf6a47234e8")
 		)
 		(pin "GPIO40" bidirectional
 			(at 156.845 88.265 0)
+			(uuid "f3e0f9ef-d2c8-49ee-a824-2046efb02e36")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "f3e0f9ef-d2c8-49ee-a824-2046efb02e36")
 		)
 		(pin "GPIO39" bidirectional
 			(at 156.845 90.805 0)
+			(uuid "cadca2bd-09d0-4049-a6ca-c99fe3cfd113")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "cadca2bd-09d0-4049-a6ca-c99fe3cfd113")
 		)
 		(pin "GPIO13" bidirectional
 			(at 92.075 123.825 180)
+			(uuid "c60c7d70-6baf-43f7-a7b3-414ae4c4fde3")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "c60c7d70-6baf-43f7-a7b3-414ae4c4fde3")
 		)
 		(pin "GPIO12" bidirectional
 			(at 92.075 121.285 180)
+			(uuid "a71a8e0c-965f-4885-a04a-4a27348232c0")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "a71a8e0c-965f-4885-a04a-4a27348232c0")
 		)
 		(pin "GPIO8{slash}ADC1_CH7" bidirectional
 			(at 92.075 96.52 180)
+			(uuid "477949ad-ef83-4c10-992e-9547a8325f0d")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "477949ad-ef83-4c10-992e-9547a8325f0d")
 		)
 		(pin "GPIO9{slash}ADC1_CH8" bidirectional
 			(at 92.075 113.665 180)
+			(uuid "055de6d8-59c9-49ae-a2ad-85a4096a8a1c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "055de6d8-59c9-49ae-a2ad-85a4096a8a1c")
 		)
 		(pin "GPIO10{slash}ADC1_CH9" bidirectional
 			(at 92.075 116.205 180)
+			(uuid "a7685307-f1c0-4a5c-92a2-44d6f18e2ac6")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "a7685307-f1c0-4a5c-92a2-44d6f18e2ac6")
 		)
 		(pin "GPIO11" bidirectional
 			(at 92.075 118.745 180)
+			(uuid "05c24b65-03d5-4dec-aae0-c53266b9451b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "05c24b65-03d5-4dec-aae0-c53266b9451b")
 		)
 		(pin "GPIO48" bidirectional
 			(at 156.845 105.41 0)
+			(uuid "4fca6723-271d-4132-a57f-321a3f9a7f47")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "4fca6723-271d-4132-a57f-321a3f9a7f47")
 		)
 		(pin "GPIO47" bidirectional
 			(at 156.845 107.95 0)
+			(uuid "7e992049-83df-4087-90be-a1a7ac804947")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "7e992049-83df-4087-90be-a1a7ac804947")
 		)
 		(pin "I2C_SDA" bidirectional
 			(at 92.075 91.44 180)
+			(uuid "f23659f1-8530-4568-a67e-1f5d0fef9386")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "f23659f1-8530-4568-a67e-1f5d0fef9386")
 		)
 		(pin "GPIO18" bidirectional
 			(at 92.075 93.98 180)
+			(uuid "8782e498-b16d-4dd7-b354-de56d27c3c0b")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "8782e498-b16d-4dd7-b354-de56d27c3c0b")
 		)
 		(pin "GPIO21" bidirectional
 			(at 156.845 110.49 0)
+			(uuid "c4b41d60-a126-4b25-8124-010405ecd611")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "c4b41d60-a126-4b25-8124-010405ecd611")
 		)
 		(pin "GPIO14" bidirectional
 			(at 156.845 113.03 0)
+			(uuid "1d6bdfc4-5157-415d-b5b8-1f2380cf954f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "1d6bdfc4-5157-415d-b5b8-1f2380cf954f")
 		)
 		(pin "GPIO38" bidirectional
 			(at 156.845 93.345 0)
+			(uuid "d1ce01eb-1e0e-4a5c-859d-7fd8959d99cc")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "d1ce01eb-1e0e-4a5c-859d-7fd8959d99cc")
 		)
 		(instances
 			(project "Tri.Ctrl1"
@@ -4076,6 +4078,10 @@
 	(sheet
 		(at 197.485 64.77)
 		(size 36.195 27.94)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -4105,53 +4111,53 @@
 		)
 		(pin "CANH" bidirectional
 			(at 197.485 71.755 180)
+			(uuid "9b418dc3-1959-4232-bb6a-d6e2614d8d2f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "9b418dc3-1959-4232-bb6a-d6e2614d8d2f")
 		)
 		(pin "CANL" bidirectional
 			(at 197.485 74.295 180)
+			(uuid "99350a8b-df5a-4fc7-9369-910a635b4771")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "99350a8b-df5a-4fc7-9369-910a635b4771")
 		)
 		(pin "I2C_SCL" bidirectional
 			(at 197.485 84.455 180)
+			(uuid "49859973-0f5f-4e4f-a42e-d36bffcfa47e")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "49859973-0f5f-4e4f-a42e-d36bffcfa47e")
 		)
 		(pin "I2C_SDA" bidirectional
 			(at 197.485 86.995 180)
+			(uuid "a8d24023-03cc-4724-99d9-5e522c87e1fe")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "a8d24023-03cc-4724-99d9-5e522c87e1fe")
 		)
 		(pin "VIN" input
 			(at 197.485 80.645 180)
+			(uuid "7f776568-4dcd-4782-90e3-4f9e6940dcec")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "7f776568-4dcd-4782-90e3-4f9e6940dcec")
 		)
 		(instances
 			(project "Tri.Ctrl1"
@@ -4164,6 +4170,10 @@
 	(sheet
 		(at 27.94 60.96)
 		(size 43.18 39.37)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -4193,73 +4203,73 @@
 		)
 		(pin "I2C_SCL" bidirectional
 			(at 71.12 72.39 0)
+			(uuid "d32bf012-4c17-4233-a75c-af670d4f1620")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "d32bf012-4c17-4233-a75c-af670d4f1620")
 		)
 		(pin "I2C_SDA" bidirectional
 			(at 71.12 74.93 0)
+			(uuid "854d29ff-e807-46b2-ad96-9cdaf626955a")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "854d29ff-e807-46b2-ad96-9cdaf626955a")
 		)
 		(pin "VDD_BUS" output
 			(at 71.12 68.58 0)
+			(uuid "bce097f0-e21f-4b34-9718-d3c3fc7ea0cf")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "bce097f0-e21f-4b34-9718-d3c3fc7ea0cf")
 		)
 		(pin "STAT1" output
 			(at 71.12 80.01 0)
+			(uuid "3e4d01fb-4ca6-4e70-9845-e432bfff873a")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "3e4d01fb-4ca6-4e70-9845-e432bfff873a")
 		)
 		(pin "STAT2" output
 			(at 71.12 82.55 0)
+			(uuid "58c896c2-75f0-4903-b90c-3d0777cef7f6")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "58c896c2-75f0-4903-b90c-3d0777cef7f6")
 		)
 		(pin "PG" output
 			(at 71.12 85.09 0)
+			(uuid "ad6ccc3b-0654-4a1a-9eba-5694367e0961")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "ad6ccc3b-0654-4a1a-9eba-5694367e0961")
 		)
 		(pin "CHARGE_IND" input
 			(at 71.12 90.17 0)
+			(uuid "c74e422e-06b1-4216-8ee7-7a0ddb9a721f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "c74e422e-06b1-4216-8ee7-7a0ddb9a721f")
 		)
 		(instances
 			(project "Tri.Ctrl1"
@@ -4272,6 +4282,10 @@
 	(sheet
 		(at 197.485 105.41)
 		(size 36.195 25.4)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -4301,23 +4315,23 @@
 		)
 		(pin "CANH" bidirectional
 			(at 197.485 113.03 180)
+			(uuid "29b2d870-cdd3-46c2-9d99-6e52de4d2740")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "29b2d870-cdd3-46c2-9d99-6e52de4d2740")
 		)
 		(pin "CANL" bidirectional
 			(at 197.485 115.57 180)
+			(uuid "9cc9873e-7f53-4da8-b2f8-d1d0b2319542")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "9cc9873e-7f53-4da8-b2f8-d1d0b2319542")
 		)
 		(instances
 			(project "Tri.Ctrl1"
@@ -4332,4 +4346,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )
