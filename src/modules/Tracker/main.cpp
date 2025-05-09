@@ -25,7 +25,7 @@ core::SerialBus serial_bus(Serial);
 
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
-component::Pressure pressure(Wire);
+component::Pressure pressure(Wire, 0);
 
 constexpr uint8_t module_id = 0x54;
 constexpr uint8_t unit_id = 0x61;
@@ -48,7 +48,7 @@ public:
             wcpp::Packet packet = my_listener_.pop();
             if (!packet.isNull()) {
             wcpp::Packet lorapacket = newPacket(64);
-            lorapacket.command(lora.send_command_id, lora.component_id_base + 0,);
+            lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
             lorapacket.append("Pa").setPacket(packet);
             sendPacket(lorapacket);
             }

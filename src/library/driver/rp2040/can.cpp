@@ -1,5 +1,7 @@
 #include "can.h"
 
+#include "RP2040.h"
+
 namespace driver {
 
 CAN* CAN_instance = nullptr;

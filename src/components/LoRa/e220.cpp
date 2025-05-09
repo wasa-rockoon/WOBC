@@ -1,4 +1,4 @@
-#include "E220.h"
+#include "e220.h"
 
 E220::E220(Stream& stream, pin_t aux, pin_t m0, pin_t m1)
   : stream_(stream), aux_(aux), m0_(m0), m1_(m1) {
