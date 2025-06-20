@@ -62,7 +62,7 @@ void setup() {
     kernel::setUnitId(unit_id);
     if (!kernel::begin(module_id, true)) return;
 
-    Serial0.setPins(2, 1);
+    Serial0.setPins(2, 1);  // Serial0 を Serial2 に変更
     Wire.begin(17, 16);
     serial_bus.begin();
 
