@@ -33,7 +33,7 @@ protected:
 
   void initialize_pressure_data();
   void initialize_coefficients();
-  double height(int pressure);
+  double height(float pressure);
 
   class SampleTimer: public process::Timer {
   public:
