@@ -1,4 +1,5 @@
 // #define NDEBUG
+// aaa
 
 #include <library/wobc.h>
 #include <components/LiPoPower/lipo_power.h>
