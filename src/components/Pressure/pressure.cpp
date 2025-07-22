@@ -119,7 +119,7 @@ Pressure::SampleTimer::SampleTimer(Pressure& pressure_ref, BME280I2C& bme_ref, u
 void Pressure::SampleTimer::callback() { // Timerで定期的に実行される関数
 
   // 高度規正値を不揮発メモリから読み込み
-  double sealevel_Pa = 101470.0; // デフォルト値は101325 Pa (1気圧)
+  double sealevel_Pa = 100310.0; // デフォルト値は101325 Pa (1気圧)
   wcpp::Packet qnh = loadPacket('Q'); 
   if (qnh) {
     auto e = qnh.find("Sp");
