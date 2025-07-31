@@ -1116,6 +1116,15 @@
 		(uuid "4207c8e3-0b19-48fe-ab00-c317a67ace15")
 	)
 	(bus_entry
+		(at 101.6 34.29)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "729d44ee-ef8a-4e73-893b-e80a4c1fed64")
+	)
+	(bus_entry
 		(at 101.6 74.295)
 		(size 2.54 2.54)
 		(stroke
@@ -1132,6 +1141,15 @@
 			(type default)
 		)
 		(uuid "88b1c728-4436-49fc-9095-35be349d7268")
+	)
+	(bus_entry
+		(at 101.6 31.75)
+		(size 2.54 2.54)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aa73be29-68cf-4c56-9185-8243bfdfaa20")
 	)
 	(bus_entry
 		(at 101.6 59.69)
@@ -1152,6 +1170,16 @@
 		)
 		(uuid "09e47cf4-6160-4035-8b92-05afcfa62652")
 	)
+	(bus
+		(pts
+			(xy 104.14 34.29) (xy 104.14 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0e4f145f-e6ec-4843-a1d0-bcfc43c8cbdf")
+	)
 	(wire
 		(pts
 			(xy 229.9206 84.0732) (xy 241.3478 84.0732)
@@ -1161,6 +1189,26 @@
 			(type default)
 		)
 		(uuid "2027acc3-0f79-43a3-8c30-78f5ce56a30a")
+	)
+	(bus
+		(pts
+			(xy 104.14 36.83) (xy 104.14 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25ca22fe-ddbd-4608-9090-7651106d7930")
+	)
+	(wire
+		(pts
+			(xy 93.98 31.75) (xy 101.6 31.75)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "271f4f1e-6cc3-406a-b6a8-e5049d6bf5da")
 	)
 	(wire
 		(pts
@@ -1551,6 +1599,16 @@
 			(type default)
 		)
 		(uuid "c8621726-816b-4124-b27c-fde6501cb530")
+	)
+	(wire
+		(pts
+			(xy 93.98 34.29) (xy 101.6 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cd5fc17a-a892-470f-9f14-6d2cc3bedb1d")
 	)
 	(wire
 		(pts
@@ -2695,6 +2753,68 @@
 			(project "IGN"
 				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286"
 					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 63.5 16.51)
+		(size 30.48 26.67)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "3c4b5ceb-c9aa-4ec9-ae4e-83d5decb932e")
+		(property "Sheetname" "Pressure"
+			(at 63.5 15.7984 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Pressure.kicad_sch"
+			(at 63.5 43.7646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 93.98 34.29 0)
+			(uuid "0637b4f1-69a2-4575-9a75-1d1abffc76b1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 93.98 31.75 0)
+			(uuid "bfe16c07-f640-4698-acc8-c245f6a84aa2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "IGN"
+				(path "/2a7771e6-36a4-47ae-b559-dde705e1d286"
+					(page "5")
 				)
 			)
 		)
