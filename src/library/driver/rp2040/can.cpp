@@ -17,10 +17,9 @@ bool CAN::begin(unsigned baudrate, pin_t rx, pin_t tx) {
 }
 
 bool CAN::send(const Frame& frame) {
-  // struct can2040_stats stats;
-  // can2040_get_statistics(&cbus, &stats);
-  // printf("\nCAN %d %d %d %d\n", stats.rx_total, stats.tx_total, stats.tx_attempt, stats.parse_error);
-  // return true;
+  struct can2040_stats stats;
+  can2040_get_statistics(&cbus, &stats);
+  // Serial.printf("\nCAN %d %d %d %d %d\n", stats.rx_total, stats.tx_total, stats.tx_attempt, stats.parse_error, can2040_check_transmit(&cbus));
 
   can2040_msg msg;
   msg.id             = frame.id;
@@ -28,13 +27,16 @@ bool CAN::send(const Frame& frame) {
   if (frame.rtr)       msg.id |= CAN2040_ID_RTR;
   msg.dlc            = frame.length;
   memcpy(msg.data, frame.data, frame.length);
-  if (!can2040_check_transmit(&cbus)) {
+  int retry = 5;
+  while (!can2040_check_transmit(&cbus) && retry > 0) {
     vTaskDelay( 1 / portTICK_PERIOD_MS);
+    retry--;
   } 
   return can2040_transmit(&cbus, &msg) == 0;
 }
 
 void CAN::callback(struct can2040 *cd, uint32_t notify, struct can2040_msg *msg) {
+  // Serial.printf("\ncan %d %d\n", msg->id, msg->dlc);
   if (notify == CAN2040_NOTIFY_RX) {
     Frame frame;
     frame.id       = msg->id & ~(CAN2040_ID_EFF | CAN2040_ID_RTR);

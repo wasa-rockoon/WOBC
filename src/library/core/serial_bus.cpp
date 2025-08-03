@@ -3,13 +3,10 @@
 namespace core {
 
 SerialBus::SerialBus(Stream& serial)
-: Task("SerialBus", WOBC_SERIAL_BUS_STACK_SIZE, WOBC_SERIAL_BUS_PRIORITY), serial_(serial) {
+: CoreTask("SerialBus", WOBC_SERIAL_BUS_STACK_SIZE, WOBC_SERIAL_BUS_PRIORITY), serial_(serial) {
 
 };
 
-void SerialBus::begin() {
-  startProcess(nullptr);
-}
 
 void SerialBus::setup() {
   listen(all_packets, WOBC_SERIAL_BUS_PACKET_QUEUE_SIZE, true);
@@ -36,19 +33,24 @@ void SerialBus::loop() {
     rx_buf_[rx_count_] = b;
     rx_count_++;
 
-    if (rx_count_ >= wcpp::size_max + 2) { // Too long 
+    if (rx_count_ >= wcpp::size_max + 2) {
+      error("sbRL", "serial bus, received too long: %d", rx_count_);
       rx_count_ = 0;
       break;
     }
 
     if (b == 0) {     
       uint8_t size = rx_buf_[0];
-      if (size != rx_count_ - 2) { // Size mismatch
+      if (size > rx_count_ - 2) continue;
+      if (size != rx_count_ - 2) {
+        error("sbSM", "serial bus, size mismatch. expected: %d, actual: %d", size, rx_count_ - 2);
         rx_count_ = 0;
         break;
       }
       uint8_t checksum = rx_buf_[rx_count_ - 2];
-      if (checksum != wcpp::Packet::checksum(rx_buf_, rx_count_ - 2)) { // Incorrect checksum
+      uint8_t checksum_calc = wcpp::Packet::checksum(rx_buf_, rx_count_ - 2);
+      if (checksum != checksum_calc) { // Incorrect checksum
+        error("sbCS", "serial bus, incorrect checksum. expected: %d, actual: %d", checksum, checksum_calc);
         rx_count_ = 0;
         break;
       }

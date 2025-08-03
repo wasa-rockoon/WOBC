@@ -2,12 +2,12 @@
 
 #include "library/common.h"
 #include "library/process/task.h"
-#include "library/driver/can.h"
+#include "library/driver/driver.h"
 
 namespace core {
 
 #ifndef WOBC_CAN_BUS_BAUDRATE
-#define WOBC_CAN_BUS_BAUDRATE 1000000
+#define WOBC_CAN_BUS_BAUDRATE 125000
 #endif
 #ifndef WOBC_CAN_BUS_POOL_SIZE
 #define WOBC_CAN_BUS_POOL_SIZE 4
@@ -25,11 +25,9 @@ namespace core {
 #define WOBC_CAN_BUS_PRIORITY 7
 #endif
 
-class CANBus: public process::Task, public driver::CAN::Receiver {
+class CANBus: public process::CoreTask, public driver::CAN::Receiver {
 public:
   CANBus(pin_t rx, pin_t tx);
-
-  void begin();
 
 private:
   driver::CAN can_;
