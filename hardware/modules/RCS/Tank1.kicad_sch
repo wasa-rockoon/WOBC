@@ -1,12 +1,14 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "0c58bf0c-5dbb-4da1-b25f-087ed8a1106c")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -79,7 +81,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -91,7 +93,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -140,11 +142,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:L"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -211,32 +218,8 @@
 			)
 			(symbol "L_0_1"
 				(arc
-					(start 0 -2.54)
-					(mid 0.6323 -1.905)
-					(end 0 -1.27)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 -1.27)
-					(mid 0.6323 -0.635)
-					(end 0 0)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 0)
-					(mid 0.6323 0.635)
+					(start 0 2.54)
+					(mid 0.6323 1.905)
 					(end 0 1.27)
 					(stroke
 						(width 0)
@@ -248,8 +231,32 @@
 				)
 				(arc
 					(start 0 1.27)
-					(mid 0.6323 1.905)
-					(end 0 2.54)
+					(mid 0.6323 0.635)
+					(end 0 0)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 0)
+					(mid 0.6323 -0.635)
+					(end 0 -1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -1.27)
+					(mid 0.6323 -1.905)
+					(end 0 -2.54)
 					(stroke
 						(width 0)
 						(type default)
@@ -297,9 +304,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -418,6 +428,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "WOBCLibrary:MIS-2500-150G"
 			(exclude_from_sim no)
@@ -480,60 +491,6 @@
 					)
 				)
 				(pin input line
-					(at 7.62 -3.81 180)
-					(length 2.54)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 7.62 0 180)
-					(length 2.54)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 7.62 3.81 180)
-					(length 2.54)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
 					(at -8.89 3.81 0)
 					(length 2.54)
 					(name "VDD"
@@ -587,7 +544,62 @@
 						)
 					)
 				)
+				(pin input line
+					(at 7.62 3.81 180)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 7.62 0 180)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 7.62 -3.81 180)
+					(length 2.54)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "WOBCLibrary:TPS63070RNMR"
 			(pin_names
@@ -633,7 +645,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "\nWide input voltage (2V-16V) buck-boost converter\n"
+			(property "Description" "Wide input voltage (2V-16V) buck-boost converter"
 				(at -1.27 47.26 0)
 				(effects
 					(font
@@ -735,42 +747,6 @@
 						(type background)
 					)
 				)
-				(pin input line
-					(at -15.24 -3.81 0)
-					(length 5.08)
-					(name "PS/SYNC"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 15.24 -10.16 180)
-					(length 5.08)
-					(name "PGND"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
 				(pin bidirectional line
 					(at -15.24 12.7 0)
 					(length 5.08)
@@ -808,6 +784,24 @@
 					)
 				)
 				(pin input line
+					(at -15.24 1.27 0)
+					(length 5.08)
+					(name "VSEL"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin input line
 					(at -15.24 -1.27 0)
 					(length 5.08)
 					(name "EN"
@@ -826,34 +820,16 @@
 					)
 				)
 				(pin input line
-					(at -15.24 1.27 0)
+					(at -15.24 -3.81 0)
 					(length 5.08)
-					(name "VSEL"
+					(name "PS/SYNC"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "15"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 15.24 -5.08 180)
-					(length 5.08)
-					(name "PG"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "2"
+					(number "1"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -879,17 +855,35 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 15.24 -12.7 180)
+				(pin bidirectional line
+					(at 15.24 12.7 180)
 					(length 5.08)
-					(name "GND"
+					(name "L2"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "4"
+					(number "9"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 7.62 180)
+					(length 5.08)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "7_8"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -934,16 +928,16 @@
 					)
 				)
 				(pin output line
-					(at 15.24 7.62 180)
+					(at 15.24 -5.08 180)
 					(length 5.08)
-					(name "VOUT"
+					(name "PG"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "7_8"
+					(number "2"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -951,17 +945,35 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at 15.24 12.7 180)
+				(pin power_in line
+					(at 15.24 -10.16 180)
 					(length 5.08)
-					(name "L2"
+					(name "PGND"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "9"
+					(number "10"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 15.24 -12.7 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "4"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -970,6 +982,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
@@ -1049,7 +1062,8 @@
 			(symbol "GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -1066,12 +1080,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VDD"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1143,7 +1162,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -1155,7 +1174,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -1186,6 +1205,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -2217,7 +2237,6 @@
 	(hierarchical_label "TankPressure1"
 		(shape input)
 		(at 236.22 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2229,7 +2248,6 @@
 	(hierarchical_label "TankPressure2"
 		(shape input)
 		(at 234.95 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2247,7 +2265,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "02661961-9956-4f37-9a82-6f2e7de44dc4")
-		(property "Reference" "C142"
+		(property "Reference" "C507"
 			(at 178.943 73.406 0)
 			(effects
 				(font
@@ -2310,7 +2328,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C142")
+					(reference "C507")
 					(unit 1)
 				)
 			)
@@ -2325,7 +2343,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "086b7299-f658-4f38-b5b7-d7b73841f2e7")
-		(property "Reference" "R132"
+		(property "Reference" "R505"
 			(at 156.337 58.547 90)
 			(effects
 				(font
@@ -2386,7 +2404,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R132")
+					(reference "R505")
 					(unit 1)
 				)
 			)
@@ -2401,7 +2419,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0bb124c8-7df8-4870-a21b-76d0b2c7b674")
-		(property "Reference" "C140"
+		(property "Reference" "C505"
 			(at 139.827 73.152 0)
 			(effects
 				(font
@@ -2464,7 +2482,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C140")
+					(reference "C505")
 					(unit 1)
 				)
 			)
@@ -2479,7 +2497,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0ed366d1-128d-4e43-896a-81191cc7dc55")
-		(property "Reference" "#PWR0163"
+		(property "Reference" "#PWR0503"
 			(at 85.852 92.202 0)
 			(effects
 				(font
@@ -2529,7 +2547,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0163")
+					(reference "#PWR0503")
 					(unit 1)
 				)
 			)
@@ -2544,7 +2562,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "11ff4bf6-5850-41a2-b496-de70a08ac82c")
-		(property "Reference" "#PWR0162"
+		(property "Reference" "#PWR0502"
 			(at 77.724 92.075 0)
 			(effects
 				(font
@@ -2594,7 +2612,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0162")
+					(reference "#PWR0502")
 					(unit 1)
 				)
 			)
@@ -2609,7 +2627,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1331e383-caab-4531-84c6-5bb08dc69248")
-		(property "Reference" "C138"
+		(property "Reference" "C503"
 			(at 96.012 73.787 0)
 			(effects
 				(font
@@ -2672,7 +2690,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C138")
+					(reference "C503")
 					(unit 1)
 				)
 			)
@@ -2687,7 +2705,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2109f1ef-c082-4860-8558-3ece82ce100f")
-		(property "Reference" "C139"
+		(property "Reference" "C504"
 			(at 106.172 80.137 0)
 			(effects
 				(font
@@ -2750,7 +2768,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C139")
+					(reference "C504")
 					(unit 1)
 				)
 			)
@@ -2765,7 +2783,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "26ce02fc-18db-4594-b136-2cfe8f649056")
-		(property "Reference" "#PWR0172"
+		(property "Reference" "#PWR0512"
 			(at 209.55 100.33 0)
 			(effects
 				(font
@@ -2815,7 +2833,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0172")
+					(reference "#PWR0512")
 					(unit 1)
 				)
 			)
@@ -2830,7 +2848,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "275ba9f6-f205-4f47-ade3-6a68c168180f")
-		(property "Reference" "#PWR0170"
+		(property "Reference" "#PWR0510"
 			(at 173.228 88.011 0)
 			(effects
 				(font
@@ -2880,7 +2898,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0170")
+					(reference "#PWR0510")
 					(unit 1)
 				)
 			)
@@ -2895,7 +2913,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "327744d6-28ac-4815-a84b-c76a0dead831")
-		(property "Reference" "#PWR0171"
+		(property "Reference" "#PWR0511"
 			(at 209.296 71.247 0)
 			(effects
 				(font
@@ -2945,7 +2963,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0171")
+					(reference "#PWR0511")
 					(unit 1)
 				)
 			)
@@ -2960,7 +2978,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "404b14df-a67f-447c-b375-af73be4a5026")
-		(property "Reference" "C137"
+		(property "Reference" "C502"
 			(at 75.819 59.69 0)
 			(effects
 				(font
@@ -3023,7 +3041,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C137")
+					(reference "C502")
 					(unit 1)
 				)
 			)
@@ -3039,7 +3057,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5962ad2f-6d17-4c31-ba65-52ecede735d9")
-		(property "Reference" "#PWR0161"
+		(property "Reference" "#PWR0501"
 			(at 72.644 55.372 0)
 			(effects
 				(font
@@ -3089,7 +3107,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0161")
+					(reference "#PWR0501")
 					(unit 1)
 				)
 			)
@@ -3104,7 +3122,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5ec8f402-66f2-4fde-9957-61f9ccb0732e")
-		(property "Reference" "C136"
+		(property "Reference" "C501"
 			(at 70.104 59.69 0)
 			(effects
 				(font
@@ -3167,7 +3185,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C136")
+					(reference "C501")
 					(unit 1)
 				)
 			)
@@ -3182,7 +3200,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6fdb788f-ceab-4642-bbd4-0332dbc654d4")
-		(property "Reference" "C141"
+		(property "Reference" "C506"
 			(at 173.863 73.406 0)
 			(effects
 				(font
@@ -3245,7 +3263,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C141")
+					(reference "C506")
 					(unit 1)
 				)
 			)
@@ -3260,7 +3278,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "724eea95-a907-4813-a520-f1feacead43f")
-		(property "Reference" "#PWR0164"
+		(property "Reference" "#PWR0504"
 			(at 95.377 92.202 0)
 			(effects
 				(font
@@ -3310,7 +3328,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0164")
+					(reference "#PWR0504")
 					(unit 1)
 				)
 			)
@@ -3325,7 +3343,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7a3ab636-153e-40e3-ad8c-61911b6c7f88")
-		(property "Reference" "R135"
+		(property "Reference" "R508"
 			(at 228.6 88.9 90)
 			(effects
 				(font
@@ -3386,7 +3404,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R135")
+					(reference "R508")
 					(unit 1)
 				)
 			)
@@ -3401,7 +3419,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7ba2d728-8a88-42a0-aecc-7b8970dbdc9e")
-		(property "Reference" "#PWR0169"
+		(property "Reference" "#PWR0509"
 			(at 151.257 92.202 0)
 			(effects
 				(font
@@ -3451,7 +3469,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0169")
+					(reference "#PWR0509")
 					(unit 1)
 				)
 			)
@@ -3466,7 +3484,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "85a5a46c-4d37-4d6e-8211-d2e2c37e7627")
-		(property "Reference" "C145"
+		(property "Reference" "C510"
 			(at 203.708 82.804 0)
 			(effects
 				(font
@@ -3529,7 +3547,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C145")
+					(reference "C510")
 					(unit 1)
 				)
 			)
@@ -3544,7 +3562,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8a3a6c09-160f-464a-9070-a06dd2954678")
-		(property "Reference" "R133"
+		(property "Reference" "R506"
 			(at 164.592 58.547 90)
 			(effects
 				(font
@@ -3605,7 +3623,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R133")
+					(reference "R506")
 					(unit 1)
 				)
 			)
@@ -3620,7 +3638,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8ad241dc-9386-4770-985d-47815bb6bfc0")
-		(property "Reference" "#PWR0167"
+		(property "Reference" "#PWR0507"
 			(at 136.017 92.202 0)
 			(effects
 				(font
@@ -3670,7 +3688,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0167")
+					(reference "#PWR0507")
 					(unit 1)
 				)
 			)
@@ -3685,7 +3703,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "949bc883-730c-404d-b5bb-ce233cb9c115")
-		(property "Reference" "R128"
+		(property "Reference" "R501"
 			(at 89.662 61.087 0)
 			(effects
 				(font
@@ -3748,7 +3766,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R128")
+					(reference "R501")
 					(unit 1)
 				)
 			)
@@ -3764,7 +3782,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "990780aa-8601-4889-927b-fe77d6824d43")
-		(property "Reference" "U109"
+		(property "Reference" "U502"
 			(at 233.045 39.37 0)
 			(effects
 				(font
@@ -3828,7 +3846,7 @@
 		(instances
 			(project ""
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "U109")
+					(reference "U502")
 					(unit 1)
 				)
 			)
@@ -3843,7 +3861,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9db38516-fc0f-4966-ae36-3d5d86ae6772")
-		(property "Reference" "U108"
+		(property "Reference" "U501"
 			(at 119.507 81.407 0)
 			(effects
 				(font
@@ -4019,7 +4037,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "U108")
+					(reference "U501")
 					(unit 1)
 				)
 			)
@@ -4034,7 +4052,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9ef06071-59e5-4a68-b284-6cca2518b262")
-		(property "Reference" "C144"
+		(property "Reference" "C509"
 			(at 203.454 53.34 0)
 			(effects
 				(font
@@ -4097,7 +4115,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C144")
+					(reference "C509")
 					(unit 1)
 				)
 			)
@@ -4113,7 +4131,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a2bce779-8532-4626-9960-31ddd10361b0")
-		(property "Reference" "L102"
+		(property "Reference" "L501"
 			(at 118.872 42.037 90)
 			(effects
 				(font
@@ -4174,7 +4192,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "L102")
+					(reference "L501")
 					(unit 1)
 				)
 			)
@@ -4189,7 +4207,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a915ccd9-aaf3-4905-bba1-050fe1b2b515")
-		(property "Reference" "#PWR0166"
+		(property "Reference" "#PWR0506"
 			(at 103.632 92.202 0)
 			(effects
 				(font
@@ -4239,7 +4257,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0166")
+					(reference "#PWR0506")
 					(unit 1)
 				)
 			)
@@ -4255,7 +4273,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b138dd39-deda-4fb9-a0b6-44bb5a89fb94")
-		(property "Reference" "U110"
+		(property "Reference" "U503"
 			(at 233.045 67.31 0)
 			(effects
 				(font
@@ -4319,7 +4337,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "U110")
+					(reference "U503")
 					(unit 1)
 				)
 			)
@@ -4334,7 +4352,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c2bad06a-eeb7-4536-b1c3-0f7aded7e0c9")
-		(property "Reference" "R131"
+		(property "Reference" "R504"
 			(at 153.162 66.167 0)
 			(effects
 				(font
@@ -4397,7 +4415,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R131")
+					(reference "R504")
 					(unit 1)
 				)
 			)
@@ -4412,7 +4430,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c4030f60-e813-4924-8ea0-6ef248043391")
-		(property "Reference" "#PWR0165"
+		(property "Reference" "#PWR0505"
 			(at 99.822 92.202 0)
 			(effects
 				(font
@@ -4462,7 +4480,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0165")
+					(reference "#PWR0505")
 					(unit 1)
 				)
 			)
@@ -4477,7 +4495,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c9ed61af-7a9c-4e39-b99b-dca9c1b81000")
-		(property "Reference" "R134"
+		(property "Reference" "R507"
 			(at 228.6 59.69 90)
 			(effects
 				(font
@@ -4538,7 +4556,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R134")
+					(reference "R507")
 					(unit 1)
 				)
 			)
@@ -4554,7 +4572,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cc74fecb-9bf8-429a-88e0-cff542fd99b4")
-		(property "Reference" "R130"
+		(property "Reference" "R503"
 			(at 144.272 63.627 90)
 			(effects
 				(font
@@ -4615,7 +4633,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R130")
+					(reference "R503")
 					(unit 1)
 				)
 			)
@@ -4630,7 +4648,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dadd3c5f-c860-4cae-a721-11ce8a12b6cb")
-		(property "Reference" "R129"
+		(property "Reference" "R502"
 			(at 80.772 80.772 0)
 			(effects
 				(font
@@ -4693,7 +4711,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "R129")
+					(reference "R502")
 					(unit 1)
 				)
 			)
@@ -4708,7 +4726,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "db9f97a4-dec8-43ed-ba17-ddc9fb9f2822")
-		(property "Reference" "#PWR0168"
+		(property "Reference" "#PWR0508"
 			(at 139.192 92.202 0)
 			(effects
 				(font
@@ -4758,7 +4776,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "#PWR0168")
+					(reference "#PWR0508")
 					(unit 1)
 				)
 			)
@@ -4773,7 +4791,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e88f8098-5af3-424b-9ad7-18d1f08f6925")
-		(property "Reference" "C143"
+		(property "Reference" "C508"
 			(at 184.023 73.406 0)
 			(effects
 				(font
@@ -4836,7 +4854,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/712675c7-f5bd-425c-bbfe-d7042feaf382"
-					(reference "C143")
+					(reference "C508")
 					(unit 1)
 				)
 			)

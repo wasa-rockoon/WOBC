@@ -1,13 +1,15 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "010a0b60-693c-4bb5-883e-93047fe123a8")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Connector:Conn_01x02_Pin"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -81,16 +83,26 @@
 				)
 			)
 			(symbol "Conn_01x02_Pin_1_1"
-				(polyline
-					(pts
-						(xy 1.27 -2.54) (xy 0.8636 -2.54)
-					)
+				(rectangle
+					(start 0.8636 0.127)
+					(end 0 -0.127)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
 					)
 				)
 				(polyline
@@ -105,26 +117,16 @@
 						(type none)
 					)
 				)
-				(rectangle
-					(start 0.8636 -2.413)
-					(end 0 -2.667)
+				(polyline
+					(pts
+						(xy 1.27 -2.54) (xy 0.8636 -2.54)
+					)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type outline)
-					)
-				)
-				(rectangle
-					(start 0.8636 0.127)
-					(end 0 -0.127)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type outline)
+						(type none)
 					)
 				)
 				(pin passive line
@@ -164,10 +166,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Connector_Generic_MountingPin:Conn_01x04_MountingPin"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -235,19 +240,19 @@
 			)
 			(symbol "Conn_01x04_MountingPin_1_1"
 				(rectangle
-					(start -1.27 -4.953)
-					(end 0 -5.207)
+					(start -1.27 3.81)
+					(end 1.27 -6.35)
 					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
 				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
+					(start -1.27 2.667)
+					(end 0 2.413)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -268,8 +273,8 @@
 					)
 				)
 				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
+					(start -1.27 -2.413)
+					(end 0 -2.667)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -279,14 +284,14 @@
 					)
 				)
 				(rectangle
-					(start -1.27 3.81)
-					(end 1.27 -6.35)
+					(start -1.27 -4.953)
+					(end 0 -5.207)
 					(stroke
-						(width 0.254)
+						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type background)
+						(type none)
 					)
 				)
 				(polyline
@@ -400,9 +405,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -475,7 +483,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -487,7 +495,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -536,9 +544,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -657,6 +668,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
@@ -736,7 +748,8 @@
 			(symbol "GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -753,6 +766,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -906,7 +920,6 @@
 	(hierarchical_label "CANH"
 		(shape bidirectional)
 		(at 135.509 85.09 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -918,7 +931,6 @@
 	(hierarchical_label "CANL"
 		(shape bidirectional)
 		(at 135.509 87.63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -930,7 +942,6 @@
 	(hierarchical_label "VIO"
 		(shape bidirectional)
 		(at 115.824 90.17 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -949,7 +960,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "168f1eba-244e-4e08-b0cc-51014fa7cf96")
-		(property "Reference" "#PWR0138"
+		(property "Reference" "#PWR0303"
 			(at 154.559 104.14 0)
 			(effects
 				(font
@@ -999,7 +1010,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/75165dc7-ffb2-4f16-9f68-6478aa466472"
-					(reference "#PWR0138")
+					(reference "#PWR0303")
 					(unit 1)
 				)
 			)
@@ -1014,7 +1025,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "266c8f49-703a-4b0a-b923-be1563566d73")
-		(property "Reference" "C118"
+		(property "Reference" "C301"
 			(at 120.904 97.155 0)
 			(effects
 				(font
@@ -1077,7 +1088,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/75165dc7-ffb2-4f16-9f68-6478aa466472"
-					(reference "C118")
+					(reference "C301")
 					(unit 1)
 				)
 			)
@@ -1093,7 +1104,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5ff7cfd2-10e9-469e-92dd-8d7ad99a76ae")
-		(property "Reference" "#PWR0136"
+		(property "Reference" "#PWR0301"
 			(at 122.174 105.41 0)
 			(effects
 				(font
@@ -1143,7 +1154,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/75165dc7-ffb2-4f16-9f68-6478aa466472"
-					(reference "#PWR0136")
+					(reference "#PWR0301")
 					(unit 1)
 				)
 			)
@@ -1158,7 +1169,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6f3b1925-ad5d-48ec-bd75-eedbc59c8bab")
-		(property "Reference" "R113"
+		(property "Reference" "R301"
 			(at 142.494 74.295 0)
 			(effects
 				(font
@@ -1221,7 +1232,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/75165dc7-ffb2-4f16-9f68-6478aa466472"
-					(reference "R113")
+					(reference "R301")
 					(unit 1)
 				)
 			)
@@ -1237,7 +1248,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8b3cc9de-0c0d-4601-87c8-d32d85c1a124")
-		(property "Reference" "J104"
+		(property "Reference" "J302"
 			(at 157.734 87.9856 0)
 			(effects
 				(font
@@ -1309,7 +1320,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/75165dc7-ffb2-4f16-9f68-6478aa466472"
-					(reference "J104")
+					(reference "J302")
 					(unit 1)
 				)
 			)
@@ -1325,7 +1336,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aca86b7e-1afe-4baa-b387-258ffeb9b739")
-		(property "Reference" "J103"
+		(property "Reference" "J301"
 			(at 135.509 71.12 0)
 			(effects
 				(font
@@ -1386,7 +1397,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/75165dc7-ffb2-4f16-9f68-6478aa466472"
-					(reference "J103")
+					(reference "J301")
 					(unit 1)
 				)
 			)
@@ -1402,7 +1413,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f42ebe5d-3d36-409d-b8a5-ca24e3945196")
-		(property "Reference" "#PWR0137"
+		(property "Reference" "#PWR0302"
 			(at 148.209 104.14 0)
 			(effects
 				(font
@@ -1452,7 +1463,7 @@
 		(instances
 			(project "RCS"
 				(path "/8712227c-dfcf-4399-a04c-a9abd63db3ea/75165dc7-ffb2-4f16-9f68-6478aa466472"
-					(reference "#PWR0137")
+					(reference "#PWR0302")
 					(unit 1)
 				)
 			)
