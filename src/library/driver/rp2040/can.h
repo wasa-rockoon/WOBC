@@ -1,3 +1,5 @@
+#pragma once
+
 #include "../can_if.h"
 extern "C" {
   #include <can2040.h>

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "library/common.h"
 
 namespace driver {
