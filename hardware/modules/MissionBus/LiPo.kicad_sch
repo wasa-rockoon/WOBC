@@ -1,7 +1,7 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "e6ae2fbe-fb16-4147-ae6b-ffe1ae8442d6")
 	(paper "A4")
 	(lib_symbols
@@ -88,17 +88,17 @@
 				)
 			)
 			(symbol "MCP73871-1CC_1_1"
-				(pin power_out line
-					(at 17.78 15.24 180)
+				(pin input line
+					(at -17.78 15.24 0)
 					(length 2.54)
-					(name "OUT"
+					(name "VPCC"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -106,17 +106,17 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 0 -22.86 90)
+				(pin input line
+					(at -17.78 10.16 0)
 					(length 2.54)
-					(name "V_{SS}"
+					(name "SEL"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "10"
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -124,17 +124,35 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 0 -22.86 90)
-					(length 2.54) hide
-					(name "V_{SS}"
+				(pin bidirectional line
+					(at -17.78 5.08 0)
+					(length 2.54)
+					(name "PROG1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "11"
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -17.78 2.54 0)
+					(length 2.54)
+					(name "PROG2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -161,52 +179,16 @@
 					)
 				)
 				(pin bidirectional line
-					(at -17.78 5.08 0)
+					(at -17.78 -5.08 0)
 					(length 2.54)
-					(name "PROG1"
+					(name "THERM"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 17.78 7.62 180)
-					(length 2.54)
-					(name "V_{BAT}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "14"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 17.78 7.62 180)
-					(length 2.54) hide
-					(name "V_{BAT}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "15"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -215,16 +197,16 @@
 					)
 				)
 				(pin input line
-					(at 17.78 2.54 180)
+					(at -17.78 -10.16 0)
 					(length 2.54)
-					(name "V_{BAT_SENSE}"
+					(name "~{TE}"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "16"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -270,7 +252,8 @@
 				)
 				(pin passive line
 					(at 0 22.86 270)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "IN"
 						(effects
 							(font
@@ -286,35 +269,17 @@
 						)
 					)
 				)
-				(pin input line
-					(at -17.78 15.24 0)
+				(pin power_in line
+					(at 0 -22.86 90)
 					(length 2.54)
-					(name "VPCC"
+					(name "V_{SS}"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 17.78 15.24 180)
-					(length 2.54) hide
-					(name "OUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "20"
+					(number "10"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -324,7 +289,27 @@
 				)
 				(pin passive line
 					(at 0 -22.86 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
+					(name "V_{SS}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -22.86 90)
+					(length 2.54)
+					(hide yes)
 					(name "V_{SS}"
 						(effects
 							(font
@@ -340,17 +325,73 @@
 						)
 					)
 				)
-				(pin input line
-					(at -17.78 10.16 0)
+				(pin power_out line
+					(at 17.78 15.24 180)
 					(length 2.54)
-					(name "SEL"
+					(name "OUT"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "3"
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 17.78 15.24 180)
+					(length 2.54)
+					(hide yes)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "20"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 17.78 7.62 180)
+					(length 2.54)
+					(name "V_{BAT}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 17.78 7.62 180)
+					(length 2.54)
+					(hide yes)
+					(name "V_{BAT}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -359,34 +400,16 @@
 					)
 				)
 				(pin input line
-					(at -17.78 2.54 0)
+					(at 17.78 2.54 180)
 					(length 2.54)
-					(name "PROG2"
+					(name "V_{BAT_SENSE}"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at -17.78 -5.08 0)
-					(length 2.54)
-					(name "THERM"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
+					(number "16"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -413,24 +436,6 @@
 					)
 				)
 				(pin open_collector line
-					(at 17.78 -12.7 180)
-					(length 2.54)
-					(name "STAT2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
 					(at 17.78 -10.16 180)
 					(length 2.54)
 					(name "STAT1/~{LBO}"
@@ -448,17 +453,17 @@
 						)
 					)
 				)
-				(pin input line
-					(at -17.78 -10.16 0)
+				(pin open_collector line
+					(at 17.78 -12.7 180)
 					(length 2.54)
-					(name "~{TE}"
+					(name "STAT2"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -467,10 +472,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Connector_Generic:Conn_01x02"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -537,14 +545,14 @@
 			)
 			(symbol "Conn_01x02_1_1"
 				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
 					(stroke
-						(width 0.1524)
+						(width 0.254)
 						(type default)
 					)
 					(fill
-						(type none)
+						(type background)
 					)
 				)
 				(rectangle
@@ -559,14 +567,14 @@
 					)
 				)
 				(rectangle
-					(start -1.27 1.27)
-					(end 1.27 -3.81)
+					(start -1.27 -2.413)
+					(end 0 -2.667)
 					(stroke
-						(width 0.254)
+						(width 0.1524)
 						(type default)
 					)
 					(fill
-						(type background)
+						(type none)
 					)
 				)
 				(pin passive line
@@ -606,10 +614,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Connector_Generic:Conn_01x03"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -676,8 +687,19 @@
 			)
 			(symbol "Conn_01x03_1_1"
 				(rectangle
-					(start -1.27 -2.413)
-					(end 0 -2.667)
+					(start -1.27 3.81)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 2.667)
+					(end 0 2.413)
 					(stroke
 						(width 0.1524)
 						(type default)
@@ -698,25 +720,14 @@
 					)
 				)
 				(rectangle
-					(start -1.27 2.667)
-					(end 0 2.413)
+					(start -1.27 -2.413)
+					(end 0 -2.667)
 					(stroke
 						(width 0.1524)
 						(type default)
 					)
 					(fill
 						(type none)
-					)
-				)
-				(rectangle
-					(start -1.27 3.81)
-					(end 1.27 -3.81)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
 					)
 				)
 				(pin passive line
@@ -774,9 +785,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -849,7 +863,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -861,7 +875,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -910,11 +924,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:L"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -981,32 +1000,8 @@
 			)
 			(symbol "L_0_1"
 				(arc
-					(start 0 -2.54)
-					(mid 0.6323 -1.905)
-					(end 0 -1.27)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 -1.27)
-					(mid 0.6323 -0.635)
-					(end 0 0)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 0 0)
-					(mid 0.6323 0.635)
+					(start 0 2.54)
+					(mid 0.6323 1.905)
 					(end 0 1.27)
 					(stroke
 						(width 0)
@@ -1018,8 +1013,32 @@
 				)
 				(arc
 					(start 0 1.27)
-					(mid 0.6323 1.905)
-					(end 0 2.54)
+					(mid 0.6323 0.635)
+					(end 0 0)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 0)
+					(mid 0.6323 -0.635)
+					(end 0 -1.27)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start 0 -1.27)
+					(mid 0.6323 -1.905)
+					(end 0 -2.54)
 					(stroke
 						(width 0)
 						(type default)
@@ -1067,11 +1086,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:LED"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1139,10 +1163,22 @@
 			(symbol "LED_0_1"
 				(polyline
 					(pts
-						(xy -1.27 -1.27) (xy -1.27 1.27)
+						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
 					)
 					(stroke
-						(width 0.254)
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
+					)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -1163,7 +1199,7 @@
 				)
 				(polyline
 					(pts
-						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
+						(xy -1.27 -1.27) (xy -1.27 1.27)
 					)
 					(stroke
 						(width 0.254)
@@ -1175,22 +1211,10 @@
 				)
 				(polyline
 					(pts
-						(xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524)
+						(xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27)
 					)
 					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524)
-					)
-					(stroke
-						(width 0)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -1236,9 +1260,12 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:Polyfuse"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -1308,6 +1335,18 @@
 				)
 			)
 			(symbol "Polyfuse_0_1"
+				(polyline
+					(pts
+						(xy -1.524 2.54) (xy -1.524 1.524) (xy 1.524 -1.524) (xy 1.524 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(rectangle
 					(start -0.762 2.54)
 					(end 0.762 -2.54)
@@ -1322,18 +1361,6 @@
 				(polyline
 					(pts
 						(xy 0 2.54) (xy 0 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy -1.524 2.54) (xy -1.524 1.524) (xy 1.524 -1.524) (xy 1.524 -2.54)
 					)
 					(stroke
 						(width 0)
@@ -1382,10 +1409,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:Q_NPN_BEC"
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1446,6 +1476,18 @@
 			(symbol "Q_NPN_BEC_0_1"
 				(polyline
 					(pts
+						(xy 0.635 1.905) (xy 0.635 -1.905) (xy 0.635 -1.905)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
 						(xy 0.635 0.635) (xy 2.54 2.54)
 					)
 					(stroke
@@ -1468,12 +1510,11 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy 0.635 1.905) (xy 0.635 -1.905) (xy 0.635 -1.905)
-					)
+				(circle
+					(center 1.27 0)
+					(radius 2.8194)
 					(stroke
-						(width 0.508)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -1492,17 +1533,6 @@
 						(type outline)
 					)
 				)
-				(circle
-					(center 1.27 0)
-					(radius 2.8194)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
 			)
 			(symbol "Q_NPN_BEC_1_1"
 				(pin input line
@@ -1516,24 +1546,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 -5.08 90)
-					(length 2.54)
-					(name "E"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1559,11 +1571,32 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "E"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:Q_PMOS_GSD"
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1624,6 +1657,18 @@
 			(symbol "Q_PMOS_GSD_0_1"
 				(polyline
 					(pts
+						(xy 0.254 1.905) (xy 0.254 -1.905)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
 						(xy 0.254 0) (xy -2.54 0)
 					)
 					(stroke
@@ -1636,7 +1681,31 @@
 				)
 				(polyline
 					(pts
-						(xy 0.254 1.905) (xy 0.254 -1.905)
+						(xy 0.762 2.286) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 1.778) (xy 3.302 1.778) (xy 3.302 -1.778) (xy 0.762 -1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.762 0.508) (xy 0.762 -0.508)
 					)
 					(stroke
 						(width 0.254)
@@ -1658,60 +1727,11 @@
 						(type none)
 					)
 				)
-				(polyline
-					(pts
-						(xy 0.762 0.508) (xy 0.762 -0.508)
-					)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
 					(stroke
 						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 2.286) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 2.54) (xy 2.54 1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.762 1.778) (xy 3.302 1.778) (xy 3.302 -1.778) (xy 0.762 -1.778)
-					)
-					(stroke
-						(width 0)
 						(type default)
 					)
 					(fill
@@ -1728,6 +1748,52 @@
 					)
 					(fill
 						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 2.54) (xy 2.54 1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
 				(polyline
@@ -1754,39 +1820,6 @@
 						(type none)
 					)
 				)
-				(circle
-					(center 1.651 0)
-					(radius 2.794)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 2.54 -1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(circle
-					(center 2.54 1.778)
-					(radius 0.254)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
 			)
 			(symbol "Q_PMOS_GSD_1_1"
 				(pin input line
@@ -1800,24 +1833,6 @@
 						)
 					)
 					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 2.54 -5.08 90)
-					(length 2.54)
-					(name "S"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1843,10 +1858,31 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "S"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0)
 			)
@@ -1965,10 +2001,13 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:R_Potentiometer"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2034,12 +2073,11 @@
 				)
 			)
 			(symbol "R_Potentiometer_0_1"
-				(polyline
-					(pts
-						(xy 2.54 0) (xy 1.524 0)
-					)
+				(rectangle
+					(start 1.016 2.54)
+					(end -1.016 -2.54)
 					(stroke
-						(width 0)
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -2058,11 +2096,12 @@
 						(type outline)
 					)
 				)
-				(rectangle
-					(start 1.016 2.54)
-					(end -1.016 -2.54)
+				(polyline
+					(pts
+						(xy 2.54 0) (xy 1.524 0)
+					)
 					(stroke
-						(width 0.254)
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -2090,24 +2129,6 @@
 					)
 				)
 				(pin passive line
-					(at 3.81 0 180)
-					(length 1.27)
-					(name "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
 					(at 0 -3.81 90)
 					(length 1.27)
 					(name "3"
@@ -2125,13 +2146,36 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "GND_1"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2222,12 +2266,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "GND_2"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2318,6 +2367,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Power_Management:TPS2116DRL"
 			(exclude_from_sim no)
@@ -2400,7 +2450,8 @@
 			(symbol "TPS2116DRL_1_0"
 				(pin power_out line
 					(at 10.16 5.08 180)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "VOUT"
 						(effects
 							(font
@@ -2419,52 +2470,16 @@
 			)
 			(symbol "TPS2116DRL_1_1"
 				(pin power_in line
-					(at 0 -10.16 90)
+					(at -10.16 6.35 0)
 					(length 2.54)
-					(name "GND"
+					(name "VIN2"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 10.16 5.08 180)
-					(length 2.54)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at -10.16 -6.35 0)
-					(length 2.54)
-					(name "VIN1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
+					(number "6"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2509,16 +2524,52 @@
 					)
 				)
 				(pin power_in line
-					(at -10.16 6.35 0)
+					(at -10.16 -6.35 0)
 					(length 2.54)
-					(name "VIN2"
+					(name "VIN1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2545,6 +2596,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Sensor_Energy:INA226"
 			(exclude_from_sim no)
@@ -2626,16 +2678,16 @@
 			)
 			(symbol "INA226_1_1"
 				(pin input line
-					(at 10.16 7.62 180)
+					(at -10.16 7.62 0)
 					(length 2.54)
-					(name "A1"
+					(name "Vbus"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "8"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2662,70 +2714,16 @@
 					)
 				)
 				(pin input line
-					(at 10.16 5.08 180)
+					(at -10.16 -5.08 0)
 					(length 2.54)
-					(name "A0"
+					(name "Vin-"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 -7.62 180)
-					(length 2.54)
-					(name "~{Alert}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin bidirectional line
-					(at 10.16 0 180)
-					(length 2.54)
-					(name "SDA"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 10.16 -2.54 180)
-					(length 2.54)
-					(name "SCL"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2770,16 +2768,16 @@
 					)
 				)
 				(pin input line
-					(at -10.16 7.62 0)
+					(at 10.16 7.62 180)
 					(length 2.54)
-					(name "Vbus"
+					(name "A1"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "8"
+					(number "1"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2788,16 +2786,70 @@
 					)
 				)
 				(pin input line
-					(at -10.16 -5.08 0)
+					(at 10.16 5.08 180)
 					(length 2.54)
-					(name "Vin-"
+					(name "A0"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "9"
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -7.62 180)
+					(length 2.54)
+					(name "~{Alert}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2806,6 +2858,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "WOBCLibrary:TPS63070RNMR"
 			(pin_names
@@ -2851,7 +2904,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "\nWide input voltage (2V-16V) buck-boost converter\n"
+			(property "Description" "Wide input voltage (2V-16V) buck-boost converter"
 				(at -1.27 47.26 0)
 				(effects
 					(font
@@ -2953,42 +3006,6 @@
 						(type background)
 					)
 				)
-				(pin input line
-					(at -15.24 -3.81 0)
-					(length 5.08)
-					(name "PS/SYNC"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 15.24 -10.16 180)
-					(length 5.08)
-					(name "PGND"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
 				(pin bidirectional line
 					(at -15.24 12.7 0)
 					(length 5.08)
@@ -3026,6 +3043,24 @@
 					)
 				)
 				(pin input line
+					(at -15.24 1.27 0)
+					(length 5.08)
+					(name "VSEL"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin input line
 					(at -15.24 -1.27 0)
 					(length 5.08)
 					(name "EN"
@@ -3044,34 +3079,16 @@
 					)
 				)
 				(pin input line
-					(at -15.24 1.27 0)
+					(at -15.24 -3.81 0)
 					(length 5.08)
-					(name "VSEL"
+					(name "PS/SYNC"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "15"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 15.24 -5.08 180)
-					(length 5.08)
-					(name "PG"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "2"
+					(number "1"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3097,17 +3114,35 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at 15.24 -12.7 180)
+				(pin bidirectional line
+					(at 15.24 12.7 180)
 					(length 5.08)
-					(name "GND"
+					(name "L2"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "4"
+					(number "9"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 7.62 180)
+					(length 5.08)
+					(name "VOUT"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "7_8"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3152,16 +3187,16 @@
 					)
 				)
 				(pin output line
-					(at 15.24 7.62 180)
+					(at 15.24 -5.08 180)
 					(length 5.08)
-					(name "VOUT"
+					(name "PG"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "7_8"
+					(number "2"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3169,17 +3204,35 @@
 						)
 					)
 				)
-				(pin bidirectional line
-					(at 15.24 12.7 180)
+				(pin power_in line
+					(at 15.24 -10.16 180)
 					(length 5.08)
-					(name "L2"
+					(name "PGND"
 						(effects
 							(font
 								(size 1.016 1.016)
 							)
 						)
 					)
-					(number "9"
+					(number "10"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 15.24 -12.7 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "4"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3188,6 +3241,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
@@ -3267,7 +3321,8 @@
 			(symbol "GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -3284,6 +3339,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VBUS"
 			(power)
@@ -3361,7 +3417,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -3373,7 +3429,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -3387,7 +3443,8 @@
 			(symbol "VBUS_1_1"
 				(pin power_in line
 					(at 0 0 90)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "VBUS"
 						(effects
 							(font
@@ -3404,6 +3461,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VDD"
 			(power)
@@ -3481,7 +3539,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -3493,7 +3551,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -3507,7 +3565,8 @@
 			(symbol "VDD_1_1"
 				(pin power_in line
 					(at 0 0 90)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "VDD"
 						(effects
 							(font
@@ -3524,6 +3583,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VPP"
 			(power)
@@ -3601,7 +3661,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -3613,7 +3673,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -3627,7 +3687,8 @@
 			(symbol "VPP_1_1"
 				(pin power_in line
 					(at 0 0 90)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "VPP"
 						(effects
 							(font
@@ -3644,7 +3705,107 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
+	)
+	(text "6V Max"
+		(exclude_from_sim no)
+		(at 13.5638 96.2007 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2caedd8c-087e-465e-8da7-729c69d70228")
+	)
+	(text "6V Max"
+		(exclude_from_sim no)
+		(at 14.3258 38.9237 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "41b8162c-e5f9-4bd8-8712-e7b3f82fddfc")
+	)
+	(text "I2C ADDR: 0x4D"
+		(exclude_from_sim no)
+		(at 112.6238 76.5157 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4e01f77a-ab0f-4f9f-8276-4c524f04f5d2")
+	)
+	(text "-> 3.3V Output"
+		(exclude_from_sim no)
+		(at 257.4038 17.4607 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "7c189af6-fc88-47c7-b1d9-163b50fbfdb5")
+	)
+	(text "Backup Battery ->"
+		(exclude_from_sim no)
+		(at 14.1988 35.6217 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "808f6c4d-ccde-4f36-98aa-c309c0caaf3e")
+	)
+	(text "USB Bus Power ->"
+		(exclude_from_sim no)
+		(at 12.9288 93.0257 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "9606434a-5e94-495e-b518-f7f9632fe53b")
+	)
+	(text "I2C ADDR: 0x4E"
+		(exclude_from_sim no)
+		(at 225.6538 77.7857 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9c319d78-c8da-4a84-925f-7d1584df8896")
+	)
+	(text "<-> LiPo"
+		(exclude_from_sim no)
+		(at 201.5238 103.8207 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "9fac480b-f3b9-46df-a8cd-bbf8ace22e10")
+	)
+	(text "I2C ADDR: 0x4F"
+		(exclude_from_sim no)
+		(at 160.8838 152.0807 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b6f3218b-b379-4a05-8101-951fcc4e3ffb")
 	)
 	(junction
 		(at 50.5208 58.7357)
@@ -6648,108 +6809,8 @@
 		)
 		(uuid "ff515a81-8289-4d34-91d9-9e87e3ff3a18")
 	)
-	(text "6V Max"
-		(exclude_from_sim no)
-		(at 13.5638 96.2007 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "2caedd8c-087e-465e-8da7-729c69d70228")
-	)
-	(text "6V Max"
-		(exclude_from_sim no)
-		(at 14.3258 38.9237 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "41b8162c-e5f9-4bd8-8712-e7b3f82fddfc")
-	)
-	(text "I2C ADDR: 0x4D"
-		(exclude_from_sim no)
-		(at 112.6238 76.5157 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "4e01f77a-ab0f-4f9f-8276-4c524f04f5d2")
-	)
-	(text "-> 3.3V Output"
-		(exclude_from_sim no)
-		(at 257.4038 17.4607 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "7c189af6-fc88-47c7-b1d9-163b50fbfdb5")
-	)
-	(text "Backup Battery ->"
-		(exclude_from_sim no)
-		(at 14.1988 35.6217 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "808f6c4d-ccde-4f36-98aa-c309c0caaf3e")
-	)
-	(text "USB Bus Power ->"
-		(exclude_from_sim no)
-		(at 12.9288 93.0257 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "9606434a-5e94-495e-b518-f7f9632fe53b")
-	)
-	(text "I2C ADDR: 0x4E"
-		(exclude_from_sim no)
-		(at 225.6538 77.7857 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9c319d78-c8da-4a84-925f-7d1584df8896")
-	)
-	(text "<-> LiPo"
-		(exclude_from_sim no)
-		(at 201.5238 103.8207 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "9fac480b-f3b9-46df-a8cd-bbf8ace22e10")
-	)
-	(text "I2C ADDR: 0x4F"
-		(exclude_from_sim no)
-		(at 160.8838 152.0807 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b6f3218b-b379-4a05-8101-951fcc4e3ffb")
-	)
 	(label "PROG"
 		(at 42.7738 110.8057 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6761,7 +6822,6 @@
 	(hierarchical_label "VDD_BUS"
 		(shape output)
 		(at 273.2788 23.8107 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6773,7 +6833,6 @@
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
 		(at 95.4788 63.1807 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6785,7 +6844,6 @@
 	(hierarchical_label "STAT2"
 		(shape output)
 		(at 94.2088 128.5857 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6797,7 +6855,6 @@
 	(hierarchical_label "TEMP"
 		(shape output)
 		(at 39.5988 151.4457 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6809,7 +6866,6 @@
 	(hierarchical_label "CHARGE_IND"
 		(shape input)
 		(at 27.94 165.1 90)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6821,7 +6877,6 @@
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
 		(at 139.9288 138.7457 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6833,7 +6888,6 @@
 	(hierarchical_label "I2C_SDA"
 		(shape bidirectional)
 		(at 232.6388 63.1807 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6845,7 +6899,6 @@
 	(hierarchical_label "PG"
 		(shape output)
 		(at 94.2088 120.9657 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6857,7 +6910,6 @@
 	(hierarchical_label "STAT1"
 		(shape output)
 		(at 27.94 182.88 270)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6869,7 +6921,6 @@
 	(hierarchical_label "STAT1"
 		(shape output)
 		(at 94.2088 126.0457 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6881,7 +6932,6 @@
 	(hierarchical_label "ST"
 		(shape output)
 		(at 90.1448 52.8937 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6893,7 +6943,6 @@
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
 		(at 232.6388 65.7207 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6905,7 +6954,6 @@
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
 		(at 95.4788 65.7207 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6917,7 +6965,6 @@
 	(hierarchical_label "I2C_SCL"
 		(shape bidirectional)
 		(at 139.9288 141.2857 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6929,7 +6976,6 @@
 	(hierarchical_label "HEATER"
 		(shape input)
 		(at 79.7308 177.3537 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6947,7 +6993,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0046a378-cd5c-4ef8-883c-083608c0b9c6")
-		(property "Reference" "C511"
+		(property "Reference" "C307"
 			(at 127.8638 39.0507 0)
 			(effects
 				(font
@@ -7010,7 +7056,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C511")
+					(reference "C307")
 					(unit 1)
 				)
 			)
@@ -7026,7 +7072,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "01f8bcd4-a251-4b75-bbf9-5ad2f2e624e0")
-		(property "Reference" "U507"
+		(property "Reference" "U304"
 			(at 160.8838 123.5057 0)
 			(effects
 				(font
@@ -7113,7 +7159,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "U507")
+					(reference "U304")
 					(unit 1)
 				)
 			)
@@ -7129,7 +7175,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "06e7ba8a-fd62-4b94-b7d5-c9a743fededb")
-		(property "Reference" "U509"
+		(property "Reference" "U306"
 			(at 245.6847 48.0677 0)
 			(effects
 				(font
@@ -7216,7 +7262,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "U509")
+					(reference "U306")
 					(unit 1)
 				)
 			)
@@ -7231,7 +7277,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "06f269fa-cdfd-4f9a-b5ab-073b5e631f2b")
-		(property "Reference" "C517"
+		(property "Reference" "C313"
 			(at 230.7338 39.0507 0)
 			(effects
 				(font
@@ -7294,7 +7340,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C517")
+					(reference "C313")
 					(unit 1)
 				)
 			)
@@ -7310,7 +7356,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0acf50fb-4d7c-4f2c-a5b5-f8f55f9797f8")
-		(property "Reference" "#PWR0528"
+		(property "Reference" "#PWR0306"
 			(at 42.7738 131.1257 0)
 			(effects
 				(font
@@ -7360,7 +7406,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0528")
+					(reference "#PWR0306")
 					(unit 1)
 				)
 			)
@@ -7376,7 +7422,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0d3349d9-18df-4d8c-9573-3fc8ff6c266c")
-		(property "Reference" "#PWR0527"
+		(property "Reference" "#PWR0305"
 			(at 38.9638 131.1257 0)
 			(effects
 				(font
@@ -7426,7 +7472,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0527")
+					(reference "#PWR0305")
 					(unit 1)
 				)
 			)
@@ -7442,7 +7488,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "131ab1c1-b655-4dc3-9d97-8cf0354ec223")
-		(property "Reference" "R511"
+		(property "Reference" "R304"
 			(at 47.2188 117.1557 0)
 			(effects
 				(font
@@ -7505,7 +7551,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R511")
+					(reference "R304")
 					(unit 1)
 				)
 			)
@@ -7521,7 +7567,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "145906f0-10b6-4d50-944a-cb4e1c8becfc")
-		(property "Reference" "U505"
+		(property "Reference" "U302"
 			(at 72.8728 34.6057 0)
 			(effects
 				(font
@@ -7591,7 +7637,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "U505")
+					(reference "U302")
 					(unit 1)
 				)
 			)
@@ -7606,7 +7652,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "147ade20-43bb-4549-9c94-229fb14209bc")
-		(property "Reference" "C520"
+		(property "Reference" "C316"
 			(at 255.4988 42.2257 0)
 			(effects
 				(font
@@ -7669,7 +7715,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C520")
+					(reference "C316")
 					(unit 1)
 				)
 			)
@@ -7685,7 +7731,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1832dfa5-4f9c-4bea-992f-247a0ef435f6")
-		(property "Reference" "#PWR0536"
+		(property "Reference" "#PWR0314"
 			(at 98.2728 34.0977 0)
 			(effects
 				(font
@@ -7735,7 +7781,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0536")
+					(reference "#PWR0314")
 					(unit 1)
 				)
 			)
@@ -7750,7 +7796,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1c4d332c-176e-4946-abbf-678f72d9e73b")
-		(property "Reference" "C513"
+		(property "Reference" "C309"
 			(at 133.1978 124.0137 0)
 			(effects
 				(font
@@ -7813,7 +7859,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C513")
+					(reference "C309")
 					(unit 1)
 				)
 			)
@@ -7830,7 +7876,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1c552a7f-4071-4d5f-b8cc-2f4f93ffcaaa")
-		(property "Reference" "#PWR0529"
+		(property "Reference" "#PWR0307"
 			(at 50.5208 77.7857 0)
 			(effects
 				(font
@@ -7880,7 +7926,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0529")
+					(reference "#PWR0307")
 					(unit 1)
 				)
 			)
@@ -7895,7 +7941,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1d09daba-48cb-4244-8397-450edb74eb31")
-		(property "Reference" "R520"
+		(property "Reference" "R313"
 			(at 122.7838 32.0657 90)
 			(effects
 				(font
@@ -7956,7 +8002,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R520")
+					(reference "R313")
 					(unit 1)
 				)
 			)
@@ -7972,7 +8018,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1e0eb98d-5d6f-4a44-af0f-9976a87d3171")
-		(property "Reference" "#PWR0539"
+		(property "Reference" "#PWR0317"
 			(at 104.8768 195.8957 0)
 			(effects
 				(font
@@ -8022,7 +8068,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0539")
+					(reference "#PWR0317")
 					(unit 1)
 				)
 			)
@@ -8037,7 +8083,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "20ca2565-2557-4c90-9978-05fd9b279746")
-		(property "Reference" "#PWR0549"
+		(property "Reference" "#PWR0327"
 			(at 160.2488 71.4357 0)
 			(effects
 				(font
@@ -8087,7 +8133,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0549")
+					(reference "#PWR0327")
 					(unit 1)
 				)
 			)
@@ -8102,7 +8148,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "24908601-edf5-4102-854d-48c83489cd08")
-		(property "Reference" "U504"
+		(property "Reference" "U301"
 			(at 54.2038 91.1207 0)
 			(effects
 				(font
@@ -8224,7 +8270,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "U504")
+					(reference "U301")
 					(unit 1)
 				)
 			)
@@ -8241,7 +8287,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2782b79b-1a8a-49c3-ad84-55403a9fe6ca")
-		(property "Reference" "#PWR0531"
+		(property "Reference" "#PWR0309"
 			(at 57.6328 57.2117 0)
 			(effects
 				(font
@@ -8291,7 +8337,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0531")
+					(reference "#PWR0309")
 					(unit 1)
 				)
 			)
@@ -8306,7 +8352,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "27b06822-6310-43d2-87c8-eb78ca7b6250")
-		(property "Reference" "C507"
+		(property "Reference" "C303"
 			(at 60.1728 70.8007 0)
 			(effects
 				(font
@@ -8369,7 +8415,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C507")
+					(reference "C303")
 					(unit 1)
 				)
 			)
@@ -8385,7 +8431,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2ad5d3fb-05fd-4100-a391-4d2caece2692")
-		(property "Reference" "#PWR0559"
+		(property "Reference" "#PWR0337"
 			(at 274.5488 70.8007 0)
 			(effects
 				(font
@@ -8435,7 +8481,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0559")
+					(reference "#PWR0337")
 					(unit 1)
 				)
 			)
@@ -8450,7 +8496,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2ce6e537-760f-4fbd-bed7-29ce5787f768")
-		(property "Reference" "J502"
+		(property "Reference" "J302"
 			(at 128.2448 170.7497 0)
 			(effects
 				(font
@@ -8507,7 +8553,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "J502")
+					(reference "J302")
 					(unit 1)
 				)
 			)
@@ -8522,7 +8568,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "31027101-678f-458c-98e7-47ed607f3adb")
-		(property "Reference" "Q501"
+		(property "Reference" "Q301"
 			(at 97.8918 172.9087 0)
 			(effects
 				(font
@@ -8588,7 +8634,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "Q501")
+					(reference "Q301")
 					(unit 1)
 				)
 			)
@@ -8604,7 +8650,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "34b05531-fc85-4c37-9596-277acc028ccf")
-		(property "Reference" "#PWR0542"
+		(property "Reference" "#PWR0320"
 			(at 124.6888 188.9107 0)
 			(effects
 				(font
@@ -8654,7 +8700,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0542")
+					(reference "#PWR0320")
 					(unit 1)
 				)
 			)
@@ -8669,7 +8715,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3b8a1ce2-6bd9-44d4-8133-8cd10126761d")
-		(property "Reference" "C509"
+		(property "Reference" "C305"
 			(at 100.0508 114.4887 0)
 			(effects
 				(font
@@ -8732,7 +8778,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C509")
+					(reference "C305")
 					(unit 1)
 				)
 			)
@@ -8747,7 +8793,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3bdc2502-59fe-4650-8e81-e0645bc2305e")
-		(property "Reference" "C519"
+		(property "Reference" "C315"
 			(at 240.8938 39.0507 0)
 			(effects
 				(font
@@ -8810,7 +8856,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C519")
+					(reference "C315")
 					(unit 1)
 				)
 			)
@@ -8825,7 +8871,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "412fe6aa-ad7d-4691-8557-ed3aa080a21d")
-		(property "Reference" "LED502"
+		(property "Reference" "LED302"
 			(at 30.48 176.53 90)
 			(effects
 				(font
@@ -8888,7 +8934,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "LED502")
+					(reference "LED302")
 					(unit 1)
 				)
 			)
@@ -8904,7 +8950,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "431fb6e2-ea48-40f3-bb5d-dd5d20715acf")
-		(property "Reference" "#PWR0526"
+		(property "Reference" "#PWR0304"
 			(at 31.3438 131.1257 0)
 			(effects
 				(font
@@ -8954,7 +9000,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0526")
+					(reference "#PWR0304")
 					(unit 1)
 				)
 			)
@@ -8970,7 +9016,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "47186a52-d127-442a-a6a1-c737e3d2f71b")
-		(property "Reference" "#PWR0541"
+		(property "Reference" "#PWR0319"
 			(at 115.7988 188.9107 0)
 			(effects
 				(font
@@ -9020,7 +9066,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0541")
+					(reference "#PWR0319")
 					(unit 1)
 				)
 			)
@@ -9035,7 +9081,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "47754d99-a35f-4b3f-acfe-5b9eb7a7f1a8")
-		(property "Reference" "C508"
+		(property "Reference" "C304"
 			(at 96.7488 42.8607 0)
 			(effects
 				(font
@@ -9098,7 +9144,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C508")
+					(reference "C304")
 					(unit 1)
 				)
 			)
@@ -9114,7 +9160,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4a3d859f-ffcd-4fa0-86a6-54f9d676ec4e")
-		(property "Reference" "LED501"
+		(property "Reference" "LED301"
 			(at 23.0888 111.1232 90)
 			(effects
 				(font
@@ -9177,7 +9223,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "LED501")
+					(reference "LED301")
 					(unit 1)
 				)
 			)
@@ -9192,7 +9238,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4cc42e54-8373-4153-9869-a3a834bd326b")
-		(property "Reference" "#PWR0558"
+		(property "Reference" "#PWR0336"
 			(at 251.6888 53.6557 0)
 			(effects
 				(font
@@ -9242,7 +9288,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0558")
+					(reference "#PWR0336")
 					(unit 1)
 				)
 			)
@@ -9257,7 +9303,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4d3afad4-2dda-499f-9d83-080f8e0bd503")
-		(property "Reference" "U508"
+		(property "Reference" "U305"
 			(at 184.3788 60.6407 0)
 			(effects
 				(font
@@ -9433,7 +9479,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "U508")
+					(reference "U305")
 					(unit 1)
 				)
 			)
@@ -9448,7 +9494,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4e54227e-be5f-42e7-9424-af36a0ed3a02")
-		(property "Reference" "F502"
+		(property "Reference" "F302"
 			(at 36.8048 38.9237 90)
 			(effects
 				(font
@@ -9510,7 +9556,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "F502")
+					(reference "F302")
 					(unit 1)
 				)
 			)
@@ -9525,7 +9571,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50cecad0-80d0-4833-bfcd-29389f4a722d")
-		(property "Reference" "R515"
+		(property "Reference" "R308"
 			(at 85.9538 174.8137 90)
 			(effects
 				(font
@@ -9586,7 +9632,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R515")
+					(reference "R308")
 					(unit 1)
 				)
 			)
@@ -9602,7 +9648,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "51b4d7be-479a-4f3b-9b1d-fdbdd83900d8")
-		(property "Reference" "J513"
+		(property "Reference" "J304"
 			(at 149.86 160.0199 0)
 			(effects
 				(font
@@ -9656,7 +9702,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "J513")
+					(reference "J304")
 					(unit 1)
 				)
 			)
@@ -9672,7 +9718,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "561c52ba-94ec-4330-93c4-40b4c210b422")
-		(property "Reference" "#PWR0547"
+		(property "Reference" "#PWR0325"
 			(at 154.5338 157.7957 0)
 			(effects
 				(font
@@ -9722,7 +9768,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0547")
+					(reference "#PWR0325")
 					(unit 1)
 				)
 			)
@@ -9737,7 +9783,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "56fc0b9f-6e6b-4303-a0cf-b747ef3ccd86")
-		(property "Reference" "R527"
+		(property "Reference" "R320"
 			(at 221.2088 37.7807 90)
 			(effects
 				(font
@@ -9798,7 +9844,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R527")
+					(reference "R320")
 					(unit 1)
 				)
 			)
@@ -9813,7 +9859,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "592568a7-9a52-47d7-b2cb-36a1c5387bb9")
-		(property "Reference" "C515"
+		(property "Reference" "C311"
 			(at 171.0438 59.3707 0)
 			(effects
 				(font
@@ -9876,7 +9922,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C515")
+					(reference "C311")
 					(unit 1)
 				)
 			)
@@ -9891,7 +9937,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5a21dd75-fb9c-4ca6-85a0-e24bb4c88837")
-		(property "Reference" "#PWR0546"
+		(property "Reference" "#PWR0324"
 			(at 150.7238 71.4357 0)
 			(effects
 				(font
@@ -9941,7 +9987,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0546")
+					(reference "#PWR0324")
 					(unit 1)
 				)
 			)
@@ -9956,7 +10002,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5a466a51-f37e-469a-86f0-6649ff0e9d64")
-		(property "Reference" "#PWR0545"
+		(property "Reference" "#PWR0323"
 			(at 138.9128 135.4437 0)
 			(effects
 				(font
@@ -10006,7 +10052,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0545")
+					(reference "#PWR0323")
 					(unit 1)
 				)
 			)
@@ -10022,7 +10068,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5b6efb06-4c1c-4593-a9c4-eab9cd1619dd")
-		(property "Reference" "R512"
+		(property "Reference" "R305"
 			(at 45.9488 104.4557 0)
 			(effects
 				(font
@@ -10085,7 +10131,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R512")
+					(reference "R305")
 					(unit 1)
 				)
 			)
@@ -10100,7 +10146,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "621745b8-d98c-40fa-bd13-59549a5aef11")
-		(property "Reference" "#PWR0544"
+		(property "Reference" "#PWR0322"
 			(at 135.4838 71.4357 0)
 			(effects
 				(font
@@ -10150,7 +10196,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0544")
+					(reference "#PWR0322")
 					(unit 1)
 				)
 			)
@@ -10165,7 +10211,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "63cee98c-bc41-4383-aa67-b4a7c3191381")
-		(property "Reference" "C514"
+		(property "Reference" "C310"
 			(at 160.8838 53.0207 0)
 			(effects
 				(font
@@ -10228,7 +10274,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C514")
+					(reference "C310")
 					(unit 1)
 				)
 			)
@@ -10244,7 +10290,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6946c3b8-9ce4-451e-ab10-0715faca54c7")
-		(property "Reference" "Q502"
+		(property "Reference" "Q302"
 			(at 105.0038 155.8907 90)
 			(effects
 				(font
@@ -10308,7 +10354,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "Q502")
+					(reference "Q302")
 					(unit 1)
 				)
 			)
@@ -10323,7 +10369,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6ad2d942-9f15-46b5-add0-f0e6bbf82ae0")
-		(property "Reference" "#PWR0551"
+		(property "Reference" "#PWR0329"
 			(at 168.5038 71.4357 0)
 			(effects
 				(font
@@ -10373,7 +10419,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0551")
+					(reference "#PWR0329")
 					(unit 1)
 				)
 			)
@@ -10389,7 +10435,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6d3529c6-549c-4be9-a5b8-1965f7f2f3c0")
-		(property "Reference" "#PWR0535"
+		(property "Reference" "#PWR0313"
 			(at 89.7638 162.8757 0)
 			(effects
 				(font
@@ -10439,7 +10485,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0535")
+					(reference "#PWR0313")
 					(unit 1)
 				)
 			)
@@ -10454,7 +10500,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6f90bceb-3d6e-446a-b59d-141a86925fa4")
-		(property "Reference" "C518"
+		(property "Reference" "C314"
 			(at 235.8138 39.0507 0)
 			(effects
 				(font
@@ -10517,7 +10563,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C518")
+					(reference "C314")
 					(unit 1)
 				)
 			)
@@ -10534,7 +10580,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "71051937-28d7-4d5a-958f-1a55bad627d7")
-		(property "Reference" "#PWR0534"
+		(property "Reference" "#PWR0312"
 			(at 72.8728 64.3237 0)
 			(effects
 				(font
@@ -10584,7 +10630,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0534")
+					(reference "#PWR0312")
 					(unit 1)
 				)
 			)
@@ -10599,7 +10645,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "71bddb77-6036-41d1-94a3-09022157be33")
-		(property "Reference" "R517"
+		(property "Reference" "R310"
 			(at 92.1768 183.5767 90)
 			(effects
 				(font
@@ -10660,7 +10706,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R517")
+					(reference "R310")
 					(unit 1)
 				)
 			)
@@ -10676,7 +10722,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "77ba37cf-548b-47eb-8166-0ccd1066bbf2")
-		(property "Reference" "#PWR0560"
+		(property "Reference" "#PWR0338"
 			(at 271.3738 36.5107 0)
 			(effects
 				(font
@@ -10727,7 +10773,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0560")
+					(reference "#PWR0338")
 					(unit 1)
 				)
 			)
@@ -10743,7 +10789,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7cc96608-8f3f-49f4-8b42-3be3ac3d7693")
-		(property "Reference" "LED503"
+		(property "Reference" "LED303"
 			(at 95.9868 37.9077 90)
 			(effects
 				(font
@@ -10806,7 +10852,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "LED503")
+					(reference "LED303")
 					(unit 1)
 				)
 			)
@@ -10821,7 +10867,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "83064959-38d7-44f5-8ddd-96f0f7e935ad")
-		(property "Reference" "#PWR0556"
+		(property "Reference" "#PWR0334"
 			(at 230.0988 53.6557 0)
 			(effects
 				(font
@@ -10871,7 +10917,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0556")
+					(reference "#PWR0334")
 					(unit 1)
 				)
 			)
@@ -10887,7 +10933,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "842d2923-518b-462c-b4ef-b216f077589d")
-		(property "Reference" "LED504"
+		(property "Reference" "LED304"
 			(at 118.3388 168.5907 90)
 			(effects
 				(font
@@ -10950,7 +10996,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "LED504")
+					(reference "LED304")
 					(unit 1)
 				)
 			)
@@ -10965,7 +11011,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "84d5ab40-baf4-42f3-a728-7f4673200b7e")
-		(property "Reference" "#PWR0530"
+		(property "Reference" "#PWR0308"
 			(at 51.6638 133.6657 0)
 			(effects
 				(font
@@ -11015,7 +11061,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0530")
+					(reference "#PWR0308")
 					(unit 1)
 				)
 			)
@@ -11030,7 +11076,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8633d88d-7b4c-4c60-a093-2065c9244cd5")
-		(property "Reference" "R528"
+		(property "Reference" "R321"
 			(at 264.3888 32.0657 90)
 			(effects
 				(font
@@ -11091,7 +11137,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R528")
+					(reference "R321")
 					(unit 1)
 				)
 			)
@@ -11106,7 +11152,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8706a9f6-f09b-485e-b0f4-76f6ebbffce8")
-		(property "Reference" "F501"
+		(property "Reference" "F301"
 			(at 21.8188 98.1057 90)
 			(effects
 				(font
@@ -11168,7 +11214,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "F501")
+					(reference "F301")
 					(unit 1)
 				)
 			)
@@ -11183,7 +11229,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "88e21dcd-6c8c-42f4-9528-c4747f1b5b1b")
-		(property "Reference" "#PWR0550"
+		(property "Reference" "#PWR0328"
 			(at 164.6938 71.4357 0)
 			(effects
 				(font
@@ -11233,7 +11279,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0550")
+					(reference "#PWR0328")
 					(unit 1)
 				)
 			)
@@ -11248,7 +11294,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8dd3a91f-ae55-4c58-8463-28c1a6fcfeeb")
-		(property "Reference" "C512"
+		(property "Reference" "C308"
 			(at 133.5788 39.0507 0)
 			(effects
 				(font
@@ -11311,7 +11357,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C512")
+					(reference "C308")
 					(unit 1)
 				)
 			)
@@ -11326,7 +11372,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8f22db72-5049-44a1-9f87-5022fc852a2a")
-		(property "Reference" "#PWR0538"
+		(property "Reference" "#PWR0316"
 			(at 102.5908 126.5537 0)
 			(effects
 				(font
@@ -11376,7 +11422,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0538")
+					(reference "#PWR0316")
 					(unit 1)
 				)
 			)
@@ -11391,7 +11437,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "931caf88-e51b-4dd5-acc6-07fd5006553d")
-		(property "Reference" "R521"
+		(property "Reference" "R314"
 			(at 143.1038 40.9557 0)
 			(effects
 				(font
@@ -11454,7 +11500,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R521")
+					(reference "R314")
 					(unit 1)
 				)
 			)
@@ -11469,7 +11515,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "940caab8-8d78-4e48-b346-ef674d6f1fa8")
-		(property "Reference" "RV501"
+		(property "Reference" "RV301"
 			(at 36.4238 109.5357 0)
 			(effects
 				(font
@@ -11535,7 +11581,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "RV501")
+					(reference "RV301")
 					(unit 1)
 				)
 			)
@@ -11551,7 +11597,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9bfdd817-6107-4241-b2cd-ba29758e5390")
-		(property "Reference" "#PWR0552"
+		(property "Reference" "#PWR0330"
 			(at 198.3488 126.6807 0)
 			(effects
 				(font
@@ -11601,7 +11647,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0552")
+					(reference "#PWR0330")
 					(unit 1)
 				)
 			)
@@ -11616,7 +11662,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9ff7688f-3ffc-4237-9e7e-238abe447f2a")
-		(property "Reference" "#PWR0540"
+		(property "Reference" "#PWR0318"
 			(at 107.5438 82.2307 0)
 			(effects
 				(font
@@ -11666,7 +11712,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0540")
+					(reference "#PWR0318")
 					(unit 1)
 				)
 			)
@@ -11682,7 +11728,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5cdd8b1-b414-4007-8a26-92d5d9b8e8f7")
-		(property "Reference" "L501"
+		(property "Reference" "L301"
 			(at 183.7438 21.2707 90)
 			(effects
 				(font
@@ -11743,7 +11789,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "L501")
+					(reference "L301")
 					(unit 1)
 				)
 			)
@@ -11759,7 +11805,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a6ccd568-06db-46cf-b8f6-bcf3ea507317")
-		(property "Reference" "U506"
+		(property "Reference" "U303"
 			(at 113.2588 47.9407 0)
 			(effects
 				(font
@@ -11846,7 +11892,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "U506")
+					(reference "U303")
 					(unit 1)
 				)
 			)
@@ -11862,7 +11908,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a9759f21-d170-43ad-9d6f-083dbdb8b5e9")
-		(property "Reference" "R510"
+		(property "Reference" "R303"
 			(at 37.0588 118.4257 0)
 			(effects
 				(font
@@ -11925,7 +11971,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R510")
+					(reference "R303")
 					(unit 1)
 				)
 			)
@@ -11940,7 +11986,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "aa399dcb-ffe1-4247-8342-0f9f7413355b")
-		(property "Reference" "C516"
+		(property "Reference" "C312"
 			(at 204.6988 52.3857 0)
 			(effects
 				(font
@@ -12003,7 +12049,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C516")
+					(reference "C312")
 					(unit 1)
 				)
 			)
@@ -12019,7 +12065,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ada2e665-e0ea-4ca1-867c-9bd0ebbb9eeb")
-		(property "Reference" "R508"
+		(property "Reference" "R301"
 			(at 24.9938 119.6957 0)
 			(effects
 				(font
@@ -12082,7 +12128,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R508")
+					(reference "R301")
 					(unit 1)
 				)
 			)
@@ -12098,7 +12144,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b0618d70-3937-42a5-ac52-422303deed19")
-		(property "Reference" "J503"
+		(property "Reference" "J303"
 			(at 139.2938 64.4507 0)
 			(effects
 				(font
@@ -12150,7 +12196,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "J503")
+					(reference "J303")
 					(unit 1)
 				)
 			)
@@ -12166,7 +12212,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b45fc6e1-1406-4ef6-af36-530abe432467")
-		(property "Reference" "#PWR0533"
+		(property "Reference" "#PWR0311"
 			(at 70.7138 145.0957 0)
 			(effects
 				(font
@@ -12216,7 +12262,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0533")
+					(reference "#PWR0311")
 					(unit 1)
 				)
 			)
@@ -12232,7 +12278,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b5cb5563-195f-4033-9b58-87b2266a6061")
-		(property "Reference" "R525"
+		(property "Reference" "R318"
 			(at 209.1438 42.8607 90)
 			(effects
 				(font
@@ -12293,7 +12339,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R525")
+					(reference "R318")
 					(unit 1)
 				)
 			)
@@ -12308,7 +12354,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bd2a63cc-34fc-403a-8aff-57d0a0f0454a")
-		(property "Reference" "R513"
+		(property "Reference" "R306"
 			(at 46.0758 64.3237 90)
 			(effects
 				(font
@@ -12369,7 +12415,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R513")
+					(reference "R306")
 					(unit 1)
 				)
 			)
@@ -12385,7 +12431,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c8563daf-90ff-4e91-a867-34e13ff6cc67")
-		(property "Reference" "LED505"
+		(property "Reference" "LED305"
 			(at 280.8988 47.3057 90)
 			(effects
 				(font
@@ -12448,7 +12494,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "LED505")
+					(reference "LED305")
 					(unit 1)
 				)
 			)
@@ -12463,7 +12509,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ca012b4e-db11-48b0-8ca2-1614c5cafca1")
-		(property "Reference" "#PWR0522"
+		(property "Reference" "#PWR0301"
 			(at 20.5488 100.6457 0)
 			(effects
 				(font
@@ -12514,7 +12560,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0522")
+					(reference "#PWR0301")
 					(unit 1)
 				)
 			)
@@ -12530,7 +12576,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ca56ab8a-3a2b-4470-a265-e687d2a8f498")
-		(property "Reference" "J504"
+		(property "Reference" "J305"
 			(at 207.2388 108.2657 0)
 			(effects
 				(font
@@ -12584,7 +12630,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "J504")
+					(reference "J305")
 					(unit 1)
 				)
 			)
@@ -12600,7 +12646,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cca72cd3-3968-4340-8f51-eefb3fe6c979")
-		(property "Reference" "R522"
+		(property "Reference" "R315"
 			(at 148.59 167.894 0)
 			(effects
 				(font
@@ -12663,7 +12709,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R522")
+					(reference "R315")
 					(unit 1)
 				)
 			)
@@ -12678,7 +12724,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cdafda6d-6c05-4210-80d8-616ac6da80f3")
-		(property "Reference" "C510"
+		(property "Reference" "C306"
 			(at 124.0538 113.3457 0)
 			(effects
 				(font
@@ -12741,7 +12787,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C510")
+					(reference "C306")
 					(unit 1)
 				)
 			)
@@ -12757,7 +12803,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ce1cd1fc-13a5-4b80-9651-3a0a015f0d37")
-		(property "Reference" "#PWR0523"
+		(property "Reference" "#PWR0302"
 			(at 26.8988 131.1257 0)
 			(effects
 				(font
@@ -12807,7 +12853,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0523")
+					(reference "#PWR0302")
 					(unit 1)
 				)
 			)
@@ -12822,7 +12868,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d1ebefba-456f-4f1a-87d8-3927936b48cc")
-		(property "Reference" "#PWR0543"
+		(property "Reference" "#PWR0321"
 			(at 126.5938 125.4107 0)
 			(effects
 				(font
@@ -12872,7 +12918,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0543")
+					(reference "#PWR0321")
 					(unit 1)
 				)
 			)
@@ -12887,7 +12933,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d26bc6e3-2ca3-4c0f-9245-b82aa3e45f9f")
-		(property "Reference" "R524"
+		(property "Reference" "R317"
 			(at 171.6788 103.8207 90)
 			(effects
 				(font
@@ -12948,7 +12994,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R524")
+					(reference "R317")
 					(unit 1)
 				)
 			)
@@ -12963,7 +13009,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d68f5025-97e6-4b69-93cd-dddabfcf7c81")
-		(property "Reference" "#PWR0553"
+		(property "Reference" "#PWR0331"
 			(at 200.8888 71.4357 0)
 			(effects
 				(font
@@ -13013,7 +13059,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0553")
+					(reference "#PWR0331")
 					(unit 1)
 				)
 			)
@@ -13028,7 +13074,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d75414b0-5ac4-47ff-a015-fecd63d5fa68")
-		(property "Reference" "#PWR0537"
+		(property "Reference" "#PWR0315"
 			(at 102.4638 54.2907 0)
 			(effects
 				(font
@@ -13078,7 +13124,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0537")
+					(reference "#PWR0315")
 					(unit 1)
 				)
 			)
@@ -13093,7 +13139,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "da33ee95-1b38-432c-81af-815a9bdefdcd")
-		(property "Reference" "R509"
+		(property "Reference" "R302"
 			(at 30.48 170.18 90)
 			(effects
 				(font
@@ -13154,7 +13200,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R509")
+					(reference "R302")
 					(unit 1)
 				)
 			)
@@ -13169,7 +13215,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dc83807b-d689-4c9a-8389-a71f6b4c1078")
-		(property "Reference" "R518"
+		(property "Reference" "R311"
 			(at 94.8438 165.4157 90)
 			(effects
 				(font
@@ -13230,7 +13276,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R518")
+					(reference "R311")
 					(unit 1)
 				)
 			)
@@ -13245,7 +13291,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dc94f395-8004-4f1e-9760-2a392ad9c4ed")
-		(property "Reference" "#PWR0557"
+		(property "Reference" "#PWR0335"
 			(at 247.8788 82.2307 0)
 			(effects
 				(font
@@ -13295,7 +13341,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0557")
+					(reference "#PWR0335")
 					(unit 1)
 				)
 			)
@@ -13310,7 +13356,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dcf338ae-9bca-4dc7-9609-daaf1462a547")
-		(property "Reference" "#PWR0554"
+		(property "Reference" "#PWR0332"
 			(at 204.0638 71.4357 0)
 			(effects
 				(font
@@ -13360,7 +13406,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0554")
+					(reference "#PWR0332")
 					(unit 1)
 				)
 			)
@@ -13376,7 +13422,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dee3f06b-8f86-4b16-8784-a208465acd27")
-		(property "Reference" "R529"
+		(property "Reference" "R322"
 			(at 279.6288 56.1957 0)
 			(effects
 				(font
@@ -13439,7 +13485,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R529")
+					(reference "R322")
 					(unit 1)
 				)
 			)
@@ -13454,7 +13500,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e2282bbd-9c8f-4823-baf5-691bb5c319c1")
-		(property "Reference" "C505"
+		(property "Reference" "C301"
 			(at 28.8038 103.8207 0)
 			(effects
 				(font
@@ -13517,7 +13563,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C505")
+					(reference "C301")
 					(unit 1)
 				)
 			)
@@ -13533,7 +13579,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e2761a30-d6ee-470c-a787-a74fc2e44eb2")
-		(property "Reference" "J501"
+		(property "Reference" "J301"
 			(at 20.6758 41.4637 0)
 			(effects
 				(font
@@ -13587,7 +13633,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "J501")
+					(reference "J301")
 					(unit 1)
 				)
 			)
@@ -13603,7 +13649,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e2dc1012-af18-41da-92e5-de9854f58272")
-		(property "Reference" "R516"
+		(property "Reference" "R309"
 			(at 85.6998 46.5437 0)
 			(effects
 				(font
@@ -13666,7 +13712,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R516")
+					(reference "R309")
 					(unit 1)
 				)
 			)
@@ -13682,7 +13728,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e2df8600-35de-4954-b189-49cc01e783ef")
-		(property "Reference" "#PWR0548"
+		(property "Reference" "#PWR0326"
 			(at 159.7408 120.4577 0)
 			(effects
 				(font
@@ -13732,7 +13778,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0548")
+					(reference "#PWR0326")
 					(unit 1)
 				)
 			)
@@ -13747,7 +13793,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e64304ec-d7dd-4ade-8d06-da587f1a9cbd")
-		(property "Reference" "#PWR0555"
+		(property "Reference" "#PWR0333"
 			(at 216.1288 71.4357 0)
 			(effects
 				(font
@@ -13797,7 +13843,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0555")
+					(reference "#PWR0333")
 					(unit 1)
 				)
 			)
@@ -13813,7 +13859,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e754bac2-9830-4a0a-8774-a2fdfaa159dc")
-		(property "Reference" "#PWR0525"
+		(property "Reference" "#PWR0303"
 			(at 29.5658 76.3887 0)
 			(effects
 				(font
@@ -13863,7 +13909,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0525")
+					(reference "#PWR0303")
 					(unit 1)
 				)
 			)
@@ -13879,7 +13925,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e76a9828-2f8d-4769-a0b5-bc3b2831f86c")
-		(property "Reference" "R519"
+		(property "Reference" "R312"
 			(at 117.7038 172.4007 0)
 			(effects
 				(font
@@ -13942,7 +13988,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R519")
+					(reference "R312")
 					(unit 1)
 				)
 			)
@@ -13957,7 +14003,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "edcd5808-01dd-49eb-8fa1-50f0953f18d5")
-		(property "Reference" "R523"
+		(property "Reference" "R316"
 			(at 145.6438 60.0057 0)
 			(effects
 				(font
@@ -14020,7 +14066,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R523")
+					(reference "R316")
 					(unit 1)
 				)
 			)
@@ -14035,7 +14081,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f0fde032-0190-45bf-b0d9-c1a62e38e61d")
-		(property "Reference" "C506"
+		(property "Reference" "C302"
 			(at 55.0928 45.1467 0)
 			(effects
 				(font
@@ -14098,7 +14144,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "C506")
+					(reference "C302")
 					(unit 1)
 				)
 			)
@@ -14113,7 +14159,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f99d6539-b2a3-48a8-9f1f-6910915a509c")
-		(property "Reference" "R514"
+		(property "Reference" "R307"
 			(at 56.6168 63.1807 90)
 			(effects
 				(font
@@ -14174,7 +14220,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R514")
+					(reference "R307")
 					(unit 1)
 				)
 			)
@@ -14191,7 +14237,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fa36cf9f-b3c0-4cf7-9e94-4eddf6d6acba")
-		(property "Reference" "#PWR0532"
+		(property "Reference" "#PWR0310"
 			(at 62.7128 82.8657 0)
 			(effects
 				(font
@@ -14241,7 +14287,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "#PWR0532")
+					(reference "#PWR0310")
 					(unit 1)
 				)
 			)
@@ -14256,7 +14302,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fd359b7a-325b-40d4-a4bd-67a8c32e4c1d")
-		(property "Reference" "R526"
+		(property "Reference" "R319"
 			(at 218.0338 45.4007 0)
 			(effects
 				(font
@@ -14319,7 +14365,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "R526")
+					(reference "R319")
 					(unit 1)
 				)
 			)
@@ -14335,7 +14381,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fd7d8c35-081d-4064-9581-5cf0e3612ed5")
-		(property "Reference" "F503"
+		(property "Reference" "F303"
 			(at 185.0138 102.5507 90)
 			(effects
 				(font
@@ -14397,7 +14443,7 @@
 		(instances
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8/bc30a2d0-3898-41ca-9b9c-eba4c0067b6e"
-					(reference "F503")
+					(reference "F303")
 					(unit 1)
 				)
 			)
