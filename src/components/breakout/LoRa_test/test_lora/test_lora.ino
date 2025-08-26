@@ -1,4 +1,3 @@
-
 #include "SoftwareSerial.h"
 #include "E220.h"
 
@@ -7,13 +6,13 @@
 #define LORA_ADDR E220::BROADCAST
 #define LORA_CHANNEL 10
 
-#define LORA_TX_PIN 0
-#define LORA_RX_PIN 1
-#define LORA_AUX_PIN 22
-#define LORA_M0_PIN 21
-#define LORA_M1_PIN 20
+#define LORA_TX_PIN 28
+#define LORA_RX_PIN 29
+#define LORA_AUX_PIN 20
+#define LORA_M0_PIN 18
+#define LORA_M1_PIN 19
 
-//SoftwareSerial lora_serial(LORA_RX_PIN, LORA_TX_PIN);
+SoftwareSerial lora_serial(LORA_RX_PIN, LORA_TX_PIN);
 
 
 E220 lora(Serial1, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN);

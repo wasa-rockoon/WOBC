@@ -17,6 +17,7 @@ HardwareSerial lora_serial(1); // 通常、1 は Serial1 を指しますが、�
 // E220 LoRaモジュールの初期化
 E220 lora(lora_serial, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN);
 
+
 void setup() {
   Serial.begin(115200);
   lora_serial.begin(9600, SERIAL_8N1, LORA_RX_PIN, LORA_TX_PIN); // lora_serialの初期化
@@ -44,10 +45,12 @@ void setup() {
   } else {
     Serial.println("LoRa error.");
   }
+  
 }
 
 void loop() {
   uint8_t rx[256];
+  
   unsigned len = lora.receive(rx);
   while (lora.isBusy());
 
@@ -57,6 +60,7 @@ void loop() {
   
   const char message[] = "HELLO LORA!";
   lora.sendTransparent((const uint8_t*)message, sizeof(message) - 1);
+  
   delay(5000);
 }
 
