@@ -48,7 +48,7 @@ void setup() {
 
   delay(500);
 
-  can_bus.begin();
+  //can_bus.begin();
   serial_bus.begin();
   main_.begin();
 
