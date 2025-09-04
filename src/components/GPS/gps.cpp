@@ -34,11 +34,12 @@ void GPS::SampleTimer::callback(){
     packet.append("LO").setFloat64(gps_.location.lng());
     packet.append("AL").setInt((int)gps_.altitude.meters());
     
-    // 時刻情報の文字列を作成
-    char timeStr[24];
-    sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d", 
+    // 時刻情報の文字列を作成（センチ秒まで）
+    char timeStr[27];
+    sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d.%02d", 
             gps_.date.year(), gps_.date.month(), gps_.date.day(),
-            gps_.time.hour(), gps_.time.minute(), gps_.time.second());
+            gps_.time.hour(), gps_.time.minute(), gps_.time.second(),
+            gps_.time.centisecond());
     
     // 文字列としてパケットに追加
     packet.append("UT").setString(timeStr);
