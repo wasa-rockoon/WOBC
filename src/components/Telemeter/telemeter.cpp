@@ -38,7 +38,7 @@ void Telemeter::setup() {
 
   delay(5000);
 
-  WiFiMulti_.addAP("Redmi 9T", "1ea4c967d163p");
+  WiFiMulti_.addAP("としや", "f2gthy456");
 
   WiFi.disconnect();
   while (WiFiMulti_.run() != WL_CONNECTED) {
@@ -46,7 +46,7 @@ void Telemeter::setup() {
   }
 
   // Server address, port and URL
-  webSocket_.begin("54.248.18.111", 80, "http://54.248.18.111/ws");
+  webSocket_.begin("13.230.241.30", 80, "http://13.230.241.30/ws");
 
   // Event handler
   webSocket_.onEvent([this](WStype_t type, uint8_t* payload, size_t length) {
