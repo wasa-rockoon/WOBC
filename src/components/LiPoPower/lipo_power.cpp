@@ -80,7 +80,9 @@ void LiPoPower::SampleTimer::callback() {
   packet1.append("Vd").setInt(x3_mV);
   packet1.append("Id").setInt(x3_mA);
   packet1.append("Pd").setInt(x3_mW);
-  
+
+  packet1.append("Ts").setInt(millis());
+
   sendPacket(packet1);
 
   // LiPotelemetry_id パケット送信

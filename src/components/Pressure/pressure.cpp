@@ -141,6 +141,8 @@ void Pressure::SampleTimer::callback() { // Timerで定期的に実行される�
   packet.append("TE").setInt((int)temp);
   packet.append("HU").setInt((int)hum);
   packet.append("PA").setInt((int)pressureAlt);  // 計算された高度を追加
+
+  packet.append("Ts").setInt(millis());
   // ... TODO
   sendPacket(packet);
 }
