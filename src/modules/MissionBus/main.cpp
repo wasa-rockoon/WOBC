@@ -13,7 +13,7 @@
 #define SPI0_MISO_PIN 2
 #define SPI0_CS_PIN 4
 
-#define SD_INSERTED_PIN 5
+#define SD_INSERTED_PIN 6
 #define SDCARD_MOSI_PIN SPI0_MOSI_PIN
 #define SDCARD_MISO_PIN SPI0_MISO_PIN
 #define SDCARD_SS_PIN SPI0_CS_PIN
@@ -81,7 +81,7 @@ void setup() {
     kernel::setUnitId(unit_id);
     if (!kernel::begin(module_id, true)) return;
 
-    //Serial0.setPins(2, 1);
+    //Serial0.setPins(4, 5);
     Wire.begin(17, 16);
     serial_bus.begin();
 
