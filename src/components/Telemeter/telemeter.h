@@ -24,6 +24,8 @@ protected:
 
   void setup() override;
   void loop() override;
+  bool connectToWiFi();
+  bool sendDebugText(const String& message);
   void webSocketEvent(WStype_t type, uint8_t* payload, size_t length);
 };
 
