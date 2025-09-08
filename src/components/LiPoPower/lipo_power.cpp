@@ -28,8 +28,12 @@ void LiPoPower::setup() {
   pinMode(st_pin_, INPUT);
   pinMode(pg_pin_, INPUT_PULLUP);
   pinMode(stat1_pin_, INPUT_PULLUP);
-  pinMode(stat2_pin_, INPUT_PULLUP);
-  pinMode(charge_led_pin_, OUTPUT);
+  if(stat2_pin_ >= 0) {
+    pinMode(stat2_pin_, INPUT_PULLUP);
+  }
+  if(charge_led_pin_ >= 0) {
+    pinMode(charge_led_pin_, OUTPUT);
+  }
 
   ina1.begin();
   ina1.setMaxCurrentShunt(1, 0.05);
@@ -61,12 +65,14 @@ void LiPoPower::SampleTimer::callback() {
   bool source = digitalRead(lipo_power_.st_pin_) ? 0 : 1;
   bool charge = 0;
 
-  if (!digitalRead(lipo_power_.pg_pin_) && !digitalRead(lipo_power_.stat1_pin_) && digitalRead(lipo_power_.stat2_pin_)) {
+  if (!digitalRead(lipo_power_.pg_pin_) && !digitalRead(lipo_power_.stat1_pin_)) {
     charge = 1;
   }
 
-  // LED の状態を更新
-  digitalWrite(lipo_power_.charge_led_pin_, charge);
+  // Charge LEDピンが有効な場合のみ制御
+  if(lipo_power_.charge_led_pin_ >= 0) {
+    digitalWrite(lipo_power_.charge_led_pin_, charge);
+  }
 
   // Powertelemetry_id パケット送信
 
