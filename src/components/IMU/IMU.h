@@ -23,5 +23,22 @@ protected:
   TwoWire& wire_;
   uint8_t unit_id_;
   BoschSensorClass* imu;
+
+  void setup() override;
+
+  void readallIMU();
+
+  class SampleTimer: public process::Timer{
+  public:
+    SampleTimer(IMU9& IMU9_ref, BoschSensorClass& imu_ref, uint8_t& unit_id_ref, unsigned interval_ms);
+  
+  protected:
+    void callback() override;
+  
+  private:
+    IMU9& IMU9_;
+    BoschSensorClass& imu_;
+    uint8_t& unit_id_;
+  } sample_timer_;
 };
 }
