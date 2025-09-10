@@ -26,4 +26,19 @@ IMU9::SampleTimer::SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_
     IMU9_(IMU9_ref), IMU_(IMU_ref), unit_id_(unit_id_ref) {
 }
 
+void IMU9::SampleTimer::callback() {
+  float Ax, Ay, Az, Gx, Gy, Gz, Mx, My, Mz;
+
+  if (IMU.accelerationAvailable()) {
+    IMU.readAcceleration(Ax, Ay, Az);
+  }
+  if (IMU.gyroscopeAvailable()) {
+    IMU.readGyroscope(Gx, Gy, Gz);
+  }
+  if (IMU.magneticFieldAvailable()) {
+    IMU.readMagneticField(Mx, My, Mz);
+  }
+
+  
+}
 }
