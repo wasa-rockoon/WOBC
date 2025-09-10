@@ -45,7 +45,7 @@ component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, un
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
-component::IMU9 imu(Wire, unit_id);
+component::IMU9 imu(Wire, unit_id, 100);
 component::GPS gps(39, 38, 115200, unit_id);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());

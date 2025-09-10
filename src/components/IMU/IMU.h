@@ -28,7 +28,7 @@ protected:
 
   class SampleTimer: public process::Timer{
   public:
-    SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_t unit_id_ref, unsigned sample_freq_hz = 100);
+    SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_t unit_id_ref, unsigned interval_ms);
   
   protected:
     void callback() override;
