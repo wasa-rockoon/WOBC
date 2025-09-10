@@ -14,10 +14,8 @@ IMU9::IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz)
 
 void IMU9::setup() {
   start(sample_timer_);
-  Wire.begin();
-  if (!IMU.begin()) {
+  if (!IMU_->begin()) {
     Serial.println("Failed to initialize IMU!");
-    while (1);
   }
 }
 
@@ -29,16 +27,29 @@ IMU9::SampleTimer::SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_
 void IMU9::SampleTimer::callback() {
   float Ax, Ay, Az, Gx, Gy, Gz, Mx, My, Mz;
 
-  if (IMU.accelerationAvailable()) {
-    IMU.readAcceleration(Ax, Ay, Az);
+  if (IMU_->accelerationAvailable()) {
+    IMU_->readAcceleration(Ax, Ay, Az);
   }
-  if (IMU.gyroscopeAvailable()) {
-    IMU.readGyroscope(Gx, Gy, Gz);
+  if (IMU_->gyroscopeAvailable()) {
+    IMU_->readGyroscope(Gx, Gy, Gz);
   }
-  if (IMU.magneticFieldAvailable()) {
-    IMU.readMagneticField(Mx, My, Mz);
+  if (IMU_->magneticFieldAvailable()) {
+    IMU_->readMagneticField(Mx, My, Mz);
   }
 
-  
+  wcpp::Packet packet = newPacket(64);
+  packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
+  packet.append("Ax").setFloat32(Ax);
+  packet.append("Ay").setFloat32(Ay);
+  packet.append("Az").setFloat32(Az);
+  packet.append("Gx").setFloat32(Gx);
+  packet.append("Gy").setFloat32(Gy);
+  packet.append("Gz").setFloat32(Gz);
+  packet.append("Mx").setFloat32(Mx);
+  packet.append("My").setFloat32(My);
+  packet.append("Mz").setFloat32(Mz);
+
+  packet.append("Ts").setInt((int)millis());
+  sendPacket(packet);
 }
 }
