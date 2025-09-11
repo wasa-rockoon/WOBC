@@ -16,6 +16,11 @@ bool Telemeter::connectToWiFi() {
       LOG("WiFi接続タイムアウト");
       return false;
     }
+    // RSSI や試行回数を簡易表示
+    static int counter = 0;
+    if((counter++ % 20) == 0){
+      LOG("接続試行中 (WiFiMulti.run 未接続)");
+    }
   }
   LOG("WiFi接続成功");
   return true;
@@ -25,6 +30,10 @@ bool Telemeter::connectToWiFi() {
 bool Telemeter::sendDebugText(const String& message) {
   if (WiFi.status() != WL_CONNECTED) {
     LOG("デバッグメッセージ送信失敗: WiFi未接続");
+    return false;
+  }
+  if(!webSocket_.isConnected()){
+    LOG("デバッグメッセージ送信失敗: WebSocket未接続");
     return false;
   }
   
@@ -42,12 +51,16 @@ bool Telemeter::sendDebugText(const String& message) {
 }
 
 void Telemeter::webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
+  // 生タイプ番号も記録
+  Serial.printf("[WSc] Event type=%d length=%u\n", (int)type, (unsigned)length);
   switch (type) {
     case WStype_DISCONNECTED:
-      Serial.printf("[WSc] Disconnected!\n");
+      Serial.printf("[WSc] Disconnected! (WiFi status=%d)\n", WiFi.status());
       break;
     case WStype_CONNECTED:
       Serial.printf("[WSc] Connected to url: %s\n", payload);
+      // HTTP応答コード等はライブラリ内部しか見えないので簡易通知
+      LOG("WebSocket接続イベント受信 (CONNECTED)");
       // Send message to server when connected
       break;
     case WStype_TEXT:
@@ -56,13 +69,26 @@ void Telemeter::webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
       // webSocket.sendTXT("message here");
       break;
     case WStype_BIN:
+      Serial.printf("[WSc] binary frame len=%u\n", (unsigned)length);
       break;
     case WStype_ERROR:
+      Serial.printf("[WSc] ERROR event\n");
+      LOG("WebSocket ERROR イベント発生");
     case WStype_FRAGMENT_TEXT_START:
     case WStype_FRAGMENT_BIN_START:
     case WStype_FRAGMENT:
     case WStype_FRAGMENT_FIN:
       break;
+  }
+}
+
+const char* Telemeter::wsStateName(int state) const {
+  switch(state){
+    case 0: return "DISCONNECTED"; // ライブラリ内部定義と一致しない可能性あり(参考)
+    case 1: return "CONNECTING";
+    case 2: return "HANDSHAKE";
+    case 3: return "CONNECTED";
+    default: return "UNKNOWN";
   }
 }
 
@@ -80,6 +106,9 @@ void Telemeter::setup() {
 
   // Server address, port and URL
   webSocket_.begin("18.178.150.196", 80, "/ws");
+  LOG("WebSocket.begin 呼び出し (ws://18.178.150.196:80/ws)");
+  LOG("接続シーケンス開始: WiFi IP=" );
+  Serial.println(WiFi.localIP());
 
   // Event handler
   webSocket_.onEvent([this](WStype_t type, uint8_t* payload, size_t length) {
@@ -88,6 +117,7 @@ void Telemeter::setup() {
 
   // Set reconnect interval
   webSocket_.setReconnectInterval(5000);
+  LOG("WebSocket 再接続間隔 5000ms 設定");
 }
 
 void Telemeter::loop() {
@@ -108,6 +138,12 @@ void Telemeter::loop() {
   }
 
   webSocket_.loop();
+  static unsigned long lastWsDiag = 0;
+  if(millis() - lastWsDiag > 3000){
+    lastWsDiag = millis();
+    // isConnected() 以外に内部状態は expose されないので最低限
+    LOG(webSocket_.isConnected() ? "WebSocket状態: 接続済" : "WebSocket状態: 未接続");
+  }
   while (up_packets_) {
     const wcpp::Packet packet = up_packets_.pop();
     uint8_t buf[wcpp::size_max];
@@ -131,7 +167,9 @@ void Telemeter::loop() {
     bool ok = webSocket_.sendBIN(packet_tele.encode(), packet_tele.size());
 
     if(ok) LOG("UP server");
-    else LOG("Mistake up");
+    else {
+      LOG("Mistake up (WebSocket未接続/送信失敗)" );
+    }
   }
 }
 }

@@ -24,9 +24,15 @@ protected:
 
   void setup() override;
   void loop() override;
-  bool connectToWiFi();
-  bool sendDebugText(const String& message);
   void webSocketEvent(WStype_t type, uint8_t* payload, size_t length);
+
+  // 追加: デバッグ用 (接続状態番号→文字列)
+  const char* wsStateName(int state) const;
+
+  // WiFi 接続 (タイムアウト付き)
+  bool connectToWiFi();
+  // デバッグテキスト送信
+  bool sendDebugText(const String& message);
 };
 
 }
