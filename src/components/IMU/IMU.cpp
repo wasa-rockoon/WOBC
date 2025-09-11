@@ -49,7 +49,7 @@ void IMU9::SampleTimer::callback() {
   packet.append("My").setFloat32(My);
   packet.append("Mz").setFloat32(Mz);
 
-  packet.append("Ts").setInt((int)millis());
+  //packet.append("Ts").setInt((int)millis());
   sendPacket(packet);
 }
 }

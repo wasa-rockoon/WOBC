@@ -43,7 +43,7 @@ void GPS::SampleTimer::callback(){
     
     // 文字列としてパケットに追加
     packet.append("UT").setString(timeStr);
-    packet.append("Ts").setInt(millis());
+    //packet.append("Ts").setInt(millis());
     sendPacket(packet);
     }
 }
