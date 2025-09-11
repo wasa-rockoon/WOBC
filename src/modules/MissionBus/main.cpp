@@ -98,7 +98,7 @@ void setup() {
     error_indicator.set(true);
 
     power.begin();
-    lora.begin();
+    //lora.begin();
     pressure.begin();
     imu.begin();
     gps.begin();
