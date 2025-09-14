@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>大量データポイントの地図表示</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    
+    <!-- MarkerCluster CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    
+    <style>
+        #map { 
+            height: 600px; 
+            width: 100%;
+        }
+        .info-content {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>データポイントマップ</h1>
+    <div id="map"></div>
+    <input type="file" id="csvFile" accept=".csv" />
+    <button onclick="loadCSV()">CSVをロード</button>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    
+    <script>
+        // 地図の初期化
+        var map = L.map('map').setView([32.95180, 132.5869], 13);
+        
+        // 背景タイルレイヤーの追加
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        
+        // マーカークラスタグループの作成
+        var markers = L.markerClusterGroup({
+            chunkedLoading: true,  // 大量データ時のパフォーマンス向上
+            maxClusterRadius: 25,  // クラスタリングの半径を小さくする (50→25)
+            spiderfyOnMaxZoom: true,  // 最大ズーム時に展開
+            disableClusteringAtZoom: 18,  // この拡大レベル以上でクラスタリングを無効化
+            zoomToBoundsOnClick: true,  // クラスタをクリックしたときに境界にズーム
+            showCoverageOnHover: true  // ホバー時にクラスタの範囲を表示
+        });
+        
+        // CSVファイルの読み込み処理
+        function loadCSV() {
+            const fileInput = document.getElementById('csvFile');
+            const file = fileInput.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    // クラスタグループをクリア
+                    markers.clearLayers();
+                    
+                    // CSVデータをパース
+                    const csvData = e.target.result;
+                    const lines = csvData.split('\n');
+                    
+                    // ヘッダー行をスキップ
+                    for (let i = 1; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        if (line) {
+                            const columns = line.split(',');
+                            
+                            // スプレッドシートの形式に合わせてインデックスを調整
+                            const date = columns[0]; // A列
+                            const time = columns[1]; // B列
+                            const value = columns[2]; // C列
+                            const lat = parseFloat(columns[3]); // D列（緯度）
+                            const lng = parseFloat(columns[4]); // E列（経度）
+                            const timestamp = columns[5]; // F列
+                            
+                            // 有効な座標の場合のみマーカーを追加
+                            if (!isNaN(lat) && !isNaN(lng)) {
+                                const marker = L.marker([lat, lng]);
+                                marker.bindPopup(`
+                                    <div class="info-content">
+                                        <strong>日時:</strong> ${date} ${time}<br>
+                                        <strong>値:</strong> ${value}<br>
+                                        <strong>座標:</strong> ${lat}, ${lng}<br>
+                                        <strong>タイムスタンプ:</strong> ${timestamp}
+                                    </div>
+                                `);
+                                markers.addLayer(marker);
+                            }
+                        }
+                    }
+                    
+                    // クラスタをマップに追加
+                    map.addLayer(markers);
+                    
+                    // 全てのマーカーが表示されるようにビューを調整
+                    if (markers.getLayers().length > 0) {
+                        map.fitBounds(markers.getBounds());
+                    }
+                };
+                
+                reader.readAsText(file);
+            } else {
+                alert('CSVファイルを選択してください');
+            }
+        }
+    </script>
+</body>
+</html>
