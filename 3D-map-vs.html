@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D GPS データビジュアライゼーション</title>
+    
+    <!-- MapboxGL JS -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
+    
+    <!-- deck.gl for 3D visualization -->
+    <script src="https://unpkg.com/deck.gl@^8.8.0/dist.min.js"></script>
+    
+    <!-- PapaParse for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { width: 100vw; height: 100vh; position: absolute; top: 0; }
+        #control-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 1;
+            max-width: 300px;
+        }
+        #fileInput {
+            margin: 10px 0;
+        }
+        .legend {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="control-panel">
+        <h3>GPS 3Dビジュアライザー</h3>
+        <p>CSVファイルを選択（日付,時間,データID,緯度,経度,高度）：</p>
+        <input type="file" id="fileInput" accept=".csv">
+        
+        <!-- タッチパッド操作用コントロール -->
+        <div style="margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            <h4>ビューコントロール（タッチパッド用）</h4>
+            <button onclick="resetView()" style="margin: 2px;">リセット</button>
+            <button onclick="zoomIn()" style="margin: 2px;">拡大</button>
+            <button onclick="zoomOut()" style="margin: 2px;">縮小</button><br>
+            <button onclick="rotateLeft()" style="margin: 2px;">左回転</button>
+            <button onclick="rotateRight()" style="margin: 2px;">右回転</button><br>
+            <button onclick="pitchUp()" style="margin: 2px;">上から見る</button>
+            <button onclick="pitchDown()" style="margin: 2px;">横から見る</button>
+        </div>
+        
+        <div class="legend">
+            <h4>高度の色分け（滑らかなグラデーション）</h4>
+            <div class="legend-item">
+                <div class="color-box" style="background: linear-gradient(to right, rgb(0, 0, 255), rgb(0, 128, 255));"></div>
+                <span>0-10km</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box" style="background: linear-gradient(to right, rgb(0, 128, 255), rgb(0, 255, 0));"></div>
+                <span>10-15km</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box" style="background: linear-gradient(to right, rgb(0, 255, 0), rgb(255, 255, 0));"></div>
+                <span>15-20km</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box" style="background: linear-gradient(to right, rgb(255, 255, 0), rgb(255, 140, 0));"></div>
+                <span>20-25km</span>
+            </div>
+            <div class="legend-item">
+                <div class="color-box" style="background: linear-gradient(to right, rgb(255, 140, 0), rgb(180, 0, 0));"></div>
+                <span>25km以上</span>
+            </div>
+        </div>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        // Mapbox APIキー（実際の使用時は自分のAPIキーに置き換えてください）
+        // 注意: 無料でも使える Open Mapboxを使用する場合は、別の設定が必要です
+        const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJja2V5IjoiMTIzNDU2Nzg5MCJ9.example';
+        
+        // 初期マップ設定
+        const initialViewState = {
+            longitude: 139.6917,
+            latitude: 35.6895,
+            zoom: 5,
+            pitch: 45,  // 3D表示のための傾斜
+            bearing: 0
+        };
+
+        // deck.glの設定
+        const deckgl = new deck.DeckGL({
+            container: 'map',
+            mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',  // OpenStreetMap風のスタイル（APIキー不要）
+            initialViewState: initialViewState,
+            controller: {
+                touchRotate: true,
+                touchZoom: true,
+                scrollZoom: true,
+                dragPan: true,
+                dragRotate: true,
+                doubleClickZoom: true,
+                keyboard: true,
+                // タッチパッド用の設定
+                touchAction: 'pan-y'
+            },
+            getTooltip: ({object}) => object && `
+                緯度: ${object.position[1].toFixed(5)}
+                経度: ${object.position[0].toFixed(5)}
+                高度: ${object.elevation.toFixed(2)}m
+            `
+        });
+
+        // CSVファイルの読み込み処理
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            Papa.parse(file, {
+                header: true,
+                dynamicTyping: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    const points = [];
+                    const ELEVATION_SCALE = 1;  // 高度の強調度合いを調整
+                    
+                    // デバッグ: CSVの構造を確認
+                    console.log("CSVデータ構造:", results);
+                    if (results.data && results.data.length > 0) {
+                        console.log("最初の行のキー:", Object.keys(results.data[0]));
+                        console.log("最初の行のデータ:", results.data[0]);
+                        console.log("2行目のデータ:", results.data[1]);
+                    }
+                    
+                    // データ処理
+                    results.data.forEach(function(row, index) {
+                        // CSVの実際の列構造に基づいて、インデックスまたは列名で直接アクセス
+                        const keys = Object.keys(row);
+                        
+                        // 実際のデータ構造に基づいて列を特定
+                        // 列D (インデックス3): 緯度 (32.95183など)
+                        // 列E (インデックス4): 経度 (132.5869など)
+                        // 列C (インデックス2): 高度候補 (43など)
+                        
+                        let lat, lng, altitude;
+                        
+                        // 配列形式でアクセスを試す（results.dataが配列の配列の場合）
+                        if (Array.isArray(row)) {
+                            lat = parseFloat(row[3]);  // 4番目の列（D列）
+                            lng = parseFloat(row[4]);  // 5番目の列（E列）
+                            altitude = parseFloat(row[2]) || 0;  // 3番目の列（C列）
+                        } else {
+                            // オブジェクト形式の場合、キー名で直接アクセス
+                            const values = Object.values(row);
+                            if (values.length >= 5) {
+                                lat = parseFloat(values[3]);  // D列相当
+                                lng = parseFloat(values[4]);  // E列相当  
+                                altitude = parseFloat(values[2]) || 0;  // C列相当
+                            }
+                        }
+                        
+                        // デバッグ用の出力（最初の5行のみ）
+                        if (index < 5) {
+                            console.log(`行${index + 1}: keys=`, keys);
+                            console.log(`行${index + 1}: values=`, Object.values(row));
+                            console.log(`行${index + 1}: lat=${lat}, lng=${lng}, altitude=${altitude}`);
+                        }
+                        
+                        if (!isNaN(lat) && !isNaN(lng) && lat !== 0 && lng !== 0 && lat > 20 && lng > 100) {
+                            points.push({
+                                position: [lng, lat],
+                                elevation: altitude || 0,
+                                color: getColorByElevation(altitude || 0)
+                            });
+                        }
+                    });
+                    
+                    // パフォーマンス改善: データ数が多い場合はサンプリング
+                    let displayPoints = points;
+                    if (points.length > 10000) {
+                        const sampleRate = Math.ceil(points.length / 10000);
+                        displayPoints = points.filter((_, index) => index % sampleRate === 0);
+                        console.log(`データが多いため、${sampleRate}個に1個をサンプリング: ${points.length} → ${displayPoints.length}`);
+                    }
+                    
+                    // パース完了後にデータを確認
+                    console.log("CSV最初の3行:", results.data.slice(0, 3));
+                    console.log("有効なポイント数:", points.length);
+                    console.log("表示ポイント数:", displayPoints.length);
+                    if (displayPoints.length > 0) {
+                        console.log("最初のポイント:", displayPoints[0]);
+                    } else {
+                        console.log("有効なポイントがありません");
+                    }
+
+                    // データの中心点を計算
+                    if (displayPoints.length > 0) {
+                        const sumLat = displayPoints.reduce((sum, p) => sum + p.position[1], 0);
+                        const sumLng = displayPoints.reduce((sum, p) => sum + p.position[0], 0);
+                        const centerLat = sumLat / displayPoints.length;
+                        const centerLng = sumLng / displayPoints.length;
+                        
+                        // ビューを更新
+                        deckgl.setProps({
+                            initialViewState: {
+                                longitude: centerLng,
+                                latitude: centerLat,
+                                zoom: 12,
+                                pitch: 30,
+                                bearing: 0
+                            }
+                        });
+                    }
+                    
+                    // 3Dレイヤーの追加
+                    const layers = [
+                        // 3Dポイントクラウド
+                        new deck.PointCloudLayer({
+                            id: 'point-cloud',
+                            data: displayPoints,
+                            getPosition: d => [d.position[0], d.position[1], d.elevation * ELEVATION_SCALE],
+                            getColor: d => d.color,
+                            pointSize: 3,
+                            pickable: true
+                        }),
+                        
+                        // 高度を表す柱
+                        new deck.ColumnLayer({
+                            id: 'columns',
+                            data: points,
+                            diskResolution: 12,
+                            radius: 30,
+                            extruded: true,
+                            getPosition: d => [d.position[0], d.position[1], 0],
+                            getElevation: d => d.elevation * ELEVATION_SCALE,
+                            getFillColor: d => [...d.color, 180],  // 透明度を追加
+                            pickable: true
+                        })
+                    ];
+                    
+                    deckgl.setProps({ layers });
+                }
+            });
+        });
+        
+        // 高度に基づく色を取得（早めに赤色に変化）
+        function getColorByElevation(elevation) {
+            // 高度をkmに変換
+            const altitudeKm = elevation / 1000;
+            
+            if (altitudeKm < 10) {
+                // 0-10km: 濃い青から青緑へのグラデーション
+                const ratio = altitudeKm / 10;
+                return [
+                    Math.floor(0 * (1 - ratio) + 0 * ratio),     // R: 0 → 0
+                    Math.floor(0 * (1 - ratio) + 128 * ratio),   // G: 0 → 128
+                    Math.floor(255 * (1 - ratio) + 255 * ratio)  // B: 255 → 255
+                ];
+            } else if (altitudeKm < 15) {
+                // 10-15km: 青緑から緑へのグラデーション
+                const ratio = (altitudeKm - 10) / 5;
+                return [
+                    Math.floor(0 * (1 - ratio) + 0 * ratio),     // R: 0 → 0
+                    Math.floor(128 * (1 - ratio) + 255 * ratio), // G: 128 → 255
+                    Math.floor(255 * (1 - ratio) + 0 * ratio)    // B: 255 → 0
+                ];
+            } else if (altitudeKm < 20) {
+                // 15-20km: 緑から黄色へのグラデーション
+                const ratio = (altitudeKm - 15) / 5;
+                return [
+                    Math.floor(0 * (1 - ratio) + 255 * ratio),   // R: 0 → 255
+                    Math.floor(255 * (1 - ratio) + 255 * ratio), // G: 255 → 255
+                    Math.floor(0 * (1 - ratio) + 0 * ratio)      // B: 0 → 0
+                ];
+            } else if (altitudeKm < 25) {
+                // 20-25km: 黄色からオレンジへのグラデーション
+                const ratio = (altitudeKm - 20) / 5;
+                return [
+                    Math.floor(255 * (1 - ratio) + 255 * ratio), // R: 255 → 255
+                    Math.floor(255 * (1 - ratio) + 140 * ratio), // G: 255 → 140
+                    Math.floor(0 * (1 - ratio) + 0 * ratio)      // B: 0 → 0
+                ];
+            } else {
+                // 25km以上: オレンジから深い赤へのグラデーション
+                const maxAlt = Math.min(altitudeKm, 50); // 50kmで上限
+                const ratio = Math.min((maxAlt - 25) / 25, 1);
+                return [
+                    Math.floor(255 * (1 - ratio) + 180 * ratio), // R: 255 → 180
+                    Math.floor(140 * (1 - ratio) + 0 * ratio),   // G: 140 → 0
+                    Math.floor(0 * (1 - ratio) + 0 * ratio)      // B: 0 → 0
+                ];
+            }
+        }
+        
+        // タッチパッド用のビューコントロール関数
+        let currentViewState = {...initialViewState};
+        
+        function updateView() {
+            deckgl.setProps({
+                initialViewState: currentViewState
+            });
+        }
+        
+        function resetView() {
+            currentViewState = {...initialViewState};
+            updateView();
+        }
+        
+        function zoomIn() {
+            currentViewState.zoom = Math.min(currentViewState.zoom + 1, 20);
+            updateView();
+        }
+        
+        function zoomOut() {
+            currentViewState.zoom = Math.max(currentViewState.zoom - 1, 1);
+            updateView();
+        }
+        
+        function rotateLeft() {
+            currentViewState.bearing = (currentViewState.bearing - 15) % 360;
+            updateView();
+        }
+        
+        function rotateRight() {
+            currentViewState.bearing = (currentViewState.bearing + 15) % 360;
+            updateView();
+        }
+        
+        function pitchUp() {
+            currentViewState.pitch = Math.max(currentViewState.pitch - 15, 0);
+            updateView();
+        }
+        
+        function pitchDown() {
+            currentViewState.pitch = Math.min(currentViewState.pitch + 15, 60);
+            updateView();
+        }
+    </script>
+</body>
+</html>
