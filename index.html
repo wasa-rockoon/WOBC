@@ -25,9 +25,14 @@
 </head>
 <body>
     <h1>データポイントマップ</h1>
+    <div style="margin-bottom: 10px;">
+        <input type="file" id="csvFile" accept=".csv" />
+        <label for="maxDistance">最大距離 (km):</label>
+        <input type="number" id="maxDistance" value="50" min="1" max="1000" step="1" style="width: 80px;">
+        <button onclick="loadCSV()">CSVをロード</button>
+    </div>
+    <div id="stats" style="margin-bottom: 10px; color: #666;"></div>
     <div id="map"></div>
-    <input type="file" id="csvFile" accept=".csv" />
-    <button onclick="loadCSV()">CSVをロード</button>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
@@ -54,10 +59,54 @@
             showCoverageOnHover: true  // ホバー時にクラスタの範囲を表示
         });
         
-        // CSVファイルの読み込み処理
+        // 外れ値検出のヘルパー関数
+        function isValidCoordinate(lat, lng) {
+            // 緯度は-90から90、経度は-180から180の範囲内である必要がある
+            return lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180 && 
+                   lat !== 0 && lng !== 0; // (0,0)座標も除外
+        }
+        
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            // ハヴァーサイン公式を使用して2点間の距離を計算（km）
+            const R = 6371; // 地球の半径（km）
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+        
+        function removeOutliers(dataPoints, maxDistance = 50) {
+            // maxDistance: 前の点からの最大許容距離（km）
+            if (dataPoints.length === 0) return [];
+            
+            const filtered = [dataPoints[0]]; // 最初の点は常に含める
+            
+            for (let i = 1; i < dataPoints.length; i++) {
+                const current = dataPoints[i];
+                const previous = filtered[filtered.length - 1];
+                
+                const distance = calculateDistance(
+                    previous.lat, previous.lng,
+                    current.lat, current.lng
+                );
+                
+                // 距離が許容範囲内の場合のみ追加
+                if (distance <= maxDistance) {
+                    filtered.push(current);
+                }
+            }
+            
+            return filtered;
+        }
+        
         function loadCSV() {
             const fileInput = document.getElementById('csvFile');
             const file = fileInput.files[0];
+            const maxDistanceInput = document.getElementById('maxDistance');
+            const maxDistance = parseFloat(maxDistanceInput.value) || 50;
             
             if (file) {
                 const reader = new FileReader();
@@ -70,7 +119,10 @@
                     const csvData = e.target.result;
                     const lines = csvData.split('\n');
                     
-                    // ヘッダー行をスキップ
+                    // 一時的にデータポイントを格納する配列
+                    const dataPoints = [];
+                    
+                    // ヘッダー行をスキップしてデータを収集
                     for (let i = 1; i < lines.length; i++) {
                         const line = lines[i].trim();
                         if (line) {
@@ -84,21 +136,51 @@
                             const lng = parseFloat(columns[4]); // E列（経度）
                             const timestamp = columns[5]; // F列
                             
-                            // 有効な座標の場合のみマーカーを追加
-                            if (!isNaN(lat) && !isNaN(lng)) {
-                                const marker = L.marker([lat, lng]);
-                                marker.bindPopup(`
-                                    <div class="info-content">
-                                        <strong>日時:</strong> ${date} ${time}<br>
-                                        <strong>値:</strong> ${value}<br>
-                                        <strong>座標:</strong> ${lat}, ${lng}<br>
-                                        <strong>タイムスタンプ:</strong> ${timestamp}
-                                    </div>
-                                `);
-                                markers.addLayer(marker);
+                            // 基本的な座標検証
+                            if (!isNaN(lat) && !isNaN(lng) && isValidCoordinate(lat, lng)) {
+                                dataPoints.push({
+                                    date: date,
+                                    time: time,
+                                    value: value,
+                                    lat: lat,
+                                    lng: lng,
+                                    timestamp: timestamp
+                                });
                             }
                         }
                     }
+                    
+                    // 外れ値を除去
+                    const filteredPoints = removeOutliers(dataPoints, maxDistance);
+                    
+                    // 統計情報を表示
+                    const statsDiv = document.getElementById('stats');
+                    const removedCount = dataPoints.length - filteredPoints.length;
+                    const removalRate = dataPoints.length > 0 ? (removedCount / dataPoints.length * 100).toFixed(1) : 0;
+                    
+                    statsDiv.innerHTML = `
+                        元のデータ点数: ${dataPoints.length} | 
+                        フィルタ後: ${filteredPoints.length} | 
+                        除去された点数: ${removedCount} (${removalRate}%)
+                    `;
+                    
+                    console.log(`元のデータ点数: ${dataPoints.length}`);
+                    console.log(`フィルタ後のデータ点数: ${filteredPoints.length}`);
+                    console.log(`除去された点数: ${removedCount}`);
+                    
+                    // フィルタ後のデータでマーカーを作成
+                    filteredPoints.forEach(point => {
+                        const marker = L.marker([point.lat, point.lng]);
+                        marker.bindPopup(`
+                            <div class="info-content">
+                                <strong>日時:</strong> ${point.date} ${point.time}<br>
+                                <strong>値:</strong> ${point.value}<br>
+                                <strong>座標:</strong> ${point.lat}, ${point.lng}<br>
+                                <strong>タイムスタンプ:</strong> ${point.timestamp}
+                            </div>
+                        `);
+                        markers.addLayer(marker);
+                    });
                     
                     // クラスタをマップに追加
                     map.addLayer(markers);
