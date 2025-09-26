@@ -54,6 +54,17 @@
         <p>CSVファイルを選択（日付,時間,データID,緯度,経度,高度）：</p>
         <input type="file" id="fileInput" accept=".csv">
         
+        <!-- 地図スタイル選択 -->
+        <div style="margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            <h4>地図スタイル</h4>
+            <select id="mapStyleSelect" onchange="changeMapStyle()" style="width: 100%; margin: 5px 0;">
+                <option value="osm" selected>OpenStreetMap（標準）</option>
+                <option value="carto-light">CartoDB Light（シンプル）</option>
+                <option value="carto-dark">CartoDB Dark（ダーク）</option>
+                <option value="none">地図なし（背景色のみ）</option>
+            </select>
+        </div>
+        
         <!-- タッチパッド操作用コントロール -->
         <div style="margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
             <h4>ビューコントロール（タッチパッド用）</h4>
@@ -106,10 +117,31 @@
             bearing: 0
         };
 
-        // deck.glの設定
+        // deck.glの設定（OpenStreetMapベース）
         const deckgl = new deck.DeckGL({
             container: 'map',
-            mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',  // OpenStreetMap風のスタイル（APIキー不要）
+            mapStyle: {
+                "version": 8,
+                "sources": {
+                    "osm": {
+                        "type": "raster",
+                        "tiles": [
+                            "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                            "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                            "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        ],
+                        "tileSize": 256,
+                        "attribution": "© OpenStreetMap contributors"
+                    }
+                },
+                "layers": [{
+                    "id": "osm-tiles",
+                    "type": "raster",
+                    "source": "osm",
+                    "minzoom": 0,
+                    "maxzoom": 18
+                }]
+            },
             initialViewState: initialViewState,
             controller: {
                 touchRotate: true,
@@ -228,26 +260,31 @@
                         });
                     }
                     
+                    // 軌跡パスの作成
+                    const pathData = [{
+                        path: displayPoints.map(d => [d.position[0], d.position[1], d.elevation * ELEVATION_SCALE])
+                    }];
+                    
                     // 3Dレイヤーの追加
                     const layers = [
-                        // 3Dポイントクラウド
-                        new deck.PointCloudLayer({
-                            id: 'point-cloud',
-                            data: displayPoints,
-                            getPosition: d => [d.position[0], d.position[1], d.elevation * ELEVATION_SCALE],
-                            getColor: d => d.color,
-                            pointSize: 3,
-                            pickable: true
+                        // 軌跡パス（3D）
+                        new deck.PathLayer({
+                            id: 'path-3d',
+                            data: pathData,
+                            getPath: d => d.path,
+                            getColor: [120, 120, 120, 180],
+                            getWidth: 3,
+                            pickable: false
                         }),
                         
-                        // 高度を表す柱
+                        // 高度を表すカラム
                         new deck.ColumnLayer({
                             id: 'columns',
-                            data: points,
-                            diskResolution: 12,
-                            radius: 30,
+                            data: displayPoints,
+                            diskResolution: 8,
+                            radius: 50,
                             extruded: true,
-                            getPosition: d => [d.position[0], d.position[1], 0],
+                            getPosition: d => [d.position[0], d.position[1]],
                             getElevation: d => d.elevation * ELEVATION_SCALE,
                             getFillColor: d => [...d.color, 180],  // 透明度を追加
                             pickable: true
@@ -350,6 +387,100 @@
         function pitchDown() {
             currentViewState.pitch = Math.min(currentViewState.pitch + 15, 60);
             updateView();
+        }
+        
+        // 地図スタイル変更機能
+        function changeMapStyle() {
+            const select = document.getElementById('mapStyleSelect');
+            const styleValue = select.value;
+            
+            let mapStyle;
+            switch(styleValue) {
+                case 'osm':
+                    mapStyle = {
+                        "version": 8,
+                        "sources": {
+                            "osm": {
+                                "type": "raster",
+                                "tiles": [
+                                    "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                    "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                    "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                ],
+                                "tileSize": 256,
+                                "attribution": "© OpenStreetMap contributors"
+                            }
+                        },
+                        "layers": [{
+                            "id": "osm-tiles",
+                            "type": "raster",
+                            "source": "osm"
+                        }]
+                    };
+                    break;
+                case 'carto-light':
+                    mapStyle = {
+                        "version": 8,
+                        "sources": {
+                            "carto": {
+                                "type": "raster",
+                                "tiles": ["https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png"],
+                                "tileSize": 256
+                            }
+                        },
+                        "layers": [{
+                            "id": "carto-tiles",
+                            "type": "raster",
+                            "source": "carto"
+                        }]
+                    };
+                    break;
+                case 'carto-dark':
+                    mapStyle = {
+                        "version": 8,
+                        "sources": {
+                            "carto-dark": {
+                                "type": "raster",
+                                "tiles": ["https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"],
+                                "tileSize": 256
+                            }
+                        },
+                        "layers": [{
+                            "id": "carto-dark-tiles",
+                            "type": "raster",
+                            "source": "carto-dark"
+                        }]
+                    };
+                    break;
+                case 'none':
+                    mapStyle = null;
+                    break;
+                default:
+                    mapStyle = {
+                        "version": 8,
+                        "sources": {
+                            "osm": {
+                                "type": "raster",
+                                "tiles": [
+                                    "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                    "https://b.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                                    "https://c.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                ],
+                                "tileSize": 256,
+                                "attribution": "© OpenStreetMap contributors"
+                            }
+                        },
+                        "layers": [{
+                            "id": "osm-tiles",
+                            "type": "raster",
+                            "source": "osm"
+                        }]
+                    };
+            }
+            
+            deckgl.setProps({
+                mapStyle: mapStyle
+            });
         }
     </script>
 </body>
