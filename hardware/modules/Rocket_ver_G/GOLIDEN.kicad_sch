@@ -1,5 +1,446 @@
-(kicad_sch (version 20250114) (generator "eeschema") (generator_version "9.0")
-  (paper "A4")
-  (lib_symbols)
-  (symbol_instances)
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "718e9fc1-0aec-4051-b929-e6ccf2afef13")
+	(paper "A4")
+	(lib_symbols)
+	(no_connect
+		(at 160.02 121.92)
+		(uuid "c2888a4b-1a28-4c2b-85e2-86eb65a7f954")
+	)
+	(sheet
+		(at 207.01 111.76)
+		(size 54.61 16.51)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "258d44bb-b520-4b67-9cdf-1f65787abd81")
+		(property "Sheetname" "BMI270"
+			(at 207.01 111.0484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "IMU2.kicad_sch"
+			(at 207.01 128.8546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "GOLIDEN"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 204.47 39.37)
+		(size 54.61 19.05)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "645bba05-ae11-4008-82a3-847288d6fd66")
+		(property "Sheetname" "LiPo"
+			(at 204.47 38.6584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "LiPoPower.kicad_sch"
+			(at 204.47 59.0046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "GOLIDEN"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 125.73 77.47)
+		(size 58.42 44.45)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "c7a87c4f-52e5-4220-b36c-4b69bf35c2b4")
+		(property "Sheetname" "ESP32S3"
+			(at 125.73 76.7584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ESP32Core.kicad_sch"
+			(at 125.73 122.5046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "CANH" bidirectional
+			(at 125.73 86.36 180)
+			(uuid "dad2b0f5-c126-47a1-a425-4eff7e54605c")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "CANL" bidirectional
+			(at 125.73 88.9 180)
+			(uuid "77a967b2-a814-4e14-93d9-80acac021f98")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO1{slash}ADC1_CH0" bidirectional
+			(at 125.73 81.28 180)
+			(uuid "6b41115f-e446-4c0b-9cca-2021d5a753df")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO2{slash}ADC1_CH1" bidirectional
+			(at 125.73 83.82 180)
+			(uuid "1025ca13-d090-4bbc-9947-1ddabc776abd")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO3{slash}ADC1_CH2" bidirectional
+			(at 160.02 121.92 270)
+			(uuid "ccca667a-7910-4de4-8fde-4d94c4d20e29")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO4{slash}ADC1_CH3" bidirectional
+			(at 184.15 81.28 0)
+			(uuid "47806403-8e31-405c-9c7f-07eff4db669f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GPIO5{slash}ADC1_CH4" bidirectional
+			(at 184.15 83.82 0)
+			(uuid "034f964e-5c77-4d8f-8833-287cc8952f41")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GPIO6{slash}ADC1_CH5" bidirectional
+			(at 184.15 86.36 0)
+			(uuid "10ba2525-5c20-4c73-8752-763e624f12ad")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GPIO7{slash}ADC1_CH6" bidirectional
+			(at 184.15 88.9 0)
+			(uuid "f5364d0e-eeb3-4442-a847-49491b8092eb")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GPIO8{slash}ADC1_CH7" bidirectional
+			(at 184.15 104.14 0)
+			(uuid "03047863-d79e-47d9-8b8b-3246c683ba98")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GPIO9{slash}ADC1_CH8" bidirectional
+			(at 157.48 121.92 270)
+			(uuid "170241eb-8b82-4908-970c-a8773d38f27a")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO10{slash}ADC1_CH9" bidirectional
+			(at 154.94 121.92 270)
+			(uuid "c653d675-60ca-4cbd-bc7b-c2263a486cef")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO11" bidirectional
+			(at 152.4 121.92 270)
+			(uuid "20ea9c60-dec4-4c90-a326-824eb1bc27c8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO12" bidirectional
+			(at 149.86 121.92 270)
+			(uuid "3aba50b1-8e47-4138-9d23-e29717318599")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO13" bidirectional
+			(at 147.32 121.92 270)
+			(uuid "f4b1dfa3-2e51-4997-bb2c-71f0e37c3759")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO14" bidirectional
+			(at 143.51 121.92 270)
+			(uuid "79fb1267-628c-45e8-a4fc-63a5c8474b3f")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO18" bidirectional
+			(at 184.15 101.6 0)
+			(uuid "f5edbd14-45d7-4330-92ed-47fa24236863")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "GPIO21" bidirectional
+			(at 140.97 121.92 270)
+			(uuid "66c83d66-cf5a-4d9e-b1ed-da952b0edd86")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO38" bidirectional
+			(at 125.73 100.33 180)
+			(uuid "4524b402-1905-4719-b04b-d4b2ea630f23")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO39" bidirectional
+			(at 125.73 97.79 180)
+			(uuid "0187566d-2f46-4e3c-a2a7-a1b4736eafb1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO40" bidirectional
+			(at 125.73 95.25 180)
+			(uuid "53ebaddc-f515-4874-be44-3d967032dcff")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO47" bidirectional
+			(at 138.43 121.92 270)
+			(uuid "7ba312a2-bd01-4fc0-a402-031e1ca46449")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "GPIO48" bidirectional
+			(at 135.89 121.92 270)
+			(uuid "e3f8480a-24d9-4b21-8014-e7b0e5b59ff9")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "I2C_SCL" bidirectional
+			(at 184.15 93.98 0)
+			(uuid "4e9db009-7636-4f62-9c6f-4d19603f69e4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "I2C_SDA" bidirectional
+			(at 184.15 96.52 0)
+			(uuid "a48d0f1b-54ef-4efc-a1bc-612c3ce3d2b2")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "VUSB" output
+			(at 184.15 78.74 0)
+			(uuid "fedfd602-06ca-46dd-a015-f920021daf64")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(instances
+			(project "GOLIDEN"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 207.01 77.47)
+		(size 54.61 19.05)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "f8721561-3d07-4004-addc-6e0929d6ce8e")
+		(property "Sheetname" "SD"
+			(at 207.01 76.7584 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "Logger.kicad_sch"
+			(at 207.01 97.1046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "GOLIDEN"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
 )
