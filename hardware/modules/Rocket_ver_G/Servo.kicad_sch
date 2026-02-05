@@ -5,6 +5,148 @@
 	(uuid "4fd38b81-012a-4c14-a44f-c00945db5727")
 	(paper "A4")
 	(lib_symbols
+		(symbol "Connector_Generic:Conn_01x02"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Conn_01x02"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x02_1_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x03"
 			(pin_names
 				(offset 1.016)
@@ -277,131 +419,33 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "power:VDD"
-			(power)
-			(pin_numbers
-				(hide yes)
+	)
+	(text "<-> LiPo"
+		(exclude_from_sim no)
+		(at 174.625 65.405 0)
+		(effects
+			(font
+				(size 2 2)
 			)
-			(pin_names
-				(offset 0)
-				(hide yes)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "VDD"
-				(at 0 3.556 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Power symbol creates a global label with name \"VDD\""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "global power"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "VDD_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "VDD_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0)
-					(name "~"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
+			(justify left bottom)
 		)
+		(uuid "baef7c9a-0f1a-4cc8-8e53-2a0d0c4e60fd")
+	)
+	(junction
+		(at 162.56 69.85)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "32e1a021-9b1f-4dc9-ab22-e2ad267a1c67")
+	)
+	(wire
+		(pts
+			(xy 139.7 69.85) (xy 139.7 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06142cd7-15d6-4527-a30b-47063fb4d913")
 	)
 	(wire
 		(pts
@@ -415,13 +459,43 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 110.49) (xy 142.24 110.49)
+			(xy 139.7 110.49) (xy 142.24 110.49)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "32c0a53e-82b3-4e4a-a907-7dd4534a167c")
+		(uuid "0dcac6a5-fe33-4cef-86ae-c3decd3638c9")
+	)
+	(wire
+		(pts
+			(xy 139.7 92.71) (xy 142.24 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12e51c10-005a-4165-8393-986755c6b674")
+	)
+	(wire
+		(pts
+			(xy 162.56 69.85) (xy 162.56 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "177c7b75-3c26-4218-97a8-bd611da84efa")
+	)
+	(wire
+		(pts
+			(xy 171.45 72.39) (xy 172.72 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39884241-fbc1-42e4-ba3c-434aec1f6907")
 	)
 	(wire
 		(pts
@@ -445,6 +519,16 @@
 	)
 	(wire
 		(pts
+			(xy 171.45 81.915) (xy 171.45 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "831a472c-e1f7-40a0-9d73-d2020b547058")
+	)
+	(wire
+		(pts
 			(xy 142.24 90.17) (xy 127 90.17)
 		)
 		(stroke
@@ -452,6 +536,16 @@
 			(type default)
 		)
 		(uuid "86f01cb5-d7bd-4f5a-b80b-23b205f0a196")
+	)
+	(wire
+		(pts
+			(xy 139.7 102.87) (xy 139.7 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9dd9f301-be93-4f1e-9b22-185e283677ee")
 	)
 	(wire
 		(pts
@@ -465,16 +559,6 @@
 	)
 	(wire
 		(pts
-			(xy 140.97 92.71) (xy 142.24 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "af32c933-e26e-4253-baf2-c0d543a1b3d8")
-	)
-	(wire
-		(pts
 			(xy 127 90.17) (xy 127 93.98)
 		)
 		(stroke
@@ -482,6 +566,36 @@
 			(type default)
 		)
 		(uuid "b36714a5-18a0-498a-87cd-d1090bf9ec9b")
+	)
+	(wire
+		(pts
+			(xy 162.56 102.87) (xy 139.7 102.87)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc1a74bf-a873-4924-a832-756dfd4c4e84")
+	)
+	(wire
+		(pts
+			(xy 162.56 69.85) (xy 139.7 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ce7ee41b-21cf-4b86-b3ed-1317645f9f35")
+	)
+	(wire
+		(pts
+			(xy 172.72 69.85) (xy 162.56 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff18f77d-458e-4ef9-891f-fbf7c6516e3b")
 	)
 	(hierarchical_label "Servo2"
 		(shape input)
@@ -506,26 +620,17 @@
 		(uuid "8958cd7b-65b2-426a-8c2e-5f2a7d01c14d")
 	)
 	(symbol
-		(lib_id "power:VDD")
-		(at 140.97 110.49 90)
+		(lib_id "Connector_Generic:Conn_01x02")
+		(at 177.8 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "1b6a080a-ffd4-44ba-9d5d-da351f2c3580")
-		(property "Reference" "#PWR025"
-			(at 144.78 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VDD"
-			(at 137.16 110.4899 90)
+		(uuid "28765f03-3818-4e49-bc2d-1f89935f9442")
+		(property "Reference" "J603"
+			(at 180.34 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -533,8 +638,17 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
-			(at 140.97 110.49 0)
+		(property "Value" "LiPo"
+			(at 180.34 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
+			(at 177.8 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -542,8 +656,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 140.97 110.49 0)
+		(property "Datasheet" "~"
+			(at 177.8 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -551,8 +665,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 140.97 110.49 0)
+		(property "Description" ""
+			(at 177.8 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -561,29 +675,32 @@
 			)
 		)
 		(pin "1"
-			(uuid "a467a14d-a0d8-4396-ad25-cd505f47aa95")
+			(uuid "7733d9a2-e24f-435a-a5cc-f8319d427065")
+		)
+		(pin "2"
+			(uuid "6ed67b1e-d252-4b96-b001-eda964943135")
 		)
 		(instances
 			(project "GOLIDEN"
 				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/41f0ddf7-c41b-4c15-b9a9-59b78aa5b735"
-					(reference "#PWR025")
+					(reference "J603")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "power:VDD")
-		(at 140.97 92.71 90)
+		(lib_id "power:GND")
+		(at 171.45 81.915 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "3185959e-a782-42fc-b5ce-6b47c0c71b72")
-		(property "Reference" "#PWR023"
-			(at 144.78 92.71 0)
+		(uuid "40519dff-b53a-443b-b6bc-4be2bee64d15")
+		(property "Reference" "#PWR0603"
+			(at 171.45 88.265 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -591,17 +708,16 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "VDD"
-			(at 137.16 92.7099 90)
+		(property "Value" "GND"
+			(at 171.45 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 140.97 92.71 0)
+			(at 171.45 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -610,7 +726,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 140.97 92.71 0)
+			(at 171.45 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -618,8 +734,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 140.97 92.71 0)
+		(property "Description" ""
+			(at 171.45 81.915 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -628,12 +744,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "730bdfd4-d35c-4b77-a633-f8fd3eb9e110")
+			(uuid "67cd6fb2-4fa7-441d-934e-5ff495999198")
 		)
 		(instances
 			(project "GOLIDEN"
 				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/41f0ddf7-c41b-4c15-b9a9-59b78aa5b735"
-					(reference "#PWR023")
+					(reference "#PWR0603")
 					(unit 1)
 				)
 			)
@@ -649,7 +765,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4f2c706a-0f46-4d2e-8674-5c2571ac9cfb")
-		(property "Reference" "J6"
+		(property "Reference" "J602"
 			(at 149.86 109.2199 0)
 			(effects
 				(font
@@ -706,7 +822,7 @@
 		(instances
 			(project "GOLIDEN"
 				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/41f0ddf7-c41b-4c15-b9a9-59b78aa5b735"
-					(reference "J6")
+					(reference "J602")
 					(unit 1)
 				)
 			)
@@ -722,7 +838,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5a9feda9-885e-4530-a127-5298525c25cb")
-		(property "Reference" "J5"
+		(property "Reference" "J601"
 			(at 149.86 91.4399 0)
 			(effects
 				(font
@@ -779,7 +895,7 @@
 		(instances
 			(project "GOLIDEN"
 				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/41f0ddf7-c41b-4c15-b9a9-59b78aa5b735"
-					(reference "J5")
+					(reference "J601")
 					(unit 1)
 				)
 			)
@@ -795,7 +911,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a2b231ec-d3c6-4045-a2e8-12a908b0a975")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR0602"
 			(at 127 118.11 0)
 			(effects
 				(font
@@ -845,7 +961,7 @@
 		(instances
 			(project "GOLIDEN"
 				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/41f0ddf7-c41b-4c15-b9a9-59b78aa5b735"
-					(reference "#PWR024")
+					(reference "#PWR0602")
 					(unit 1)
 				)
 			)
@@ -861,7 +977,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c363e167-88eb-441e-845c-8978d6481f2b")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR0601"
 			(at 127 100.33 0)
 			(effects
 				(font
@@ -911,7 +1027,7 @@
 		(instances
 			(project "GOLIDEN"
 				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/41f0ddf7-c41b-4c15-b9a9-59b78aa5b735"
-					(reference "#PWR022")
+					(reference "#PWR0601")
 					(unit 1)
 				)
 			)

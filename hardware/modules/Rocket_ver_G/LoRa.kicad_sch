@@ -1,13 +1,15 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "d339b9d8-51a7-460e-bb19-8d8c25d3e2aa")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Connector:Conn_Coaxial_Power"
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -74,8 +76,8 @@
 			)
 			(symbol "Conn_Coaxial_Power_0_1"
 				(arc
-					(start -1.27 -1.27)
-					(mid 0 -2.5345)
+					(start 1.016 -0.508)
+					(mid 1.2048 -0.8684)
 					(end 1.27 -1.27)
 					(stroke
 						(width 0.254)
@@ -85,10 +87,34 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(arc
-					(start -1.016 -0.508)
-					(mid -1.2048 -0.8684)
+					(start 1.27 -1.27)
+					(mid 0 -2.5345)
 					(end -1.27 -1.27)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(arc
+					(start -1.27 -1.27)
+					(mid -1.2048 -0.8684)
+					(end -1.016 -0.508)
 					(stroke
 						(width 0.254)
 						(type default)
@@ -114,30 +140,6 @@
 					)
 					(stroke
 						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 -1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(arc
-					(start 1.27 -1.27)
-					(mid 1.2048 -0.8684)
-					(end 1.016 -0.508)
-					(stroke
-						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -183,11 +185,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Device:C_Small"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0.254) hide)
+				(offset 0.254)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -257,10 +264,10 @@
 			(symbol "C_Small_0_1"
 				(polyline
 					(pts
-						(xy -1.524 -0.508) (xy 1.524 -0.508)
+						(xy -1.524 0.508) (xy 1.524 0.508)
 					)
 					(stroke
-						(width 0.3302)
+						(width 0.3048)
 						(type default)
 					)
 					(fill
@@ -269,10 +276,10 @@
 				)
 				(polyline
 					(pts
-						(xy -1.524 0.508) (xy 1.524 0.508)
+						(xy -1.524 -0.508) (xy 1.524 -0.508)
 					)
 					(stroke
-						(width 0.3048)
+						(width 0.3302)
 						(type default)
 					)
 					(fill
@@ -318,11 +325,16 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Diode:ESD9B5.0ST5G"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 1.016) hide)
+				(offset 1.016)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -390,18 +402,6 @@
 			(symbol "ESD9B5.0ST5G_0_1"
 				(polyline
 					(pts
-						(xy 1.27 0) (xy -1.27 0)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy -2.54 -1.27) (xy 0 0) (xy -2.54 1.27) (xy -2.54 -1.27)
 					)
 					(stroke
@@ -418,6 +418,18 @@
 					)
 					(stroke
 						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
 						(type default)
 					)
 					(fill
@@ -475,6 +487,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "RF_Module_additional:E220-900T22S(JP)"
 			(exclude_from_sim no)
@@ -547,16 +560,16 @@
 			)
 			(symbol "E220-900T22S(JP)_1_1"
 				(pin power_in line
-					(at 0 -12.7 90)
+					(at -12.7 -2.54 0)
 					(length 2.54)
-					(name "GND"
+					(name "ANT"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "1"
+					(number "21"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -582,9 +595,28 @@
 						)
 					)
 				)
+				(pin power_in line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -602,7 +634,8 @@
 				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -620,7 +653,8 @@
 				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -638,7 +672,8 @@
 				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -656,7 +691,8 @@
 				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -672,27 +708,10 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at -12.7 -2.54 0)
-					(length 2.54)
-					(name "ANT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "21"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -710,7 +729,8 @@
 				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -728,7 +748,8 @@
 				)
 				(pin passive line
 					(at 0 -12.7 90)
-					(length 2.54) hide
+					(length 2.54)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -744,17 +765,53 @@
 						)
 					)
 				)
-				(pin input line
-					(at 12.7 -5.08 180)
+				(pin output line
+					(at 12.7 5.08 180)
 					(length 2.54)
-					(name "M0"
+					(name "AUX"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "5"
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 2.54 180)
+					(length 2.54)
+					(name "TXD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 12.7 0 180)
+					(length 2.54)
+					(name "RXD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -781,52 +838,16 @@
 					)
 				)
 				(pin input line
-					(at 12.7 0 180)
+					(at 12.7 -5.08 180)
 					(length 2.54)
-					(name "RXD"
+					(name "M0"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 12.7 2.54 180)
-					(length 2.54)
-					(name "TXD"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 12.7 5.08 180)
-					(length 2.54)
-					(name "AUX"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -835,6 +856,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "XA17-G4K:XA17-G4K"
 			(exclude_from_sim no)
@@ -961,16 +983,16 @@
 					)
 				)
 				(pin free line
-					(at 7.62 -2.54 180)
+					(at 7.62 2.54 180)
 					(length 2.54)
-					(name "V1"
+					(name "V2"
 						(effects
 							(font
 								(size 0.762 0.762)
 							)
 						)
 					)
-					(number "4"
+					(number "6"
 						(effects
 							(font
 								(size 0.508 0.508)
@@ -997,16 +1019,16 @@
 					)
 				)
 				(pin free line
-					(at 7.62 2.54 180)
+					(at 7.62 -2.54 180)
 					(length 2.54)
-					(name "V2"
+					(name "V1"
 						(effects
 							(font
 								(size 0.762 0.762)
 							)
 						)
 					)
-					(number "6"
+					(number "4"
 						(effects
 							(font
 								(size 0.508 0.508)
@@ -1015,6 +1037,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
@@ -1094,7 +1117,8 @@
 			(symbol "GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
-					(length 0) hide
+					(length 0)
+					(hide yes)
 					(name "GND"
 						(effects
 							(font
@@ -1111,6 +1135,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -1768,7 +1793,6 @@
 	(hierarchical_label "LoRa_M0"
 		(shape output)
 		(at 194.31 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1780,7 +1804,6 @@
 	(hierarchical_label "LoRa_AUX"
 		(shape output)
 		(at 194.31 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1792,7 +1815,6 @@
 	(hierarchical_label "RF_switch2"
 		(shape input)
 		(at 135.89 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1804,7 +1826,6 @@
 	(hierarchical_label "LoRa_M1"
 		(shape output)
 		(at 194.31 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1816,7 +1837,6 @@
 	(hierarchical_label "LoRa_RTX"
 		(shape output)
 		(at 194.31 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1828,7 +1848,6 @@
 	(hierarchical_label "LoRa_TRX"
 		(shape input)
 		(at 194.31 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1840,7 +1859,6 @@
 	(hierarchical_label "RF_switch1"
 		(shape input)
 		(at 135.89 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1907,6 +1925,12 @@
 			(uuid "b58a65d7-8594-44f4-b495-3f8ea5772e33")
 		)
 		(instances
+			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "#PWR0101")
+					(unit 1)
+				)
+			)
 			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "#PWR0101")
@@ -1986,6 +2010,12 @@
 		)
 		(instances
 			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "C107")
+					(unit 1)
+				)
+			)
+			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "C107")
 					(unit 1)
@@ -2064,6 +2094,12 @@
 			(uuid "803dd607-b1e4-41b5-b007-7483e6a76d33")
 		)
 		(instances
+			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "D102")
+					(unit 1)
+				)
+			)
 			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "D102")
@@ -2153,6 +2189,12 @@
 		)
 		(instances
 			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "Switch101")
+					(unit 1)
+				)
+			)
+			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "Switch101")
 					(unit 1)
@@ -2231,6 +2273,12 @@
 		)
 		(instances
 			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "C103")
+					(unit 1)
+				)
+			)
+			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "C103")
 					(unit 1)
@@ -2306,6 +2354,12 @@
 			(uuid "8de8281e-1470-4cab-8cb0-428636d7117e")
 		)
 		(instances
+			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "C102")
+					(unit 1)
+				)
+			)
 			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "C102")
@@ -2384,6 +2438,12 @@
 			(uuid "cbdf3de2-14a3-45f6-8a59-0a955ef32572")
 		)
 		(instances
+			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "C104")
+					(unit 1)
+				)
+			)
 			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "C104")
@@ -2464,6 +2524,12 @@
 		)
 		(instances
 			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "J102")
+					(unit 1)
+				)
+			)
+			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "J102")
 					(unit 1)
@@ -2540,6 +2606,12 @@
 			(uuid "3dc40486-7e82-4b84-b38c-32c8adbbf7d8")
 		)
 		(instances
+			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "C101")
+					(unit 1)
+				)
+			)
 			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "C101")
@@ -2618,6 +2690,12 @@
 			(uuid "9f008275-45c7-40a1-939d-8b24e339a18a")
 		)
 		(instances
+			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "D101")
+					(unit 1)
+				)
+			)
 			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "D101")
@@ -2698,6 +2776,12 @@
 		)
 		(instances
 			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "J101")
+					(unit 1)
+				)
+			)
+			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "J101")
 					(unit 1)
@@ -2773,6 +2857,12 @@
 			(uuid "6b640a2b-b958-4c8e-8938-e1d1bf52775f")
 		)
 		(instances
+			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "C105")
+					(unit 1)
+				)
+			)
 			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "C105")
@@ -2895,6 +2985,12 @@
 		)
 		(instances
 			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "U101")
+					(unit 1)
+				)
+			)
+			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "U101")
 					(unit 1)
@@ -2973,16 +3069,17 @@
 		)
 		(instances
 			(project "LoRa"
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13/62d39229-64df-434c-b537-8e099071c95b"
+					(reference "C106")
+					(unit 1)
+				)
+			)
+			(project "LoRa"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "C106")
 					(unit 1)
 				)
 			)
-		)
-	)
-	(sheet_instances
-		(path "/"
-			(page "1")
 		)
 	)
 )
