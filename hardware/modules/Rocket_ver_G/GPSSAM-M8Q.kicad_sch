@@ -1385,16 +1385,6 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 93.98) (xy 160.02 90.678)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "18680895-0d14-4a0d-884e-30373ba527f9")
-	)
-	(wire
-		(pts
 			(xy 152.4 93.98) (xy 160.02 93.98)
 		)
 		(stroke
@@ -1425,7 +1415,17 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 93.218) (xy 179.324 93.218)
+			(xy 154.94 91.44) (xy 160.02 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f7cf35c-e7d2-438d-8cdb-0102d8c546e0")
+	)
+	(wire
+		(pts
+			(xy 170.18 93.98) (xy 179.07 93.98)
 		)
 		(stroke
 			(width 0)
@@ -1435,7 +1435,7 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 88.138) (xy 171.45 84.074)
+			(xy 171.45 88.9) (xy 171.45 84.074)
 		)
 		(stroke
 			(width 0)
@@ -1455,6 +1455,16 @@
 	)
 	(wire
 		(pts
+			(xy 160.02 93.98) (xy 160.02 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67323fc8-7054-42b1-a8e8-3258599ce393")
+	)
+	(wire
+		(pts
 			(xy 137.16 78.74) (xy 113.03 78.74)
 		)
 		(stroke
@@ -1465,7 +1475,7 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 88.138) (xy 171.45 88.138)
+			(xy 170.18 88.9) (xy 171.45 88.9)
 		)
 		(stroke
 			(width 0)
@@ -1495,7 +1505,7 @@
 	)
 	(wire
 		(pts
-			(xy 117.8638 92.71) (xy 113.03 92.71)
+			(xy 118.11 92.71) (xy 113.2762 92.71)
 		)
 		(stroke
 			(width 0)
@@ -1515,7 +1525,7 @@
 	)
 	(wire
 		(pts
-			(xy 172.466 98.298) (xy 170.18 98.298)
+			(xy 172.466 99.06) (xy 170.18 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1535,17 +1545,17 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 96.52) (xy 160.02 96.52)
+			(xy 154.94 96.52) (xy 154.94 91.44)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "bca6c7ba-fc5d-4899-a6a5-72ec23b7a139")
+		(uuid "ae6f474a-4d64-4340-8c37-105a20e8abc6")
 	)
 	(wire
 		(pts
-			(xy 172.466 86.614) (xy 172.466 98.298)
+			(xy 172.466 86.614) (xy 172.466 99.06)
 		)
 		(stroke
 			(width 0)
@@ -1555,23 +1565,34 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 100.838) (xy 160.02 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f91dc0eb-4b3a-462d-bdd0-89b422000439")
-	)
-	(wire
-		(pts
-			(xy 170.18 103.378) (xy 179.578 103.378)
+			(xy 170.18 104.14) (xy 179.07 104.14)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
 		(uuid "f9d19fde-4c95-4678-9437-1a07eaa652eb")
+	)
+	(wire
+		(pts
+			(xy 152.4 96.52) (xy 154.94 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd9a577c-f79c-4d65-a416-1a29031edfab")
+	)
+	(hierarchical_label "TX"
+		(shape output)
+		(at 179.07 93.98 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2e72c102-772c-4659-844b-c0c042374e54")
 	)
 	(hierarchical_label "TIME PULSE"
 		(shape input)
@@ -1595,20 +1616,9 @@
 		)
 		(uuid "4f3b6d01-377b-4e5c-85fd-23c8e84072f0")
 	)
-	(hierarchical_label "RX"
-		(shape input)
-		(at 179.324 93.218 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "633eb792-28b2-44bb-8a87-e7f282d2a674")
-	)
 	(hierarchical_label "BUCKUP"
 		(shape input)
-		(at 113.03 92.71 180)
+		(at 113.2762 92.71 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -1617,16 +1627,16 @@
 		)
 		(uuid "9cb2f7aa-365f-4eb6-958c-1eca78b9ef6f")
 	)
-	(hierarchical_label "TX"
-		(shape output)
-		(at 179.578 103.378 0)
+	(hierarchical_label "RX"
+		(shape input)
+		(at 179.07 104.14 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "bab10679-4bdc-4ef5-809a-65ee72d84f9d")
+		(uuid "ed64e0cd-b566-400e-94c7-d6715ca62bee")
 	)
 	(symbol
 		(lib_id "power:VDD")
@@ -1996,7 +2006,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push_DPDT")
-		(at 165.1 95.758 0)
+		(at 165.1 96.52 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2005,7 +2015,7 @@
 		(fields_autoplaced yes)
 		(uuid "d1da6796-0dec-487d-908f-b493d8610393")
 		(property "Reference" "SW901"
-			(at 165.1 81.534 0)
+			(at 165.1 82.296 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2013,7 +2023,7 @@
 			)
 		)
 		(property "Value" "SW_Push_DPDT"
-			(at 165.1 84.074 0)
+			(at 165.1 84.836 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2021,7 +2031,7 @@
 			)
 		)
 		(property "Footprint" "WOBCLibrary:IS-2245S-G"
-			(at 165.1 90.678 0)
+			(at 165.1 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2030,7 +2040,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 165.1 90.678 0)
+			(at 165.1 91.44 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2039,7 +2049,7 @@
 			)
 		)
 		(property "Description" "Momentary Switch, dual pole double throw"
-			(at 165.1 95.758 0)
+			(at 165.1 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
