@@ -564,6 +564,131 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "power:VBUS"
+			(power)
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "VBUS"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"VBUS\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "VBUS_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "VBUS_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 	)
 	(no_connect
 		(at 207.01 68.58)
@@ -1691,6 +1816,16 @@
 	)
 	(wire
 		(pts
+			(xy 167.64 46.99) (xy 167.64 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4f18394-809e-4063-80a3-800d28a36e4d")
+	)
+	(wire
+		(pts
 			(xy 147.32 140.97) (xy 157.48 140.97)
 		)
 		(stroke
@@ -2049,6 +2184,16 @@
 		)
 		(uuid "ebac68b6-cc03-4c40-add1-045f2f733fe2")
 	)
+	(wire
+		(pts
+			(xy 167.64 50.8) (xy 161.29 50.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ebf48f0b-5ad8-4b9d-b1a7-4a0ba0c17505")
+	)
 	(bus
 		(pts
 			(xy 194.31 96.52) (xy 194.31 101.6)
@@ -2149,6 +2294,16 @@
 		)
 		(uuid "085771e8-39c2-443a-9cb5-0657bb17a8d7")
 	)
+	(label "PG"
+		(at 189.23 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "0910b27f-88a9-471d-8788-6fba87f988a4")
+	)
 	(label "LoRa_RTX"
 		(at 92.71 69.85 0)
 		(effects
@@ -2199,16 +2354,6 @@
 		)
 		(uuid "17f46261-f178-4dde-b01f-4dca9d04e677")
 	)
-	(label "STAT2"
-		(at 185.42 60.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "269b39f4-3562-4c90-a9ed-c90bce32c0ae")
-	)
 	(label "GPS_TX"
 		(at 129.54 104.14 90)
 		(effects
@@ -2228,16 +2373,6 @@
 			(justify left bottom)
 		)
 		(uuid "2fd6f31e-a31b-4d37-98ae-ea3ae8317889")
-	)
-	(label "ST"
-		(at 187.96 73.66 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "346a5331-84f5-4365-9ad8-f4501ae4308e")
 	)
 	(label "STAT1"
 		(at 196.85 52.07 0)
@@ -2309,16 +2444,6 @@
 		)
 		(uuid "6f2a6d5a-fdd3-4590-a7a0-994d353e8305")
 	)
-	(label "STAT1"
-		(at 185.42 58.42 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "832f1b64-8767-4eb7-a22a-4b7f11aaa390")
-	)
 	(label "SD_CLK"
 		(at 118.11 104.14 90)
 		(effects
@@ -2368,6 +2493,26 @@
 			(justify left bottom)
 		)
 		(uuid "9cd4e66a-1afa-4a75-91f0-e0a7886f4390")
+	)
+	(label "STAT1"
+		(at 185.42 76.2 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a4a4370d-12f0-409c-a943-7a45348366d4")
+	)
+	(label "ST"
+		(at 189.23 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b03f02f4-3126-4bab-881c-023d3c9357f3")
 	)
 	(label "SDA"
 		(at 196.85 48.26 0)
@@ -2439,6 +2584,16 @@
 		)
 		(uuid "cec675dd-a933-41b1-8b62-e9c5e7a002f2")
 	)
+	(label "STAT2"
+		(at 185.42 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cf98be52-524d-4206-b90d-3606e7d8c664")
+	)
 	(label "PULSE"
 		(at 92.71 53.34 0)
 		(effects
@@ -2468,16 +2623,6 @@
 			(justify left bottom)
 		)
 		(uuid "e463c2fb-57f2-44c7-9395-b5cb93bcd049")
-	)
-	(label "PG"
-		(at 187.96 76.2 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e69d2af8-78f7-48fa-a179-eda8cfaf657a")
 	)
 	(label "SDA"
 		(at 196.85 120.65 0)
@@ -2630,6 +2775,72 @@
 			(project "GOLIDEN"
 				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13"
 					(reference "#PWR0102")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VBUS")
+		(at 167.64 46.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "3c1be646-ecf7-49d5-960e-90181e83c5f6")
+		(property "Reference" "#PWR0104"
+			(at 167.64 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "VBUS"
+			(at 167.64 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 167.64 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 167.64 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VBUS\""
+			(at 167.64 46.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a472260d-822d-416d-901a-7bd13824435e")
+		)
+		(instances
+			(project ""
+				(path "/718e9fc1-0aec-4051-b929-e6ccf2afef13"
+					(reference "#PWR0104")
 					(unit 1)
 				)
 			)
