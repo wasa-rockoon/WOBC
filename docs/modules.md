@@ -8,10 +8,10 @@ GNSS及び気圧温湿度センサを搭載し，位置情報と高度といっ�
 | --- | --- |
 | ESP32Core | 0 |
 | LiPoPower | 1 |
-| Logger | ? |
-| GPSActive | ? |
+| Logger | 20 |
+| GPSActive | 21 |
 | LoRa | 11~18 |
-| Pressure | ? |
+| Pressure | - |
 
 # GS(G, 0x47)
 機体からのダウンリンクの受信およびアップリンクを行う地上局の中心となるモジュール自身の位置がわかるようにGNSSを搭載する．サーバーの更新を行う．
@@ -21,7 +21,7 @@ GNSS及び気圧温湿度センサを搭載し，位置情報と高度といっ�
 | --- | --- |
 | ESP32Core | 0 |
 | LiPoPowerSimple | 1 |
-| Logger | ? |
+| Logger | 20 |
 | ModuleIFSimple | - |
 | GPSPassive | ? |
 
@@ -53,12 +53,12 @@ LoRaモジュールを2機搭載しアップリンクとダウンリンクの送
 | --- | --- |
 | ESP32Core | 0 |
 | LiPoPower | 1 |
-| Logger | ? |
+| Logger | 20 |
 | ModuleIF | 3~10 |
 | GPSActive | |
 | LoRa | 11~18 |
-| Pressure | ? |
-| IMU | |
+| Pressure | - |
+| IMU | - |
 
 # IGN(I, 0x49)
 点火回路を有し，モデルロケットの点火を行うモジュール．
@@ -68,7 +68,7 @@ LoRaモジュールを2機搭載しアップリンクとダウンリンクの送
 | --- | --- |
 | ERP2040Core | 0 |
 | ModuleIFSimple | - |
-| Ignite | |
+| Ignite | - |
 
 # RCS(V, 0x56)
 姿勢制御のためのスラスタの駆動を行う．そのほか圧縮空気タンクの圧力とロードセルのデータの取得を行う．
@@ -90,9 +90,9 @@ LoRaモジュールを2機搭載しアップリンクとダウンリンクの送
 | --- | --- |
 | ESP32Core | 0 |
 | LiPoPower | 1 |
-| Logger | ? |
+| Logger | 20 |
 | ModuleIF | 3~10 |
-| GPSActive | |
+| GPSActive | 21 |
 | LoRa | 11~18 |
 | Pressure | ? |
-| IMU | |
+| IMU | - |
