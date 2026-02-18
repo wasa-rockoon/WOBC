@@ -1,4 +1,8 @@
 #include <Arduino.h>
+#include <library/wobc.h>
+#include <components/Logger/logger.h>
+#include <components/IMU/IMU.h>
+#include <SPI.h>
 
 // RP2040 (Pico) の場合はFreeRTOSのヘッダを明示的にインクルード
 #ifdef ARDUINO_ARCH_RP2350
@@ -28,6 +32,12 @@
 #define SDCARD_MISO_PIN SPI0_MISO_PIN
 #define SDCARD_SS_PIN SPI0_CS_PIN
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
+
+constexpr uint8_t module_id = 0x45;
+constexpr uint8_t unit_id = 0x66;
+
+component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
+component::IMU9 imu(Wire, unit_id, 100);
 
 // 100Hz (10ms) でCMG制御と姿勢計算を行うタスク
 void cmg_control_task(void *pvParameters) {
