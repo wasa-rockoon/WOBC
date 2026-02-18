@@ -7,6 +7,28 @@
 #endif
 // ESP32の場合はArduino.hにすでに含まれているので不要です
 
+#define MR 11
+#define MRr 12
+#define ML 13
+#define MLr 14
+#define relay 15
+#define servo 10
+
+#define I2C_SCL_PIN 5
+#define I2C_SDA_PIN 4
+#define I2C_freq 400000
+
+#define SPI0_SCK_PIN 18
+#define SPI0_MOSI_PIN 19
+#define SPI0_MISO_PIN 16
+#define SPI0_CS_PIN 17
+
+#define SD_INSERTED_PIN 9
+#define SDCARD_MOSI_PIN SPI0_MOSI_PIN
+#define SDCARD_MISO_PIN SPI0_MISO_PIN
+#define SDCARD_SS_PIN SPI0_CS_PIN
+#define SDCARD_SCK_PIN SPI0_SCK_PIN
+
 // 100Hz (10ms) でCMG制御と姿勢計算を行うタスク
 void cmg_control_task(void *pvParameters) {
     TickType_t xLastWakeTime = xTaskGetTickCount();
