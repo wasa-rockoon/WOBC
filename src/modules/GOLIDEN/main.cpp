@@ -7,10 +7,26 @@
 #include <components/Logger/logger.h>
 #include <SPI.h>
 
-#define SPI0_CS_PIN      13
+#define SPI0_CS_PIN     13
 #define SPI0_MOSI_PIN   14
 #define SPI0_MISO_PIN   47
 #define SPI0_SCK_PIN    21
+
+
+#define LORA_CHANNEL 5
+#define LORA_TX_PIN 40
+#define LORA_RX_PIN 39
+#define LORA_AUX_PIN 38
+#define LORA_M0_PIN 43
+#define LORA_M1_PIN 44
+
+#define ST 6
+#define PG 7
+#define STAT1 8
+#define STAT2 18
+#define HEAT -1
+#define CHARGELED 10
+#define TEMP -1
 
 #define SD_INSERTED_PIN 48
 #define SDCARD_MOSI_PIN SPI0_MOSI_PIN
@@ -26,6 +42,9 @@ core::SerialBus serial_bus(Serial);
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::IMU9 imu(Wire, unit_id, 200);
+component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
+component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
+
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -77,10 +96,10 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
 
-    //power.begin();
-    //lora.begin();
+    power.begin();
+    lora.begin();
     //pressure.begin();
-    imu.begin();
+    //imu.begin();
     //gps.begin();
     logger.begin();
     main_.begin();
