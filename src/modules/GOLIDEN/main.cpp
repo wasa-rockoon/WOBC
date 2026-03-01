@@ -7,28 +7,89 @@
 #include <components/Logger/logger.h>
 #include <SPI.h>
 
+#define SPI0_CS_PIN      13
+#define SPI0_MOSI_PIN   14
+#define SPI0_MISO_PIN   47
+#define SPI0_SCK_PIN    21
+
+#define SD_INSERTED_PIN 48
+#define SDCARD_MOSI_PIN SPI0_MOSI_PIN
+#define SDCARD_MISO_PIN SPI0_MISO_PIN
+#define SDCARD_SS_PIN SPI0_CS_PIN
+#define SDCARD_SCK_PIN SPI0_SCK_PIN
+
 constexpr uint8_t module_id = 0x4E;  // GOLIDEN module ID
 constexpr uint8_t unit_id = 0x63;
 
 core::SerialBus serial_bus(Serial);
 
-component::IMU9 imu(Wire, unit_id, 100);
+
+component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
+component::IMU9 imu(Wire, unit_id, 200);
+
+interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
+
+class Main : public process::Component {
+public:
+    Main() : process::Component("main", 0x00) {}
+    kernel::Listener my_listener_;
+    kernel::Listener heartbeat_;
+
+    void setup() override {
+        my_listener_.telemetry(); 
+        listen(my_listener_, 8);
+        heartbeat_.component(0x4D);
+        listen(heartbeat_,1);
+    }
+
+    void loop() override {
+        /*while (my_listener_) {
+            wcpp::Packet packet = my_listener_.pop();
+                wcpp::Packet lorapacket = newPacket(64);
+                auto im = packet.find("Im");
+                if(!im){
+                    lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+                    lorapacket.append("Pa").setPacket(packet);
+                    sendPacket(lorapacket);
+                }
+            }
+        }*/
+    }
+} main_;
 
 void setup() {
-  Serial.begin(115200);
-  kernel::setUnitId(unit_id);
-  if (!kernel::begin(module_id, true)) return;
+    Serial.begin(115200);
+    kernel::setUnitId(unit_id);
+    if (!kernel::begin(module_id, true)) return;
 
-  Wire.begin(17, 16);  // SDA=17, SCL=16
-  serial_bus.begin();
+    //Serial0.setPins(4, 5);
+    Wire.begin(17, 16);  // SDA=17, SCL=16
+    serial_bus.begin();
 
-  delay(1000);
+    SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
-  imu.begin();
-  
-  Serial.println("GOLIDEN system initialized");
+    delay(1000); 
+
+    status_indicator.begin();
+    status_indicator.blink_on_change();
+
+    error_indicator.begin();
+    error_indicator.set(true);
+
+    //power.begin();
+    //lora.begin();
+    //pressure.begin();
+    imu.begin();
+    //gps.begin();
+    logger.begin();
+    main_.begin();
+
+    error_indicator.set(false);
+    error_indicator.blink_on_change(100);
 }
 
 void loop() {
-  vTaskDelay(pdMS_TO_TICKS(100));
+    status_indicator.update();
+    error_indicator.update();
 }
