@@ -6,3 +6,11 @@
 #include <components/GPS/gps.h>
 #include <components/Logger/logger.h>
 #include <SPI.h>
+void setup() {
+  Serial.begin(115200);
+  Serial.println("GOLIDEN system initialized");
+}
+
+void loop() {
+  vTaskDelay(pdMS_TO_TICKS(100));
+}

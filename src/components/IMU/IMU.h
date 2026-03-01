@@ -5,10 +5,10 @@
 #include <library/wobc.h>
 #include <Arduino.h>
 #include <Wire.h>
-#include <Arduino_BMI270_BMM150.h>
+#include "BMI2_BMM1/BMI2_BMM1.h" //IMUセンサーのライブラリ。
 
 // グローバル変数の外部宣言
-extern BoschSensorClass IMU;
+extern BMI2_BMM1_Class IMU;
 
 namespace component {
 
@@ -21,21 +21,21 @@ public:
 
 protected:
   TwoWire& wire_;
-  BoschSensorClass* IMU_;
+  BMI2_BMM1_Class* IMU_;
   uint8_t unit_id_;
 
   void setup() override;
 
   class SampleTimer: public process::Timer{
   public:
-    SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_t unit_id_ref, unsigned interval_ms);
+    SampleTimer(IMU9& IMU9_ref, BMI2_BMM1_Class* IMU_ref, uint8_t unit_id_ref, unsigned interval_ms);
   
   protected:
     void callback() override;
   
   private:
     IMU9& IMU9_;
-    BoschSensorClass* IMU_;
+    BMI2_BMM1_Class* IMU_;
     uint8_t unit_id_;
   } sample_timer_;
 };

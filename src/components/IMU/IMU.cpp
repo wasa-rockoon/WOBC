@@ -1,5 +1,4 @@
 #include "IMU.h"
-#include <Arduino_BMI270_BMM150.h> // 明示的に再度インクルード
 
 namespace component {
 
@@ -19,7 +18,7 @@ void IMU9::setup() {
   }
 }
 
-IMU9::SampleTimer::SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_t unit_id_ref, unsigned sample_freq_hz)
+IMU9::SampleTimer::SampleTimer(IMU9& IMU9_ref, BMI2_BMM1_Class* IMU_ref, uint8_t unit_id_ref, unsigned sample_freq_hz)
   : process::Timer("IMU", 1000 / sample_freq_hz),
     IMU9_(IMU9_ref), IMU_(IMU_ref), unit_id_(unit_id_ref) {
 }
@@ -55,3 +54,5 @@ void IMU9::SampleTimer::callback() {
   //サーボでの処理を追記
   
 }
+
+}  // namespace component
