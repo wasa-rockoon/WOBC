@@ -51,5 +51,7 @@ void IMU9::SampleTimer::callback() {
 
   //packet.append("Ts").setInt((int)millis());
   sendPacket(packet);
-}
+  
+  //サーボでの処理を追記
+  
 }
