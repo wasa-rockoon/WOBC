@@ -440,9 +440,9 @@ struct bmi2_sens_data sensor_data = { { 0 } };
     imu_sensor_data.acc.y  = sensor_data.acc.y* 9.8 / BMI2_ACC_FOC_2G_REF;
     imu_sensor_data.acc.z  = sensor_data.acc.z* 9.8 / BMI2_ACC_FOC_2G_REF;
     
-     imu_sensor_data.gyr.x  = sensor_data.gyr.x / BMI2_GYRO_FOC_2000_DPS_REF;
-    imu_sensor_data.gyr.y = sensor_data.gyr.y / BMI2_GYRO_FOC_2000_DPS_REF;
-    imu_sensor_data.gyr.z = sensor_data.gyr.z / BMI2_GYRO_FOC_2000_DPS_REF;
+     imu_sensor_data.gyr.x  = sensor_data.gyr.x / 16.384f;
+    imu_sensor_data.gyr.y = sensor_data.gyr.y / 16.384f;
+    imu_sensor_data.gyr.z = sensor_data.gyr.z / 16.384f;
 }
 else // raw true
 {
@@ -478,11 +478,11 @@ struct bmi2_sens_data sensor_data = { { 0 } };
 
     int res = bmi2_get_sensor_data(&sensor_data, &bmi2);
     
-     x  = sensor_data.gyr.x / BMI2_GYRO_FOC_2000_DPS_REF;
+     x  = sensor_data.gyr.x / 16.384f;
 
-    y = sensor_data.gyr.y / BMI2_GYRO_FOC_2000_DPS_REF;
+    y = sensor_data.gyr.y / 16.384f;
 
-    z = sensor_data.gyr.z / BMI2_GYRO_FOC_2000_DPS_REF;
+    z = sensor_data.gyr.z / 16.384f;
 
     return res;
     
