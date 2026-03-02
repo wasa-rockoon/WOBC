@@ -42,7 +42,7 @@ void IMU9::IMUDataTimer::callback() {
   uint32_t timestamp_ms = millis();
 
   wcpp::Packet packet = IMU9_.newPacket(80);
-  packet.telemetry(IMU9_::telemetry_id, IMU9_::component_id, unit_id_, 0xFF, timestamp_ms);
+  packet.telemetry(IMU9::telemetry_id, IMU9::component_id, unit_id_, 0xFF, timestamp_ms);
   packet.append("Ax").setFloat32(Ax);
   packet.append("Ay").setFloat32(Ay);
   packet.append("Az").setFloat32(Az);
