@@ -63,7 +63,7 @@ public:
     }
 
     void loop() override {
-        /*while (my_listener_) {
+        while (my_listener_) {
             wcpp::Packet packet = my_listener_.pop();
                 wcpp::Packet lorapacket = newPacket(64);
                 auto im = packet.find("Im");
@@ -73,9 +73,8 @@ public:
                     sendPacket(lorapacket);
                 }
             }
-        }*/
-    }
-} main_;
+        }
+    }main_;
 
 void setup() {
     Serial.begin(115200);
