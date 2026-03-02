@@ -37,6 +37,7 @@
 constexpr uint8_t module_id = 0x4E;  // GOLIDEN module ID
 constexpr uint8_t unit_id = 0x63;
 
+HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
 
 

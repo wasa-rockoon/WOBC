@@ -59,11 +59,11 @@ void LoRa::setup() {
 
   delay(100);
 
-  /*if (ok) {
+  if (ok) {
     LOG("LoRa setup complete.");
   } else {
     LOG("LoRa setup error.");
-  }*/
+  }
 }
 
 void LoRa::loop() {
@@ -93,7 +93,7 @@ void LoRa::onCommand(const wcpp::Packet& packet) {
     memcpy(data_with_checksum, data, size);
     data_with_checksum[size] = checksum_value;
 
-    //LOG("LoRa send %d", size + 1);
+    LOG("LoRa send %d", size + 1);
     e220_.sendTransparent(data_with_checksum, size + 1);
   }
 }
