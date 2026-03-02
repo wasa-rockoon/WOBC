@@ -3,7 +3,7 @@
 namespace component {
 
 IMU9::IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz)
-  : process::Component("IMU", component_id),
+  : process::Component("IMU", IMU9::component_id),
     wire_(wire),
     IMU_(&::IMU),
     unit_id_(unit_id),
@@ -41,9 +41,22 @@ void IMU9::IMUDataTimer::callback() {
 
   uint32_t timestamp_ms = millis();
 
+  wcpp::Packet packet = IMU9_.newPacket(80);
+  packet.telemetry(IMU9_::telemetry_id, IMU9_::component_id, unit_id_, 0xFF, timestamp_ms);
+  packet.append("Ax").setFloat32(Ax);
+  packet.append("Ay").setFloat32(Ay);
+  packet.append("Az").setFloat32(Az);
+  packet.append("Gx").setFloat32(Gx);
+  packet.append("Gy").setFloat32(Gy);
+  packet.append("Gz").setFloat32(Gz);
+  packet.append("Mx").setFloat32(Mx);
+  packet.append("My").setFloat32(My);
+  packet.append("Mz").setFloat32(Mz);
+
   // シリアルに9軸の生データを出力
   Serial.printf("[IMU] t=%u Ax=%.3f Ay=%.3f Az=%.3f Gx=%.3f Gy=%.3f Gz=%.3f Mx=%.3f My=%.3f Mz=%.3f\n",
     timestamp_ms, Ax, Ay, Az, Gx, Gy, Gz, Mx, My, Mz);
+  IMU9_.sendPacket(packet);
 }
 
 IMU9::ServoControlTimer::ServoControlTimer(IMU9& IMU9_ref, uint8_t unit_id_ref)
@@ -54,19 +67,5 @@ IMU9::ServoControlTimer::ServoControlTimer(IMU9& IMU9_ref, uint8_t unit_id_ref)
 void IMU9::ServoControlTimer::callback() {
   // サーボ制御は不要
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }  // namespace component
