@@ -12,6 +12,8 @@
 #define SPI0_MISO_PIN   47
 #define SPI0_SCK_PIN    21
 
+#define GPS_RX_PIN 11
+#define GPS_TX_PIN 12
 
 #define LORA_CHANNEL 3
 #define LORA_TX_PIN 40
@@ -42,6 +44,7 @@ core::SerialBus serial_bus(Serial);
 
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
+component::GPS gps(GPS_RX_PIN, GPS_TX_PIN, 115200, unit_id);
 component::IMU9 imu(Wire, unit_id, 200);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, 1);
@@ -100,7 +103,7 @@ void setup() {
     lora.begin();
     //pressure.begin();
     //imu.begin();
-    //gps.begin();
+    gps.begin();
     logger.begin();
     main_.begin();
 
