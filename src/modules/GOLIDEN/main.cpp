@@ -13,7 +13,7 @@
 #define SPI0_SCK_PIN    21
 
 
-#define LORA_CHANNEL 5
+#define LORA_CHANNEL 3
 #define LORA_TX_PIN 40
 #define LORA_RX_PIN 39
 #define LORA_AUX_PIN 38
