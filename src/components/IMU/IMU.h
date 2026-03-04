@@ -99,6 +99,7 @@ protected:
     IMU9& IMU9_;
     BMI2_BMM1_Class* IMU_;
     uint8_t unit_id_;
+    uint8_t lora_decimation_counter_ = 0;
   } imu_data_timer_;
 
   // 20Hz サーボ制御タイマー
