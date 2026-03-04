@@ -90,8 +90,8 @@ void IMU9::IMUDataTimer::callback() {
   }
 
   // シリアルに9軸の生データを出力
-  Serial.printf("[IMU] t=%u Ax=%.3f Ay=%.3f Az=%.3f Gx=%.3f Gy=%.3f Gz=%.3f qw=%.4f qx=%.4f qy=%.4f qz=%.4f\n",
-    timestamp_ms, Ax, Ay, Az, Gx, Gy, Gz, IMU9_.latest_data_.qw, IMU9_.latest_data_.qx, IMU9_.latest_data_.qy, IMU9_.latest_data_.qz);
+  //Serial.printf("[IMU] t=%u Ax=%.3f Ay=%.3f Az=%.3f Gx=%.3f Gy=%.3f Gz=%.3f qw=%.4f qx=%.4f qy=%.4f qz=%.4f\n",
+    //timestamp_ms, Ax, Ay, Az, Gx, Gy, Gz, IMU9_.latest_data_.qw, IMU9_.latest_data_.qx, IMU9_.latest_data_.qy, IMU9_.latest_data_.qz);
   IMU9_.sendPacket(packet);
 }
 
