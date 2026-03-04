@@ -436,9 +436,9 @@ struct bmi2_sens_data sensor_data = { { 0 } };
     int res = bmi2_get_sensor_data(&sensor_data, &bmi2);
 
    if(raw == false){
-   imu_sensor_data.acc.x = sensor_data.acc.x* 9.8 / BMI2_ACC_FOC_2G_REF;
-    imu_sensor_data.acc.y  = sensor_data.acc.y* 9.8 / BMI2_ACC_FOC_2G_REF;
-    imu_sensor_data.acc.z  = sensor_data.acc.z* 9.8 / BMI2_ACC_FOC_2G_REF;
+  imu_sensor_data.acc.x = sensor_data.acc.x * 9.8f / (BMI2_ACC_FOC_2G_REF / 8.0f);
+   imu_sensor_data.acc.y  = sensor_data.acc.y * 9.8f / (BMI2_ACC_FOC_2G_REF / 8.0f);
+   imu_sensor_data.acc.z  = sensor_data.acc.z * 9.8f / (BMI2_ACC_FOC_2G_REF / 8.0f);
     
      imu_sensor_data.gyr.x  = sensor_data.gyr.x / 16.384f;
     imu_sensor_data.gyr.y = sensor_data.gyr.y / 16.384f;
@@ -463,11 +463,11 @@ struct bmi2_sens_data sensor_data = { { 0 } };
 
     int res = bmi2_get_sensor_data(&sensor_data, &bmi2);
 
-   x = sensor_data.acc.x* 9.8 / BMI2_ACC_FOC_2G_REF;
+  x = sensor_data.acc.x * 9.8f / (BMI2_ACC_FOC_2G_REF / 8.0f);
 
-    y  = sensor_data.acc.y* 9.8 / BMI2_ACC_FOC_2G_REF;
+   y  = sensor_data.acc.y * 9.8f / (BMI2_ACC_FOC_2G_REF / 8.0f);
 
-    z  = sensor_data.acc.z* 9.8 / BMI2_ACC_FOC_2G_REF;
+   z  = sensor_data.acc.z * 9.8f / (BMI2_ACC_FOC_2G_REF / 8.0f);
 
     return res;
     
