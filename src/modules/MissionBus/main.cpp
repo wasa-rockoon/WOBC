@@ -46,7 +46,7 @@ component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_R
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
 component::IMU9 imu(Wire, unit_id, 100);
-component::GPS gps(39, 38, 115200, unit_id);
+component::GPS gps(39, 38, 115200, unit_id);  //ボーレート用件等
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
