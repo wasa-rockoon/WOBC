@@ -12,7 +12,7 @@ public:
   static const uint8_t Heatertelemetry_id = 'H';
 
   // コンストラクタにピン指定用の引数を追加
-  LiPoPower(TwoWire& wire, int st_pin, int pg_pin, int stat1_pin, int stat2_pin, int heat_pin, int charge_led_pin, int temp_pin, uint8_t unit_id, unsigned sample_freq_hz = 10);
+  LiPoPower(TwoWire& wire, int st_pin, int pg_pin, int stat1_pin, int stat2_pin, int heat_pin, int charge_led_pin, int temp_pin, uint8_t unit_id, unsigned sample_freq_hz = 1);
 
 protected:
   TwoWire& wire_;
