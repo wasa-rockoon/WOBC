@@ -25,10 +25,10 @@ constexpr uint16_t SERVO_MIN_US = 500;
 constexpr uint16_t SERVO_MAX_US = 2400;
 
 // ===== 姿勢制御パラメータ（参考コード準拠） =====
-constexpr float q0_target = 0.1829f;
-constexpr float q1_target = -0.7056f;
-constexpr float q2_target = -0.1778f;
-constexpr float q3_target = -0.6611f;
+constexpr float q0_target = 0.7071f;
+constexpr float q1_target = 0.0000f;
+constexpr float q2_target = -0.7071f;
+constexpr float q3_target = 0.0000f;
 
 constexpr float Kp_roll = 1.0f;
 constexpr float Kd_roll = 0.32f;
@@ -87,7 +87,7 @@ protected:
 
   void setup() override;
 
-  // 200Hz IMUデータ取得タイマー
+  // 10Hz パケット生成・送信タイマー
   class IMUDataTimer: public process::Timer{
   public:
     IMUDataTimer(IMU9& IMU9_ref, BMI2_BMM1_Class* IMU_ref, uint8_t unit_id_ref, unsigned interval_ms);
@@ -99,8 +99,20 @@ protected:
     IMU9& IMU9_;
     BMI2_BMM1_Class* IMU_;
     uint8_t unit_id_;
-    uint8_t lora_decimation_counter_ = 0;
+    uint8_t lora_counter_ = 0;
   } imu_data_timer_;
+
+  // 100Hz センサー読み取り＋姿勢積分タイマー
+  class QuaternionUpdateTimer: public process::Timer{
+  public:
+    QuaternionUpdateTimer(IMU9& IMU9_ref);
+  
+  protected:
+    void callback() override;
+  
+  private:
+    IMU9& IMU9_;
+  } quaternion_update_timer_;
 
   // 20Hz サーボ制御タイマー
   class ServoControlTimer: public process::Timer{

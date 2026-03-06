@@ -7,7 +7,8 @@ IMU9::IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz)
     wire_(wire),
     IMU_(&::IMU),
     unit_id_(unit_id),
-    imu_data_timer_(*this, IMU_, unit_id, (sample_freq_hz == 0 ? 5 : (1000 / sample_freq_hz))),
+    imu_data_timer_(*this, IMU_, unit_id, 100),
+    quaternion_update_timer_(*this),
     servo_control_timer_(*this, unit_id) {
 }
 
@@ -16,7 +17,8 @@ void IMU9::setup() {
     error("IMU", "Failed to initialize IMU");
   }
 
-  start(imu_data_timer_);      // 200Hz
+  start(quaternion_update_timer_);  // 100Hz センサー読み取り＋姿勢積分
+  start(imu_data_timer_);           // 10Hz パケット生成・送信
 }
 
 IMU9::IMUDataTimer::IMUDataTimer(IMU9& IMU9_ref, BMI2_BMM1_Class* IMU_ref, uint8_t unit_id_ref, unsigned interval_ms)
@@ -24,44 +26,42 @@ IMU9::IMUDataTimer::IMUDataTimer(IMU9& IMU9_ref, BMI2_BMM1_Class* IMU_ref, uint8
     IMU9_(IMU9_ref), IMU_(IMU_ref), unit_id_(unit_id_ref) {
 }
 
+IMU9::QuaternionUpdateTimer::QuaternionUpdateTimer(IMU9& IMU9_ref)
+  : process::Timer("QuaternionUpdate", 20),
+    IMU9_(IMU9_ref) {
+}
+
 void IMU9::IMUDataTimer::callback() {
-  float Ax = 0, Ay = 0, Az = 0;
-  float Gx = 0, Gy = 0, Gz = 0;
-  float Mx = 0, My = 0, Mz = 0;
+  // 最新のセンサーデータ・姿勢をスナップショット（100Hzタイマーで更新済み）
+  float Ax = IMU9_.latest_data_.Ax;
+  float Ay = IMU9_.latest_data_.Ay;
+  float Az = IMU9_.latest_data_.Az;
+  float Gx = IMU9_.latest_data_.Gx;
+  float Gy = IMU9_.latest_data_.Gy;
+  float Gz = IMU9_.latest_data_.Gz;
+  float qx = IMU9_.attitude_.q1;
+  float qy = IMU9_.attitude_.q2;
+  float qz = IMU9_.attitude_.q3;
+  float qw = IMU9_.attitude_.q0;
+  uint32_t timestamp_ms = IMU9_.latest_data_.timestamp_ms;
 
-  if (IMU_->accelerationAvailable()) {
-    IMU_->readAcceleration(Ax, Ay, Az);
+  // 誤差クォータニオンの計算: q_err = q_target^-1 * q_current
+  float q_err_w = q0_target*qw + q1_target*qx + q2_target*qy + q3_target*qz;
+  float q_err_x = q0_target*qx - q1_target*qw - q2_target*qz + q3_target*qy;
+  float q_err_y = q0_target*qy + q1_target*qz - q2_target*qw - q3_target*qx;
+  float q_err_z = q0_target*qz - q1_target*qy + q2_target*qx - q3_target*qw;
+  
+  float q_err_norm = sqrtf(q_err_w*q_err_w + q_err_x*q_err_x + q_err_y*q_err_y + q_err_z*q_err_z);
+  if (q_err_norm > 0.01f) {
+    q_err_w /= q_err_norm;
+    q_err_x /= q_err_norm;
+    q_err_y /= q_err_norm;
+    q_err_z /= q_err_norm;
   }
-  if (IMU_->gyroscopeAvailable()) {
-    IMU_->readGyroscope(Gx, Gy, Gz);
-  }
-  if (IMU_->magneticFieldAvailable()) {
-    IMU_->readMagneticField(Mx, My, Mz);
-  }
-
-  uint32_t timestamp_ms = millis();
-
-  // 最新データを更新
-  IMU9_.latest_data_.Ax = Ax;
-  IMU9_.latest_data_.Ay = Ay;
-  IMU9_.latest_data_.Az = Az;
-  IMU9_.latest_data_.Gx = Gx;
-  IMU9_.latest_data_.Gy = Gy;
-  IMU9_.latest_data_.Gz = Gz;
-  IMU9_.latest_data_.Mx = Mx;
-  IMU9_.latest_data_.My = My;
-  IMU9_.latest_data_.Mz = Mz;
-  IMU9_.latest_data_.timestamp_ms = timestamp_ms;
-
-  // 相補フィルター実行
-  IMU9_.updateQuaternion();
-
-  // クォータニオン結果を保存
-  IMU9_.latest_data_.qx = IMU9_.attitude_.q1;
-  IMU9_.latest_data_.qy = IMU9_.attitude_.q2;
-  IMU9_.latest_data_.qz = IMU9_.attitude_.q3;
-  IMU9_.latest_data_.qw = IMU9_.attitude_.q0;
-
+  
+  float pitch_err_deg = 2.0f * q_err_y * 180.0f / M_PI;
+  float yaw_err_deg = 2.0f * q_err_z * 180.0f / M_PI;
+  
   wcpp::Packet packet = IMU9_.newPacket(80);
   packet.telemetry(IMU9::telemetry_id, IMU9::component_id, unit_id_, 0xFF, timestamp_ms);
   packet.append("Ts").setInt(timestamp_ms);
@@ -71,33 +71,71 @@ void IMU9::IMUDataTimer::callback() {
   packet.append("Gx").setFloat16(Gx);
   packet.append("Gy").setFloat16(Gy);
   packet.append("Gz").setFloat16(Gz);
-  packet.append("qx").setFloat16(IMU9_.latest_data_.qx);
-  packet.append("qy").setFloat16(IMU9_.latest_data_.qy);
-  packet.append("qz").setFloat16(IMU9_.latest_data_.qz);
-  packet.append("qw").setFloat16(IMU9_.latest_data_.qw);
-  //packet.append("Mx").setFloat32(Mx);
-  //packet.append("My").setFloat32(My);
-  //packet.append("Mz").setFloat32(Mz);
+  packet.append("qx").setFloat16(qx);
+  packet.append("qy").setFloat16(qy);
+  packet.append("qz").setFloat16(qz);
+  packet.append("qw").setFloat16(qw);
+  packet.append("PE").setFloat16(pitch_err_deg);
+  packet.append("YE").setFloat16(yaw_err_deg);
 
-  // 200Hzのうち100回に1回だけLoRaへ流す（約2Hz）
-  lora_decimation_counter_++;
-  if (lora_decimation_counter_ >= 100) {
-    lora_decimation_counter_ = 0;
-    // Imなし: LoRaにも転送
-  } else {
-    // Imあり: SD保存のみ
-    packet.append("Im").setNull();
+  // 10Hzのうち10回に1回だけLoRaへ流す（約1Hz）
+  if (++lora_counter_ % 10 != 0) {
+    packet.append("Im").setNull();  // SD保存のみ
   }
 
-  // シリアルに9軸の生データを出力
-  //Serial.printf("[IMU] t=%u Ax=%.3f Ay=%.3f Az=%.3f Gx=%.3f Gy=%.3f Gz=%.3f qw=%.4f qx=%.4f qy=%.4f qz=%.4f\n",
-    //timestamp_ms, Ax, Ay, Az, Gx, Gy, Gz, IMU9_.latest_data_.qw, IMU9_.latest_data_.qx, IMU9_.latest_data_.qy, IMU9_.latest_data_.qz);
   IMU9_.sendPacket(packet);
 }
 
 IMU9::ServoControlTimer::ServoControlTimer(IMU9& IMU9_ref, uint8_t unit_id_ref)
   : process::Timer("ServoControl", 50),
     IMU9_(IMU9_ref), unit_id_(unit_id_ref) {
+}
+
+void IMU9::QuaternionUpdateTimer::callback() {
+  // 100Hz でセンサー読み取り＋クォータニオン積分
+  static uint32_t quat_count = 0;
+  static uint32_t last_log_us = 0;
+  static uint32_t last_call_us = 0;
+  static uint32_t dt_min_us = 999999;
+  static uint32_t dt_max_us = 0;
+
+  uint32_t now_us = micros();
+  if (last_call_us > 0) {
+    uint32_t dt = now_us - last_call_us;
+    if (dt < dt_min_us) dt_min_us = dt;
+    if (dt > dt_max_us) dt_max_us = dt;
+  }
+  last_call_us = now_us;
+  quat_count++;
+
+  // 1秒ごとに実行回数・min/max間隔をログ出力（us単位）
+  if (now_us - last_log_us >= 1000000) {
+    IMU9_.log("IMU", __LINE__, "Hz=%u min=%u max=%u(us)", quat_count, dt_min_us, dt_max_us);
+    quat_count = 0;
+    dt_min_us = 999999;
+    dt_max_us = 0;
+    last_log_us = now_us;
+  }
+
+  // センサー読み取り（Available()チェック省略: BMI270 ODR=200Hz > 50Hz読み取り）
+  // 磁気センサーはクォータニオン計算で未使用のため50Hzでは読み取らない
+  float Ax = 0, Ay = 0, Az = 0;
+  float Gx = 0, Gy = 0, Gz = 0;
+
+  IMU9_.IMU_->readAcceleration(Ax, Ay, Az);
+  IMU9_.IMU_->readGyroscope(Gx, Gy, Gz);
+
+  // 最新データを更新
+  IMU9_.latest_data_.Ax = Ax;
+  IMU9_.latest_data_.Ay = Ay;
+  IMU9_.latest_data_.Az = Az;
+  IMU9_.latest_data_.Gx = Gx;
+  IMU9_.latest_data_.Gy = Gy;
+  IMU9_.latest_data_.Gz = Gz;
+  IMU9_.latest_data_.timestamp_ms = millis();
+
+  // 姿勢積分
+  IMU9_.updateQuaternion();
 }
 
 void IMU9::ServoControlTimer::callback() {
@@ -125,32 +163,19 @@ void IMU9::accelToQuaternion(float ax, float ay, float az, float &q0, float &q1,
   ay /= norm;
   az /= norm;
 
-  // 重力ベクトル(0, 0, -1)から現在の加速度方向への回転クォータニオン
-  // TRIAD法: accから重力方向への回転
-  float gx = 0.0f, gy = 0.0f, gz = -1.0f;  // 重力方向（下向き）
-
-  // 外積: acc × gravity
-  float cx = ay*gz - az*gy;
-  float cy = az*gx - ax*gz;
-  float cz = ax*gy - ay*gx;
-
-  // 内積（回転角度の余弦）
-  float dot = ax*gx + ay*gy + az*gz;
+  // ロール・ピッチをクォータニオンに変換 (ヨーは0と仮定)
+  float roll  = atan2f(ay, az);
+  float pitch = atan2f(-ax, sqrtf(ay*ay + az*az));
   
-  // クォータニオン作成
-  float s = sqrtf((1.0f + dot) * 2.0f);
-  if (s < 0.001f) {
-    // 反対方向の場合
-    q0 = 0.0f;
-    q1 = 1.0f;
-    q2 = 0.0f;
-    q3 = 0.0f;
-  } else {
-    q0 = s * 0.25f;
-    q1 = cx / s;
-    q2 = cy / s;
-    q3 = cz / s;
-  }
+  float cr = cosf(roll * 0.5f);
+  float sr = sinf(roll * 0.5f);
+  float cp = cosf(pitch * 0.5f);
+  float sp = sinf(pitch * 0.5f);
+  
+  q0 = cr * cp;
+  q1 = sr * cp;
+  q2 = cr * sp;
+  q3 = -sr * sp;
 
   normalizeQuaternion(q0, q1, q2, q3);
 }
@@ -192,8 +217,13 @@ void IMU9::updateQuaternion() {
   float ax = latest_data_.Ax, ay = latest_data_.Ay, az = latest_data_.Az;
   float accel_norm_sq = ax*ax + ay*ay + az*az;
   
-  if (accel_norm_sq > 0.001f) {
-    attitude_.accel_trust = 1.0f;
+  // 加速度信頼度：静止時（1G）から機動時まで段階的に判定
+  // 約0.5～1.5G：信頼度高め、異常加速度時は落とす
+  float accel_norm = sqrtf(accel_norm_sq);
+  if (accel_norm > 0.1f && accel_norm < 2.0f) {
+    attitude_.accel_trust = 1.0f;  // 0.5G～2.0G で信頼度100%
+  } else if (accel_norm >= 2.0f) {
+    attitude_.accel_trust = 0.5f;  // 大加速度時は50%減衰（ロケット衝撃時の過補正抑止）
   } else {
     attitude_.accel_trust = 0.0f;
   }
@@ -218,8 +248,9 @@ void IMU9::updateQuaternion() {
     float accel_q0, accel_q1, accel_q2, accel_q3;
     accelToQuaternion(ax, ay, az, accel_q0, accel_q1, accel_q2, accel_q3);
     
-    // 融合ゲイン（加速度信頼度に応じた重み）
-    float alpha = 0.1f * attitude_.accel_trust;  // 0.0～0.1
+    // 融合ゲイン：ロケット搭載で応答性重視
+    // 加速度信頼度100%時に0.08（8%）～0.1（10%）で補正
+    float alpha = 0.08f * attitude_.accel_trust;
     
     // SLERP簡易版（低加重の場合は線形補間）
     attitude_.q0 += (accel_q0 - attitude_.q0) * alpha;
