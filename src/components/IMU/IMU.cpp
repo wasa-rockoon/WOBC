@@ -313,7 +313,8 @@ void IMU9::updateQuaternionFromGyro(float &q0, float &q1, float &q2, float &q3,
 //   ○ 長期的に安定（ドリフトしない）
 //   × 機体加速・振動で瞬間的に不正確
 //
-// → 毎周期ジャイロで姿勢を更新し、少量(α%)だけ加速度方向に引き寄せる。
+// → 毎周期ジャイロで姿勢を更新し、Mahony式フィルターで重力方向を補正する。
+//   オイラー角を経由しないため、ピッチ±90°でのジンバルロックが発生しない。
 //   これにより短期的にはジャイロの応答を維持し、長期的にはドリフトを補正する。
 //
 // 加速度信頼度 (accel_trust) は条件により動的に変化する:
@@ -371,36 +372,62 @@ void IMU9::updateQuaternion() {
     return;
   }
 
-  // --- ステップ1: ジャイロ積分で姿勢を更新 ---
-  // ジャイロ角速度 [deg/s] → [rad/s] に変換してからクォータニオン積分
+  // --- ステップ1: ジャイロ角速度 [deg/s] → [rad/s] ---
   float gx_rad = latest_data_.Gx * M_PI / 180.0f;
   float gy_rad = latest_data_.Gy * M_PI / 180.0f;
   float gz_rad = latest_data_.Gz * M_PI / 180.0f;
 
+  // --- ステップ2: 加速度による重力ベクトル補正（Mahony式）---
+  // 旧LERP方式では accelToQuaternion() 内でオイラー角（roll/pitch）を経由するため、
+  // ピッチ±90°（＝目標姿勢そのもの！）でジンバルロックが発生し、
+  // roll = atan2(~0, ~0) が不定 → ロール角がノイズで暴れ → 姿勢推定が崩壊していた。
+  //
+  // Mahony式はオイラー角を一切使わず、重力ベクトルの方向だけで補正する:
+  //   1. 現在クォータニオンから「予測重力方向」を計算（回転行列の第3行）
+  //   2. 実測加速度（正規化）との外積で誤差軸＋誤差量を得る
+  //   3. 誤差量をジャイロ入力に加算してから積分
+  // → オイラー角を経由しないので全姿勢で安定動作（ジンバルロックなし）
+  if (attitude_.accel_trust > 0.1f) {
+    float anorm = sqrtf(ax*ax + ay*ay + az*az);
+    if (anorm > 0.001f) {
+      // 測定加速度を正規化（重力方向の単位ベクトル）
+      float mx = ax / anorm;
+      float my = ay / anorm;
+      float mz = az / anorm;
+
+      // 現在クォータニオンから予測した重力方向（ボディフレーム）
+      // 回転行列 R(q) の第3行 = ワールドZ軸（上方向）のボディフレーム表現
+      // 静止時、正規化加速度 (mx,my,mz) と一致するはず
+      float q0 = attitude_.q0, q1 = attitude_.q1;
+      float q2 = attitude_.q2, q3 = attitude_.q3;
+      float vx = 2.0f * (q1*q3 - q0*q2);
+      float vy = 2.0f * (q2*q3 + q0*q1);
+      float vz = q0*q0 - q1*q1 - q2*q2 + q3*q3;
+
+      // 予測と実測の外積 = 補正すべき回転の軸と量
+      // cross(measured, predicted) の方向にジャイロを補正すると
+      // 予測重力が実測に近づく
+      float ex = my*vz - mz*vy;
+      float ey = mz*vx - mx*vz;
+      float ez = mx*vy - my*vx;
+
+      // Mahony P補正ゲイン
+      // MAHONY_KP=4.0 は旧LERP方式の alpha=0.08 at 50Hz と等価な応答速度
+      //   旧: alpha * error_per_step = 0.08 * θ
+      //   新: Kp * |cross| * dt = 4.0 * θ * 0.02 = 0.08 * θ
+      float kp = MAHONY_KP * attitude_.accel_trust;
+      gx_rad += kp * ex;
+      gy_rad += kp * ey;
+      gz_rad += kp * ez;
+    }
+  }
+
+  // --- ステップ3: 補正済みジャイロでクォータニオン積分 ---
+  // ジャイロに重力補正を加えた後に積分することで、
+  // 短期的にはジャイロの高速応答を維持しつつ、
+  // 長期的には重力方向へのドリフト補正が掛かる。
   updateQuaternionFromGyro(attitude_.q0, attitude_.q1, attitude_.q2, attitude_.q3, 
                            gx_rad, gy_rad, gz_rad, dt_s);
-
-  // --- ステップ2: 加速度で補正（LERP融合）---
-  // 信頼度が低い場合はスキップ（ジャイロ積分のみで更新）
-  if (attitude_.accel_trust > 0.1f) {
-    // 加速度から「あるべき姿勢」を計算
-    float accel_q0, accel_q1, accel_q2, accel_q3;
-    accelToQuaternion(ax, ay, az, accel_q0, accel_q1, accel_q2, accel_q3);
-    
-    // 融合ゲイン α: 信頼度 100% 時に 8% だけ加速度方向へ引き寄せる
-    // → 信頼度 15%(下限) なら 1.2% という微量なドリフト補正のみ
-    float alpha = 0.08f * attitude_.accel_trust;
-    
-    // LERP（線形補間）: q = q_gyro + α * (q_accel - q_gyro)
-    // SLERPの方が理論的に正確だが、αが小さいのでLERPで十分
-    attitude_.q0 += (accel_q0 - attitude_.q0) * alpha;
-    attitude_.q1 += (accel_q1 - attitude_.q1) * alpha;
-    attitude_.q2 += (accel_q2 - attitude_.q2) * alpha;
-    attitude_.q3 += (accel_q3 - attitude_.q3) * alpha;
-    
-    // LERP後はノルムが1でなくなるので再正規化
-    normalizeQuaternion(attitude_.q0, attitude_.q1, attitude_.q2, attitude_.q3);
-  }
 }
 
 // ======================================================================
@@ -590,22 +617,23 @@ void IMU9::runServoControl() {
 
     // ====== (G) PD制御出力計算 ======
     // 小アングル近似で誤差ベクトルを取得:
-    //   error = 2 * q_err_xyz  [rad] (無次元)
-    // q_err_x → ロール軸誤差、q_err_y → ピッチ軸誤差
-    float error_x = 2.0f * q_err_x;  // ロール誤差 [rad相当]
-    float error_y = 2.0f * q_err_y;  // ピッチ誤差 [rad相当]
+    //   error = 2 * q_err_component [rad] (無次元)
+    // q_err_z → ヨー軸誤差（フィン1で補正）、q_err_y → ピッチ軸誤差（フィン2で補正）
+    // ※ ロール（q_err_x）は2枚フィンでは制御不能なので使用しない
+    float error_x = 2.0f * q_err_z;  // ヨー誤差 [rad相当]（フィン1で補正）
+    float error_y = 2.0f * q_err_y;  // ピッチ誤差 [rad相当]（フィン2で補正）
 
     // デッドバンド: 微小な誤差を0にしてサーボのチャタリングを防止
     if (fabsf(error_x) < ERROR_DEADBAND) error_x = 0.0f;
     if (fabsf(error_y) < ERROR_DEADBAND) error_y = 0.0f;
 
-    // --- PD制御 — ロール軸 ---
+    // --- PD制御 — ヨー軸（フィン1 = servo1） ---
     // P項: 比例ゲイン × 現在の誤差（誤差が大きいほど強く修正）
     // D項: 微分ゲイン × 誤差の変化量（変化が速いほど強くブレーキ、振動抑制）
-    float d_error_x = disable_dterm ? 0.0f : (error_x - servo_ctrl_.roll.prev_error);
-    float output_x = Kp_roll * error_x + Kd_roll * d_error_x;
+    float d_error_x = disable_dterm ? 0.0f : (error_x - servo_ctrl_.yaw.prev_error);
+    float output_x = Kp_yaw * error_x + Kd_yaw * d_error_x;
     output_x = fmaxf(-1.0f, fminf(1.0f, output_x));  // [-1, +1] にクランプ
-    servo_ctrl_.roll.prev_error = error_x;  // 次回のD項計算用に保存
+    servo_ctrl_.yaw.prev_error = error_x;  // 次回のD項計算用に保存
 
     // --- PD制御 — ピッチ軸 ---
     float d_error_y = disable_dterm ? 0.0f : (error_y - servo_ctrl_.pitch.prev_error);
@@ -618,7 +646,7 @@ void IMU9::runServoControl() {
     // 中立(90°) を基準に加減算
     // servo1_dir/servo2_dir はサーボの取り付け方向に合わせた符号
     constexpr float max_deflection = 20.0f;  // PD出力±1.0時の舵角 [deg]
-    constexpr int servo1_dir = -1;  // サーボ1の回転方向（ロール軸）
+    constexpr int servo1_dir = -1;  // サーボ1の回転方向（ヨー軸）
     constexpr int servo2_dir = +1;  // サーボ2の回転方向（ピッチ軸）
     servo1_target = 90.0f + servo1_dir * max_deflection * output_x;
     servo2_target = 90.0f + servo2_dir * max_deflection * output_y;
@@ -651,8 +679,8 @@ void IMU9::runServoControl() {
         q_err_z = -q_err_z;
       }
       // prev_error を更新（D項スパイク防止のため）
-      servo_ctrl_.roll.prev_error  = 2.0f * q_err_x;
-      servo_ctrl_.pitch.prev_error = 2.0f * q_err_y;
+      servo_ctrl_.yaw.prev_error   = 2.0f * q_err_z;  // ヨー誤差（フィン1用）
+      servo_ctrl_.pitch.prev_error = 2.0f * q_err_y;  // ピッチ誤差（フィン2用）
       // テレメトリ用に誤差角度を保存（制御無効中も表示するため）
       latest_data_.pitch_error_deg = 2.0f * q_err_y * (180.0f / M_PI);
       latest_data_.yaw_error_deg   = 2.0f * q_err_z * (180.0f / M_PI);
