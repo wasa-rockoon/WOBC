@@ -44,10 +44,10 @@ core::SerialBus serial_bus(Serial);
 
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
-component::GPS gps(GPS_RX_PIN, GPS_TX_PIN, 9600, unit_id, 10);
-component::IMU9 imu(Wire, unit_id, 100);
+component::GPS gps(GPS_RX_PIN, GPS_TX_PIN, 9600, unit_id, 1);
+component::IMU9 imu(Wire, unit_id, 100, 15.0f);  // 発射検知閾値 35 m/s^2 (~3.6G)
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
-component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 10);
+component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
 
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
