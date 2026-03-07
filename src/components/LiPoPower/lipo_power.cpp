@@ -90,6 +90,7 @@ void LiPoPower::SampleTimer::callback() {
   packet1.append("Pd").setInt(x3_mW);
 
   packet1.append("Ts").setInt(millis());
+  packet1.append("Im").setNull();
   
   sendPacket(packet1);
 
