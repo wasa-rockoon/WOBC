@@ -181,6 +181,20 @@ void IMU9::QuaternionUpdateTimer::callback() {
 
   // 相補フィルターで姿勢クォータニオンを更新
   IMU9_.updateQuaternion();
+
+  // --- SD保存のみの加速度・角速度パケット (50Hz) ---
+  uint32_t ts = IMU9_.latest_data_.timestamp_ms;
+  wcpp::Packet raw = IMU9_.newPacket(40);
+  raw.telemetry(IMU9::raw_telemetry_id, IMU9::component_id, IMU9_.unit_id_, 0xFF, ts);
+  raw.append("Ts").setInt(ts);
+  raw.append("Ax").setFloat16(Ax);
+  raw.append("Ay").setFloat16(Ay);
+  raw.append("Az").setFloat16(Az);
+  raw.append("Gx").setFloat16(Gx);
+  raw.append("Gy").setFloat16(Gy);
+  raw.append("Gz").setFloat16(Gz);
+  raw.append("Im").setNull();  // SD保存のみ、LoRa送信しない
+  IMU9_.sendPacket(raw);
 }
 
 // ServoControlTimer コールバック (20Hz)

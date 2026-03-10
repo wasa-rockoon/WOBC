@@ -44,7 +44,7 @@ void GPS::SampleTimer::callback(){
             gps_.time.centisecond());
     
     // 文字列としてパケットに追加
-    packet.append("UT").setString(timeStr);
+    //packet.append("UT").setString(timeStr);
     //packet.append("Ts").setInt(millis());
     sendPacket(packet);
     }
