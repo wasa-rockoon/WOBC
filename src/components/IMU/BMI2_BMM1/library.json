@@ -1,0 +1,23 @@
+{
+  "name": "BMI2_BMM1",
+  "version": "1.0.0",
+  "description": "BMI270 + BMM150 sensor library",
+  "keywords": "sensor, imu, bmi270, bmm150",
+  "authors": {
+    "name": "Author"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "frameworks": "arduino",
+  "platforms": "*",
+  "build": {
+    "flags": "-I utilities",
+    "srcFilter": [
+      "+<*.cpp>",
+      "+<*.c>",
+      "+<utilities/*.c>"
+    ]
+  }
+}

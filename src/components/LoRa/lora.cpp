@@ -59,11 +59,11 @@ void LoRa::setup() {
 
   delay(100);
 
-  /*if (ok) {
+  if (ok) {
     LOG("LoRa setup complete.");
   } else {
     LOG("LoRa setup error.");
-  }*/
+  }
 }
 
 void LoRa::loop() {
