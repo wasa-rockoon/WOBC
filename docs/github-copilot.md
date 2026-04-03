@@ -1,6 +1,6 @@
 # Github Copilotを学生無料で導入するためのマニュアル(適宜更新していきましょう！)
 
-最終更新日：2026/03/29
+最終更新日：2026/04/03
 
 githubのアカウントはすでにある前提で書いていこうと思います．[URL](https://qiita.com/melonsode/items/3602ea6441ca82e43c5a)この記事にまとまっていることを参考にしつつ，github-copilot君と書いています．時間が経つと色々変わることもあると思うので，適宜修正してください．
 
@@ -93,13 +93,15 @@ githubのアカウントはすでにある前提で書いていこうと思い�
 
 ## 3. Copilot無料特典を有効化する
 
-学生認証が通ったら、GitHub側のCopilot設定へ進みます。
+学生認証が通ったら、次にCopilotの無料特典を有効化（引き換え）するセットアップが必要です。
 
-1. GitHubの自分のアイコンをクリックして `Settings` を開く
-2. `Copilot -> Features` から設定を確認
-3. 学生向け無料特典が表示されていれば有効化する
+1. 審査完了のメールに記載されているリンク、もしくは [GitHub Educationの学習者ダッシュボード](https://education.github.com/learner/learn) にアクセスします。
+2. 画面の案内に従って、Copilotのアクセス権（Student Developer Packの特典）を要求・セットアップする手続きを行います。
 
-![有効化後](/docs/image/github-copilot/active.png)
+![学習者ダッシュボード](/docs/image/github-copilot/github-education.jpg)
+
+3. 手続き完了後、GitHubの自分のアイコン -> `Settings` -> 左メニュー `Copilot` -> `Features` などを開き、有効になっているか確認します。
+
 
 - このページで諸々の設定変更を行うことが出来ます。
 
@@ -108,16 +110,15 @@ githubのアカウントはすでにある前提で書いていこうと思い�
 
 ## 4. VS CodeでCopilotを使えるようにする
 
-### 1. VS Codeを開く
+1. VS Codeを開く
 2. 拡張機能 `GitHub Copilot` と `GitHub Copilot Chat` をインストール
-3. 右下やコマンドパレットからGitHubアカウントでサインイン
-4. 対象リポジトリで補完が出るか確認
+3. 対象リポジトリで補完が出るか確認
 
 ## 5. 動作確認（最小チェック）
 
-- 任意のコードファイルを開く
-- コメントで「何を作りたいか」を書く
-- 補完候補（グレー文字）が出るか確認し、`Tab` で採用
+1. Githubのweb版のchatを開く．[github.com/copilot](https://github.com/copilot)
+2. `Agent`モードが使用できるか確認する．
+3. VsCodeを開いて，同様に`Agent`モードが使えるか確認．
 
 ## 6. よくあるトラブル
 
@@ -129,6 +130,7 @@ githubのアカウントはすでにある前提で書いていこうと思い�
 ### Q2. Education承認済みなのにCopilotが無料にならない
 
 - 反映に時間がかかる場合あり
+- GitHub Educationの学生者ダッシュボードから`Copilot Pro`の有効化のセットアップをまだ行っていない．
 - GitHubから一度サインアウト→再ログイン
 - `Settings` のプラン表示を再確認
 
