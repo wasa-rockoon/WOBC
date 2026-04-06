@@ -6,7 +6,11 @@
 namespace component {
 
 #ifndef WOBC_LOGGER_PACKET_QUEUE_SIZE
-#define WOBC_LOGGER_PACKET_QUEUE_SIZE 32
+#define WOBC_LOGGER_PACKET_QUEUE_SIZE 256
+#endif
+
+#ifndef WOBC_LOGGER_FLUSH_INTERVAL
+#define WOBC_LOGGER_FLUSH_INTERVAL 50
 #endif
 
 class Logger: public process::Component {

@@ -51,7 +51,9 @@ void Logger::loop() {
     else {
       packets_wrote_++;
       bytes_wrote_ += packet_log.size() + 2;
-      file_.flush();
+      if (packets_wrote_ % 50 == 0){
+        file_.flush();
+      }
     }
   }
 }
@@ -80,7 +82,13 @@ bool Logger::openFile() {
   char file_name[16];
   snprintf(file_name, sizeof(file_name), "/log_%4d.bin", file_number);
 
-  file_ = SD.open(file_name, FILE_APPEND);
+  #if defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
+    // RP2040/RP2350: "a" = append mode
+    file_ = SD.open(file_name, "a");
+  #elif defined(ARDUINO_ARCH_ESP32)
+    // ESP32: FILE_APPEND
+    file_ = SD.open(file_name, FILE_APPEND);
+  #endif
 
   if (!file_) {
     error("cOF", "failed to open file: %s", file_name);
@@ -103,12 +111,14 @@ void Logger::flushFile() {
 
 void Logger::sendLog() {
   // Log
-  wcpp::Packet log = newPacket(32);
+  wcpp::Packet log = newPacket(64);
   log.telemetry(log_telemetry_id, component_id);
   log.append("Fo").setBool(!!file_);
   log.append("Bw").setInt(bytes_wrote_);
   log.append("Pw").setInt(packets_wrote_);
-  // sendPacket(log);
+  log.append("Qz").setInt(all_packets_.available());
+  log.append("Qm").setInt(WOBC_LOGGER_PACKET_QUEUE_SIZE);
+  //sendPacket(log);
 }
 
 Logger::Clock::Clock(Logger& logger, float freq)
