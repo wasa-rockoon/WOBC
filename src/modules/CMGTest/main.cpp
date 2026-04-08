@@ -10,7 +10,7 @@
 #define I2C_freq 400000
 
 #define SPI0_SCK_PIN 18
-#define SPI0_MOSI_PIN 19
+#define SPI0_MOSI_PIN 15
 #define SPI0_MISO_PIN 16
 #define SPI0_CS_PIN 17
 
@@ -28,50 +28,81 @@ constexpr uint8_t unit_id = 0x66;
 component::Logger logger(SPI, SPI0_CS_PIN, -1);
 component::IMU9 imu(Wire, unit_id, 100);
 
+interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
+
 class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
+    kernel::Listener my_listener_;
+    kernel::Listener heartbeat_;
 
     void setup() override {
         LOG("CMG Task: Setup started"); // Serial.printlnの代わりにこれを使う
+        my_listener_.telemetry(); 
+        listen(my_listener_, 8);
+        heartbeat_.component(0x4D);
+        listen(heartbeat_,1);
     }
 
     void loop() override {
-        delay(10); // 100ms周期 (10Hz)
+        delay(100);
+        while (my_listener_) {
+            float Ax = 0.1;
+            float Ay = 0.2;
+            float Az = 0.3;
+            float Gx = 0.4;
+            float Gy = 0.5;
+            float Gz = 0.6;
+            float Mx = 0.7;
+            float My = 0.8;
+            float Mz = 0.9;
+            wcpp::Packet packet = my_listener_.pop();
+            wcpp::Packet new_packet = newPacket(64);
+            new_packet.telemetry('C', component_id(), unit_id, 0xFF, 1234);
+            new_packet.append("Ts").setInt((int)millis());
+            new_packet.append("Ax").setFloat32(Ax);
+            new_packet.append("Ay").setFloat32(Ay);
+            new_packet.append("Az").setFloat32(Az);
+            new_packet.append("Gx").setFloat32(Gx);
+            new_packet.append("Gy").setFloat32(Gy);
+            new_packet.append("Gz").setFloat32(Gz);
+            new_packet.append("Mx").setFloat32(Mx);
+            new_packet.append("My").setFloat32(My);
+            new_packet.append("Mz").setFloat32(Mz);
 
-        // 0最適化バグ回避のため微小な値を入れる
-        float qx = 0.00001, qy = 0.00001, qz = 0.00001, qw = 1.0;
+            sendPacket(new_packet);
 
-        wcpp::Packet log_packet = newPacket(64);
-        log_packet.telemetry('C', component_id());
-        
-        log_packet.append("Ts").setInt(millis());
-        log_packet.append("Qx").setFloat32(qx); 
-        log_packet.append("Qy").setFloat32(qy);
-        log_packet.append("Qz").setFloat32(qz);
-        log_packet.append("Qw").setFloat32(qw);
-        
-        sendPacket(log_packet);
-    }
+            }
+        }
 } main_;
 
 void setup() {
     Serial.begin(115200);
+    kernel::setUnitId(unit_id);
+    if (!kernel::begin(module_id, true)) return;
 
     wobc::beginSPI(SPI, SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
     wobc::beginI2C(Wire, I2C_SDA_PIN, I2C_SCL_PIN, I2C_freq);
-
-    kernel::setUnitId(unit_id);
-    if (!kernel::begin(module_id, true)) {
-        return; 
-    }
-
     serial_bus.begin(); 
+
+    delay(1000);
+
+    status_indicator.begin();
+    status_indicator.blink_on_change();
+
+    error_indicator.begin();
+    error_indicator.set(true);
+    
     logger.begin();
     //imu.begin(); 
     main_.begin();
+
+    error_indicator.set(false);
+    error_indicator.blink_on_change(100);
 }
 
 void loop() {
-    delay(1000);
+    status_indicator.update();
+    error_indicator.update();
 }
