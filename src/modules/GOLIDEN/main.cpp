@@ -1,50 +1,53 @@
-// #define NDEBUG
-
 #include <library/wobc.h>
 #include <components/LiPoPower/lipo_power.h>
 #include <components/LoRa/lora.h>
 #include <components/Pressure/pressure.h>
+#include <components/IMU/IMU.h>
 #include <components/GPS/gps.h>
 #include <components/Logger/logger.h>
 #include <SPI.h>
 
-#define SPI0_SCK_PIN 1
-#define SPI0_MOSI_PIN 4
-#define SPI0_MISO_PIN 3
-#define SPI0_CS_PIN 2
+#define SPI0_CS_PIN     13
+#define SPI0_MOSI_PIN   14
+#define SPI0_MISO_PIN   47
+#define SPI0_SCK_PIN    21
 
-#define SD_INSERTED_PIN 5
+#define GPS_RX_PIN 11
+#define GPS_TX_PIN 12
+
+#define LORA_CHANNEL 3
+#define LORA_TX_PIN 40
+#define LORA_RX_PIN 39
+#define LORA_AUX_PIN 38
+#define LORA_M0_PIN 43
+#define LORA_M1_PIN 44
+
+#define ST 6
+#define PG 7
+#define STAT1 8
+#define STAT2 18
+#define HEAT -1
+#define CHARGELED 10
+#define TEMP -1
+
+#define SD_INSERTED_PIN 48
 #define SDCARD_MOSI_PIN SPI0_MOSI_PIN
 #define SDCARD_MISO_PIN SPI0_MISO_PIN
 #define SDCARD_SS_PIN SPI0_CS_PIN
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
 
-#define ST 6
-#define PG 10
-#define STAT1 43
-#define STAT2 44
-#define HEAT 9
-#define CHARGELED 8
-#define TEMP 7
-
-#define LORA_CHANNEL 3
-#define LORA_TX_PIN 38
-#define LORA_RX_PIN 39
-#define LORA_AUX_PIN 40
-#define LORA_M0_PIN 12
-#define LORA_M1_PIN 11
-
-constexpr uint8_t module_id = 0x54;
-constexpr uint8_t unit_id = 0x61;
+constexpr uint8_t module_id = 0x4E;  // GOLIDEN module ID
+constexpr uint8_t unit_id = 0x63;
 
 HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
 
-component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
-component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
+
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
-component::Pressure pressure(Wire, unit_id);
-component::GPS gps(47, 48, 115200, unit_id);
+component::GPS gps(GPS_RX_PIN, GPS_TX_PIN, 9600, unit_id, 1);
+component::IMU9 imu(Wire, unit_id, 100, 15.0f);  // 発射検知閾値 35 m/s^2 (~3.6G)
+component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
+component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
 
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -59,7 +62,7 @@ public:
     void setup() override {
         my_listener_.telemetry(); 
         listen(my_listener_, 8);
-        heartbeat_.component(0x54);
+        heartbeat_.component(0x4D);
         listen(heartbeat_,1);
     }
 
@@ -82,8 +85,8 @@ void setup() {
     kernel::setUnitId(unit_id);
     if (!kernel::begin(module_id, true)) return;
 
-    Serial0.setPins(2, 1);
-    Wire.begin(17, 16);
+    //Serial0.setPins(4, 5);
+    Wire.begin(17, 16);  // SDA=17, SCL=16
     serial_bus.begin();
 
     SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
@@ -98,7 +101,8 @@ void setup() {
 
     power.begin();
     lora.begin();
-    pressure.begin();
+    //pressure.begin();
+    imu.begin();
     gps.begin();
     logger.begin();
     main_.begin();

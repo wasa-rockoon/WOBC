@@ -28,8 +28,12 @@ void LiPoPower::setup() {
   pinMode(st_pin_, INPUT);
   pinMode(pg_pin_, INPUT_PULLUP);
   pinMode(stat1_pin_, INPUT_PULLUP);
-  pinMode(stat2_pin_, INPUT_PULLUP);
-  pinMode(charge_led_pin_, OUTPUT);
+  if(stat2_pin_ >= 0) {
+    pinMode(stat2_pin_, INPUT_PULLUP);
+  }
+  if(charge_led_pin_ >= 0) {
+    pinMode(charge_led_pin_, OUTPUT);
+  }
 
   ina1.begin();
   ina1.setMaxCurrentShunt(1, 0.05);
@@ -61,17 +65,21 @@ void LiPoPower::SampleTimer::callback() {
   bool source = digitalRead(lipo_power_.st_pin_) ? 0 : 1;
   bool charge = 0;
 
-  if (!digitalRead(lipo_power_.pg_pin_) && !digitalRead(lipo_power_.stat1_pin_) && digitalRead(lipo_power_.stat2_pin_)) {
+  if (!digitalRead(lipo_power_.pg_pin_) && !digitalRead(lipo_power_.stat1_pin_)) {
     charge = 1;
   }
 
-  // LED の状態を更新
-  digitalWrite(lipo_power_.charge_led_pin_, charge);
+  // Charge LEDピンが有効な場合のみ制御
+  if(lipo_power_.charge_led_pin_ >= 0) {
+    digitalWrite(lipo_power_.charge_led_pin_, charge);
+  }
 
   // Powertelemetry_id パケット送信
 
   wcpp::Packet packet1 = newPacket(64);
-  packet1.telemetry(Powertelemetry_id, lipo_power_.component_id, unit_id_, 0xFF, 1234);
+  
+  //packet1.telemetry(Powertelemetry_id, lipo_power_.component_id, unit_id_, 0xFF, 1234);
+  packet1.telemetry(Powertelemetry_id, lipo_power_.component_id);
   packet1.append("Sc").setBool(source);
   packet1.append("Vp").setInt(x1_mV);
   packet1.append("Ip").setInt(x1_mA);
@@ -80,6 +88,9 @@ void LiPoPower::SampleTimer::callback() {
   packet1.append("Vd").setInt(x3_mV);
   packet1.append("Id").setInt(x3_mA);
   packet1.append("Pd").setInt(x3_mW);
+
+  packet1.append("Ts").setInt(millis());
+  packet1.append("Im").setNull();
   
   sendPacket(packet1);
 
