@@ -4,23 +4,25 @@ namespace component {
 
 Logger::Logger(SPIClass& spi, pin_t SD_cs, pin_t SD_inserted, float clock_freq)
   : process::Component("Logger", component_id),
-    clock_(*this, clock_freq),
-    spi_(spi), SD_cs_(SD_cs), SD_inserted_(SD_inserted){
+    spi_(spi), SD_cs_(SD_cs), SD_inserted_(SD_inserted),
+    clock_(*this, clock_freq){
 }
 
 void Logger::setup() {
+  start(clock_);
   listen(all_packets_, WOBC_LOGGER_PACKET_QUEUE_SIZE);
+  if (SD_inserted_ >= 0){
   pinMode(SD_inserted_, INPUT_PULLUP);
+  }
   openFile();
 }
 
 void Logger::loop() {
   while (file_ && all_packets_) {
     // パケット書き込み
-
     const wcpp::Packet packet = all_packets_.pop();
 
-    uint8_t buf[wcpp::size_max];
+    static uint8_t buf[wcpp::size_max];
     wcpp::Packet packet_log = wcpp::Packet::empty(buf, wcpp::size_max);
 
     if (packet.isLocal()) { // Add unit id
@@ -40,9 +42,9 @@ void Logger::loop() {
     packet_log.append("Ts").setInt(millis()); // Add timestamp in ms
 
     bool ok = true;
-    ok |= file_.write(packet.encode(), packet.size()) == packet.size();
-    ok |= file_.write((uint8_t)packet.checksum()) == 1;
-    ok |= file_.write((uint8_t)'\0') == 1;
+    ok &= file_.write(packet.encode(), packet.size()) == packet.size();
+    ok &= file_.write((uint8_t)packet.checksum()) == 1;
+    ok &= file_.write((uint8_t)'\0') == 1;
 
     if (!ok) {
       error("cWE", "SD log write error");
@@ -63,7 +65,7 @@ bool Logger::openFile() {
     return true;
   }
 
-  if (digitalRead(SD_inserted_)) {
+  if (SD_inserted_ >= 0 && digitalRead(SD_inserted_)) {
       error("cNI", "SD card is not inserted");
       return false;
   }
@@ -80,7 +82,7 @@ bool Logger::openFile() {
   }
 
   char file_name[16];
-  snprintf(file_name, sizeof(file_name), "/log_%4d.bin", file_number);
+  snprintf(file_name, sizeof(file_name), "/log_%04d.bin", file_number);
 
   #if defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
     // RP2040/RP2350: "a" = append mode
@@ -118,7 +120,7 @@ void Logger::sendLog() {
   log.append("Pw").setInt(packets_wrote_);
   log.append("Qz").setInt(all_packets_.available());
   log.append("Qm").setInt(WOBC_LOGGER_PACKET_QUEUE_SIZE);
-  //sendPacket(log);
+  sendPacket(log);
 }
 
 Logger::Clock::Clock(Logger& logger, float freq)
@@ -132,7 +134,7 @@ void Logger::Clock::callback() {
   }
 
   logger_.sendLog();
-  logger_.flushFile();
+  //logger_.flushFile(); //書き込み時にflushしてみる
 }
 
 }

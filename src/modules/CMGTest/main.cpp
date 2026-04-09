@@ -25,7 +25,7 @@ core::SerialBus serial_bus(Serial);
 constexpr uint8_t module_id = 0x45;
 constexpr uint8_t unit_id = 0x66;
 
-component::Logger logger(SPI, SPI0_CS_PIN, -1);
+component::Logger logger(SPI, SPI0_CS_PIN, -1, 1.0);
 component::IMU9 imu(Wire, unit_id, 100);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -33,21 +33,22 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 
 class Main : public process::Component {
 public:
-    Main() : process::Component("main", 0x00) {}
+    Main() : process::Component("Main", 0x00) {}
     kernel::Listener my_listener_;
     kernel::Listener heartbeat_;
-
+  
     void setup() override {
-        LOG("CMG Task: Setup started"); // Serial.printlnの代わりにこれを使う
+        LOG("CMG Task: Setup started"); 
         my_listener_.telemetry(); 
         listen(my_listener_, 8);
         heartbeat_.component(0x4D);
         listen(heartbeat_,1);
+        LOG("CMG Task: loop starts"); 
     }
 
     void loop() override {
-        delay(100);
-        while (my_listener_) {
+        delay(10);
+        // while (my_listener_) { //main向けのログがあれば実行
             float Ax = 0.1;
             float Ay = 0.2;
             float Az = 0.3;
@@ -58,7 +59,7 @@ public:
             float My = 0.8;
             float Mz = 0.9;
             wcpp::Packet packet = my_listener_.pop();
-            wcpp::Packet new_packet = newPacket(64);
+            wcpp::Packet new_packet = newPacket(128);
             new_packet.telemetry('C', component_id(), unit_id, 0xFF, 1234);
             new_packet.append("Ts").setInt((int)millis());
             new_packet.append("Ax").setFloat32(Ax);
@@ -73,7 +74,7 @@ public:
 
             sendPacket(new_packet);
 
-            }
+            //}
         }
 } main_;
 
