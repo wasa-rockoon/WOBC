@@ -4,6 +4,7 @@
 #include <library/wobc.h>
 #include <components/Logger/logger.h>
 #include <components/IMU/IMU.h>
+#include <components/Pressure/pressure.h>
 
 #define I2C_SCL_PIN 5
 #define I2C_SDA_PIN 4
@@ -27,6 +28,7 @@ constexpr uint8_t unit_id = 0x66;
 
 component::Logger logger(SPI, SPI0_CS_PIN, -1, 1.0);
 component::IMU9 imu(Wire, unit_id, 100);
+component::Pressure pressure(Wire, unit_id, 10);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -96,7 +98,8 @@ void setup() {
     error_indicator.set(true);
     
     logger.begin();
-    //imu.begin(); 
+    imu.begin(); 
+    pressure.begin();
     main_.begin();
 
     error_indicator.set(false);
