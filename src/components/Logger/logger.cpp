@@ -1,64 +1,107 @@
 #include "logger.h"
 
+// RP2350/2040のマルチコア機能を使うためのインクルード
+#if defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
+#include <pico/multicore.h>
+component::Logger* global_logger_ptr = nullptr;
+#endif
+
 namespace component {
 
+// 警告(-Wreorder)解消のため、.hの宣言順に合わせて初期化順を修正しました
 Logger::Logger(SPIClass& spi, pin_t SD_cs, pin_t SD_inserted, float clock_freq)
   : process::Component("Logger", component_id),
-    spi_(spi), SD_cs_(SD_cs), SD_inserted_(SD_inserted),
-    clock_(*this, clock_freq){
+    clock_(*this, clock_freq), spi_(spi), SD_inserted_(SD_inserted), SD_cs_(SD_cs) {
 }
 
 void Logger::setup() {
   start(clock_);
   listen(all_packets_, WOBC_LOGGER_PACKET_QUEUE_SIZE);
   if (SD_inserted_ >= 0){
-  pinMode(SD_inserted_, INPUT_PULLUP);
+    pinMode(SD_inserted_, INPUT_PULLUP);
   }
   openFile();
+
+  // ====== タスクの分離（コア1 or 0への割り当て） ======
+#if defined(ARDUINO_ARCH_ESP32)
+  xTaskCreatePinnedToCore(
+      sdWriteTaskWrapper, "SD_Task", 8192, this, 1, &sdTaskHandle_, 0
+  );
+#elif defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
+  global_logger_ptr = this;
+  multicore_launch_core1(sdWriteTaskWrapper);
+#endif
 }
 
+// フレームワーク側のloopは空にする（ブロックさせない）
 void Logger::loop() {
-  while (file_ && all_packets_) {
-    // パケット書き込み
-    const wcpp::Packet packet = all_packets_.pop();
+}
 
-    static uint8_t buf[wcpp::size_max];
-    wcpp::Packet packet_log = wcpp::Packet::empty(buf, wcpp::size_max);
+// ====== 裏で動き続けるSD書き込み専用タスク ======
+void Logger::sdWriteTask() {
+  while (true) {
+    if (file_ && all_packets_) {
+      const wcpp::Packet packet = all_packets_.pop();
 
-    if (packet.isLocal()) { // Add unit id
-      if (packet.isCommand()) {
-        packet_log.command(
-          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
-      }else {
-        packet_log.telemetry(
-          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
+      static uint8_t buf[wcpp::size_max];
+      wcpp::Packet packet_log = wcpp::Packet::empty(buf, wcpp::size_max);
+
+      if (packet.isLocal()) { 
+        if (packet.isCommand()) {
+          packet_log.command(packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
+        } else {
+          packet_log.telemetry(packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
+        }
+        packet_log.copyPayload(packet);
+      } else {
+        packet_log.copy(packet);
       }
-      packet_log.copyPayload(packet);
-    }
-    else {
-      packet_log.copy(packet);
-    }
 
-    packet_log.append("Ts").setInt(millis()); // Add timestamp in ms
+      packet_log.append("Ts").setInt(millis()); 
 
-    bool ok = true;
-    ok &= file_.write(packet.encode(), packet.size()) == packet.size();
-    ok &= file_.write((uint8_t)packet.checksum()) == 1;
-    ok &= file_.write((uint8_t)'\0') == 1;
+      bool ok = true;
+      ok &= file_.write(packet.encode(), packet.size()) == packet.size();
+      ok &= file_.write((uint8_t)packet.checksum()) == 1;
+      ok &= file_.write((uint8_t)'\0') == 1;
 
-    if (!ok) {
-      error("cWE", "SD log write error");
-      file_.close();
-    }
-    else {
-      packets_wrote_++;
-      bytes_wrote_ += packet_log.size() + 2;
-      if (packets_wrote_ % 50 == 0){
-        file_.flush();
+      if (!ok) {
+        error("cWE", "SD log write error");
+        file_.close();
+      } else {
+        packets_wrote_++;
+        bytes_wrote_ += packet_log.size() + 2;
+        if (packets_wrote_ % 50 == 0){
+          file_.flush();
+        }
       }
     }
+
+    // WDT回避用の待機
+#if defined(ARDUINO_ARCH_ESP32)
+    vTaskDelay(pdMS_TO_TICKS(1)); 
+#elif defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
+    delay(1); 
+#endif
   }
 }
+
+// ====== OS向けラッパー関数 ======
+#if defined(ARDUINO_ARCH_ESP32)
+void Logger::sdWriteTaskWrapper(void* parameter) {
+  Logger* logger = static_cast<Logger*>(parameter);
+  logger->sdWriteTask();
+}
+#elif defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
+void Logger::sdWriteTaskWrapper() {
+  if(global_logger_ptr) {
+    global_logger_ptr->sdWriteTask();
+  }
+}
+#endif
+
+// ==========================================
+// ここから下は元々の logger.cpp の後半部分です
+// ==========================================
 
 bool Logger::openFile() {
   if (file_) {
@@ -85,10 +128,8 @@ bool Logger::openFile() {
   snprintf(file_name, sizeof(file_name), "/log_%04d.bin", file_number);
 
   #if defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
-    // RP2040/RP2350: "a" = append mode
     file_ = SD.open(file_name, "a");
   #elif defined(ARDUINO_ARCH_ESP32)
-    // ESP32: FILE_APPEND
     file_ = SD.open(file_name, FILE_APPEND);
   #endif
 
@@ -112,7 +153,6 @@ void Logger::flushFile() {
 }
 
 void Logger::sendLog() {
-  // Log
   wcpp::Packet log = newPacket(64);
   log.telemetry(log_telemetry_id, component_id);
   log.append("Fo").setBool(!!file_);
@@ -132,9 +172,7 @@ void Logger::Clock::callback() {
   if (!logger_.file_) {
     logger_.openFile();
   }
-
   logger_.sendLog();
-  //logger_.flushFile(); //書き込み時にflushしてみる
 }
 
 }
