@@ -8,7 +8,7 @@
 
 #define I2C_SCL_PIN 5
 #define I2C_SDA_PIN 4
-#define I2C_freq 400000
+#define I2C_freq 1000000
 
 #define SPI0_SCK_PIN 18
 #define SPI0_MOSI_PIN 15
