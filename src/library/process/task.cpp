@@ -2,13 +2,19 @@
 
 namespace process {
 
-Task::Task(const char *name, unsigned stack_size, uint8_t priority)
-  : Process(name), stack_size_(stack_size), priority_(priority) {}
+Task::Task(const char *name, unsigned stack_size, uint8_t priority, BaseType_t core_id)
+  : Process(name), stack_size_(stack_size), priority_(priority), core_id_(core_id) {}
 
 bool Task::onStart() {
+#ifdef ESP32
+  return xTaskCreatePinnedToCore(
+    entryPoint, name_, stack_size_, this,
+    priority_, &task_handle_, core_id_) == pdPASS;
+#else
   return xTaskCreate(
     entryPoint, name_, stack_size_, this,
     priority_, &task_handle_) == pdPASS;
+#endif
 }
 
 void Task::entryPoint(void* instance) {

@@ -12,7 +12,7 @@ namespace process {
 class Component: public Process {
 public:
   Component(const char* name, uint8_t id, unsigned command_queue_size = 5, 
-            unsigned stack_size = 4096);
+            unsigned stack_size = 4096, BaseType_t core_id = tskNO_AFFINITY);
 
   bool begin();
   bool storeOnCommand(uint8_t packet_id);
@@ -24,6 +24,7 @@ protected:
 
   uint8_t id_; 
   uint8_t priority_;
+  BaseType_t core_id_;
   unsigned stack_size_;
 
 private:

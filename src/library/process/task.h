@@ -6,7 +6,7 @@ namespace process {
 
 class Task: public Process {
 public:
-  Task(const char* name, unsigned stack_size = 1600, uint8_t priority = 0);
+  Task(const char* name, unsigned stack_size = 1600, uint8_t priority = 0, BaseType_t core_id = tskNO_AFFINITY);
   inline void terminate() { terminated_ = true; }
 
   unsigned getMaximumStackUsage() const;
@@ -18,6 +18,7 @@ protected:
   bool     terminated_;
   unsigned stack_size_;
   uint8_t  priority_;
+  BaseType_t core_id_;
   xTaskHandle task_handle_;
 
   bool onStart() override;

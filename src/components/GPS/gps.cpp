@@ -36,19 +36,15 @@ void GPS::SampleTimer::callback(){
     packet.append("LO").setFloat32(gps_.location.lng());
     packet.append("AL").setInt((int)gps_.altitude.meters());
     
-    // 時刻情報の文字列を作成（センチ秒まで）
+    // Build UTC timestamp string with centiseconds.
     char timeStr[27];
     sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d.%02d", 
             gps_.date.year(), gps_.date.month(), gps_.date.day(),
             gps_.time.hour(), gps_.time.minute(), gps_.time.second(),
             gps_.time.centisecond());
     
-    // 文字列としてパケットに追加
-<<<<<<< HEAD
+    // Add UTC timestamp string to packet.
     packet.append("UT").setString(timeStr);
-=======
-    //packet.append("UT").setString(timeStr);
->>>>>>> feature/Rocketsrc
     //packet.append("Ts").setInt(millis());
     sendPacket(packet);
     }

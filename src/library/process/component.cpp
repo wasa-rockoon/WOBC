@@ -3,8 +3,15 @@
 namespace process {
 
 
-Component::Component(const char* name, uint8_t id, unsigned command_queue_size, unsigned stack_size)
-: Process(name), id_(id), command_queue_size_(command_queue_size), stack_size_(stack_size) {
+Component::Component(const char* name, uint8_t id, unsigned command_queue_size, unsigned stack_size, BaseType_t core_id)
+: Process(name),
+  id_(id),
+  priority_(0),
+  core_id_(core_id),
+  stack_size_(stack_size),
+  task_handle_(nullptr),
+  command_listener_(),
+  command_queue_size_(command_queue_size) {
   component_id_ = id;
   command_listener_.command().component(id);
   memset(store_command_ids, 0x00, WOBC_COMPONENT_STORE_COMMANDS_MAX);
@@ -26,9 +33,15 @@ bool Component::storeOnCommand(uint8_t packet_id) {
 }
 
 bool Component::onStart() {
+#ifdef ESP32
+  return xTaskCreatePinnedToCore(
+    entryPoint, name_, stack_size_, this,
+    priority_, &task_handle_, core_id_) == pdPASS;
+#else
   return xTaskCreate(
     entryPoint, name_, stack_size_, this,
     priority_, &task_handle_) == pdPASS;
+#endif
 }
 
 void Component::entryPoint(void* instance) {
