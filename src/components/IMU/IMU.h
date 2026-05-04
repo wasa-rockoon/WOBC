@@ -1,6 +1,9 @@
 #ifndef ARDUINO
 #define ARDUINO 100
 #endif
+
+#define IMU_BMI_BMM 0
+#define IMU_ICM_MMC 1
 #define IMU_DATA 0
 #define IMU_DATA_WITH_MADGWICK_6 1
 #define IMU_DATA_WITH_KALMAN_6 2
@@ -9,6 +12,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <Arduino_BMI270_BMM150.h>
+#include "src/MMC5603.h"
 #include <MadgwickAHRS.h>
 #include <array>
 
@@ -23,13 +27,15 @@ public:
   static const uint8_t telemetry_id = 'I';
 
   Madgwick filter;
-  IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 100, int mode = IMU_DATA);
+  IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 100, int data_mode = IMU_DATA, int sensor_mode = IMU_BMI_BMM);
 
 protected:
   TwoWire& wire_;
   BoschSensorClass* IMU_;
+  MMC5603 MMC5603_;
   uint8_t unit_id_;
-  int mode = 0;
+  int data_mode = 0;
+  int sensor_mode = 0;
   int freq_;
   std::array<float, 3> gyro_offset_ = {0.0f, 0.0f, 0.0f};
   std::array<float, 3> bias_magnetometer_ = {0.0f, 0.0f, 0.0f};
