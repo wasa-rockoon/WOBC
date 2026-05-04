@@ -46,7 +46,7 @@ IMU9::SampleTimer::SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_
 }
 
 void IMU9::SampleTimer::callback() {
-  uint32_t t0 = micros(); // ① デバッグ用タイマー　
+  //uint32_t t0 = micros(); // ① デバッグ用タイマー　
   static float Ax = 0, Ay = 0, Az = 0;
   static float Gx = 0, Gy = 0, Gz = 0;
   static float Mx = 0, My = 0, Mz = 0;
@@ -61,7 +61,7 @@ void IMU9::SampleTimer::callback() {
     My = mag_data.magY;
     Mz = mag_data.magZ;
   }
-  uint32_t t1 = micros(); // ② I2C読み取り完了
+  //uint32_t t1 = micros(); // ② I2C読み取り完了
 
   wcpp::Packet packet = newPacket(128);
   packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
@@ -75,7 +75,7 @@ void IMU9::SampleTimer::callback() {
   packet.append("My").setFloat32(My);
   packet.append("Mz").setFloat32(Mz);
 
-  uint32_t t2 = micros(); // ③ パケット生成完了
+  //uint32_t t2 = micros(); // ③ パケット生成完了
 
   if (IMU9_.data_mode == IMU_DATA_WITH_MADGWICK_6) {
     float Gx_cal = Gx - IMU9_.gyro_offset_[0];
@@ -87,20 +87,20 @@ void IMU9::SampleTimer::callback() {
     packet.append("Ya").setFloat32(IMU9_.filter.getYaw());
   }
 
-  uint32_t t3 = micros(); // ④ Madgwick計算完了
+  //uint32_t t3 = micros(); // ④ Madgwick計算完了
 
   packet.append("Ts").setInt((int)millis());
   sendPacket(packet);
 
-  uint32_t t4 = micros(); // ⑤ 全完了（送信完了）
+  //uint32_t t4 = micros(); // ⑤ 全完了（送信完了）
 
-  uint32_t total = t4 - t0;
+  //uint32_t total = t4 - t0;
   
   // もし合計が 5000us を超えたら、内訳を全部吐き出す！
-  if (total > 0) { 
+  /*if (total > 0) { 
       Serial.printf("Total:%u | I2C:%u | Pkt1:%u | Madgwick:%u | Send:%u\n", 
                     total, (t1 - t0), (t2 - t1), (t3 - t2), (t4 - t3));
-  }
+  }*/
 }
 
 std::array<float, 3> IMU9::calibrate_gyro() {

@@ -3,7 +3,9 @@
 
 bool MMC5603::init() {  //Wire.begin()はmainでやってね
   // 1. 接続確認 (Chip IDのチェック)
-  writeRegister8(MMC5603_REG_ID, 0x00); // Dummy write to set register pointer
+  Wire.beginTransmission(MMC5603_I2C_ADDR);
+  Wire.write(MMC5603_REG_ID); 
+  Wire.endTransmission(false); 
   Wire.requestFrom(MMC5603_I2C_ADDR, 1);
   if (Wire.read() != 0x10) {
     Serial.println("MMC5603 not found!");
@@ -29,23 +31,28 @@ bool MMC5603::init() {  //Wire.begin()はmainでやってね
 // --- 高速読み出し処理 ---
 struct MMC5603::MagData MMC5603::read() {
   struct MagData magData;
-  // データの先頭レジスタを指定するためのダミー書き込み
-  writeRegister8(MMC5603_REG_DATA, 0x00); 
+  // データの先頭レジスタを指定
+  Wire.beginTransmission(MMC5603_I2C_ADDR);
+  Wire.write(MMC5603_REG_DATA); 
+  Wire.endTransmission(false); 
 
   // X, Y, Z (各2バイト) ＝ 計6バイトを一括要求
-  Wire.requestFrom(MMC5603_I2C_ADDR, 6);
+  Wire.requestFrom(MMC5603_I2C_ADDR, 9);
 
-  if (Wire.available() >= 6) {
-    // MMC5603は MSB(上位ビット) -> LSB(下位ビット) の順で送られてくる
-    uint16_t x_raw = (Wire.read() << 8) | Wire.read();
-    uint16_t y_raw = (Wire.read() << 8) | Wire.read();
-    uint16_t z_raw = (Wire.read() << 8) | Wire.read();
+  if (Wire.available() >= 9) {
+    uint8_t buf[9];
+    for(int i = 0; i < 9; i++) {
+        buf[i] = Wire.read();
+    }
+    uint32_t x_raw = ((uint32_t)buf[0] << 12) | ((uint32_t)buf[1] << 4) | ((uint32_t)buf[6] >> 4);
+    uint32_t y_raw = ((uint32_t)buf[2] << 12) | ((uint32_t)buf[3] << 4) | ((uint32_t)buf[7] >> 4);
+    uint32_t z_raw = ((uint32_t)buf[4] << 12) | ((uint32_t)buf[5] << 4) | ((uint32_t)buf[8] >> 4);
 
-    // 16ビットモードの場合、生データは符号なし(0 ~ 65535)で、中心が32768。
-    // そのため、32768を引いて ±32768 の符号付き整数（中心0）に変換する
-    magData.magX = ((int32_t)x_raw - 32768) * MMC5603_LSB_RESOLUTION;
-    magData.magY = ((int32_t)y_raw - 32768) * MMC5603_LSB_RESOLUTION;
-    magData.magZ = ((int32_t)z_raw - 32768) * MMC5603_LSB_RESOLUTION;
+    // 20ビットモードの場合、生データは符号なし(0 ~ 1048575)で、中心が524288。
+    // そのため、524288を引いて ±524288 の符号付き整数（中心0）に変換する
+    magData.magX = ((int32_t)x_raw - 524288) * MMC5603_LSB_RESOLUTION;
+    magData.magY = ((int32_t)y_raw - 524288) * MMC5603_LSB_RESOLUTION;
+    magData.magZ = ((int32_t)z_raw - 524288) * MMC5603_LSB_RESOLUTION;
   }
   return magData;
 }

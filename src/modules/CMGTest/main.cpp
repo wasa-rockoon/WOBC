@@ -26,9 +26,9 @@ core::SerialBus serial_bus(Serial);
 constexpr uint8_t module_id = 0x45;
 constexpr uint8_t unit_id = 0x66;
 
-component::Logger logger(SPI, SPI0_CS_PIN, -1, 1.0);
-component::IMU9 imu(Wire, unit_id, 100);
-component::Pressure pressure(Wire, unit_id, 10);
+//component::Logger logger(SPI, SPI0_CS_PIN, -1, 1.0);
+component::IMU9 imu(Wire, unit_id, 100, IMU_DATA, IMU_ICM_MMC);
+//component::Pressure pressure(Wire, unit_id, 20);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -49,7 +49,7 @@ public:
     }
 
     void loop() override {
-        delay(10);
+        delay(100);
         // while (my_listener_) { //main向けのログがあれば実行
             float Ax = 0.1;
             float Ay = 0.2;
@@ -97,9 +97,9 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
     
-    logger.begin();
+    //logger.begin();
     imu.begin(); 
-    pressure.begin();
+    //pressure.begin();
     main_.begin();
 
     error_indicator.set(false);
