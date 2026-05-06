@@ -5,12 +5,15 @@ namespace component {
 IMU9::IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz, int data_mode, int sensor_mode)
   : process::Component("IMU", component_id),
     wire_(wire),
-    IMU_(&::IMU),  // IMU_を先に初期化
+    IMU_(&::IMU),
+    ICM42688_(wire_, 0x68),
+    MMC5603_(),
     unit_id_(unit_id),
     data_mode(data_mode),
     sensor_mode(sensor_mode),
-    sample_timer_(*this, &::IMU, unit_id, sample_freq_hz),
-    freq_(sample_freq_hz) {
+    freq_(sample_freq_hz),
+    sample_timer_(*this, &::IMU, unit_id, sample_freq_hz)
+    {
     
 }
 
@@ -19,8 +22,16 @@ void IMU9::setup() {
     if (!IMU_->begin()) {
     error("I", "Failed to initialize IMU!");
     }
-  const uint8_t BMI270_ADDR = 0x68; 
+  //const uint8_t BMI270_ADDR = 0x68; 
   } else if (sensor_mode == IMU_ICM_MMC) {
+    if (!ICM42688_.begin()) {
+      error("I", "Failed to initialize ICM42688!");
+    }
+    ICM42688_.setAccelFS(ICM42688::gpm16); // 加速度センサーのフルスケールレンジを±16gに設定
+    ICM42688_.setGyroFS(ICM42688::dps2000); // ジャイロセンサーのフルスケールレンジを±2000dpsに設定
+    ICM42688_.setFilters(true, true); // 加速度センサーとジャイロセンサーの両方にフィルタを適用
+    ICM42688_.setGyroNotchFilter(166.7f, 166.7f, 166.7f, ICM42688::nfBW162Hz); // ジャイロセンサーのノッチフィルタを設定
+    
     if (!MMC5603_.init()) {
       error("I", "Failed to initialize MMC5603!");
     }
@@ -30,12 +41,15 @@ void IMU9::setup() {
   }
   
   if (data_mode == IMU_DATA_WITH_MADGWICK_6) {
-    gyro_offset_ = calibrate_gyro();
+    if (sensor_mode == IMU_BMI_BMM) {
+      gyro_offset_ = calibrate_gyro();
+    } 
     filter.begin(freq_);
   }
   if (data_mode == IMU_DATA_WITH_KALMAN_6) {
-    gyro_offset_ = calibrate_gyro();
-    // Kalmanフィルタの初期化処理（未実装）
+    if (sensor_mode == IMU_BMI_BMM) {
+      gyro_offset_ = calibrate_gyro();
+    } 
   }
   start(sample_timer_);
 }
@@ -56,6 +70,13 @@ void IMU9::SampleTimer::callback() {
     if (IMU_->gyroscopeAvailable()) { IMU_->readGyroscope(Gx, Gy, Gz); }
     if (IMU_->magneticFieldAvailable()) { IMU_->readMagneticField(Mx, My, Mz); }
   } else if (IMU9_.sensor_mode == IMU_ICM_MMC) {
+    IMU9_.ICM42688_.getAGT();
+    Ax = IMU9_.ICM42688_.accX();
+    Ay = IMU9_.ICM42688_.accY();
+    Az = IMU9_.ICM42688_.accZ();
+    Gx = IMU9_.ICM42688_.gyrX();
+    Gy = IMU9_.ICM42688_.gyrY();
+    Gz = IMU9_.ICM42688_.gyrZ();
     struct MMC5603::MagData mag_data = IMU9_.MMC5603_.read();
     Mx = mag_data.magX;
     My = mag_data.magY;
@@ -87,6 +108,22 @@ void IMU9::SampleTimer::callback() {
     packet.append("Ya").setFloat32(IMU9_.filter.getYaw());
   }
 
+  if (IMU9_.data_mode == IMU_DATA_WITH_KALMAN_6) {
+    if (IMU9_.sensor_mode == IMU_BMI_BMM) {
+      IMU9_.Gx_cal = Gx - IMU9_.gyro_offset_[0];
+      IMU9_.Gy_cal = Gy - IMU9_.gyro_offset_[1];
+      IMU9_.Gz_cal = Gz - IMU9_.gyro_offset_[2];
+    } else if (IMU9_.sensor_mode == IMU_ICM_MMC) {
+      IMU9_.Gx_cal = Gx;
+      IMU9_.Gy_cal = Gy;
+      IMU9_.Gz_cal = Gz;
+    }
+    KalmanFilter::angle angles = IMU9_.kalman_filter.update(IMU9_.Gx_cal, IMU9_.Gy_cal, IMU9_.Gz_cal, Ax, Ay, Az);
+    packet.append("Ro").setFloat32(angles.roll * 180.0f / PI);
+    packet.append("Pi").setFloat32(angles.pitch * 180.0f / PI);
+    packet.append("Ya").setFloat32(angles.yaw * 180.0f / PI);
+  }
+
   //uint32_t t3 = micros(); // ④ Madgwick計算完了
 
   packet.append("Ts").setInt((int)millis());
@@ -96,14 +133,13 @@ void IMU9::SampleTimer::callback() {
 
   //uint32_t total = t4 - t0;
   
-  // もし合計が 5000us を超えたら、内訳を全部吐き出す！
   /*if (total > 0) { 
       Serial.printf("Total:%u | I2C:%u | Pkt1:%u | Madgwick:%u | Send:%u\n", 
                     total, (t1 - t0), (t2 - t1), (t3 - t2), (t4 - t3));
   }*/
 }
 
-std::array<float, 3> IMU9::calibrate_gyro() {
+std::array<float, 3> IMU9::calibrate_gyro() {//ICM42688ではライブラリ内にキャリブレーション関数があるのでこれは使わなくてよい
     const int num_samples = 200;
     std::array<float, 3> gyro_sum = {0.0f, 0.0f, 0.0f};
 
