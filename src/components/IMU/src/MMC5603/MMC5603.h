@@ -1,8 +1,9 @@
+#pragma once
 #include <Arduino.h>
 #include <Wire.h>
 
 #define MMC5603_I2C_ADDR 0x30
-#define MMC5603_REG_DATA  0x00 // Xout0 (ここから6バイト読む)
+#define MMC5603_REG_DATA  0x00 // Xout0 (ここから9バイト読む)
 #define MMC5603_REG_ODR   0x1A // Output data rate
 #define MMC5603_REG_CTRL0 0x1B // Control register 0
 #define MMC5603_REG_CTRL1 0x1C // Control register 1
