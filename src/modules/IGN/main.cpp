@@ -2,11 +2,13 @@
 
 #include <library/wobc.h>
 #include <components/LiPoPower/lipo_power.h>
-#include <components/LoRa/lora.h>
+#include <components/Telemeter/telemeter.h>
+//#include <components/LoRa/lora.h>
 #include <components/Pressure/pressure.h>
-#include <components/GPS/gps.h>
+//#include <components/GPS/gps.h>
 #include <components/Logger/logger.h>
 #include <SPI.h>
+#include <Wire.h>
 /*
 #define SPI0_SCK_PIN 1
 #define SPI0_MOSI_PIN 4
@@ -41,7 +43,7 @@
 constexpr uint8_t module_id = 0x17; //IGN module id
 constexpr uint8_t unit_id = 0x23;
 
-HardwareSerial lora_serial(1);
+//HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
 
 //component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
@@ -49,10 +51,11 @@ core::SerialBus serial_bus(Serial);
 //component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
 //component::GPS gps(47, 48, 115200, unit_id);
+component::Telemeter telemeter;
 
 
-interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
-interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
+interface::WatchIndicator<unsigned> status_indicator(25, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(24, kernel::errorCount());
 
 class Main : public process::Component {
 public:
@@ -66,8 +69,11 @@ public:
         heartbeat_.component(0x54);
         listen(heartbeat_,1);
     }
-    /*
+    
     void loop() override {
+        delay(1000);
+        LOG("IGN working");
+        /*
         while (my_listener_) {
             wcpp::Packet packet = my_listener_.pop();
                 wcpp::Packet lorapacket = newPacket(64);
@@ -77,9 +83,9 @@ public:
                     lorapacket.append("Pa").setPacket(packet);
                     sendPacket(lorapacket);
                 }
-            }
+            }*/
         }
-        */
+        
     }main_;
     
 
@@ -89,18 +95,26 @@ void setup() {
     if (!kernel::begin(module_id, true)) return;
 
     //Serial0.setPins(2, 1);
-    Wire.begin(17, 16);
+#if defined(ARDUINO_ARCH_RP2040)
+    Wire.setSDA(16);
+    Wire.setSCL(17);
+    Wire.begin();
+#else
+    Wire.setPins(16, 17);
+    Wire.begin();
+#endif
+    status_indicator.begin();
+    status_indicator.blink_on_change();
+    error_indicator.begin();
+    error_indicator.set(true);
+
+    delay(1000);
+
     serial_bus.begin();
 
     //SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
     delay(1000); 
-
-    status_indicator.begin();
-    status_indicator.blink_on_change();
-
-    error_indicator.begin();
-    error_indicator.set(true);
 
     //power.begin();
     //lora.begin();
