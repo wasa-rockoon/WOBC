@@ -4,6 +4,7 @@
 #include <components/Telemeter/telemeter.h>
 #include <components/Logger/logger.h>
 #include <components/LiPoPower/lipo_power_simple.h>
+#include <components/GPS/gps.h>
 #include <SPI.h>
 
 #define SPI0_SCK_PIN 12
@@ -29,6 +30,7 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 // Components
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::LiPoPowerSimple power(Wire, unit_id, 1);
+component::GPS gps(2, 1, 9600, unit_id);
 component::Telemeter telemeter;
 
 class Main: public process::Component {
@@ -75,7 +77,7 @@ public:
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  Serial0.setPins(2, 1);
+  //Serial0.setPins(2, 1);
 
   kernel::setUnitId(unit_id); // unit id を設定（mainモジュールのみ）
   if (!kernel::begin(module_id, true)) return; // check module id
@@ -96,6 +98,7 @@ void setup() {
   logger.begin();
   power.begin();
   telemeter.begin();
+  gps.begin();
   main_.begin();
 
   error_indicator.set(false);
