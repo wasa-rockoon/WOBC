@@ -21,10 +21,21 @@
 #define ARDUINO 100
 #endif
 
+#define IMU_BMI_BMM 0
+#define IMU_ICM_MMC 1
+#define IMU_DATA 0
+#define IMU_DATA_WITH_MADGWICK_6 1
+#define IMU_DATA_WITH_KALMAN_6 2
+
 #include <library/wobc.h>
 #include <Arduino.h>
 #include <Wire.h>
-#include "BMI2_BMM1/BMI2_BMM1.h"  // BMI270(加速度+ジャイロ) + BMM150(地磁気) ドライバ
+#include <Arduino_BMI270_BMM150.h>
+#include "src/MMC5603/MMC5603.h"
+#include "src/ICM42688/ICM42688.h"
+#include <MadgwickAHRS.h>
+#include "src/Kalmanfilter/Kalmanfilter.h"
+#include <array>
 
 // BMI2_BMM1_Class のグローバルインスタンス（platformio のライブラリ側で定義）
 extern BMI2_BMM1_Class IMU;
@@ -115,130 +126,36 @@ struct PIDController {
 // ==========================================================================
 class IMU9: public process::Component {
 public:
-  static const uint8_t component_id = 0x30;   // WOBC コンポーネントID
-  static const uint8_t telemetry_id = 'I';    // テレメトリパケットの識別子 'I' = IMU
-  static const uint8_t raw_telemetry_id = 'R'; // 生データ(加速度・角速度)SD保存専用 50Hz
+  static const uint8_t component_id = 0x30;
+  static const uint8_t telemetry_id = 'I';
 
-  // コンストラクタ
-  // wire              : I2C バス（SDA=17, SCL=16）
-  // unit_id           : ユニットID（パケットの宛先識別）
-  // sample_freq_hz    : センサーサンプリング周波数（未使用、互換性のため残存）
-  // launch_acc_threshold : 発射検知加速度閾値 [m/s²]
-  IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 200, float launch_acc_threshold = LAUNCH_DETECT_ACC_DEFAULT);
+  Madgwick filter;
+  KalmanFilter kalman_filter;
+  IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 100, int data_mode = IMU_DATA, int sensor_mode = IMU_BMI_BMM);
 
 protected:
-  TwoWire& wire_;             // I2C バス参照
-  BMI2_BMM1_Class* IMU_;      // BMI270+BMM150 センサードライバへのポインタ
-  uint8_t unit_id_;            // WOBC ユニットID
+  TwoWire& wire_;
+  BoschSensorClass* IMU_;
+  ICM42688 ICM42688_;
+  MMC5603 MMC5603_;
+  uint8_t unit_id_;
+  int data_mode = 0;
+  int sensor_mode = 0;
+  int freq_;
+  std::array<float, 3> gyro_offset_ = {0.0f, 0.0f, 0.0f};
+  std::array<float, 3> bias_magnetometer_ = {0.0f, 0.0f, 0.0f};
+  float Gx_cal = 0, 
+        Gy_cal = 0, 
+        Gz_cal = 0;
 
-  // --- 最新センサーデータ＆テレメトリ用スナップショット ---
-  // QuaternionUpdateTimer(50Hz) が更新し、IMUDataTimer(10Hz)/ServoControlTimer(20Hz) が読む。
-  struct {
-    float Ax, Ay, Az;                // 加速度 [m/s²]（BMI270出力）
-    float Gx, Gy, Gz;                // 角速度 [deg/s]（BMI270出力）
-    float Mx, My, Mz;                // 地磁気 [μT]（BMM150出力、現在未使用）
-    float qx, qy, qz, qw;           // 推定姿勢クォータニオン（テレメトリ送信用コピー）
-    uint32_t timestamp_ms;            // データ取得時刻 [ms]
-    float servo1_deg, servo2_deg;     // サーボ出力角度 [deg]（83°～97°、中立=90°）
-    float pitch_error_deg;            // ピッチ誤差角度 [deg]（テレメトリ Ep）
-    float yaw_error_deg;              // ヨー誤差角度 [deg]（テレメトリ Ey）
-  } latest_data_;
-
-  // --- 姿勢推定用クォータニオン状態 ---
-  // 相補フィルターの内部状態。q0=w, q1=x, q2=y, q3=z。
-  // 初期値 (1,0,0,0) = 回転なし。最初の加速度読み取りで初期姿勢を設定する。
-  struct {
-    float q0 = 1.0f;              // クォータニオン w 成分
-    float q1 = 0.0f;              // クォータニオン x 成分
-    float q2 = 0.0f;              // クォータニオン y 成分
-    float q3 = 0.0f;              // クォータニオン z 成分
-    bool initialized = false;      // 初回の加速度による姿勢初期化が完了したか
-    uint32_t last_update_ms = 0;   // 前回更新時刻 [ms]（dt計算用）
-    float accel_trust = 1.0f;      // 加速度の信頼度 [0.15～1.0]（相補フィルターの融合比率に使用）
-  } attitude_;
-
-  // --- サーボ PD制御の内部状態 ---
-  struct {
-    PIDController yaw{0.0f};       // ヨー軸 PD制御器（prev_error 保持、フィン1 = servo1）
-    PIDController pitch{0.0f};     // ピッチ軸 PD制御器（prev_error 保持）
-    float servo1_cmd = 90.0f;      // サーボ1 コマンド値 [deg]（スルーレート制限後）
-    float servo2_cmd = 90.0f;      // サーボ2 コマンド値 [deg]（スルーレート制限後）
-    uint32_t last_control_ms = 0;  // 前回制御時刻 [ms]（D項のdt計算用）
-  } servo_ctrl_;
-
-  // --- 発射検知・制御状態フラグ ---
-  bool launch_detected_ = false;               // 発射を検知したか
-  uint32_t launch_detection_time_ = 0;          // 発射検知時刻 [ms]
-  bool control_aborted_ = false;                // 姿勢誤差超過で制御終了したか
-  uint32_t attitude_error_exceed_count_ = 0;    // 姿勢誤差が連続で閾値を超えた回数
-
-  // --- デバッグ用 ---
-  struct {
-    uint32_t last_print_ms = 0;
-  } debug_;
-
-  // setup() : IMUセンサー初期化→サーボPWM初期化→3つのタイマー開始
   void setup() override;
 
-  // ====================================================================
-  //  IMUDataTimer — テレメトリパケット生成・送信（10Hz）
-  //
-  //  最新の姿勢クォータニオン・サーボ角度・誤差角度・制御状態を
-  //  wcpp::Packet に詰めて送信する。LoRa への送信は10回に1回（≒1Hz）。
-  //
-  //  パケットフィールド:
-  //    Ts : タイムスタンプ [ms]
-  //    qx, qy, qz, qw : 推定姿勢クォータニオン (Float16)
-  //    S1, S2 : サーボ1/2 出力角度 [deg] (Int)
-  //    Ep : ピッチ誤差角度 [deg] (Float16)
-  //    Ey : ヨー誤差角度 [deg] (Float16)
-  //    Ct : 制御状態 (Int) — 0:待機, 1:発射検知(遅延中), 2:制御中, 3:アボート済
-  //    Im : LoRa送信抑制フラグ（nullならSD保存のみ）
-  // ====================================================================
-  class IMUDataTimer: public process::Timer{
-  public:
-    IMUDataTimer(IMU9& IMU9_ref, BMI2_BMM1_Class* IMU_ref, uint8_t unit_id_ref, unsigned interval_ms);
-  
-  protected:
-    void callback() override;
-  
-  private:
-    IMU9& IMU9_;
-    BMI2_BMM1_Class* IMU_;
-    uint8_t unit_id_;
-    uint8_t lora_counter_ = 0;  // LoRa間引きカウンタ（10回に1回送信）
-  } imu_data_timer_;
+  std::array<float, 3> calibrate_gyro();
+  std::array<float, 3> calibrate_magnetometer();
 
-  // ====================================================================
-  //  QuaternionUpdateTimer — センサー読み取り＋姿勢積分（50Hz）
-  //
-  //  BMI270から加速度・ジャイロを読み取り、相補フィルターで
-  //  クォータニオン姿勢を更新する。
-  //  ・ジャイロ: 高速応答（短期的に正確、長期的にドリフト）
-  //  ・加速度 : 重力方向基準（長期的に正確、振動・加速に弱い）
-  //  → Mahony式フィルターで両者を融合し互いの弱点を補う（ジンバルロックなし）。
-  // ====================================================================
-  class QuaternionUpdateTimer: public process::Timer{
+  class SampleTimer: public process::Timer{
   public:
-    QuaternionUpdateTimer(IMU9& IMU9_ref);
-  
-  protected:
-    void callback() override;
-  
-  private:
-    IMU9& IMU9_;
-  } quaternion_update_timer_;
-
-  // ====================================================================
-  //  ServoControlTimer — PD サーボ姿勢制御（20Hz）
-  //
-  //  現在姿勢と目標姿勢の誤差クォータニオンを計算し、
-  //  PD制御でサーボ角度を算出する。
-  //  発射検知→遅延→制御開始→誤差超過でアボート の状態遷移を管理。
-  // ====================================================================
-  class ServoControlTimer: public process::Timer{
-  public:
-    ServoControlTimer(IMU9& IMU9_ref, uint8_t unit_id_ref);
+    SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_t unit_id_ref, unsigned sample_freq_hz);
   
   protected:
     void callback() override;
