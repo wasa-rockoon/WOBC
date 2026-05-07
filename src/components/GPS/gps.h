@@ -18,7 +18,7 @@ public:
     int txPin_;
     uint32_t gpsBaud_;
     TinyGPSPlus gps_;
-    HardwareSerial ss_;
+    HardwareSerial* ss_;
     uint8_t unit_id_;
 
     class SampleTimer: public process::Timer {

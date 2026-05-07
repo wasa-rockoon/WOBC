@@ -7,14 +7,25 @@ GPS::GPS(int rxPin, int txPin, uint32_t gpsBaud, uint8_t unit_id , unsigned samp
     rxPin_(rxPin), 
     txPin_(txPin), 
     gpsBaud_(gpsBaud),
-    ss_(2),
+    ss_(&Serial1), // GPSモジュールはSerial1を使用
     unit_id_(unit_id),
-    sample_timer_(ss_ ,*this, gps_, unit_id, 1000 / sample_freq_hz)
+    sample_timer_(*ss_ ,*this, gps_, unit_id, 1000 / sample_freq_hz)
     {    
 }
 
 void GPS::setup(){
-    ss_.begin(gpsBaud_, SERIAL_8N1, rxPin_, txPin_);
+    //ss_.begin(gpsBaud_, SERIAL_8N1, rxPin_, txPin_);
+    // アーキテクチャに合わせて、ポインタ(ss_)経由でピンとBaudRateを設定
+    #if defined(ESP32)
+        ss_->begin(gpsBaud_, SERIAL_8N1, rxPin_, txPin_);
+    #elif defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
+        Serial1.setRX(rxPin_);
+        Serial1.setTX(txPin_);
+        Serial1.begin(gpsBaud_);
+    #else
+    // その他の一般的なマイコン用
+        ss_->begin(gpsBaud_);
+    #endif
     start(sample_timer_);
 }
 
