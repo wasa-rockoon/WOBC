@@ -3,7 +3,7 @@
 #include <library/wobc.h>
 #include <components/Telemeter/telemeter.h>
 #include <components/Logger/logger.h>
-//#include <components/LiPoPower/lipo_power_simple.h>
+#include <components/LiPoPower/lipo_power_simple.h>
 #include <SPI.h>
 
 #define SPI0_SCK_PIN 12
@@ -28,7 +28,7 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 
 // Components
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
-//component::LiPoPowerSimple power(Wire);
+component::LiPoPowerSimple power(Wire, unit_id, 1);
 component::Telemeter telemeter;
 
 class Main: public process::Component {
@@ -80,7 +80,7 @@ void setup() {
   kernel::setUnitId(unit_id); // unit id を設定（mainモジュールのみ）
   if (!kernel::begin(module_id, true)) return; // check module id
 
-  //Wire.setPins();
+  Wire.begin(17, 16);
   SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
   status_indicator.begin();
@@ -94,7 +94,7 @@ void setup() {
   serial_bus.begin();
 
   logger.begin();
-  //power.begin();
+  power.begin();
   telemeter.begin();
   main_.begin();
 

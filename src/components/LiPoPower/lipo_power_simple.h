@@ -1,5 +1,6 @@
 #include <library/wobc.h>
 #include <Wire.h>
+#include "INA226.h"
 
 namespace component {
 
@@ -8,19 +9,27 @@ public:
   static const uint8_t component_id = 0x22; // TBD
   static const uint8_t telemetry_id = 'P'; // TBD
 
-  LiPoPowerSimple(TwoWire& wire, unsigned sample_freq_hz = 10/*TODO*/);
+  LiPoPowerSimple(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 10/*TODO*/);
 
 protected:
   TwoWire& wire_;
+  INA226 ina;
+
+  uint8_t unit_id_;
 
   void setup() override;
 
   class SampleTimer: public process::Timer {
   public:
-    using process::Timer::Timer;
-
+    SampleTimer(LiPoPowerSimple& lipo_power_simple_ref, INA226& ina_ref, uint8_t unit_id_ref, unsigned interval_ms);
+  
   protected:
     void callback() override;
+
+  private:
+    INA226& ina_; // INA226 の参照を保持
+    LiPoPowerSimple& lipo_power_simple_; // LiPoPowerSimple の参照を保持
+    uint8_t unit_id_;
   } sample_timer_;
 };
 
