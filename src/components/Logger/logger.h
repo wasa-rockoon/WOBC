@@ -44,8 +44,6 @@ protected:
   bool openFile();
   void sendLog();
   void flushFile();
-
-  // ====== ▼▼ 追加部分 ▼▼ ======
   void sdWriteTask(); // 実際に裏で回し続ける処理
 
 #if defined(ARDUINO_ARCH_ESP32)
@@ -54,7 +52,6 @@ protected:
 #elif defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
   static void sdWriteTaskWrapper();
 #endif
-  // ====== ▲▲ 追加部分 ▲▲ ======
 
   friend Clock;
 };

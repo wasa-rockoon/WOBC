@@ -12,7 +12,7 @@ Pressure::Pressure(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz)
 void Pressure::setup() {
   start(sample_timer_);
   storeOnCommand('Q'); // 高度規正値の設定コマンド
-  Wire.begin();
+  //Wire.begin();　 Wireはmain.cppのsetupで初期化されている前提
   while(!bme.begin()){
     LOG("Could not find BME280");
     delay(1000);

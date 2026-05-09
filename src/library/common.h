@@ -21,7 +21,7 @@ constexpr uint8_t unit_id_local = 0x00;
 
 namespace wobc {
 
-  // 環境の違いを吸収する共通のSPI初期化関数 (テンプレート版)
+  //SPI初期化用ラッパ関数
   template <typename TSPI>
   inline void beginSPI(TSPI& spi, int sck, int miso, int mosi, int ss) {
 #if defined(ARDUINO_ARCH_RP2350) || defined(ARDUINO_ARCH_RP2040)
@@ -35,7 +35,7 @@ namespace wobc {
 #endif
   }
 
-  // 環境の違いを吸収する共通のI2C初期化関数 (テンプレート版)
+  //I2C初期化用ラッパ関数
   template <typename TWire>
   inline void beginI2C(TWire& wire, int sda, int scl, uint32_t freq = 400000) {
 #if defined(ARDUINO_ARCH_RP2350) || defined(ARDUINO_ARCH_RP2040)

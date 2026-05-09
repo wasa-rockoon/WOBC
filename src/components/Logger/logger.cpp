@@ -8,7 +8,6 @@ component::Logger* global_logger_ptr = nullptr;
 
 namespace component {
 
-// 警告(-Wreorder)解消のため、.hの宣言順に合わせて初期化順を修正しました
 Logger::Logger(SPIClass& spi, pin_t SD_cs, pin_t SD_inserted, float clock_freq)
   : process::Component("Logger", component_id),
     clock_(*this, clock_freq), spi_(spi), SD_inserted_(SD_inserted), SD_cs_(SD_cs) {
@@ -85,7 +84,7 @@ void Logger::sdWriteTask() {
   }
 }
 
-// ====== OS向けラッパー関数 ======
+// ====== OS向けラッパ関数 ======
 #if defined(ARDUINO_ARCH_ESP32)
 void Logger::sdWriteTaskWrapper(void* parameter) {
   Logger* logger = static_cast<Logger*>(parameter);
@@ -98,10 +97,6 @@ void Logger::sdWriteTaskWrapper() {
   }
 }
 #endif
-
-// ==========================================
-// ここから下は元々の logger.cpp の後半部分です
-// ==========================================
 
 bool Logger::openFile() {
   if (file_) {
