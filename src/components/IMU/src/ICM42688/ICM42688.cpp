@@ -29,7 +29,6 @@ ICM42688::ICM42688(SPIClass& bus, uint8_t csPin, uint32_t spi_hs_clock) {
 
 /* starts communication with the ICM42688 */
 int ICM42688::begin() {
-
 	// reset the ICM42688
 	reset();
 
@@ -680,7 +679,7 @@ void ICM42688::reset() {
 	writeRegister(UB0_REG_DEVICE_CONFIG, 0x01);
 
 	// wait for ICM42688 to come back up
-	delay(1);
+	delay(10);
 }
 
 /* gets the ICM42688 WHO_AM_I register value */

@@ -6,7 +6,7 @@ IMU9::IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz, int data_mod
   : process::Component("IMU", component_id),
     wire_(wire),
     IMU_(&::IMU),
-    ICM42688_(wire_, 0x68),
+    ICM42688_(wire_, 0x69),
     MMC5603_(),
     unit_id_(unit_id),
     data_mode(data_mode),
@@ -29,7 +29,7 @@ void IMU9::setup() {
     }
     ICM42688_.setAccelFS(ICM42688::gpm16); // 加速度センサーのフルスケールレンジを±16gに設定
     ICM42688_.setGyroFS(ICM42688::dps2000); // ジャイロセンサーのフルスケールレンジを±2000dpsに設定
-    ICM42688_.setFilters(true, true); // 加速度センサーとジャイロセンサーの両方にフィルタを適用
+    ICM42688_.setFilters(true, false); // ジャイロセンサーのみにフィルタを適用
     ICM42688_.setGyroNotchFilter(166.7f, 166.7f, 166.7f, ICM42688::nfBW162Hz); // ジャイロセンサーのノッチフィルタを設定
     
     if (!MMC5603_.init()) {
@@ -60,7 +60,7 @@ IMU9::SampleTimer::SampleTimer(IMU9& IMU9_ref, BoschSensorClass* IMU_ref, uint8_
 }
 
 void IMU9::SampleTimer::callback() {
-  //uint32_t t0 = micros(); // ① デバッグ用タイマー　
+  uint32_t t0 = micros(); // ① デバッグ用タイマー　
   static float Ax = 0, Ay = 0, Az = 0;
   static float Gx = 0, Gy = 0, Gz = 0;
   static float Mx = 0, My = 0, Mz = 0;
@@ -82,7 +82,7 @@ void IMU9::SampleTimer::callback() {
     My = mag_data.magY;
     Mz = mag_data.magZ;
   }
-  //uint32_t t1 = micros(); // ② I2C読み取り完了
+  uint32_t t1 = micros(); // ② I2C読み取り完了
 
   wcpp::Packet packet = newPacket(128);
   packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
@@ -96,7 +96,7 @@ void IMU9::SampleTimer::callback() {
   packet.append("My").setFloat32(My);
   packet.append("Mz").setFloat32(Mz);
 
-  //uint32_t t2 = micros(); // ③ パケット生成完了
+  uint32_t t2 = micros(); // ③ パケット生成完了
 
   if (IMU9_.data_mode == IMU_DATA_WITH_MADGWICK_6) {
     float Gx_cal = Gx - IMU9_.gyro_offset_[0];
@@ -124,19 +124,19 @@ void IMU9::SampleTimer::callback() {
     packet.append("Ya").setFloat32(angles.yaw * 180.0f / PI);
   }
 
-  //uint32_t t3 = micros(); // ④ Madgwick計算完了
+  uint32_t t3 = micros(); // ④ Madgwick計算完了
 
   packet.append("Ts").setInt((int)millis());
   sendPacket(packet);
 
-  //uint32_t t4 = micros(); // ⑤ 全完了（送信完了）
+  uint32_t t4 = micros(); // ⑤ 全完了（送信完了）
 
   //uint32_t total = t4 - t0;
-  
-  /*if (total > 0) { 
+  uint32_t total = t4 - t0;
+  if (total > 0) { 
       Serial.printf("Total:%u | I2C:%u | Pkt1:%u | Madgwick:%u | Send:%u\n", 
                     total, (t1 - t0), (t2 - t1), (t3 - t2), (t4 - t3));
-  }*/
+  }
 }
 
 std::array<float, 3> IMU9::calibrate_gyro() {//ICM42688ではライブラリ内にキャリブレーション関数があるのでこれは使わなくてよい
