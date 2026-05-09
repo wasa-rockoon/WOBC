@@ -45,6 +45,7 @@ constexpr uint8_t unit_id = 0x23;
 
 //HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
+core::CANBus can_bus(23, 22);
 
 //component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
 //component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
@@ -109,7 +110,8 @@ void setup() {
     error_indicator.set(true);
 
     delay(1000);
-
+    
+    can_bus.begin();
     serial_bus.begin();
 
     //SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
@@ -117,6 +119,7 @@ void setup() {
     delay(1000); 
 
     //power.begin();
+
     //lora.begin();
     pressure.begin();
     //gps.begin();
