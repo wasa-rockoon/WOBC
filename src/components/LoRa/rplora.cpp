@@ -40,7 +40,7 @@ void LoRa::setup() {
     digitalWrite(antenna_B_, LOW);
   }
   
-  lora_serial_.begin(9800);
+  lora_serial_.begin(9600); //9800と書かれていたのを修正
   
 
   bool ok = true;

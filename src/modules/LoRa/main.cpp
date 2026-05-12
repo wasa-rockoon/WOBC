@@ -27,6 +27,7 @@ public:
   void setup() override {
   }
   void loop() override {
+    LOG("LoRa Working");
     delay(1000);
   }
 };
@@ -48,7 +49,7 @@ void setup() {
 
   delay(500);
 
-  //can_bus.begin();
+  can_bus.begin();
   serial_bus.begin();
   main_.begin();
 
