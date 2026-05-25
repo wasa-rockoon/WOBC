@@ -19,7 +19,12 @@ void Logger::setup() {
   if (SD_inserted_ >= 0){
     pinMode(SD_inserted_, INPUT_PULLUP);
   }
-  openFile();
+  while (!openFile()) {
+    error("cOR", "Retrying to open SD card...");
+    delay(100);
+  }
+
+  
 
   // ====== タスクの分離（コア1 or 0への割り当て） ======
 #if defined(ARDUINO_ARCH_ESP32)
@@ -69,7 +74,7 @@ void Logger::sdWriteTask() {
       } else {
         packets_wrote_++;
         bytes_wrote_ += packet_log.size() + 2;
-        if (packets_wrote_ % 50 == 0){
+        if (packets_wrote_ % 100 == 0){
           file_.flush();
         }
       }

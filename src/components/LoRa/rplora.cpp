@@ -38,7 +38,7 @@ void LoRa::setup() {
     pinMode(antenna_B_, OUTPUT);
   }
   
-  lora_serial_.begin(9800);
+  lora_serial_.begin(9600);
   
 
   bool ok = true;
