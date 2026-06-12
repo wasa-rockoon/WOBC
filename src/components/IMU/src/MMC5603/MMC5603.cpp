@@ -8,7 +8,7 @@ bool MMC5603::init() {  //Wire.begin()はmainでやってね
   Wire.endTransmission(false); 
   Wire.requestFrom(MMC5603_I2C_ADDR, 1);
   if (Wire.read() != 0x10) {
-    Serial.println("MMC5603 not found!");
+    //Serial.println("MMC5603 not found!");
     return false;
   }
 
@@ -24,12 +24,13 @@ bool MMC5603::init() {  //Wire.begin()はmainでやってね
   writeRegister8(MMC5603_REG_CTRL2, MMC5603_CTRL2);
   delay(10);
   
-  Serial.println("MMC5603 initialized in 100Hz Continuous Mode.");
+  //Serial.println("MMC5603 initialized in 100Hz Continuous Mode.");
   return true;
 }
 
 // --- 高速読み出し処理 ---
 struct MMC5603::MagData MMC5603::read() {
+  int init_flag = 0;
   struct MagData magData;
   // データの先頭レジスタを指定
   Wire.beginTransmission(MMC5603_I2C_ADDR);
@@ -53,6 +54,16 @@ struct MMC5603::MagData MMC5603::read() {
     magData.magX = ((int32_t)x_raw - 524288) * MMC5603_LSB_RESOLUTION;
     magData.magY = ((int32_t)y_raw - 524288) * MMC5603_LSB_RESOLUTION;
     magData.magZ = ((int32_t)z_raw - 524288) * MMC5603_LSB_RESOLUTION;
+
+    
+    /*if (magData.magX == -32768 && magData.magY == -32768 && magData.magZ == -32768) {
+      init_flag += 1;
+      if (init_flag > 5) { // 5回連続で異常値が出たら再初期化
+        init_flag = 0;
+        //Serial.println("MMC5603 read error, reinitializing...");
+        init();
+      }
+    }*/
   }
   return magData;
 }
@@ -63,7 +74,7 @@ void MMC5603::writeRegister8(uint8_t reg, uint8_t data) {
   Wire.write(data);
   int error = Wire.endTransmission();
   if (error != 0) {
-    Serial.print("I2C write error: ");
-    Serial.println(error);
+    //Serial.print("I2C write error: ");
+    //Serial.println(error);
   }
 }

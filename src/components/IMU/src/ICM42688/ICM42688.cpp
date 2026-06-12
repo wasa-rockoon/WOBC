@@ -31,6 +31,7 @@ ICM42688::ICM42688(SPIClass& bus, uint8_t csPin, uint32_t spi_hs_clock) {
 int ICM42688::begin() {
 	// reset the ICM42688
 	reset();
+	delay(10);
 
 	// check the WHO AM I byte
 	if (whoAmI() != WHO_AM_I) {
