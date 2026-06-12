@@ -26,8 +26,8 @@ core::SerialBus serial_bus(Serial);
 constexpr uint8_t module_id = 0x45;
 constexpr uint8_t unit_id = 0x66;
 
-//component::Logger logger(SPI, SPI0_CS_PIN, -1, 1.0);
-component::IMU9 imu(Wire, unit_id, 100, IMU_DATA, IMU_ICM_MMC);
+component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
+component::IMU9 imu(Wire, unit_id, 10, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
 //component::Pressure pressure(Wire, unit_id, 20);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -97,7 +97,7 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
     
-    //logger.begin();
+    logger.begin();
     imu.begin(); 
     //pressure.begin();
     main_.begin();

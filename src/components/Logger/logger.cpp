@@ -44,24 +44,11 @@ void Logger::loop() {
 // ====== 裏で動き続けるSD書き込み専用タスク ======
 void Logger::sdWriteTask() {
   while (true) {
-    if (file_ && all_packets_) {
+    bool wrote_something = false;
+    int burst_count = 0; // バースト処理の回数をカウント
+
+    while (file_ && all_packets_.available() > 0) {
       const wcpp::Packet packet = all_packets_.pop();
-
-      static uint8_t buf[wcpp::size_max];
-      wcpp::Packet packet_log = wcpp::Packet::empty(buf, wcpp::size_max);
-
-      if (packet.isLocal()) { 
-        if (packet.isCommand()) {
-          packet_log.command(packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
-        } else {
-          packet_log.telemetry(packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
-        }
-        packet_log.copyPayload(packet);
-      } else {
-        packet_log.copy(packet);
-      }
-
-      packet_log.append("Ts").setInt(millis()); 
 
       bool ok = true;
       ok &= file_.write(packet.encode(), packet.size()) == packet.size();
@@ -71,16 +58,34 @@ void Logger::sdWriteTask() {
       if (!ok) {
         error("cWE", "SD log write error");
         file_.close();
+        break; 
       } else {
         packets_wrote_++;
-        bytes_wrote_ += packet_log.size() + 2;
-        if (packets_wrote_ % 100 == 0){
-          file_.flush();
-        }
+        bytes_wrote_ += packet.size() + 2;
+        wrote_something = true;
+      }
+
+      // ★ 最強のWDT対策：50個（0.5秒分）処理するごとに、OSに一瞬だけ呼吸させる
+      burst_count++;
+      if (burst_count % 50 == 0) {
+#if defined(ARDUINO_ARCH_ESP32)
+        taskYIELD(); // FreeRTOSのコンテキストスイッチ（1msも待たず、数μsで戻る）
+#elif defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
+        yield(); 
+#endif
       }
     }
 
-    // WDT回避用の待機
+    // 暇なタイミングでFlush
+    if (file_ && wrote_something) {
+      static uint32_t last_flush_time = 0;
+      if (millis() - last_flush_time > 1000) {
+        file_.flush();
+        last_flush_time = millis();
+      }
+    }
+
+    // キューが空になったら、今まで通り1ms休んで次のデータ群を待つ
 #if defined(ARDUINO_ARCH_ESP32)
     vTaskDelay(pdMS_TO_TICKS(1)); 
 #elif defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
@@ -152,6 +157,7 @@ void Logger::flushFile() {
   if (file_) file_.flush();
 }
 
+/*
 void Logger::sendLog() {
   wcpp::Packet log = newPacket(64);
   log.telemetry(log_telemetry_id, component_id);
@@ -161,7 +167,7 @@ void Logger::sendLog() {
   log.append("Qz").setInt(all_packets_.available());
   log.append("Qm").setInt(WOBC_LOGGER_PACKET_QUEUE_SIZE);
   sendPacket(log);
-}
+}*/
 
 Logger::Clock::Clock(Logger& logger, float freq)
   : process::Timer("LoggerClock", 1000 / freq),
@@ -172,7 +178,7 @@ void Logger::Clock::callback() {
   if (!logger_.file_) {
     logger_.openFile();
   }
-  logger_.sendLog();
+  //logger_.sendLog();
 }
 
 }
