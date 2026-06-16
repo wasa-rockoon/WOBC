@@ -14,7 +14,7 @@ Logger::Logger(SPIClass& spi, pin_t SD_cs, pin_t SD_inserted, float clock_freq)
 }
 
 void Logger::setup() {
-  start(clock_);
+  std::atomic<bool> is_file_switching{false};
   listen(all_packets_, WOBC_LOGGER_PACKET_QUEUE_SIZE);
   if (SD_inserted_ >= 0){
     pinMode(SD_inserted_, INPUT_PULLUP);
@@ -23,6 +23,7 @@ void Logger::setup() {
     error("cOR", "Retrying to open SD card...");
     delay(100);
   }
+  start(clock_);
 
   
 
@@ -176,9 +177,14 @@ Logger::Clock::Clock(Logger& logger, float freq)
 
 void Logger::Clock::callback() { 
   if (!logger_.file_) {
-    logger_.openFile();
-  }
+    // 1秒に1回だけ再オープンを試みる（100Hzの連打を防ぐ）
+    static uint32_t last_retry_time = 0;
+    if (millis() - last_retry_time > 1000) {
+      logger_.openFile();
+      last_retry_time = millis();
   //logger_.sendLog();
+}
+}
 }
 
 }

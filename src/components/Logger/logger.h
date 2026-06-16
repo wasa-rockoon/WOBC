@@ -2,6 +2,7 @@
 #include <library/wobc.h>
 #include <SPI.h>
 #include <SD.h>
+#include <atomic>
 
 namespace component {
 
@@ -12,6 +13,8 @@ namespace component {
 #ifndef WOBC_LOGGER_FLUSH_INTERVAL
 #define WOBC_LOGGER_FLUSH_INTERVAL 50
 #endif
+
+extern std::atomic<bool> is_file_switching;
 
 class Logger: public process::Component {
 public:
