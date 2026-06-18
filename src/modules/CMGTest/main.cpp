@@ -27,7 +27,7 @@ constexpr uint8_t module_id = 0x45;
 constexpr uint8_t unit_id = 0x66;
 
 component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
-component::IMU9 imu(Wire, unit_id, 10, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
+component::IMU9 imu(Wire, unit_id, 100, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
 //component::Pressure pressure(Wire, unit_id, 20);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -49,6 +49,11 @@ public:
     }
 
     void loop() override {
+        static uint32_t start_time = millis();
+        if (millis() - start_time > 120000) {
+            request_file_split.store(true);
+            start_time = millis();
+        }
         delay(100);
         // while (my_listener_) { //main向けのログがあれば実行
             float Ax = 0.1;

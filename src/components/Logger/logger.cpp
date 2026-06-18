@@ -14,7 +14,6 @@ Logger::Logger(SPIClass& spi, pin_t SD_cs, pin_t SD_inserted, float clock_freq)
 }
 
 void Logger::setup() {
-  std::atomic<bool> is_file_switching{false};
   listen(all_packets_, WOBC_LOGGER_PACKET_QUEUE_SIZE);
   if (SD_inserted_ >= 0){
     pinMode(SD_inserted_, INPUT_PULLUP);
@@ -75,6 +74,26 @@ void Logger::sdWriteTask() {
         yield(); 
 #endif
       }
+    }
+
+    // ----- 2. 20分（1,200,000 ms）経過のチェックと分割 -----
+    if (file_ && request_file_split.load()) {
+      
+      // ② センサータスクが今のI2C通信を終えてZOHモードに入るのを待つ
+      delay(10); 
+
+      // ③ 今のファイルを閉じる（ここで数百ms〜数秒かかることがある）
+      file_.flush();
+      file_.close();
+
+      // ④ 新しいファイルを開く（既存のopenFile関数などを利用）
+      // ※ openFile() の中身で連番のインクリメント等が行われる想定
+      while (!openFile()) {
+        delay(10); // 開けなかったら少し待ってリトライ
+      }
+
+      // ⑤ タイマーリセット & センサータスクに「I2C再開してヨシ！」と通達
+      request_file_split.store(false);
     }
 
     // 暇なタイミングでFlush

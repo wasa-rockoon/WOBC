@@ -1,13 +1,17 @@
 #pragma once
 
-#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_RP2040)
+#if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_ARCH_RP2350)
 #include <Arduino.h>
 #include <FreeRTOS.h>
 #include <timers.h>
 #include <task.h>
+#include <atomic>
 #else 
 #error
 #endif
+
+// メインからLoggerへの分割要求フラグ
+inline std::atomic<bool> request_file_split{false};
 
 using pin_t = byte;
 

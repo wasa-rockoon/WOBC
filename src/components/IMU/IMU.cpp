@@ -65,22 +65,37 @@ void IMU9::SampleTimer::callback() {
   static float Gx = 0, Gy = 0, Gz = 0;
   static float Mx = 0, My = 0, Mz = 0;
 
-  if (IMU9_.sensor_mode == IMU_BMI_BMM) {
-    if (IMU_->accelerationAvailable()) { IMU_->readAcceleration(Ax, Ay, Az); }
-    if (IMU_->gyroscopeAvailable()) { IMU_->readGyroscope(Gx, Gy, Gz); }
-    if (IMU_->magneticFieldAvailable()) { IMU_->readMagneticField(Mx, My, Mz); }
-  } else if (IMU9_.sensor_mode == IMU_ICM_MMC) {
-    IMU9_.ICM42688_.getAGT();
-    Ax = IMU9_.ICM42688_.accX();
-    Ay = IMU9_.ICM42688_.accY();
-    Az = IMU9_.ICM42688_.accZ();
-    Gx = IMU9_.ICM42688_.gyrX();
-    Gy = IMU9_.ICM42688_.gyrY();
-    Gz = IMU9_.ICM42688_.gyrZ();
-    struct MMC5603::MagData mag_data = IMU9_.MMC5603_.read();
-    Mx = mag_data.magX;
-    My = mag_data.magY;
-    Mz = mag_data.magZ;
+  //ファイル切り替え時はI2Cを完全スキップ
+  if (request_file_split.load()) {
+    //static変数に残っている前回の正常な値（ZOH）をそのまま使う
+  } 
+  else {
+    //I2C通信を行い、成功した時だけ値を更新する
+    if (IMU9_.sensor_mode == IMU_BMI_BMM) {
+      if (IMU_->accelerationAvailable()) { IMU_->readAcceleration(Ax, Ay, Az); }
+      if (IMU_->gyroscopeAvailable()) { IMU_->readGyroscope(Gx, Gy, Gz); }
+      if (IMU_->magneticFieldAvailable()) { IMU_->readMagneticField(Mx, My, Mz); }
+    } 
+    else if (IMU9_.sensor_mode == IMU_ICM_MMC) {
+      
+      // ICM42688の読み取り：成功(>0)した時のみstatic変数を上書きする
+      if (IMU9_.ICM42688_.getAGT() > 0) {
+        Ax = IMU9_.ICM42688_.accX();
+        Ay = IMU9_.ICM42688_.accY();
+        Az = IMU9_.ICM42688_.accZ();
+        Gx = IMU9_.ICM42688_.gyrX();
+        Gy = IMU9_.ICM42688_.gyrY();
+        Gz = IMU9_.ICM42688_.gyrZ();
+      }
+
+      // MMC5603の読み取り：異常値(-32768)でなければ上書きする
+      struct MMC5603::MagData mag_data = IMU9_.MMC5603_.read();
+      if (mag_data.magX != -32768.0f) {
+        Mx = mag_data.magX;
+        My = mag_data.magY;
+        Mz = mag_data.magZ;
+      }
+    }
   }
   //uint32_t t1 = micros(); // ② I2C読み取り完了
 
