@@ -9,6 +9,7 @@
 #define MMC5603_REG_CTRL1 0x1C // Control register 1
 #define MMC5603_REG_CTRL2 0x1D // Control register 2
 #define MMC5603_REG_ID    0x39 // Product ID
+#define MMC5603_Status1 0x18 // Status register 1 (データの準備ができているかのフラグなど)
 
 #define MMC5603_ODR_100HZ 0x64 // ODR 100Hz
 #define MMC5603_CTRL0 0x80 // Continuous mode
@@ -22,10 +23,11 @@ class MMC5603 {
     void writeRegister8(uint8_t reg, uint8_t data);
   public:
     struct MagData {
-      float magX;
-      float magY;
-      float magZ;
+      float magX = 0.0f;
+      float magY = 0.0f;
+      float magZ = 0.0f;
     };
     bool init();
     struct MagData read();
+    bool isMMCdataready();
 };

@@ -282,6 +282,10 @@ int ICM42688::getAGT() {  // modified to use getRawAGT()
 /* reads the most current data from ICM42688 and stores in buffer */
 int ICM42688::getRawAGT() {  // Added to return raw data only
 	_useSPIHS = true;          // use the high speed SPI for data readout
+	// check if data is ready
+	if (isICMready() == false) {
+		return -1;
+	}
 	// grab the data from the ICM42688
 	if (readRegisters(UB0_REG_TEMP_DATA1, 14, _buffer) < 0) {
 		return -1;
@@ -1107,6 +1111,13 @@ int ICM42688::selfTest() {
 	return 1;
 }
 
+bool ICM42688::isICMready() {
+	uint8_t reg;
+	if (readRegisters(UB0_REG_INT_STATUS, 1, &reg) < 0) {
+		return false;
+	}
+	return reg & 0x08;  // check if data ready bit is set
+}
 /*//#TODO
 //High priority
 raw data reading          <-- Validated

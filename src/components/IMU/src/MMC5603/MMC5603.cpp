@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "MMC5603.h"
 
-bool MMC5603::init() {  //Wire.begin()はmainでやってね
+bool MMC5603::init() {  //Wire.begin()はmainでやること
   // 1. 接続確認 (Chip IDのチェック)
   Wire.beginTransmission(MMC5603_I2C_ADDR);
   Wire.write(MMC5603_REG_ID); 
@@ -28,16 +28,20 @@ bool MMC5603::init() {  //Wire.begin()はmainでやってね
   return true;
 }
 
-// --- 高速読み出し処理 ---
 struct MMC5603::MagData MMC5603::read() {
-  int init_flag = 0;
-  struct MagData magData;
-  // データの先頭レジスタを指定
+  //int init_flag = 0;
+  static struct MagData magData;
+
+  if (!isMMCdataready()) {
+    //Serial.println("MMC5603 data not ready");
+    return magData;
+  }
+
   Wire.beginTransmission(MMC5603_I2C_ADDR);
   Wire.write(MMC5603_REG_DATA); 
   Wire.endTransmission(false); 
 
-  // X, Y, Z (各2バイト) ＝ 計6バイトを一括要求
+  // X, Y, Z (各3バイト) ＝ 計9バイトを一括要求
   Wire.requestFrom(MMC5603_I2C_ADDR, 9);
 
   if (Wire.available() >= 9) {
@@ -77,4 +81,16 @@ void MMC5603::writeRegister8(uint8_t reg, uint8_t data) {
     //Serial.print("I2C write error: ");
     //Serial.println(error);
   }
+}
+
+bool MMC5603::isMMCdataready() {
+  Wire.beginTransmission(MMC5603_I2C_ADDR);
+  Wire.write(MMC5603_Status1); 
+  Wire.endTransmission(false); 
+  Wire.requestFrom(MMC5603_I2C_ADDR, 1);
+  if (Wire.available()) {
+    uint8_t status = Wire.read();
+    return (status & 0x40) != 0; // データ準備完了フラグが立っているか(6ビット目のビットマスク)
+  }
+  return false;
 }

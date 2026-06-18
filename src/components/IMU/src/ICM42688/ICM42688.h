@@ -358,6 +358,7 @@ class ICM42688 {
 	int writeRegister(uint8_t subAddress, uint8_t data);
 	int readRegisters(uint8_t subAddress, uint8_t count, uint8_t* dest);
 	int setBank(uint8_t bank);
+	bool isICMready();
 
 	/**
      * @brief      Software reset of the device
