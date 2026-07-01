@@ -761,6 +761,10 @@
 		(uuid "0c526458-cdb0-4c39-b666-3b37ed778951")
 	)
 	(no_connect
+		(at 80.01 100.33)
+		(uuid "e1e3bb5e-57f3-45bb-b4aa-375f38c61281")
+	)
+	(no_connect
 		(at 156.21 97.79)
 		(uuid "e9f2f882-7520-4680-9a0e-cc5790cc6b02")
 	)
@@ -1076,16 +1080,6 @@
 		)
 		(uuid "0bb7b47b-46c2-4edb-ad45-4571a457221e")
 	)
-	(wire
-		(pts
-			(xy 137.16 100.33) (xy 80.01 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0bdfd337-91f5-4950-840c-85f7f9746c37")
-	)
 	(bus
 		(pts
 			(xy 92.71 115.57) (xy 92.71 118.11)
@@ -1115,16 +1109,6 @@
 			(type default)
 		)
 		(uuid "126cc5cf-541c-4b8b-abd8-2e6a392168f0")
-	)
-	(wire
-		(pts
-			(xy 148.59 38.1) (xy 148.59 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "14185e07-780b-4656-835e-a0fbc379d835")
 	)
 	(wire
 		(pts
@@ -1375,16 +1359,6 @@
 			(type default)
 		)
 		(uuid "56ba3a92-33e9-47bd-a5c6-78c216d0cb89")
-	)
-	(wire
-		(pts
-			(xy 160.02 40.64) (xy 137.16 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "580c9a2d-743e-42bf-ac1e-33d4e6c9f09e")
 	)
 	(wire
 		(pts
@@ -1828,16 +1802,6 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 44.45) (xy 144.78 46.99)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9f993950-9318-4d1e-86fd-31302bf9e8fd")
-	)
-	(wire
-		(pts
 			(xy 222.25 100.33) (xy 229.87 100.33)
 		)
 		(stroke
@@ -1905,16 +1869,6 @@
 			(type default)
 		)
 		(uuid "acc7b83a-7e35-414a-99d2-f151c9656447")
-	)
-	(wire
-		(pts
-			(xy 137.16 40.64) (xy 137.16 100.33)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b115df2a-39ac-4b70-bbb4-d4a7c993d65e")
 	)
 	(bus
 		(pts
@@ -2138,16 +2092,6 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 44.45) (xy 144.78 44.45)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e69c12ea-384b-4e99-8eb7-985de2950370")
-	)
-	(wire
-		(pts
 			(xy 160.02 95.25) (xy 147.32 95.25)
 		)
 		(stroke
@@ -2235,16 +2179,6 @@
 			(type default)
 		)
 		(uuid "ee1f0b7a-6c4f-4896-b11e-f3b8ed7493bb")
-	)
-	(wire
-		(pts
-			(xy 160.02 38.1) (xy 148.59 38.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f19d23b4-b314-4559-9b50-35c34665d439")
 	)
 	(wire
 		(pts
@@ -2631,72 +2565,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VDD")
-		(at 148.59 35.56 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "259ab5fd-ea93-4afe-b343-dc256d0ac2c5")
-		(property "Reference" "#PWR0105"
-			(at 148.59 39.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "VDD"
-			(at 148.59 30.48 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 148.59 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 148.59 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"VDD\""
-			(at 148.59 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e336d575-97e7-4847-bcaf-2533daab29cd")
-		)
-		(instances
-			(project "MissionBus"
-				(path "/6ad42b70-359f-4102-8634-1155beb51fd8"
-					(reference "#PWR0105")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 222.25 92.71 180)
 		(unit 1)
@@ -2835,72 +2703,6 @@
 			(project "MissionBus"
 				(path "/6ad42b70-359f-4102-8634-1155beb51fd8"
 					(reference "#PWR0101")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 144.78 46.99 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "7af0b8f2-dedf-445c-bf11-4c68dcbb23ce")
-		(property "Reference" "#PWR0103"
-			(at 144.78 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 144.78 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 144.78 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 144.78 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 144.78 46.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ea848d21-94ea-4386-9cc8-cf4a8e911448")
-		)
-		(instances
-			(project "MissionBus"
-				(path "/6ad42b70-359f-4102-8634-1155beb51fd8"
-					(reference "#PWR0103")
 					(unit 1)
 				)
 			)
@@ -4108,16 +3910,6 @@
 				(justify left)
 			)
 		)
-		(pin "A0" input
-			(at 160.02 44.45 180)
-			(uuid "c4ea2f26-5577-433d-953e-5a78532264f7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
 		(pin "I2C_SDA" bidirectional
 			(at 160.02 46.99 180)
 			(uuid "16266f38-65ab-4d70-939d-4f3224ee9d7f")
@@ -4131,26 +3923,6 @@
 		(pin "I2C_SCL" bidirectional
 			(at 160.02 49.53 180)
 			(uuid "4f1de64d-c4d5-47e4-8175-6fe76ca3887d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "VIN" input
-			(at 160.02 38.1 180)
-			(uuid "906ccd0f-9591-4efb-bd25-57bb624d6608")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "EN" input
-			(at 160.02 40.64 180)
-			(uuid "4c2812d1-5a69-49bf-8cc6-266fdbdb4591")
 			(effects
 				(font
 					(size 1.27 1.27)
