@@ -5,6 +5,7 @@
 #include <components/Logger/logger.h>
 #include <components/IMU/IMU.h>
 #include <components/Pressure/pressure.h>
+#include <components/Heater/Heater.h>
 
 #define I2C_SCL_PIN 5
 #define I2C_SDA_PIN 4
@@ -28,6 +29,7 @@ constexpr uint8_t unit_id = 0x66;
 
 component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
 component::IMU9 imu(Wire, unit_id, 100, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
+component::Heater heater(Wire, unit_id, 1);
 //component::Pressure pressure(Wire, unit_id, 20);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -50,7 +52,7 @@ public:
 
     void loop() override {
         static uint32_t start_time = millis();
-        if (millis() - start_time > 120000) {
+        if (millis() - start_time > 1200000) {
             request_file_split.store(true);
             start_time = millis();
         }
@@ -104,6 +106,7 @@ void setup() {
     
     logger.begin();
     imu.begin(); 
+    heater.begin();
     //pressure.begin();
     main_.begin();
 
