@@ -31,7 +31,7 @@ ICM42688::ICM42688(SPIClass& bus, uint8_t csPin, uint32_t spi_hs_clock) {
 int ICM42688::begin() {
 	// reset the ICM42688
 	reset();
-	delay(10);
+	delay(100);
 
 	// check the WHO AM I byte
 	if (whoAmI() != WHO_AM_I) {
@@ -282,10 +282,10 @@ int ICM42688::getAGT() {  // modified to use getRawAGT()
 /* reads the most current data from ICM42688 and stores in buffer */
 int ICM42688::getRawAGT() {  // Added to return raw data only
 	_useSPIHS = true;          // use the high speed SPI for data readout
-	// check if data is ready
-	if (isICMready() == false) {
+	// check if data is ready(not usable yet)
+	/*if (isICMready() == false) {
 		return -1;
-	}
+	}*/
 	// grab the data from the ICM42688
 	if (readRegisters(UB0_REG_TEMP_DATA1, 14, _buffer) < 0) {
 		return -1;

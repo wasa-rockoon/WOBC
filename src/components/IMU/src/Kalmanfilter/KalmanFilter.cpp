@@ -64,11 +64,11 @@ KalmanFilter::angle KalmanFilter::update(float gx, float gy, float gz, float ax,
     if (mode == MODE_9DOF) {
         mag_noise = mag_noise + fabsf(tp) * fabsf(tp) * K_MAG_TILT_PENALTY;//傾いているときに磁気センサを無視
         K_yaw = P_yaw / (P_yaw + mag_noise);
-        float yaw_error = fabsf(observed_yaw - predicted_yaw);
+        float yaw_error = observed_yaw - predicted_yaw;
         // -PI ~ PIの範囲に正規化
         while (yaw_error > PI)  yaw_error -= 2.0f * PI;
         while (yaw_error < -PI) yaw_error += 2.0f * PI;
-        angle_result.yaw = predicted_yaw + K_yaw * (observed_yaw - predicted_yaw);
+        angle_result.yaw = predicted_yaw + K_yaw * yaw_error;
         P_yaw = (1 - K_yaw) * P_yaw;
     } else {
         angle_result.yaw = predicted_yaw; // 6DOFモードではジャイロ積分値を使用
