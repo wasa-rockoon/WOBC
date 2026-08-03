@@ -31,18 +31,18 @@ namespace component {
 
         void setup() override;
 
-        class SampleTimer: public process::Timer {
-        public:
-            SampleTimer(Heater& heater_ref, TwoWire& wire_ref, uint8_t unit_id_ref, unsigned interval_ms);
+    class SampleTimer: public process::Timer {
+    public:
+        SampleTimer(Heater& heater_ref, TwoWire& wire_ref, uint8_t unit_id_ref, unsigned interval_ms);
 
-        protected:
-            void callback() override;
+    protected:
+        void callback() override;
 
-        private:
-            TwoWire& wire_;
-            Heater& heater_;
-            uint8_t unit_id_;
-        } sample_timer_;
+    private:
+        TwoWire& wire_;
+        Heater& heater_;
+        uint8_t unit_id_;
+    } sample_timer_;
     };
 
 }
