@@ -281,6 +281,162 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "WOBCLibrary:Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Board_0_1"
+				(polyline
+					(pts
+						(xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Board_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers
@@ -1495,7 +1651,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "997e972a-6d55-4a03-8d3b-10c7059a6aa9")
-		(property "Reference" "#PWR0106"
+		(property "Reference" "#PWR0104"
 			(at 227.3778 126.3138 0)
 			(effects
 				(font
@@ -1545,7 +1701,74 @@
 		(instances
 			(project "GS2026"
 				(path "/5b60bd26-c7ab-4090-a1e7-05989cea3fbf"
-					(reference "#PWR0106")
+					(reference "#PWR0104")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "WOBCLibrary:Board")
+		(at 151.13 119.38 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a77f58d9-6727-443a-a07d-9353ad77b209")
+		(property "Reference" "B101"
+			(at 153.67 119.8117 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 153.67 121.7168 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:Board_2U_120x60"
+			(at 151.13 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 151.13 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 151.13 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "GND"
+			(uuid "3395ab5b-1737-40f6-920b-81af812c031d")
+		)
+		(instances
+			(project ""
+				(path "/5b60bd26-c7ab-4090-a1e7-05989cea3fbf"
+					(reference "B101")
 					(unit 1)
 				)
 			)
@@ -1561,7 +1784,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ac5df81e-44c4-4716-85b4-b1854e9310d8")
-		(property "Reference" "#PWR0107"
+		(property "Reference" "#PWR0105"
 			(at 237.623 106.7307 0)
 			(effects
 				(font
@@ -1611,7 +1834,7 @@
 		(instances
 			(project "GS2026"
 				(path "/5b60bd26-c7ab-4090-a1e7-05989cea3fbf"
-					(reference "#PWR0107")
+					(reference "#PWR0105")
 					(unit 1)
 				)
 			)
@@ -1627,7 +1850,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b2fec5f5-1cf9-4d79-8275-9f4e45202f74")
-		(property "Reference" "#PWR0105"
+		(property "Reference" "#PWR0103"
 			(at 215.9 106.68 0)
 			(effects
 				(font
@@ -1677,7 +1900,7 @@
 		(instances
 			(project "GS2026"
 				(path "/5b60bd26-c7ab-4090-a1e7-05989cea3fbf"
-					(reference "#PWR0105")
+					(reference "#PWR0103")
 					(unit 1)
 				)
 			)

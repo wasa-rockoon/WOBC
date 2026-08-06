@@ -1,12 +1,14 @@
 (kicad_sch
-	(version 20231120)
+	(version 20250114)
 	(generator "eeschema")
-	(generator_version "8.0")
+	(generator_version "9.0")
 	(uuid "920f9ee9-d8de-4f24-ad72-1c45434a67fe")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Device:C"
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
 				(offset 0.254)
 			)
@@ -79,7 +81,7 @@
 			(symbol "C_0_1"
 				(polyline
 					(pts
-						(xy -2.032 -0.762) (xy 2.032 -0.762)
+						(xy -2.032 0.762) (xy 2.032 0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -91,7 +93,7 @@
 				)
 				(polyline
 					(pts
-						(xy -2.032 0.762) (xy 2.032 0.762)
+						(xy -2.032 -0.762) (xy 2.032 -0.762)
 					)
 					(stroke
 						(width 0.508)
@@ -140,6 +142,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "Regulator_Linear:AMS1117-3.3"
 			(exclude_from_sim no)
@@ -222,6 +225,24 @@
 			)
 			(symbol "AMS1117-3.3_1_1"
 				(pin power_in line
+					(at -7.62 0 0)
+					(length 2.54)
+					(name "VI"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
 					(at 0 -7.62 90)
 					(length 2.54)
 					(name "GND"
@@ -257,31 +278,18 @@
 						)
 					)
 				)
-				(pin power_in line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "VI"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:GND"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -372,12 +380,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VBUS"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -449,7 +462,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -461,7 +474,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -492,12 +505,17 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 		(symbol "power:VDD"
 			(power)
-			(pin_numbers hide)
+			(pin_numbers
+				(hide yes)
+			)
 			(pin_names
-				(offset 0) hide)
+				(offset 0)
+				(hide yes)
+			)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -569,7 +587,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 0) (xy 0 2.54)
+						(xy 0 2.54) (xy 0.762 1.27)
 					)
 					(stroke
 						(width 0)
@@ -581,7 +599,7 @@
 				)
 				(polyline
 					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
+						(xy 0 0) (xy 0 2.54)
 					)
 					(stroke
 						(width 0)
@@ -612,6 +630,7 @@
 					)
 				)
 			)
+			(embedded_fonts no)
 		)
 	)
 	(junction
@@ -2452,7 +2471,6 @@
 	)
 	(label "LoRa4sw"
 		(at 113.2764 67 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2463,7 +2481,6 @@
 	)
 	(label "DB5"
 		(at 153.7026 142.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2474,7 +2491,6 @@
 	)
 	(label "raw3"
 		(at 145.0641 166.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2485,7 +2501,6 @@
 	)
 	(label "DB4"
 		(at 154.7323 52 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2496,7 +2511,6 @@
 	)
 	(label "RS"
 		(at 155.2864 42 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2507,7 +2521,6 @@
 	)
 	(label "DB5"
 		(at 154.5177 55 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2518,7 +2531,6 @@
 	)
 	(label "LoRa2sw"
 		(at 113.3742 63 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2529,7 +2541,6 @@
 	)
 	(label "lcd_sw1"
 		(at 110.0917 137.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2540,7 +2551,6 @@
 	)
 	(label "lcd_sw2"
 		(at 107.8674 53 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2551,7 +2561,6 @@
 	)
 	(label "LoRa3sw"
 		(at 119.6576 131.6815 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2562,7 +2571,6 @@
 	)
 	(label "raw4"
 		(at 144.1239 81 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2573,7 +2581,6 @@
 	)
 	(label "col2"
 		(at 144.1239 86 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2584,7 +2591,6 @@
 	)
 	(label "LoRa2sw"
 		(at 119.6576 129.6815 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2595,7 +2601,6 @@
 	)
 	(label "LoRa1sw"
 		(at 119.8854 127.6815 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2606,7 +2611,6 @@
 	)
 	(label "col4"
 		(at 145.0641 180.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2617,7 +2621,6 @@
 	)
 	(label "LoRa3sw"
 		(at 112.9051 65 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2628,7 +2631,6 @@
 	)
 	(label "col3"
 		(at 144.7979 178.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2639,7 +2641,6 @@
 	)
 	(label "col2"
 		(at 144.8866 176.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2650,7 +2651,6 @@
 	)
 	(label "NoGo"
 		(at 152.8048 151.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2661,7 +2661,6 @@
 	)
 	(label "DB6"
 		(at 154.5177 58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2672,7 +2671,6 @@
 	)
 	(label "abort"
 		(at 152.2683 153.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2683,7 +2681,6 @@
 	)
 	(label "NoGo"
 		(at 152.9045 30 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2694,7 +2691,6 @@
 	)
 	(label "RS"
 		(at 153.8573 134.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2705,7 +2701,6 @@
 	)
 	(label "raw2"
 		(at 144.931 164.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2716,7 +2711,6 @@
 	)
 	(label "LoRa1sw"
 		(at 113.54 61 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2727,7 +2721,6 @@
 	)
 	(label "sub"
 		(at 153.556 157.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2738,7 +2731,6 @@
 	)
 	(label "col1"
 		(at 145.0198 174.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2749,7 +2741,6 @@
 	)
 	(label "sub"
 		(at 154.7287 33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2760,7 +2751,6 @@
 	)
 	(label "DB7"
 		(at 154.5892 60 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2771,7 +2761,6 @@
 	)
 	(label "raw2"
 		(at 144 77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2782,7 +2771,6 @@
 	)
 	(label "raw1"
 		(at 144.8866 162.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2793,7 +2781,6 @@
 	)
 	(label "lcd_sw1"
 		(at 107.6011 51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2804,7 +2791,6 @@
 	)
 	(label "col4"
 		(at 144.1239 90 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2815,7 +2801,6 @@
 	)
 	(label "raw3"
 		(at 144.1905 79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2826,7 +2811,6 @@
 	)
 	(label "E"
 		(at 155.5907 50 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2837,7 +2821,6 @@
 	)
 	(label "DB7"
 		(at 153.7026 147.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2848,7 +2831,6 @@
 	)
 	(label "Go"
 		(at 154.6214 39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2859,7 +2841,6 @@
 	)
 	(label "DB6"
 		(at 153.7741 144.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2870,7 +2851,6 @@
 	)
 	(label "Go"
 		(at 154.4144 155.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2881,7 +2861,6 @@
 	)
 	(label "lcd_sw2"
 		(at 110.1582 139.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2892,7 +2871,6 @@
 	)
 	(label "abort"
 		(at 153.763 36 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2903,7 +2881,6 @@
 	)
 	(label "col1"
 		(at 144.0351 84 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2914,7 +2891,6 @@
 	)
 	(label "col3"
 		(at 143.9243 88 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2925,7 +2901,6 @@
 	)
 	(label "LoRa4sw"
 		(at 119.697 133.6815 180)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2936,7 +2911,6 @@
 	)
 	(label "DB4"
 		(at 153.6311 139.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2947,7 +2921,6 @@
 	)
 	(label "raw1"
 		(at 143.9907 75 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2958,7 +2931,6 @@
 	)
 	(label "E"
 		(at 154.8472 137.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2969,7 +2941,6 @@
 	)
 	(label "raw4"
 		(at 144.9754 168.6815 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -3483,6 +3454,10 @@
 	(sheet
 		(at 122.0973 122)
 		(size 20.9027 63)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -3512,243 +3487,243 @@
 		)
 		(pin "ind_row1" input
 			(at 143 162.6815 0)
+			(uuid "49f69784-ce17-475a-a7c2-5d1d469477cc")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "49f69784-ce17-475a-a7c2-5d1d469477cc")
 		)
 		(pin "lcd_RS" input
 			(at 143 134.6815 0)
+			(uuid "a22412a0-1c38-44b7-8cac-3d87e539e4ea")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "a22412a0-1c38-44b7-8cac-3d87e539e4ea")
 		)
 		(pin "lcd_E" input
 			(at 143 137.6815 0)
+			(uuid "b18b28b1-c9bc-4cd1-9642-7212c92444d7")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "b18b28b1-c9bc-4cd1-9642-7212c92444d7")
 		)
 		(pin "lcd_DB7" input
 			(at 143 147.6815 0)
+			(uuid "44100598-18d2-4fb9-8b33-a3a8102d8c33")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "44100598-18d2-4fb9-8b33-a3a8102d8c33")
 		)
 		(pin "lcd_DB4" input
 			(at 143 139.6815 0)
+			(uuid "d6fdcc9d-db54-41c0-83fc-3e62889d11ec")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "d6fdcc9d-db54-41c0-83fc-3e62889d11ec")
 		)
 		(pin "lcd_DB6" input
 			(at 143 144.6815 0)
+			(uuid "a12c6059-0f23-4e53-9b13-462abb5df74f")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "a12c6059-0f23-4e53-9b13-462abb5df74f")
 		)
 		(pin "ind_row4" input
 			(at 143 168.6815 0)
+			(uuid "351a34f3-48ab-457e-8a44-06bd784f5a0c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "351a34f3-48ab-457e-8a44-06bd784f5a0c")
 		)
 		(pin "ind_row3" input
 			(at 143 166.6815 0)
+			(uuid "23112824-6794-49e5-8cdb-6afa7c9b4142")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "23112824-6794-49e5-8cdb-6afa7c9b4142")
 		)
 		(pin "ind_row2" input
 			(at 143 164.6815 0)
+			(uuid "a5a76f69-32bf-413d-81ff-f9fb127b4803")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "a5a76f69-32bf-413d-81ff-f9fb127b4803")
 		)
 		(pin "ind_column2" input
 			(at 143 176.6815 0)
+			(uuid "b90f2945-79be-44a6-a229-5793d1077803")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "b90f2945-79be-44a6-a229-5793d1077803")
 		)
 		(pin "ind_column3" input
 			(at 143 178.6815 0)
+			(uuid "0cfb5cf3-4422-4b15-b52e-484ddfe360f7")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "0cfb5cf3-4422-4b15-b52e-484ddfe360f7")
 		)
 		(pin "ind_column4" input
 			(at 143 180.6815 0)
+			(uuid "5dba8849-b844-4b72-836f-f59188ee8486")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "5dba8849-b844-4b72-836f-f59188ee8486")
 		)
 		(pin "ind_column1" input
 			(at 143 174.6815 0)
+			(uuid "9322a9a0-37a3-4641-af7a-3d7c92a24a55")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "9322a9a0-37a3-4641-af7a-3d7c92a24a55")
 		)
 		(pin "lcd_DB5" input
 			(at 143 142.6815 0)
+			(uuid "1a3add9e-e934-4699-bb4e-005492ae14c7")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "1a3add9e-e934-4699-bb4e-005492ae14c7")
 		)
 		(pin "LoRaSW2" output
 			(at 122.0973 129.6815 180)
+			(uuid "9cd8386a-1f96-4675-aacb-eb834ff0d36e")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "9cd8386a-1f96-4675-aacb-eb834ff0d36e")
 		)
 		(pin "LoRaSW1" output
 			(at 122.0973 127.6815 180)
+			(uuid "412c10c5-4e25-4daf-bfe9-7e88f7b5a6c4")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "412c10c5-4e25-4daf-bfe9-7e88f7b5a6c4")
 		)
 		(pin "LoRaSW3" output
 			(at 122.0973 131.6815 180)
+			(uuid "9ca8e4ae-2731-4215-a413-b7341ee67b30")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "9ca8e4ae-2731-4215-a413-b7341ee67b30")
 		)
 		(pin "LoRaSW4" output
 			(at 122.0973 133.6815 180)
+			(uuid "97c99e9c-9ad3-4460-92aa-8bf9bd7f8c38")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "97c99e9c-9ad3-4460-92aa-8bf9bd7f8c38")
 		)
 		(pin "lcd_sw1" output
 			(at 122.0973 137.6815 180)
+			(uuid "e1d0df71-7f6b-47e5-bd60-79b2595f7d6d")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "e1d0df71-7f6b-47e5-bd60-79b2595f7d6d")
 		)
 		(pin "lcd_sw2" output
 			(at 122.0973 139.6815 180)
+			(uuid "7e7244d9-89fb-4a20-89cc-6144eb283c39")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "7e7244d9-89fb-4a20-89cc-6144eb283c39")
 		)
 		(pin "launch_sub" output
 			(at 143 157.6815 0)
+			(uuid "8d0ee0e4-94c7-42ae-857c-fd343b53fc1e")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "8d0ee0e4-94c7-42ae-857c-fd343b53fc1e")
 		)
 		(pin "launch_abort" output
 			(at 143 153.6815 0)
+			(uuid "bee0905f-1ed6-49e6-89b7-79a0d60b9b6c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "bee0905f-1ed6-49e6-89b7-79a0d60b9b6c")
 		)
 		(pin "launch_go" output
 			(at 143 155.6815 0)
+			(uuid "9d3b9784-a12f-44a8-b68d-cd71533c24f0")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "9d3b9784-a12f-44a8-b68d-cd71533c24f0")
 		)
 		(pin "launch_NoGo" output
 			(at 143 151.6815 0)
+			(uuid "2ebf4410-6dea-4d8e-9462-7ba5698fd0e7")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "2ebf4410-6dea-4d8e-9462-7ba5698fd0e7")
 		)
 		(instances
 			(project "Controller"
@@ -3761,6 +3736,10 @@
 	(sheet
 		(at 116 20)
 		(size 27 75)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -3790,283 +3769,283 @@
 		)
 		(pin "GPIO4" bidirectional
 			(at 143 42 0)
+			(uuid "30f974b2-d61d-4563-a5bb-eb6a9601964d")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "30f974b2-d61d-4563-a5bb-eb6a9601964d")
 		)
 		(pin "GPIO1" bidirectional
 			(at 143 33 0)
+			(uuid "dad888f1-00ac-4b18-8615-f391b17e9c73")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "dad888f1-00ac-4b18-8615-f391b17e9c73")
 		)
 		(pin "GPIO0" bidirectional
 			(at 143 30 0)
+			(uuid "9dc2d78c-2284-416a-87b2-4c140c0faf16")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "9dc2d78c-2284-416a-87b2-4c140c0faf16")
 		)
 		(pin "GPIO3" bidirectional
 			(at 143 39 0)
+			(uuid "060a4c2c-5e23-40c3-9e6f-552bce852b80")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "060a4c2c-5e23-40c3-9e6f-552bce852b80")
 		)
 		(pin "GPIO2" bidirectional
 			(at 143 36 0)
+			(uuid "706dcc09-5e74-4fdc-b500-ecdab231b684")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "706dcc09-5e74-4fdc-b500-ecdab231b684")
 		)
 		(pin "GPIO5" bidirectional
 			(at 143 75 0)
+			(uuid "ca1d2ce1-02d3-48b9-a18c-01f5c536e395")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "ca1d2ce1-02d3-48b9-a18c-01f5c536e395")
 		)
 		(pin "GPIO6" bidirectional
 			(at 143 77 0)
+			(uuid "53c54688-01bb-4e4f-97ca-7f8ed7d622eb")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "53c54688-01bb-4e4f-97ca-7f8ed7d622eb")
 		)
 		(pin "GPIO7" bidirectional
 			(at 143 50 0)
+			(uuid "93c9ffa0-3ca0-4ce4-8fee-b024bd43ebf2")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "93c9ffa0-3ca0-4ce4-8fee-b024bd43ebf2")
 		)
 		(pin "GPIO8" bidirectional
 			(at 143 52 0)
+			(uuid "0bab6aea-496c-47bf-8524-78f9e1ade66d")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "0bab6aea-496c-47bf-8524-78f9e1ade66d")
 		)
 		(pin "CANH" bidirectional
 			(at 143 68.4837 0)
+			(uuid "a648de3a-39bd-456d-9fa9-53402d2ccb20")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "a648de3a-39bd-456d-9fa9-53402d2ccb20")
 		)
 		(pin "CANL" bidirectional
 			(at 143 71 0)
+			(uuid "1f49c043-0941-49b0-ad54-cb111692e956")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "1f49c043-0941-49b0-ad54-cb111692e956")
 		)
 		(pin "GPIO21" bidirectional
 			(at 116 51 180)
+			(uuid "cae173b1-4ba9-44ec-b8d1-035774f658fd")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "cae173b1-4ba9-44ec-b8d1-035774f658fd")
 		)
 		(pin "GPIO20" bidirectional
 			(at 116 53 180)
+			(uuid "12acd04f-9994-43ad-8841-23ad1ea0feda")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "12acd04f-9994-43ad-8841-23ad1ea0feda")
 		)
 		(pin "GPIO19" bidirectional
 			(at 143 81 0)
+			(uuid "dc26e13a-0ed9-45b5-8cb9-d2bbbcb1b7f8")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "dc26e13a-0ed9-45b5-8cb9-d2bbbcb1b7f8")
 		)
 		(pin "GPIO18" bidirectional
 			(at 143 79 0)
+			(uuid "0cff6174-c056-4365-893c-7a69fe6d14dd")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "0cff6174-c056-4365-893c-7a69fe6d14dd")
 		)
 		(pin "GPIO15" bidirectional
 			(at 116 61 180)
+			(uuid "3d8401da-3493-4df7-95fa-87dd574150d5")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "3d8401da-3493-4df7-95fa-87dd574150d5")
 		)
 		(pin "GPIO14" bidirectional
 			(at 116 63 180)
+			(uuid "f4709a9e-49bc-49c1-80af-fb8ba5813cdf")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "f4709a9e-49bc-49c1-80af-fb8ba5813cdf")
 		)
 		(pin "GPIO28_ADC2" bidirectional
 			(at 143 88 0)
+			(uuid "1f1339fb-13e6-4673-9f92-345f629d24fa")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "1f1339fb-13e6-4673-9f92-345f629d24fa")
 		)
 		(pin "GPIO27_ADC1" bidirectional
 			(at 143 86 0)
+			(uuid "8f849f30-cab0-4445-b49f-c84de7b8cd4e")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "8f849f30-cab0-4445-b49f-c84de7b8cd4e")
 		)
 		(pin "GPIO29_ADC3" bidirectional
 			(at 143 90 0)
+			(uuid "70ba2aa0-fb8b-44b7-b309-5a420f81bfe6")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "70ba2aa0-fb8b-44b7-b309-5a420f81bfe6")
 		)
 		(pin "GPIO26_ADC0" bidirectional
 			(at 143 84 0)
+			(uuid "22f1379b-9fb5-4cc1-8040-42742dbe32c2")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "22f1379b-9fb5-4cc1-8040-42742dbe32c2")
 		)
 		(pin "GPIO13" bidirectional
 			(at 116 65 180)
+			(uuid "20033926-4ba9-4296-ab34-b838608da51c")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "20033926-4ba9-4296-ab34-b838608da51c")
 		)
 		(pin "GPIO9" bidirectional
 			(at 143 55 0)
+			(uuid "9669cc10-85e5-46dd-91b3-060540369a4d")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "9669cc10-85e5-46dd-91b3-060540369a4d")
 		)
 		(pin "GPIO10" bidirectional
 			(at 143 58 0)
+			(uuid "b66e9596-8df1-4ac8-b372-033dd5349ee6")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "b66e9596-8df1-4ac8-b372-033dd5349ee6")
 		)
 		(pin "GPIO11" bidirectional
 			(at 143 60 0)
+			(uuid "29cc64b7-1791-4166-a074-0ca57db17058")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "29cc64b7-1791-4166-a074-0ca57db17058")
 		)
 		(pin "GPIO12" bidirectional
 			(at 116 67 180)
+			(uuid "4985622a-79f6-4127-87f0-a8487c86e8bf")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
 			)
-			(uuid "4985622a-79f6-4127-87f0-a8487c86e8bf")
 		)
 		(pin "I2C_SDA" bidirectional
 			(at 143 64 0)
+			(uuid "1d5395f9-e2e5-4650-ac05-85e2ec3412c4")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "1d5395f9-e2e5-4650-ac05-85e2ec3412c4")
 		)
 		(pin "I2C_SCL" bidirectional
 			(at 143 66 0)
+			(uuid "f91ff82e-c765-41b5-926e-9b690b022df8")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "f91ff82e-c765-41b5-926e-9b690b022df8")
 		)
 		(instances
 			(project "Controller"
@@ -4079,6 +4058,10 @@
 	(sheet
 		(at 166.1522 86)
 		(size 13.0742 10)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
 		(fields_autoplaced yes)
 		(stroke
 			(width 0.1524)
@@ -4108,33 +4091,33 @@
 		)
 		(pin "CANL" bidirectional
 			(at 179.2264 91.4858 0)
+			(uuid "77ee5199-629e-49c2-811b-641fbd146154")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "77ee5199-629e-49c2-811b-641fbd146154")
 		)
 		(pin "CANH" bidirectional
 			(at 179.2264 94.1947 0)
+			(uuid "6365a706-97ef-45d5-a300-4d004ad734a0")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "6365a706-97ef-45d5-a300-4d004ad734a0")
 		)
 		(pin "VIO" bidirectional
 			(at 179.2264 88.1609 0)
+			(uuid "668c0b3a-0169-4da4-985e-f00f34a35029")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
 			)
-			(uuid "668c0b3a-0169-4da4-985e-f00f34a35029")
 		)
 		(instances
 			(project "Controller"
@@ -4149,4 +4132,5 @@
 			(page "1")
 		)
 	)
+	(embedded_fonts no)
 )
