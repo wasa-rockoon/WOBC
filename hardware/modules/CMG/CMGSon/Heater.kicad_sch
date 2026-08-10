@@ -5060,89 +5060,6 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 212.09 123.19 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3df0a758-8b1d-4c44-ac2b-d04773b359b8")
-		(property "Reference" "R310"
-			(at 215.9 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "1k"
-			(at 215.9 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 213.868 123.19 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 212.09 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 212.09 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25123"
-			(at 212.09 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "56b2eebe-06f4-47cc-b706-3f9a26ee549b")
-		)
-		(pin "2"
-			(uuid "4e6759ee-fd05-4b37-ba24-4051a2840f7c")
-		)
-		(instances
-			(project "Heater"
-				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "R310")
-					(unit 1)
-				)
-			)
-			(project "Heater"
-				(path "/861a27ed-ba4b-4fa4-8155-a8d1929fc215"
-					(reference "R108")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
 		(at 137.16 96.52 0)
 		(mirror y)
 		(unit 1)
@@ -5781,6 +5698,85 @@
 			(project "Heater"
 				(path "/861a27ed-ba4b-4fa4-8155-a8d1929fc215"
 					(reference "#PWR055")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 212.09 123.19 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6405d20a-7a4d-414a-b1c8-85dc716ef30e")
+		(property "Reference" "R5"
+			(at 214.63 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "470"
+			(at 214.63 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 210.312 123.19 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 212.09 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 212.09 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25117"
+			(at 212.09 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4d282535-70b0-49bb-8234-90948cbdd0b9")
+		)
+		(pin "2"
+			(uuid "c7f7b136-9afd-433a-b839-71ae54f79ab3")
+		)
+		(instances
+			(project "CMGSon"
+				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
+					(reference "R5")
 					(unit 1)
 				)
 			)
