@@ -530,6 +530,150 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Conn_01x02_1"
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J304"
+				(at 2.54 0.0001 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "Heater"
+				(at 2.54 -2.5399 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "connector"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Connector*:*_1x??_*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Conn_01x02_1_1_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(rectangle
+					(start -1.27 0.127)
+					(end 0 -0.127)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -1.27 -2.413)
+					(end 0 -2.667)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x02"
 			(pin_names
 				(offset 1.016)
@@ -2064,7 +2208,7 @@
 							)
 						)
 					)
-					(number "1"
+					(number "2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4132,7 +4276,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "3db2c4d9-4d4c-42da-abb3-735067a2e485")
+		(uuid "419923bd-c170-4c51-8be3-e07575225147")
 	)
 	(label "CH1"
 		(at 53.34 87.63 0)
@@ -4143,16 +4287,6 @@
 			(justify left bottom)
 		)
 		(uuid "4a305307-9dec-406b-b651-5fd3ef46715d")
-	)
-	(label "CH4"
-		(at 115.57 153.67 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "5cd6bda7-081b-49fa-a3f5-5396340f2fb9")
 	)
 	(label "Vref"
 		(at 135.89 62.23 0)
@@ -4184,7 +4318,7 @@
 		)
 		(uuid "60c74410-1fd4-4dc4-ae4d-5afac06882a5")
 	)
-	(label "CH2"
+	(label "CH4"
 		(at 116.84 91.44 0)
 		(effects
 			(font
@@ -4192,7 +4326,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "73f2fa60-ce1b-49ed-ac7e-f876b95d0d35")
+		(uuid "7197ae0c-6218-4eaa-a9c0-909b8703ebf0")
 	)
 	(label "VPPheater"
 		(at 153.67 143.51 180)
@@ -4213,6 +4347,16 @@
 			(justify left bottom)
 		)
 		(uuid "d4ead5cb-8aa8-41d8-8cf4-0179215d0dd9")
+	)
+	(label "CH2"
+		(at 115.57 153.67 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d5e333cf-e077-4e65-880e-eac3c730baf8")
 	)
 	(label "CH1"
 		(at 116.84 64.77 0)
@@ -4456,7 +4600,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "10738aa6-6b76-4cc8-b230-f17407416127")
-		(property "Reference" "#PWR0915"
+		(property "Reference" "#PWR0315"
 			(at 69.85 152.4 0)
 			(effects
 				(font
@@ -4506,7 +4650,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "#PWR0915")
+					(reference "#PWR0315")
 					(unit 1)
 				)
 			)
@@ -4761,7 +4905,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3033c1ab-5b34-46e1-ab2b-d49c85b4dc36")
-		(property "Reference" "C911"
+		(property "Reference" "C311"
 			(at 81.28 170.1737 0)
 			(effects
 				(font
@@ -4824,7 +4968,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "C911")
+					(reference "C311")
 					(unit 1)
 				)
 			)
@@ -5562,7 +5706,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5791cd67-13c6-42fe-953f-ff14d5f333d9")
-		(property "Reference" "C313"
+		(property "Reference" "C308"
 			(at 38.1 153.162 0)
 			(effects
 				(font
@@ -5625,7 +5769,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "C313")
+					(reference "C308")
 					(unit 1)
 				)
 			)
@@ -5713,7 +5857,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6405d20a-7a4d-414a-b1c8-85dc716ef30e")
-		(property "Reference" "R5"
+		(property "Reference" "R310"
 			(at 214.63 121.92 0)
 			(effects
 				(font
@@ -5776,7 +5920,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "R5")
+					(reference "R310")
 					(unit 1)
 				)
 			)
@@ -5864,7 +6008,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6ab1d2bd-1545-4f7a-8965-574a66c3d100")
-		(property "Reference" "#PWR0916"
+		(property "Reference" "#PWR0316"
 			(at 45.72 168.91 0)
 			(effects
 				(font
@@ -5914,7 +6058,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "#PWR0916")
+					(reference "#PWR0316")
 					(unit 1)
 				)
 			)
@@ -6020,7 +6164,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
 			(at 146.05 62.23 0)
 			(effects
 				(font
@@ -6449,7 +6593,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "966cd15b-da00-4087-a906-59a058aad0f7")
-		(property "Reference" "#PWR0918"
+		(property "Reference" "#PWR0319"
 			(at 69.85 179.07 0)
 			(effects
 				(font
@@ -6499,7 +6643,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "#PWR0918")
+					(reference "#PWR0319")
 					(unit 1)
 				)
 			)
@@ -6682,7 +6826,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "99c79f6a-433c-455a-ba07-1d0e3c289da3")
-		(property "Reference" "#PWR0919"
+		(property "Reference" "#PWR0320"
 			(at 83.82 184.15 0)
 			(effects
 				(font
@@ -6732,7 +6876,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "#PWR0919")
+					(reference "#PWR0320")
 					(unit 1)
 				)
 			)
@@ -6819,7 +6963,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ae0e298e-cc86-4969-8602-ed9b91f896b5")
-		(property "Reference" "C314"
+		(property "Reference" "C309"
 			(at 52.07 153.6763 0)
 			(effects
 				(font
@@ -6882,7 +7026,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "C314")
+					(reference "C309")
 					(unit 1)
 				)
 			)
@@ -7072,7 +7216,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
 			(at 146.05 115.57 0)
 			(effects
 				(font
@@ -7297,7 +7441,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c5ee522a-89e8-408d-9a9b-e6e17245fca6")
-		(property "Reference" "U904"
+		(property "Reference" "U303"
 			(at 71.9933 151.13 0)
 			(effects
 				(font
@@ -7378,7 +7522,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "U904")
+					(reference "U303")
 					(unit 1)
 				)
 			)
@@ -7831,7 +7975,7 @@
 		(pin "3"
 			(uuid "4bdc495e-769c-4c3b-a9b5-6e6e25c19f89")
 		)
-		(pin "1"
+		(pin "2"
 			(uuid "014db8ed-c64f-4bc7-8aaa-833bba2fda23")
 		)
 		(pin "1"
@@ -7937,6 +8081,7 @@
 		)
 	)
 	(symbol
+		(lib_name "Conn_01x02_1")
 		(lib_id "Connector_Generic:Conn_01x02")
 		(at 248.92 92.71 0)
 		(unit 1)
@@ -8021,7 +8166,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dad33d04-7a00-47d1-83e0-e18af3b5a421")
-		(property "Reference" "C912"
+		(property "Reference" "C312"
 			(at 95.25 170.688 0)
 			(effects
 				(font
@@ -8084,7 +8229,7 @@
 		(instances
 			(project "CMGSon"
 				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/c55431da-8938-47ef-8924-54f36b792cab"
-					(reference "C912")
+					(reference "C312")
 					(unit 1)
 				)
 			)
@@ -8623,7 +8768,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
+		(property "Footprint" "Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical"
 			(at 146.05 88.9 0)
 			(effects
 				(font

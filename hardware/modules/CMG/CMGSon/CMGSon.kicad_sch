@@ -820,16 +820,16 @@
 		(uuid "2bb4138f-1d24-48c1-813a-f62c167022db")
 	)
 	(no_connect
-		(at 154.94 77.47)
-		(uuid "683b595a-1328-4f54-8b5c-16a7b4c54aef")
-	)
-	(no_connect
 		(at 154.94 80.01)
 		(uuid "89652130-2d52-422f-bf43-10136266fed3")
 	)
 	(no_connect
 		(at 154.94 82.55)
 		(uuid "b10a6c73-8970-4fad-8e40-c06fcbabe593")
+	)
+	(no_connect
+		(at 119.38 97.79)
+		(uuid "c9224608-559f-47fd-9370-dc5148f78285")
 	)
 	(bus_entry
 		(at 171.45 74.93)
@@ -1137,16 +1137,6 @@
 		)
 		(uuid "16b78225-a32b-40a5-8993-0756843275e1")
 	)
-	(wire
-		(pts
-			(xy 68.58 104.14) (xy 119.38 104.14)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "18df53e6-2801-4636-9087-0b09fc65e1a4")
-	)
 	(bus
 		(pts
 			(xy 138.43 106.68) (xy 140.97 106.68)
@@ -1246,6 +1236,16 @@
 			(type default)
 		)
 		(uuid "32521766-e195-4b50-b6cf-846bf576d5bf")
+	)
+	(wire
+		(pts
+			(xy 68.58 104.14) (xy 81.28 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "33421c0d-4320-4e5b-b333-050fb5571593")
 	)
 	(wire
 		(pts
@@ -1499,13 +1499,13 @@
 	)
 	(wire
 		(pts
-			(xy 119.38 104.14) (xy 119.38 97.79)
+			(xy 154.94 77.47) (xy 162.56 77.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "81a10f20-4bef-449d-9eab-26c72c42aef3")
+		(uuid "7f989700-ee78-41c5-9d45-8949217bb6c5")
 	)
 	(wire
 		(pts
@@ -1997,16 +1997,6 @@
 		)
 		(uuid "5dfcdc89-4d77-4073-bdb1-a8847749977a")
 	)
-	(label "MOSI"
-		(at 133.35 104.14 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "60f84b09-f6cb-4ad0-97b4-383e32624903")
-	)
 	(label "I2C_SCL"
 		(at 86.36 80.01 0)
 		(effects
@@ -2127,7 +2117,7 @@
 		)
 		(uuid "ce6c2860-4224-487f-a86b-8ff94ccbcaf3")
 	)
-	(label "SCK"
+	(label "MOSI"
 		(at 135.89 104.14 90)
 		(effects
 			(font
@@ -2135,7 +2125,17 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "d1ebccdf-8cc8-4194-9b4f-6a410c8fb765")
+		(uuid "d6c4b526-36b3-4cee-a9f4-0a86ab37b8ef")
+	)
+	(label "SCK"
+		(at 133.35 104.14 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e02b1f85-72fa-4eb0-893b-4a152fc1bc37")
 	)
 	(label "CANH"
 		(at 173.99 80.01 0)
@@ -2167,6 +2167,16 @@
 		)
 		(uuid "ebb3925d-bb5f-480d-969e-fb333e2fdcc6")
 	)
+	(label "Heater"
+		(at 81.28 104.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "f2ef919f-fef6-431d-bab0-320f5f85fe3f")
+	)
 	(label "I2C_SCL"
 		(at 81.28 110.49 180)
 		(effects
@@ -2186,6 +2196,16 @@
 			(justify right bottom)
 		)
 		(uuid "fde021fa-d4a2-4dbc-98da-41a9b2e4e2b7")
+	)
+	(label "Heater"
+		(at 162.56 77.47 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "ff58ca76-845e-4656-b546-6bdaf76e1042")
 	)
 	(symbol
 		(lib_id "power:GND")

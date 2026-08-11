@@ -5391,6 +5391,109 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 112.395 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "506b3895-1883-40f1-9511-511373a73c11")
+		(property "Reference" "R204"
+			(at 114.935 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "470"
+			(at 114.935 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 110.617 81.28 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 112.395 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 112.395 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C25117"
+			(at 112.395 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4d282535-70b0-49bb-8234-90948cbdd0b9")
+		)
+		(pin "2"
+			(uuid "c7f7b136-9afd-433a-b839-71ae54f79ab3")
+		)
+		(instances
+			(project "GS"
+				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/aae98a2b-17a8-4876-aec1-8562199d8abf"
+					(reference "R204")
+					(unit 1)
+				)
+			)
+			(project "GS"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/951c9b78-7f7a-40cb-9924-3a13ae950f3e"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+			(project "GS"
+				(path "/9e354a01-2cea-4232-8b65-4471166b2c2b/a1205a74-8e08-4253-bf2f-92acd0ac696a"
+					(reference "R204")
+					(unit 1)
+				)
+			)
+			(project "GS"
+				(path "/cb4af816-aeb4-4196-ad0b-518b4d406783/4331fc0b-fea7-4b99-a505-523a919dfce8"
+					(reference "R4")
+					(unit 1)
+				)
+			)
+			(project "ESP32Core"
+				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
+					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:VDD")
 		(at 184.785 38.1 0)
 		(unit 1)
@@ -5564,109 +5667,6 @@
 			(project "ESP32Core"
 				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
 					(reference "#PWR022")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 112.395 81.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "6405d20a-7a4d-414a-b1c8-85dc716ef30e")
-		(property "Reference" "R204"
-			(at 114.935 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "470"
-			(at 114.935 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 110.617 81.28 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 112.395 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 112.395 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C25117"
-			(at 112.395 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "4d282535-70b0-49bb-8234-90948cbdd0b9")
-		)
-		(pin "2"
-			(uuid "c7f7b136-9afd-433a-b839-71ae54f79ab3")
-		)
-		(instances
-			(project "GS"
-				(path "/4eb245a9-6c21-4f00-ae42-6a498711dd85/aae98a2b-17a8-4876-aec1-8562199d8abf"
-					(reference "R204")
-					(unit 1)
-				)
-			)
-			(project "GS"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/951c9b78-7f7a-40cb-9924-3a13ae950f3e"
-					(reference "R4")
-					(unit 1)
-				)
-			)
-			(project "GS"
-				(path "/9e354a01-2cea-4232-8b65-4471166b2c2b/a1205a74-8e08-4253-bf2f-92acd0ac696a"
-					(reference "R204")
-					(unit 1)
-				)
-			)
-			(project "GS"
-				(path "/cb4af816-aeb4-4196-ad0b-518b4d406783/4331fc0b-fea7-4b99-a505-523a919dfce8"
-					(reference "R4")
-					(unit 1)
-				)
-			)
-			(project "ESP32Core"
-				(path "/d339b9d8-51a7-460e-bb19-8d8c25d3e2aa"
-					(reference "R5")
 					(unit 1)
 				)
 			)
