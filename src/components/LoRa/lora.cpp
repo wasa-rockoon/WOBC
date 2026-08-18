@@ -67,10 +67,40 @@ void LoRa::setup() {
 }
 
 void LoRa::loop() {
+  uint8_t data[255];
+  unsigned len = e220_.receive(data);
+
+  while(e220_.isBusy()){}
+
+  if (len > 0) {
+    unsigned data_size = len - 1;
+    uint8_t received_checksum = data[data_size];
+    uint8_t* received_data = data;
+    wcpp::Packet packet_received = decodePacket(received_data);
+    uint8_t calculated_checksum = packet_received.checksum(received_data, data_size);
+
+    if (calculated_checksum == received_checksum) {
+      int rssi = e220_.getRSSI();
+      wcpp::Packet packet = newPacket(packet_received.size() + 10);
+      packet.copy(packet_received);
+      packet.append("Ss").setInt(rssi);
+      sendPacket(packet);
+    } else {
+      LOG("fail to receive");
+    }
+  }
 }
 
 void LoRa::onCommand(const wcpp::Packet& packet) {
-  while(e220_.isBusy());
+  unsigned long start_time = millis();
+  constexpr unsigned long busy_timeout_ms = 2000;
+  while (e220_.isBusy()) {
+    if (millis() - start_time > busy_timeout_ms) {
+      LOG("LoRa send error: module busy timeout");
+      return;
+    }
+    delay(10);
+  }
   delay(100);
   
   if (packet.packet_id() == send_command_id) { 

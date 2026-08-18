@@ -3,7 +3,7 @@
 #include <library/wobc.h>
 #include <components/Telemeter/telemeter.h>
 #include <components/Logger/logger.h>
-//#include <components/LiPoPower/lipo_power_simple.h>
+#include <components/LoRa/lora.h>
 #include <SPI.h>
 
 #define SPI0_SCK_PIN 12
@@ -16,6 +16,13 @@
 #define SDCARD_MISO_PIN SPI0_MISO_PIN
 #define SDCARD_SS_PIN SPI0_CS_PIN
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
+
+#define LORA_CHANNEL 3
+#define LORA_TX_PIN 38
+#define LORA_RX_PIN 39
+#define LORA_AUX_PIN 40
+#define LORA_M0_PIN 12
+#define LORA_M1_PIN 11
 
 constexpr uint8_t module_id = 0x47;
 constexpr uint8_t unit_id = 0x64; // 書き込むユニットごとに変える
@@ -30,45 +37,38 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 //component::LiPoPowerSimple power(Wire);
 component::Telemeter telemeter;
+component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 
 class Main: public process::Component {
 public:
   Main(): process::Component("main", 0x00) {}
+  kernel::Listener pc_listener_;
 
   void setup() override {
-
+    listen(pc_listener_, 8);
   }
 
   void loop() override {
-    delay(1000);
-    LOG("GS working");
-    /*uint8_t buf[255];
-    memset(buf, 0, 255);
+    while (pc_listener_) {
+      wcpp::Packet packet = pc_listener_.pop();
 
-    wcpp::Packet tracker_packet = wcpp::Packet::empty(buf, 255);
-    tracker_packet.telemetry('A', 0x11, 'a', 0x11, 12345);
-    tracker_packet.append("La").setFloat64(35.7087377); 
-    tracker_packet.append("Lo").setFloat64(139.7170736);
-    tracker_packet.append("Al").setInt(1234);
+      // LoRa宛の送信指示コマンド自体は再度LoRa送信コマンドにラップしない
+      if (packet.component_id() == (component::LoRa::component_id_base + 0) &&
+          packet.packet_id() == component::LoRa::send_command_id) {
+        continue;
+      }
 
-    // Time
-    tracker_packet.append("Ut").setInt(1234);
-    tracker_packet.append("Ts").setInt(1234);
+      // Tracker等からLoRa受信されて内部カーネルに放流された受領パケット（"Ss" エントリを持つ）はLoRa再送信しない
+      if (packet.find("Ss")) {
+        continue;
+      }
 
-    // Power
-    tracker_packet.append("Vb").setInt(1111);
-    tracker_packet.append("Vp").setInt(1112);
-    tracker_packet.append("Vd").setInt(1113);
-    tracker_packet.append("Ip").setInt(2111);
-    tracker_packet.append("Id").setInt(2112);
-
-    // Environment
-    tracker_packet.append("Pr").setInt(1013);
-    tracker_packet.append("Te").setInt(29);
-    tracker_packet.append("Hu").setInt(78);
-    tracker_packet.append("Pa").setInt(100000);
-    
-    sendPacket(tracker_packet);*/
+      // PC等から届いたパケットを LoRa 送信用コマンドパケットに包んで送信
+      wcpp::Packet lorapacket = newPacket(packet.size() + 32);
+      lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+      lorapacket.append("Pa").setPacket(packet);
+      sendPacket(lorapacket, pc_listener_);
+    }
   }
 } main_;
 
@@ -96,6 +96,7 @@ void setup() {
   logger.begin();
   //power.begin();
   telemeter.begin();
+  lora.begin();
   main_.begin();
 
   error_indicator.set(false);
