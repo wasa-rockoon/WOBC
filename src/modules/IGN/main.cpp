@@ -1,0 +1,95 @@
+// #define NDEBUG
+
+#include <library/wobc.h>
+#include <components/Pressure/pressure.h>
+#include <components/Logger/logger.h>
+#include <SPI.h>
+
+#define SPI0_SCK_PIN 12
+#define SPI0_MOSI_PIN 11
+#define SPI0_MISO_PIN 13
+#define SPI0_CS_PIN 10
+
+#define SD_INSERTED_PIN 9
+#define SDCARD_MOSI_PIN SPI0_MOSI_PIN
+#define SDCARD_MISO_PIN SPI0_MISO_PIN
+#define SDCARD_SS_PIN SPI0_CS_PIN
+#define SDCARD_SCK_PIN SPI0_SCK_PIN
+
+constexpr uint8_t module_id = 0x40;
+constexpr uint8_t unit_id = 0x40;
+
+core::CANBus can_bus(44, 43);
+core::SerialBus serial_bus(Serial);
+
+component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
+component::Pressure pressure(Wire, unit_id);
+
+
+interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
+
+class Main : public process::Component {
+public:
+    Main() : process::Component("main", 0x00) {}
+    kernel::Listener my_listener_;
+    kernel::Listener heartbeat_;
+
+    void setup() override {
+        my_listener_.telemetry(); 
+        listen(my_listener_, 8);
+        heartbeat_.component(0x54);
+        listen(heartbeat_,1);
+    }
+
+    void loop() override {
+        while (my_listener_) {
+            delay(1000);
+            wcpp::Packet packet = my_listener_.pop();
+                //wcpp::Packet lorapacket = newPacket(64);
+                //auto im = packet.find("Im");
+                //if(!im){
+                //    lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+                //    lorapacket.append("Pa").setPacket(packet);
+                //    sendPacket(lorapacket);
+                //}
+            }
+        LOG("IGN working");
+        }
+    }main_;
+
+void setup() {
+    
+
+    Serial.begin(115200);
+    kernel::setUnitId(unit_id);
+    if (!kernel::begin(module_id, false)) return;
+
+    Serial0.setPins(2, 1);
+    Wire.begin(17, 16);
+
+    can_bus.begin();
+    serial_bus.begin();
+
+    SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
+
+    delay(1000); 
+
+    status_indicator.begin();
+    status_indicator.blink_on_change();
+
+    error_indicator.begin();
+    error_indicator.set(true);
+
+    pressure.begin();
+    logger.begin();
+    main_.begin();
+
+    error_indicator.set(false);
+    error_indicator.blink_on_change(100);
+}
+
+void loop() {
+    status_indicator.update();
+    error_indicator.update();
+}

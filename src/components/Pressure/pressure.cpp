@@ -106,7 +106,8 @@ double Pressure::height(float pressure) {
         }
     }
     if (pressure >= p[0].pressure) {
-        return 2*coe[0].a*(pressure - p[0].pressure) + coe[0].b;
+        const double pressure_delta = pressure - p[0].pressure;
+        return coe[0].a * pow(pressure_delta, 2) + coe[0].b * pressure_delta + coe[0].c;
     }
     return 0.0;  // 圧力範囲外の場合は高度0を返す
 }
@@ -119,7 +120,7 @@ Pressure::SampleTimer::SampleTimer(Pressure& pressure_ref, BME280I2C& bme_ref, u
 void Pressure::SampleTimer::callback() { // Timerで定期的に実行される関数
 
   // 高度規正値を不揮発メモリから読み込み
-  double sealevel_Pa = 100310.0; // デフォルト値は101325 Pa (1気圧)
+  double sealevel_Pa = 101542.0; // デフォルト値は101325 Pa (1気圧)
   wcpp::Packet qnh = loadPacket('Q'); 
   if (qnh) {
     auto e = qnh.find("Sp");
