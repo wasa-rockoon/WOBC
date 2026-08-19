@@ -74,8 +74,8 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
 
-    power.begin();
-    lora.begin();
+    //power.begin();
+    //lora.begin();
     pressure.begin();
     main_.begin();
 

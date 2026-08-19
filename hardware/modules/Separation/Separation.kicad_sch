@@ -368,6 +368,162 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "WOBCLibrary:Board"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "B"
+				(at 0 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Board_0_1"
+				(polyline
+					(pts
+						(xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032)
+					)
+					(stroke
+						(width 0.2032)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Board_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "power:GND"
 			(power)
 			(pin_numbers
@@ -1777,16 +1933,6 @@
 		)
 		(uuid "1138cccf-9e11-4d85-be4a-33b07facc337")
 	)
-	(label "SCK"
-		(at 151.13 127 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "12ebaa88-9fae-4a2a-915a-104b8434769a")
-	)
 	(label "CANL"
 		(at 180.34 86.36 180)
 		(effects
@@ -1857,6 +2003,16 @@
 		)
 		(uuid "4947b4cb-08e1-490d-b09a-06f6ed3f6264")
 	)
+	(label "MISO"
+		(at 151.13 127 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4afac16e-94da-4eaf-acbe-7eee5c1d63b6")
+	)
 	(label "SCL"
 		(at 153.67 134.62 0)
 		(effects
@@ -1875,7 +2031,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "4e51e287-5d28-4f69-8b53-a73f134f3751")
+		(uuid "4e51e287-5d28-4f69-8b53-a73f134f3752")
 	)
 	(label "CANH"
 		(at 180.34 88.9 180)
@@ -1887,6 +2043,16 @@
 		)
 		(uuid "593a58b8-57c4-49f8-b237-2eb8e66975bb")
 	)
+	(label "MOSI"
+		(at 156.21 127 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5c6f1ea4-378d-4c95-85d5-cdb7af7cf082")
+	)
 	(label "CANL"
 		(at 185.42 69.85 0)
 		(effects
@@ -1896,6 +2062,16 @@
 			(justify left bottom)
 		)
 		(uuid "66d07c1e-2964-479d-8ec4-683ad325e959")
+	)
+	(label "SCK"
+		(at 153.67 127 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7230136b-9699-4eb4-a889-400f5ec9b168")
 	)
 	(label "SCL"
 		(at 96.52 88.9 180)
@@ -1917,16 +2093,6 @@
 		)
 		(uuid "a8e34b19-94b2-4abe-bdb8-dff7361b4b64")
 	)
-	(label "MOSI"
-		(at 153.67 127 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "bb865df8-4b39-4f82-82c4-808886691cdb")
-	)
 	(label "CS"
 		(at 132.08 161.29 180)
 		(effects
@@ -1945,7 +2111,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d715")
+		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d716")
 	)
 	(label "MISO"
 		(at 132.08 156.21 180)
@@ -1955,7 +2121,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d715")
+		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d717")
 	)
 	(label "DET"
 		(at 132.08 153.67 180)
@@ -1965,7 +2131,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d715")
+		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d718")
 	)
 	(label "SCK"
 		(at 132.08 151.13 180)
@@ -1975,7 +2141,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d715")
+		(uuid "bfb6d1ec-0233-4bc5-a4fc-8ff0dd73d719")
 	)
 	(label "GPS_RTX"
 		(at 186.69 106.68 0)
@@ -2006,16 +2172,6 @@
 			(justify right bottom)
 		)
 		(uuid "d9a937c6-6f7b-45ad-8430-2e4fd7ad5949")
-	)
-	(label "MISO"
-		(at 156.21 127 90)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e51881c9-36e1-445b-bbc3-6db60da7a9c1")
 	)
 	(global_label "GPS_Backup"
 		(shape input)
@@ -2071,7 +2227,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "34d5bae9-7234-4fc9-99cc-6b8600ab274d")
-		(property "Reference" "#PWR0104"
+		(property "Reference" "#PWR0101"
 			(at 190.5 64.77 0)
 			(effects
 				(font
@@ -2121,7 +2277,74 @@
 		(instances
 			(project ""
 				(path "/67e7b825-e210-4fbd-ae56-bcf369c4487b"
-					(reference "#PWR0104")
+					(reference "#PWR0101")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "WOBCLibrary:Board")
+		(at 137.16 39.37 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4f9dc76b-16f4-4c90-acad-b35e6f180845")
+		(property "Reference" "B101"
+			(at 139.7 39.1667 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "~"
+			(at 139.7 41.7067 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "WOBCLibrary:Board_1U_60x60"
+			(at 137.16 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 137.16 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 137.16 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "GND"
+			(uuid "e94eee60-0ccc-4068-a55c-c7eb3c691e8b")
+		)
+		(instances
+			(project ""
+				(path "/67e7b825-e210-4fbd-ae56-bcf369c4487b"
+					(reference "B101")
 					(unit 1)
 				)
 			)
@@ -2338,7 +2561,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d9a97e6c-8535-4063-8fae-b5e41b5c6dc4")
-		(property "Reference" "C105"
+		(property "Reference" "C101"
 			(at 236.855 142.24 0)
 			(effects
 				(font
@@ -2401,7 +2624,7 @@
 		(instances
 			(project "Separation"
 				(path "/67e7b825-e210-4fbd-ae56-bcf369c4487b"
-					(reference "C105")
+					(reference "C101")
 					(unit 1)
 				)
 			)
@@ -2417,7 +2640,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f688c9a1-fcdc-4659-9564-e2aa40854718")
-		(property "Reference" "#PWR0106"
+		(property "Reference" "#PWR0104"
 			(at 246.38 157.48 0)
 			(effects
 				(font
@@ -2467,7 +2690,7 @@
 		(instances
 			(project "Separation"
 				(path "/67e7b825-e210-4fbd-ae56-bcf369c4487b"
-					(reference "#PWR0106")
+					(reference "#PWR0104")
 					(unit 1)
 				)
 			)
@@ -2789,23 +3012,13 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "GPS.kicad_sch"
+		(property "Sheetfile" "GPSActive.kicad_sch"
 			(at 198.12 111.0746 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left top)
-			)
-		)
-		(pin "BACKUP" input
-			(at 198.12 92.71 180)
-			(uuid "c0996fd3-1190-4228-883a-b406f4611477")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 			)
 		)
 		(pin "RESET" output
@@ -2828,9 +3041,9 @@
 				(justify left)
 			)
 		)
-		(pin "TIME PULSE" output
-			(at 198.12 100.33 180)
-			(uuid "7b1a8fac-74a0-47d1-804c-32df026f7c18")
+		(pin "TX" output
+			(at 198.12 106.68 180)
+			(uuid "1018b30d-e62c-469b-8dd2-adddf48b1474")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2838,9 +3051,19 @@
 				(justify left)
 			)
 		)
-		(pin "TX" output
-			(at 198.12 106.68 180)
-			(uuid "1018b30d-e62c-469b-8dd2-adddf48b1474")
+		(pin "+BATT" input
+			(at 198.12 92.71 180)
+			(uuid "9c17ed9c-67cb-4e7e-a7a2-4010fb61b2c5")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "TIMEPULSE" input
+			(at 198.12 100.33 180)
+			(uuid "2d0f9d09-31a2-4865-a501-31e8c51a36dd")
 			(effects
 				(font
 					(size 1.27 1.27)
