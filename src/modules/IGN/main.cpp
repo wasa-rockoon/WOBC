@@ -3,6 +3,7 @@
 #include <library/wobc.h>
 #include <components/Pressure/pressure.h>
 #include <components/Logger/logger.h>
+#include <components/IGN/IGN.h>
 #include <SPI.h>
 
 #define SPI0_SCK_PIN 12
@@ -24,6 +25,7 @@ core::SerialBus serial_bus(Serial);
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
+component::IGN ign(Wire, 5, 6, 4, unit_id);
 
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -83,6 +85,7 @@ void setup() {
 
     pressure.begin();
     logger.begin();
+    ign.begin();
     main_.begin();
 
     error_indicator.set(false);
