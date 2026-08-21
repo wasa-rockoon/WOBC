@@ -1009,10 +1009,6 @@
 		(uuid "1ce107d2-a01b-4a9f-a28b-005ef102a6c5")
 	)
 	(no_connect
-		(at 162.56 67.31)
-		(uuid "1ee509f4-2321-4870-a320-bb2b98ce1ce1")
-	)
-	(no_connect
 		(at 114.3 118.11)
 		(uuid "3e932903-49fd-46b9-b4c2-7be48e71ed06")
 	)
@@ -1021,20 +1017,8 @@
 		(uuid "4c84b8f5-526c-4315-af89-12c5a6aeaf3a")
 	)
 	(no_connect
-		(at 81.28 99.06)
-		(uuid "7611d69b-af90-429b-a4fc-3173e2f8418c")
-	)
-	(no_connect
-		(at 162.56 64.77)
-		(uuid "a414fd76-629e-45f2-837f-7074bc626a58")
-	)
-	(no_connect
 		(at 114.3 111.76)
 		(uuid "c2fcb44f-9a31-433d-8932-c4d5d7c252f6")
-	)
-	(no_connect
-		(at 114.3 81.28)
-		(uuid "dafd2c93-e1dc-4c08-bd72-ca75b0e346f4")
 	)
 	(bus_entry
 		(at 72.39 92.71)
@@ -1284,6 +1268,16 @@
 	)
 	(wire
 		(pts
+			(xy 110.49 81.28) (xy 114.3 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39abdc10-8db7-4b3d-a879-ef79e2593cc7")
+	)
+	(wire
+		(pts
 			(xy 81.28 95.25) (xy 72.39 95.25)
 		)
 		(stroke
@@ -1311,6 +1305,16 @@
 			(type default)
 		)
 		(uuid "41ce3116-980f-4966-a3d3-fe4fdbc3aa4c")
+	)
+	(wire
+		(pts
+			(xy 105.41 90.17) (xy 110.49 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "44ec5d25-fc5a-44eb-9c3f-15ee1b8eb1c9")
 	)
 	(wire
 		(pts
@@ -1601,6 +1605,16 @@
 			(type default)
 		)
 		(uuid "8afa611f-09e4-46a3-8abc-d8cfd01a4fae")
+	)
+	(wire
+		(pts
+			(xy 110.49 90.17) (xy 110.49 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d3c6d82-8d4a-4864-837a-4f22d3efca60")
 	)
 	(wire
 		(pts
@@ -3456,8 +3470,8 @@
 		)
 	)
 	(sheet
-		(at 81.28 88.9)
-		(size 24.13 17.78)
+		(at 81.28 87.122)
+		(size 24.13 17.018)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -3472,7 +3486,7 @@
 		)
 		(uuid "28a2a2f0-ed16-49aa-b7b9-f7bf9e70d2b6")
 		(property "Sheetname" "Logger"
-			(at 81.28 88.1884 0)
+			(at 81.28 86.4104 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3481,7 +3495,7 @@
 			)
 		)
 		(property "Sheetfile" "Logger.kicad_sch"
-			(at 81.28 107.2646 0)
+			(at 81.28 104.7246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3520,13 +3534,13 @@
 			)
 		)
 		(pin "SD_DET" output
-			(at 81.28 99.06 180)
+			(at 105.41 90.17 0)
 			(uuid "9592a72c-7c84-4619-adbc-7a6951e3d7dc")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
 		(pin "SD_MISO" output
@@ -3569,7 +3583,7 @@
 	)
 	(sheet
 		(at 81.28 55.88)
-		(size 25.4 27.94)
+		(size 25.4 25.146)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
@@ -3593,7 +3607,7 @@
 			)
 		)
 		(property "Sheetfile" "LiPoPowerSimple.kicad_sch"
-			(at 81.28 84.4046 0)
+			(at 81.28 81.6106 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3721,26 +3735,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left top)
-			)
-		)
-		(pin "CANH" bidirectional
-			(at 162.56 67.31 0)
-			(uuid "b824efd7-7a10-47d9-9688-7303f0a26581")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "CANL" bidirectional
-			(at 162.56 64.77 0)
-			(uuid "45621ccf-40b1-4ca2-a7f1-c3eba6a2a36e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 		(pin "I2C_SCL" bidirectional
