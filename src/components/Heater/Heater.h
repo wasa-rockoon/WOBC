@@ -9,8 +9,19 @@ namespace component {
     public:
         static const uint8_t component_id = 0x46;
         static const uint8_t telemetry_id = 'H';
+        static const uint8_t HEATER_PIN = 14;
 
-        Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 1);
+        enum class AdcResolution : uint8_t {
+            BIT_12 = 0x00,
+            BIT_14 = 0x04,
+            BIT_16 = 0x08,
+            BIT_18 = 0x0C,
+        };
+
+        Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 1,
+               AdcResolution adc_resolution = AdcResolution::BIT_16);
+        void setAdcResolution(AdcResolution adc_resolution);
+        AdcResolution adcResolution() const;
         static float CalculatedTemperature[4];
 
     protected:
@@ -28,6 +39,11 @@ namespace component {
 
         TwoWire& wire_;
         uint8_t unit_id_;
+        AdcResolution adc_resolution_;
+        bool heater_output_high_ = false;
+
+        uint16_t conversionTimeoutMs() const;
+        float voltsPerCount() const;
 
         void setup() override;
 

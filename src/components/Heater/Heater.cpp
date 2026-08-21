@@ -16,16 +16,49 @@ namespace component {
             0.0f
             };
     
-    Heater::Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz)
+    Heater::Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz,
+                   AdcResolution adc_resolution)
         : process::Component("Heater", component_id),
           wire_(wire),
           unit_id_(unit_id),
+          adc_resolution_(adc_resolution),
           sample_timer_(*this, wire_, unit_id_, sample_freq_hz > 0 ? 1000 / sample_freq_hz : 1000) {
     }
 
+    void Heater::setAdcResolution(AdcResolution adc_resolution) {
+        adc_resolution_ = adc_resolution;
+    }
+
+    Heater::AdcResolution Heater::adcResolution() const {
+        return adc_resolution_;
+    }
+
+    uint16_t Heater::conversionTimeoutMs() const {
+        switch (adc_resolution_) {
+            case AdcResolution::BIT_12: return 10;
+            case AdcResolution::BIT_14: return 30;
+            case AdcResolution::BIT_16: return 100;
+            case AdcResolution::BIT_18: return 350;
+        }
+        return 350;
+    }
+
+    float Heater::voltsPerCount() const {
+        switch (adc_resolution_) {
+            case AdcResolution::BIT_12: return 0.001f;
+            case AdcResolution::BIT_14: return 0.00025f;
+            case AdcResolution::BIT_16: return 0.0000625f;
+            case AdcResolution::BIT_18: return 0.000015625f;
+        }
+        return 0.0000625f;
+    }
+
     void Heater::setup() {
-        Wire.beginTransmission(MCP3424_ADDR);
-        if (Wire.endTransmission() != 0) {
+        pinMode(HEATER_PIN, OUTPUT);
+        digitalWrite(HEATER_PIN, LOW);
+
+        wire_.beginTransmission(MCP3424_ADDR);
+        if (wire_.endTransmission() != 0) {
             error("H", "Failed to initialize MCP3424!");
         }
         start(sample_timer_);
@@ -39,33 +72,55 @@ namespace component {
     }
 
     void Heater::SampleTimer::callback() {
+        // Toggle the heater output once per timer period (one second by default).
+        heater_.heater_output_high_ = !heater_.heater_output_high_;
+        digitalWrite(Heater::HEATER_PIN,
+                     heater_.heater_output_high_ ? HIGH : LOW);
+
         // MCP3424の各CHの測定をキックする
         for (uint8_t ch = 0; ch < 4; ch++) {
             wire_.beginTransmission(MCP3424_ADDR);
-            wire_.write(CONFIG_CH[ch]);
+            wire_.write((CONFIG_CH[ch] & 0xF3) |
+                        static_cast<byte>(heater_.adc_resolution_));
             wire_.endTransmission();
 
         // 変換完了(RDY=0)まで待ちながらポーリング
-        byte b[3];
+        const uint8_t response_size =
+            heater_.adc_resolution_ == AdcResolution::BIT_18 ? 4 : 3;
+        byte b[4] = {};
+        bool conversion_ready = false;
         unsigned long t0 = millis();
-        while (millis() - t0 < 300) {
-        Wire.requestFrom(MCP3424_ADDR, 3);
-        if (Wire.available() != 3) {
+        while (millis() - t0 < heater_.conversionTimeoutMs()) {
+        wire_.requestFrom(static_cast<uint8_t>(MCP3424_ADDR), response_size);
+        if (wire_.available() != response_size) {
             delay(5); 
             continue; 
         }
-        for (int i = 0; i < 3; i++) {
-            b[i] = Wire.read();
+        for (uint8_t i = 0; i < response_size; i++) {
+            b[i] = wire_.read();
         }
-        if (!(b[2] & 0x80)) {
+        if (!(b[response_size - 1] & 0x80)) {
+            conversion_ready = true;
             break; 
         }  // RDY=0 で変換完了
         delay(5);
         }
 
         // 電圧値を計算
-        int16_t rawADC = (int16_t)(((uint16_t)b[0] << 8) | b[1]);
-        float vOut = rawADC * 0.0000625f;
+        if (!conversion_ready) {
+            continue;
+        }
+
+        int32_t rawADC;
+        if (heater_.adc_resolution_ == AdcResolution::BIT_18) {
+            rawADC = ((int32_t)b[0] << 16) | ((int32_t)b[1] << 8) | b[2];
+            if (rawADC & 0x20000) {
+                rawADC |= 0xFFFC0000;
+            }
+        } else {
+            rawADC = (int16_t)(((uint16_t)b[0] << 8) | b[1]);
+        }
+        float vOut = rawADC * heater_.voltsPerCount();
 
         // 温度計算
         if (vOut > 0.05 && vOut < 2.00) { 
@@ -81,6 +136,7 @@ namespace component {
         packet.append("C2").setFloat32(CalculatedTemperature[1]);
         packet.append("C3").setFloat32(CalculatedTemperature[2]);
         packet.append("C4").setFloat32(CalculatedTemperature[3]);
+        packet.append("Hs").setBool(heater_.heater_output_high_);
         packet.append("Ts").setInt((int)millis());
         sendPacket(packet);
     }

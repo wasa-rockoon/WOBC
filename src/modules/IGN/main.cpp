@@ -4,6 +4,7 @@
 #include <components/Pressure/pressure.h>
 #include <components/Logger/logger.h>
 #include <components/IGN/IGN.h>
+#include <components/Heater/Heater.h>
 #include <SPI.h>
 
 #define SPI0_SCK_PIN 12
@@ -19,6 +20,8 @@
 
 constexpr uint8_t module_id = 0x40;
 constexpr uint8_t unit_id = 0x40;
+constexpr component::Heater::AdcResolution heater_adc_resolution =
+    component::Heater::AdcResolution::BIT_16;
 
 core::CANBus can_bus(44, 43);
 core::SerialBus serial_bus(Serial);
@@ -26,6 +29,7 @@ core::SerialBus serial_bus(Serial);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
 component::IGN ign(Wire, 5, 6, 4, unit_id);
+component::Heater heater(Wire, unit_id, 1, heater_adc_resolution);
 
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -86,6 +90,7 @@ void setup() {
     pressure.begin();
     logger.begin();
     ign.begin();
+    heater.begin();
     main_.begin();
 
     error_indicator.set(false);
