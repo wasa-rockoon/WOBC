@@ -91,7 +91,7 @@ namespace component {
         bool conversion_ready = false;
         unsigned long t0 = millis();
         while (millis() - t0 < heater_.conversionTimeoutMs()) {
-        wire_.requestFrom(static_cast<uint8_t>(MCP3424_ADDR), response_size);
+        wire_.requestFrom(MCP3424_ADDR, response_size);
         if (wire_.available() != response_size) {
             delay(5); 
             continue; 
@@ -132,10 +132,10 @@ namespace component {
         }
         wcpp::Packet packet = newPacket(32);
         packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
-        packet.append("C1").setFloat32(CalculatedTemperature[0]);
-        packet.append("C2").setFloat32(CalculatedTemperature[1]);
-        packet.append("C3").setFloat32(CalculatedTemperature[2]);
-        packet.append("C4").setFloat32(CalculatedTemperature[3]);
+        packet.append("Ca").setFloat32(CalculatedTemperature[0]);
+        packet.append("Cb").setFloat32(CalculatedTemperature[1]);
+        packet.append("Cc").setFloat32(CalculatedTemperature[2]);
+        packet.append("Cd").setFloat32(CalculatedTemperature[3]);
         packet.append("Hs").setBool(heater_.heater_output_high_);
         packet.append("Ts").setInt((int)millis());
         sendPacket(packet);

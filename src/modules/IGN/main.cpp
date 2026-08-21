@@ -21,7 +21,7 @@
 constexpr uint8_t module_id = 0x40;
 constexpr uint8_t unit_id = 0x40;
 constexpr component::Heater::AdcResolution heater_adc_resolution =
-    component::Heater::AdcResolution::BIT_16;
+    component::Heater::AdcResolution::BIT_12;
 
 core::CANBus can_bus(44, 43);
 core::SerialBus serial_bus(Serial);
