@@ -26,10 +26,14 @@ void Logger::loop() {
     if (packet.isLocal()) { // Add unit id
       if (packet.isCommand()) {
         packet_log.command(
-          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
+          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id(),
+          kernel::nextPacketSequence(kernel::unit_id(), kernel::unit_id(),
+                                     packet.component_id(), packet.type_and_id()));
       }else {
         packet_log.telemetry(
-          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
+          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id(),
+          kernel::nextPacketSequence(kernel::unit_id(), kernel::unit_id(),
+                                     packet.component_id(), packet.type_and_id()));
       }
       packet_log.copyPayload(packet);
     }
@@ -40,8 +44,8 @@ void Logger::loop() {
     packet_log.append("Ts").setInt(millis()); // Add timestamp in ms
 
     bool ok = true;
-    ok |= file_.write(packet.encode(), packet.size()) == packet.size();
-    ok |= file_.write((uint8_t)packet.checksum()) == 1;
+    ok |= file_.write(packet_log.encode(), packet_log.size()) == packet_log.size();
+    ok |= file_.write((uint8_t)packet_log.checksum()) == 1;
     ok |= file_.write((uint8_t)'\0') == 1;
 
     if (!ok) {

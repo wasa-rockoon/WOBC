@@ -29,7 +29,9 @@ void GPS::SampleTimer::callback(){
         gps_.encode(ss_.read());
     }
     wcpp::Packet packet = newPacket(64);
-    packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
+    packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF,
+                     kernel::nextPacketSequence(unit_id_, 0xFF, component_id(),
+                                                wcpp::packet_type_mask | telemetry_id));
     packet.append("LA").setFloat64(gps_.location.lat());
     packet.append("LO").setFloat64(gps_.location.lng());
     packet.append("AL").setInt((int)gps_.altitude.meters());

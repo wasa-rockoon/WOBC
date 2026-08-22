@@ -71,7 +71,10 @@ void LiPoPower::SampleTimer::callback() {
   // Powertelemetry_id パケット送信
 
   wcpp::Packet packet1 = newPacket(64);
-  packet1.telemetry(Powertelemetry_id, lipo_power_.component_id, unit_id_, 0xFF, 1234);
+  packet1.telemetry(Powertelemetry_id, lipo_power_.component_id, unit_id_, 0xFF,
+                    kernel::nextPacketSequence(unit_id_, 0xFF,
+                                               lipo_power_.component_id,
+                                               wcpp::packet_type_mask | Powertelemetry_id));
   packet1.append("Sc").setBool(source);
   packet1.append("Vp").setInt(x1_mV);
   packet1.append("Ip").setInt(x1_mA);

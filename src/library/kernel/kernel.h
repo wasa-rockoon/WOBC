@@ -15,6 +15,11 @@ namespace kernel {
 #define WOBC_PACKET_HEAP_SIZE 16384
 #endif
 
+// Number of independently sequenced packet streams tracked by the kernel.
+#ifndef WOBC_PACKET_SEQUENCE_STREAMS
+#define WOBC_PACKET_SEQUENCE_STREAMS 32
+#endif
+
 class Kernel;
 
 extern Kernel kernel_;
@@ -26,6 +31,8 @@ public:
   bool begin(uint8_t module_id, bool check_module_id = true);
 
   wcpp::Packet allocPacket(uint8_t size);
+  uint16_t nextPacketSequence(uint8_t origin_unit_id, uint8_t dest_unit_id,
+                              uint8_t component_id, uint8_t type_and_id);
   void sendPacket(const wcpp::Packet& packet, const Listener* exclude = nullptr);
 
   void addListener(Listener& listener);
@@ -41,6 +48,12 @@ private:
   Heap packet_heap_;
   PatriciaTrieTree<ListenerArg> packet_listener_tree_;
   unsigned packet_count_;
+  struct PacketSequenceStream {
+    uint32_t key = 0;
+    uint16_t next = 0;
+    bool used = false;
+  };
+  PacketSequenceStream packet_sequence_streams_[WOBC_PACKET_SEQUENCE_STREAMS];
 
   unsigned error_count_;
 
@@ -81,6 +94,13 @@ inline void setUnitId(uint8_t unit_id) {
 
 inline const unsigned& packetCount() { return kernel_.packet_count_; }
 inline const unsigned& errorCount() { return kernel_.error_count_; }
+
+// Returns the next sequence number for this origin/destination/component/packet
+// type stream. The 16-bit value wraps naturally after 65535.
+inline uint16_t nextPacketSequence(uint8_t origin_unit_id, uint8_t dest_unit_id,
+                                   uint8_t component_id, uint8_t type_and_id) {
+  return kernel_.nextPacketSequence(origin_unit_id, dest_unit_id, component_id, type_and_id);
+}
 
 inline uint8_t module_id() { return kernel_.module_id_; }
 inline uint8_t unit_id() { return kernel_.unit_id_; }

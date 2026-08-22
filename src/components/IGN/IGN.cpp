@@ -75,7 +75,10 @@ void IGN::SampleTimer::callback() {
   // Powertelemetry_id パケット送信
 
   wcpp::Packet packet1 = newPacket(64);
-  packet1.telemetry(Powertelemetry_id, ign_.component_id, unit_id_, 0xFF, 1234);
+  packet1.telemetry(Powertelemetry_id, ign_.component_id, unit_id_, 0xFF,
+                    kernel::nextPacketSequence(unit_id_, 0xFF,
+                                               ign_.component_id,
+                                               wcpp::packet_type_mask | Powertelemetry_id));
   packet1.append("Vi").setInt(x1_mV);
   packet1.append("Ii").setInt(x1_mA);
   packet1.append("Pi").setInt(x1_mW);

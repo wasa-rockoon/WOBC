@@ -58,6 +58,38 @@ wcpp::Packet Kernel::allocPacket(uint8_t size) {
   return wcpp::Packet::empty(buf, size, refChangeStatic);
 }
 
+uint16_t Kernel::nextPacketSequence(uint8_t origin_unit_id, uint8_t dest_unit_id,
+                                    uint8_t component_id, uint8_t type_and_id) {
+  const uint32_t key = (uint32_t)type_and_id
+                     | ((uint32_t)component_id << 8)
+                     | ((uint32_t)origin_unit_id << 16)
+                     | ((uint32_t)dest_unit_id << 24);
+
+  enter();
+  PacketSequenceStream* empty_stream = nullptr;
+  for (auto& stream : packet_sequence_streams_) {
+    if (stream.used && stream.key == key) {
+      const uint16_t sequence = stream.next++;
+      exit();
+      return sequence;
+    }
+    if (!stream.used && empty_stream == nullptr) empty_stream = &stream;
+  }
+
+  // A stream is identified by origin, destination, component and packet type/ID.
+  // Do not silently merge streams: callers can increase the configurable limit.
+  assert(empty_stream != nullptr);
+  if (empty_stream == nullptr) {
+    exit();
+    return 0;
+  }
+  empty_stream->key = key;
+  empty_stream->next = 1;
+  empty_stream->used = true;
+  exit();
+  return 0;
+}
+
 
 void Kernel::refChange(const wcpp::Packet& packet, int change) {
   // Serial.printf("change %d %d %d\n", packet.getBuf() - packet_heap_arena_, change, packet_heap_.getRefCount(packet.getBuf()));

@@ -43,7 +43,9 @@ public:
     delay(1000);
     LOG("GS working");
     wcpp::Packet p = newPacket(64);
-    p.telemetry('A', 0x11, 0x22, 0x33, 12345);
+    p.telemetry('A', 0x11, 0x22, 0x33,
+                kernel::nextPacketSequence(0x22, 0x33, 0x11,
+                                           wcpp::packet_type_mask | 'A'));
     p.append("La").setInt(1351234);
     p.append("Lo").setInt(351234);
     p.append("Al").setInt(1234);

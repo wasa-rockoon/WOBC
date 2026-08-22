@@ -73,10 +73,14 @@ void Telemeter::loop() {
     if (packet.isLocal()) {
       if (packet.isCommand()) {
         packet_tele.command(
-          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
+          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id(),
+          kernel::nextPacketSequence(kernel::unit_id(), kernel::unit_id(),
+                                     packet.component_id(), packet.type_and_id()));
       } else {
         packet_tele.telemetry(
-          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id());
+          packet.packet_id(), packet.component_id(), kernel::unit_id(), kernel::unit_id(),
+          kernel::nextPacketSequence(kernel::unit_id(), kernel::unit_id(),
+                                     packet.component_id(), packet.type_and_id()));
       }
       packet_tele.copyPayload(packet);
     } else {

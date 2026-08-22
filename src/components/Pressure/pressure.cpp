@@ -136,7 +136,9 @@ void Pressure::SampleTimer::callback() { // Timerで定期的に実行される�
   double pressureAlt = pressure_.height(pres) - pressure_.height(sealevel_Pa);  // オブジェクト pressure_ を使って height を呼び出す
 
   wcpp::Packet packet = newPacket(64);
-  packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
+  packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF,
+                   kernel::nextPacketSequence(unit_id_, 0xFF, component_id(),
+                                              wcpp::packet_type_mask | telemetry_id));
   packet.append("Sp").setInt((int)sealevel_Pa);
   packet.append("PR").setInt((int)pres);
   packet.append("TE").setInt((int)temp);
