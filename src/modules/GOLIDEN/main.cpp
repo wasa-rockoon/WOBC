@@ -39,7 +39,6 @@
 constexpr uint8_t module_id = 0x4E;  // GOLIDEN module ID
 constexpr uint8_t unit_id = 0x63;
 
-HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
 
 
@@ -56,29 +55,37 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
-    kernel::Listener my_listener_;
-    kernel::Listener heartbeat_;
+    kernel::Listener tx_listener_;
 
     void setup() override {
-        my_listener_.telemetry(); 
-        listen(my_listener_, 8);
-        heartbeat_.component(0x4D);
-        listen(heartbeat_,1);
+        listen(tx_listener_, 8);
     }
 
     void loop() override {
-        while (my_listener_) {
-            wcpp::Packet packet = my_listener_.pop();
-                wcpp::Packet lorapacket = newPacket(64);
-                auto im = packet.find("Im");
-                if(!im){
-                    lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
-                    lorapacket.append("Pa").setPacket(packet);
-                    sendPacket(lorapacket);
-                }
+        while (tx_listener_) {
+            wcpp::Packet packet = tx_listener_.pop();
+
+            if (packet.component_id() == (component::LoRa::component_id_base + 0) &&
+                packet.packet_id() == component::LoRa::send_command_id) {
+                continue;
             }
+
+            if (packet.find("Ss")) {
+                continue;
+            }
+
+            auto im = packet.find("Im");
+            if (im) {
+                continue;
+            }
+
+            wcpp::Packet lorapacket = newPacket(packet.size() + 32);
+            lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+            lorapacket.append("Pa").setPacket(packet);
+            sendPacket(lorapacket, tx_listener_);
         }
-    }main_;
+    }
+} main_;
 
 void setup() {
     Serial.begin(115200);
@@ -102,7 +109,7 @@ void setup() {
     power.begin();
     lora.begin();
     //pressure.begin();
-    imu.begin();
+    //imu.begin();
     gps.begin();
     logger.begin();
     main_.begin();

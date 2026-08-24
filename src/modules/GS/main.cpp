@@ -6,6 +6,7 @@
 #include <components/LoRa/lora.h>
 #include <SPI.h>
 
+// SPI / SD Card Pin Definitions
 #define SPI0_SCK_PIN 12
 #define SPI0_MOSI_PIN 11
 #define SPI0_MISO_PIN 13
@@ -17,6 +18,7 @@
 #define SDCARD_SS_PIN SPI0_CS_PIN
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
 
+// GS&LoRa一体型基板 LoRa Module Pin Definitions
 #define LORA_CHANNEL 3
 #define LORA_TX_PIN 38
 #define LORA_RX_PIN 39
@@ -25,9 +27,9 @@
 #define LORA_M1_PIN 11
 
 constexpr uint8_t module_id = 0x47;
-constexpr uint8_t unit_id = 0x64; // 書き込むユニットごとに変える
+constexpr uint8_t unit_id = 0x64; // 書き込むユニットごとに設定
 
-// Core
+// Core Interfaces
 core::CANBus can_bus(44, 43);
 core::SerialBus serial_bus(Serial);
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -63,7 +65,7 @@ public:
         continue;
       }
 
-      // PC等から届いたパケットを LoRa 送信用コマンドパケットに包んで送信
+      // PC等からSerialBus経由で届いたパケットを LoRa 送信用コマンドパケットに包んで送信
       wcpp::Packet lorapacket = newPacket(packet.size() + 32);
       lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
       lorapacket.append("Pa").setPacket(packet);
@@ -108,7 +110,7 @@ void loop() {
 
   status_indicator.update();
   error_indicator.update();
-
 }
+
 
 

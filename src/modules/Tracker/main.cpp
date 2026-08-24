@@ -53,50 +53,40 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
-    kernel::Listener my_listener_;
-    kernel::Listener heartbeat_;
     kernel::Listener uplink_listener_;
 
     void setup() override {
-        my_listener_.telemetry(); 
-        listen(my_listener_, 8);
-        heartbeat_.component(0x54);
-        listen(heartbeat_,1);
         listen(uplink_listener_, 8);
     }
 
     void loop() override {
-        while (my_listener_) {
-            wcpp::Packet packet = my_listener_.pop();
-            wcpp::Packet lorapacket = newPacket(64);
-            auto im = packet.find("Im");
-            if(!im){
-                lorapacket.command(lora.send_command_id, lora.component_id_base + 0); // LoRaコンポーネントのIDを指定
-                lorapacket.append("Pa").setPacket(packet); // 受信したパケットを新しいパケットにコピー
-                sendPacket(lorapacket);
-            }
-        }
-
         while (uplink_listener_) {
             wcpp::Packet rx_packet = uplink_listener_.pop();
-            auto rssi_entry = rx_packet.find("Ss");
-            if (rssi_entry) {
-                int rssi = (*rssi_entry).getInt();
-                LOG("Uplink Received! Packet ID: '%c' (0x%02X), TargetComp: 0x%02X, Size: %d, RSSI: %d dBm",
-                    rx_packet.packet_id(), rx_packet.packet_id(), rx_packet.component_id(), rx_packet.size(), rssi);
 
-                // ACK応答パケットの作成 (Packet ID 'a', Status "St"=0, 受信Packet ID "Ri")
-                wcpp::Packet ack_packet = newPacket(32);
-                ack_packet.telemetry('a', rx_packet.component_id());
-                ack_packet.append("St").setInt(0);
-                ack_packet.append("Ri").setInt(rx_packet.packet_id());
+            // ACK対象はLoRa受信パケットだけに限定する。送信コマンドや
+            // 自分で生成したACKを再処理すると、Tracker内で無限ループになる。
+            if (!rx_packet.find("Ss")) continue;
 
-                // ACKパケットを LoRa 送信用コマンドパケット ("Pa" エントリ) に包んで返信
-                wcpp::Packet lora_send_packet = newPacket(ack_packet.size() + 32);
-                lora_send_packet.command(lora.send_command_id, lora.component_id_base + 0);
-                lora_send_packet.append("Pa").setPacket(ack_packet);
-                sendPacket(lora_send_packet, uplink_listener_);
-            }
+            // PC コマンド ('t' または 'c') 以外のパケット (自動送信センサーデータ等) は無視
+            char pid = rx_packet.packet_id();
+            if (pid != 't' && pid != 'c') continue;
+
+            // 1. ログ出力
+            LOG("Uplink Received! Packet ID: '%c' (0x%02X)", rx_packet.packet_id(), rx_packet.packet_id());
+
+            // 2. ACKパケットの作成 (Packet ID 'a', Status "St"=0, 受信Packet ID "Ri")
+            wcpp::Packet ack_packet = newPacket(32);
+            ack_packet.telemetry('a', rx_packet.component_id());
+            ack_packet.append("St").setInt(0);                    // 0: 成功
+            ack_packet.append("Ri").setInt(rx_packet.packet_id()); // 受信したパケットID
+
+            // 3. ACKパケットを LoRa 送信用コマンドパケット ("Pa" エントリ) に包んで返信
+            wcpp::Packet lora_send_packet = newPacket(ack_packet.size() + 32);
+            lora_send_packet.command(lora.send_command_id, lora.component_id_base + 0);
+            lora_send_packet.append("Pa").setPacket(ack_packet);
+            
+            // 4. LoRaコンポーネントへ送出
+            sendPacket(lora_send_packet, uplink_listener_);
         }
     }
 } main_;
