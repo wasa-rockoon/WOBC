@@ -7,15 +7,16 @@
 #include <components/Pressure/pressure.h>
 #include <components/Heater/Heater.h>
 #include <components/Servo/LogServo.h>
+#include <components/MotorControl/MotorControl.h>
 
-#define I2C_SCL_PIN 5
-#define I2C_SDA_PIN 4
+#define I2C_SCL_PIN 16
+#define I2C_SDA_PIN 17
 #define I2C_freq 1000000
 
-#define SPI0_SCK_PIN 18
-#define SPI0_MOSI_PIN 15
-#define SPI0_MISO_PIN 16
-#define SPI0_CS_PIN 17
+#define SPI0_SCK_PIN 12
+#define SPI0_MOSI_PIN 11
+#define SPI0_MISO_PIN 13
+#define SPI0_CS_PIN 10
 
 #define SD_INSERTED_PIN 9
 #define SDCARD_MOSI_PIN SPI0_MOSI_PIN
@@ -28,11 +29,12 @@ core::SerialBus serial_bus(Serial);
 constexpr uint8_t module_id = 0x45;
 constexpr uint8_t unit_id = 0x66;
 
-component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
-component::IMU9 imu(Wire, unit_id, 100, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
-component::Heater heater(Wire, unit_id, 1);
-component::LogServo servo(12, 34, unit_id, WITH_READANGLE, 50);
-//component::Pressure pressure(Wire, unit_id, 20);
+//component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
+//component::IMU9 imu(Wire, unit_id, 100, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
+//component::Heater heater(Wire, unit_id, 1);
+//component::LogServo servo(12, 34, unit_id, WITH_READANGLE, 50);
+//component::Pressure pressure(Wire, unit_id, 1);
+component::MotorControl motor(2, 3, unit_id, 1000, 50);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -94,7 +96,7 @@ void setup() {
     kernel::setUnitId(unit_id);
     if (!kernel::begin(module_id, true)) return;
 
-    wobc::beginSPI(SPI, SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
+    //wobc::beginSPI(SPI, SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
     wobc::beginI2C(Wire, I2C_SDA_PIN, I2C_SCL_PIN, I2C_freq);
     serial_bus.begin(); 
 
@@ -106,12 +108,13 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
     
-    logger.begin();
-    imu.begin(); 
-    heater.begin();
-    servo.begin();
+    //logger.begin();
+    //imu.begin(); 
+    //heater.begin();
+    //servo.begin();
     //pressure.begin();
-    main_.begin();
+    //main_.begin();
+    motor.begin();
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);
