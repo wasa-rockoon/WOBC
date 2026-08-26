@@ -1778,7 +1778,7 @@
 			)
 			(justify left)
 		)
-		(uuid "b613d332-df40-4a8d-a438-d90ae425046e")
+		(uuid "2b0e0685-6131-4d93-86b1-44b22324d604")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 190.5102 45.3002 90)
 			(effects
@@ -1790,38 +1790,16 @@
 			)
 		)
 	)
-	(hierarchical_label "RF_switch2"
+	(hierarchical_label "RF_switch1"
 		(shape input)
-		(at 152.4102 82.394 0)
+		(at 152.4102 77.314 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "0df4369b-5aaf-4839-a2d2-ad3ba4f51b7f")
-	)
-	(hierarchical_label "LoRa_AUX"
-		(shape output)
-		(at 210.8302 72.234 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "57f99f6e-78a2-4462-9f5b-dd2a59a053a8")
-	)
-	(hierarchical_label "LoRa_RTX"
-		(shape output)
-		(at 210.8302 74.774 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "5a613c11-5f15-4904-aba0-936c8615ea2a")
+		(uuid "0bd8bf79-a19e-48be-a798-30a23cec679e")
 	)
 	(hierarchical_label "LoRa_TRX"
 		(shape input)
@@ -1832,29 +1810,7 @@
 			)
 			(justify left)
 		)
-		(uuid "68444d69-8df5-4286-bba8-7af8d37f567d")
-	)
-	(hierarchical_label "RF_switch1"
-		(shape input)
-		(at 152.4102 77.314 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "7a3fa94d-646e-429b-889d-4e839317e7a5")
-	)
-	(hierarchical_label "LoRa_M0"
-		(shape output)
-		(at 210.8302 82.394 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "87ea83ed-7836-4853-bb41-856e483271bd")
+		(uuid "5af70842-81da-4f76-b84d-954bad062bb8")
 	)
 	(hierarchical_label "LoRa_M1"
 		(shape output)
@@ -1865,19 +1821,64 @@
 			)
 			(justify left)
 		)
-		(uuid "df6c9747-3d70-4d10-8b79-38ecbb9683cc")
+		(uuid "7aeae70e-6666-4c2e-bfa8-fcce462648de")
+	)
+	(hierarchical_label "RF_switch2"
+		(shape input)
+		(at 152.4102 82.394 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "86a39241-6b5b-47b6-96c8-d54da3c3b4a1")
+	)
+	(hierarchical_label "LoRa_AUX"
+		(shape output)
+		(at 210.8302 72.234 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "97c6f66a-3924-44c2-8935-91fedb570f06")
+	)
+	(hierarchical_label "LoRa_M0"
+		(shape output)
+		(at 210.8302 82.394 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "eb1698ba-d83c-40b6-99c1-c77af73fe996")
+	)
+	(hierarchical_label "LoRa_RTX"
+		(shape output)
+		(at 210.8302 74.774 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "f2961317-b0d9-413e-a93a-d8d23584f8a7")
 	)
 	(symbol
-		(lib_id "Device:C_Small")
-		(at 171.4602 62.074 0)
+		(lib_id "Connector:Conn_Coaxial_Power")
+		(at 114.2266 111.2319 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "043e063b-9fe2-4c84-af3b-10a23c00fbf2")
-		(property "Reference" "C209"
-			(at 166.3802 60.804 0)
+		(fields_autoplaced yes)
+		(uuid "033b60bb-fa6b-425f-b00c-b835d1169a8d")
+		(property "Reference" "J402"
+			(at 116.7666 111.4859 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1885,8 +1886,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10u"
-			(at 165.1102 63.344 0)
+		(property "Value" "SMA"
+			(at 116.7666 114.0259 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1894,8 +1895,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 171.4602 62.074 0)
+		(property "Footprint" "WOBCLibrary:SMA_aki"
+			(at 114.2266 112.5019 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1904,7 +1905,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 171.4602 62.074 0)
+			(at 114.2266 112.5019 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1913,7 +1914,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 171.4602 62.074 0)
+			(at 114.2266 111.2319 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1921,90 +1922,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C96446"
-			(at 171.4602 62.074 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "71c70d15-1e4c-4757-8ed5-c24bb85a5d85")
-		)
-		(pin "2"
-			(uuid "0d205474-6712-4ecf-aff6-b704d7d6697b")
-		)
-		(instances
-			(project "LoRa_ESP"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "C209")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "C209")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 147.3302 92.554 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2026cb05-b35d-453d-be06-972649188887")
-		(property "Reference" "C206"
-			(at 142.2502 91.284 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100n"
-			(at 139.7102 93.824 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 147.3302 92.554 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 147.3302 92.554 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 147.3302 92.554 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C1525"
-			(at 147.3302 92.554 0)
+		(property "LCSC" ""
+			(at 114.2266 111.2319 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2013,181 +1932,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "187efd81-213e-405a-8883-2aebf12625f0")
+			(uuid "15e39426-7514-43e0-a639-1acb4a1e4dff")
 		)
 		(pin "2"
-			(uuid "d72ff176-f266-4dc2-b01e-d343fbd91c89")
+			(uuid "5808ea16-348f-4266-b9ee-48f8f7d1e703")
 		)
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "C206")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "C206")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 123.2002 82.394 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "2aeac09b-dd54-47e4-b882-267a06d0f7ae")
-		(property "Reference" "C205"
-			(at 123.2002 86.204 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100p"
-			(at 123.2002 88.744 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 123.2002 82.394 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 123.2002 82.394 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 123.2002 82.394 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" " C14858"
-			(at 123.2002 82.394 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ae339bca-63c4-4dd1-841b-8b5a3d19271f")
-		)
-		(pin "2"
-			(uuid "0eca2fb9-34a5-40fd-b524-a8f4ddd48a59")
-		)
-		(instances
-			(project "LoRa_ESP"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "C205")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "C205")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 151.1402 92.554 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "3fac4d53-4c42-432c-bb9e-9cbe8f31ffeb")
-		(property "Reference" "C207"
-			(at 153.6802 91.2903 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "100n"
-			(at 153.6802 93.824 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 151.1402 92.554 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 151.1402 92.554 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 151.1402 92.554 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" "C1525"
-			(at 151.1402 92.554 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "835760af-0162-422d-9c3a-3b3a89700ea0")
-		)
-		(pin "2"
-			(uuid "350ac73b-7301-4455-9d6b-59de20ff8e4b")
-		)
-		(instances
-			(project "LoRa_ESP"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "C207")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "C207")
+					(reference "J402")
 					(unit 1)
 				)
 			)
@@ -2201,8 +1954,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "52da6cc4-8680-420c-ae1b-358fbcfc2086")
-		(property "Reference" "Switch201"
+		(uuid "0ded840b-471c-4ccc-ab0d-7d8d7ad102e0")
+		(property "Reference" "Switch401"
 			(at 138.1333 73.1818 0)
 			(effects
 				(font
@@ -2275,110 +2028,23 @@
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "Switch201")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "Switch201")
+					(reference "Switch401")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "Diode:ESD9B5.0ST5G")
-		(at 94.4119 112.2762 90)
+		(lib_id "Device:C_Small")
+		(at 147.3302 92.554 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "57a0381d-427d-47bd-90ea-f453c415b9b7")
-		(property "Reference" "D201"
-			(at 85.905 110.985 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "ESD9B5.0ST5G"
-			(at 77.474 113.7193 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Diode_SMD:D_SOD-882"
-			(at 94.4119 112.2762 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF"
-			(at 94.4119 112.2762 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "ESD protection diode, 5.0Vrwm, SOD-923"
-			(at 94.4119 112.2762 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" " C7420372"
-			(at 94.4119 112.2762 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "bf22edc9-9d50-47e9-9956-09a84c51a618")
-		)
-		(pin "2"
-			(uuid "cd66ce78-e5be-4c8d-bcf4-6f394a8af85e")
-		)
-		(instances
-			(project "LoRa_ESP"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "D201")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "D201")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Connector:Conn_Coaxial_Power")
-		(at 101.922 110.8522 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5fb3fa66-8ca4-4842-b894-2c9fe357844a")
-		(property "Reference" "J203"
-			(at 104.462 111.1062 0)
+		(uuid "1d98b01b-db74-44f7-9e95-05ce42755094")
+		(property "Reference" "C403"
+			(at 142.2502 91.284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2386,8 +2052,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SMA"
-			(at 104.462 113.6462 0)
+		(property "Value" "100n"
+			(at 139.7102 93.824 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2395,8 +2061,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "WOBCLibrary:SMA_aki"
-			(at 101.922 112.1222 0)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 147.3302 92.554 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2405,7 +2071,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 101.922 112.1222 0)
+			(at 147.3302 92.554 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2414,7 +2080,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 101.922 110.8522 0)
+			(at 147.3302 92.554 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2422,8 +2088,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
-			(at 101.922 110.8522 0)
+		(property "LCSC" "C1525"
+			(at 147.3302 92.554 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2432,19 +2098,91 @@
 			)
 		)
 		(pin "1"
-			(uuid "62a174ec-3959-4bda-9808-565da450759f")
+			(uuid "187efd81-213e-405a-8883-2aebf12625f0")
 		)
 		(pin "2"
-			(uuid "ad9a9adf-c1c1-4bfe-8279-cc107d723dae")
+			(uuid "d72ff176-f266-4dc2-b01e-d343fbd91c89")
 		)
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "J203")
+					(reference "C403")
 					(unit 1)
 				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "J203")
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 123.2002 82.394 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "21898774-061b-4a71-8613-821a0a0a7eee")
+		(property "Reference" "C402"
+			(at 123.2002 86.204 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100p"
+			(at 123.2002 88.744 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 123.2002 82.394 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 123.2002 82.394 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 123.2002 82.394 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" " C14858"
+			(at 123.2002 82.394 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "ae339bca-63c4-4dd1-841b-8b5a3d19271f")
+		)
+		(pin "2"
+			(uuid "0eca2fb9-34a5-40fd-b524-a8f4ddd48a59")
+		)
+		(instances
+			(project "LoRa_ESP"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
+					(reference "C402")
 					(unit 1)
 				)
 			)
@@ -2459,8 +2197,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "6631f876-7886-43ea-ad62-26580fe0b728")
-		(property "Reference" "D202"
+		(uuid "256b26b7-2b45-43c9-ad94-cae750b11f17")
+		(property "Reference" "D402"
 			(at 127.8245 111.158 90)
 			(effects
 				(font
@@ -2523,11 +2261,85 @@
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "D202")
+					(reference "D402")
 					(unit 1)
 				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "D202")
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 175.2702 62.074 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "30c66a43-1f83-47db-9d4a-24b62771fc30")
+		(property "Reference" "C407"
+			(at 177.8102 60.8103 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 177.8102 63.344 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 175.2702 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 175.2702 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 175.2702 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C1525"
+			(at 175.2702 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "651813e0-6621-4a52-984e-0acb3c28456a")
+		)
+		(pin "2"
+			(uuid "4115b8f5-6b27-4591-8d49-d1582269566b")
+		)
+		(instances
+			(project "LoRa_ESP"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
+					(reference "C407")
 					(unit 1)
 				)
 			)
@@ -2535,16 +2347,16 @@
 	)
 	(symbol
 		(lib_id "Connector:Conn_Coaxial_Power")
-		(at 114.2266 111.2319 0)
+		(at 101.922 110.8522 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "6f3d862d-f315-493c-a792-e74d1d25b004")
-		(property "Reference" "J204"
-			(at 116.7666 111.4859 0)
+		(uuid "3ddd1e8b-b7c8-49b4-9f09-c7bf8e80b528")
+		(property "Reference" "J401"
+			(at 104.462 111.1062 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2553,7 +2365,7 @@
 			)
 		)
 		(property "Value" "SMA"
-			(at 116.7666 114.0259 0)
+			(at 104.462 113.6462 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2562,7 +2374,7 @@
 			)
 		)
 		(property "Footprint" "WOBCLibrary:SMA_aki"
-			(at 114.2266 112.5019 0)
+			(at 101.922 112.1222 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2571,7 +2383,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 114.2266 112.5019 0)
+			(at 101.922 112.1222 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2580,7 +2392,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 114.2266 111.2319 0)
+			(at 101.922 110.8522 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2589,7 +2401,7 @@
 			)
 		)
 		(property "LCSC" ""
-			(at 114.2266 111.2319 0)
+			(at 101.922 110.8522 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2598,100 +2410,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "15e39426-7514-43e0-a639-1acb4a1e4dff")
+			(uuid "62a174ec-3959-4bda-9808-565da450759f")
 		)
 		(pin "2"
-			(uuid "5808ea16-348f-4266-b9ee-48f8f7d1e703")
+			(uuid "ad9a9adf-c1c1-4bfe-8279-cc107d723dae")
 		)
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "J204")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "J204")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 123.2002 77.314 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "79f8c681-d5c8-4402-acce-90c870e50966")
-		(property "Reference" "C204"
-			(at 123.1938 70.964 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100p"
-			(at 123.1938 73.504 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
-			(at 123.2002 77.314 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 123.2002 77.314 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 123.2002 77.314 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC" " C14858"
-			(at 123.2002 77.314 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0e3d0803-5d5a-490a-93af-fe92dfe6ce23")
-		)
-		(pin "2"
-			(uuid "289fb959-6100-4d07-af2a-692fa7e2a03f")
-		)
-		(instances
-			(project "LoRa_ESP"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "C204")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "C204")
+					(reference "J401")
 					(unit 1)
 				)
 			)
@@ -2705,8 +2432,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7bd4b31b-8c73-4e20-abd7-c0e7beb19dcd")
-		(property "Reference" "C208"
+		(uuid "6a3b36f7-523f-4742-bb59-2ebd4b6f8ac8")
+		(property "Reference" "C405"
 			(at 166.3802 73.504 90)
 			(effects
 				(font
@@ -2767,11 +2494,229 @@
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "C208")
+					(reference "C405")
 					(unit 1)
 				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "C208")
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 171.4602 62.074 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cc9b290d-d7e9-48f1-ad76-f899ec817032")
+		(property "Reference" "C406"
+			(at 166.3802 60.804 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10u"
+			(at 165.1102 63.344 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 171.4602 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 171.4602 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 171.4602 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C96446"
+			(at 171.4602 62.074 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "71c70d15-1e4c-4757-8ed5-c24bb85a5d85")
+		)
+		(pin "2"
+			(uuid "0d205474-6712-4ecf-aff6-b704d7d6697b")
+		)
+		(instances
+			(project "LoRa_ESP"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
+					(reference "C406")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 190.5102 129.384 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d366a6b8-25f6-4cd1-aa13-4945b9050784")
+		(property "Reference" "#PWR0401"
+			(at 190.5102 135.734 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 190.5102 134.464 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 190.5102 129.384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5102 129.384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 190.5102 129.384 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7a95d367-333f-473c-a2ca-e8806b39e1bc")
+		)
+		(instances
+			(project "LoRa_ESP"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
+					(reference "#PWR0401")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 151.1402 92.554 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d69766ff-4d0a-4f9f-a14e-edf1b1970bc8")
+		(property "Reference" "C404"
+			(at 153.6802 91.2903 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100n"
+			(at 153.6802 93.824 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 151.1402 92.554 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 151.1402 92.554 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 151.1402 92.554 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C1525"
+			(at 151.1402 92.554 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "835760af-0162-422d-9c3a-3b3a89700ea0")
+		)
+		(pin "2"
+			(uuid "350ac73b-7301-4455-9d6b-59de20ff8e4b")
+		)
+		(instances
+			(project "LoRa_ESP"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
+					(reference "C404")
 					(unit 1)
 				)
 			)
@@ -2786,8 +2731,8 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "d606f66c-dd1f-4da6-9a89-8ed73641a5f3")
-		(property "Reference" "U202"
+		(uuid "d785681b-2c33-4e84-a5af-a062633936d6")
+		(property "Reference" "U401"
 			(at 192.7043 62.074 0)
 			(effects
 				(font
@@ -2892,81 +2837,7 @@
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "U202")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "U202")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 190.5102 129.384 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d9f42a5e-0508-4832-8fe3-7d65d4e05ca4")
-		(property "Reference" "#PWR0208"
-			(at 190.5102 135.734 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 190.5102 134.464 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 190.5102 129.384 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 190.5102 129.384 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 190.5102 129.384 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7a95d367-333f-473c-a2ca-e8806b39e1bc")
-		)
-		(instances
-			(project "LoRa_ESP"
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "#PWR0208")
-					(unit 1)
-				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "#PWR0208")
+					(reference "U401")
 					(unit 1)
 				)
 			)
@@ -2974,33 +2845,32 @@
 	)
 	(symbol
 		(lib_id "Device:C_Small")
-		(at 175.2702 62.074 0)
+		(at 123.2002 77.314 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "fc27cd4e-81f6-4230-8d12-331e17d58003")
-		(property "Reference" "C210"
-			(at 177.8102 60.8103 0)
+		(fields_autoplaced yes)
+		(uuid "dea238f8-d3d1-481e-808f-cb01cac459ff")
+		(property "Reference" "C401"
+			(at 123.1938 70.964 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Value" "100n"
-			(at 177.8102 63.344 0)
+		(property "Value" "100p"
+			(at 123.1938 73.504 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 175.2702 62.074 0)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 123.2002 77.314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3009,7 +2879,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 175.2702 62.074 0)
+			(at 123.2002 77.314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3018,7 +2888,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 175.2702 62.074 0)
+			(at 123.2002 77.314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3026,8 +2896,8 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C1525"
-			(at 175.2702 62.074 0)
+		(property "LCSC" " C14858"
+			(at 123.2002 77.314 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3036,19 +2906,93 @@
 			)
 		)
 		(pin "1"
-			(uuid "651813e0-6621-4a52-984e-0acb3c28456a")
+			(uuid "0e3d0803-5d5a-490a-93af-fe92dfe6ce23")
 		)
 		(pin "2"
-			(uuid "4115b8f5-6b27-4591-8d49-d1582269566b")
+			(uuid "289fb959-6100-4d07-af2a-692fa7e2a03f")
 		)
 		(instances
 			(project "LoRa_ESP"
 				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
-					(reference "C210")
+					(reference "C401")
 					(unit 1)
 				)
-				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/3b791c74-f14e-421b-856f-483993ca41de"
-					(reference "C210")
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:ESD9B5.0ST5G")
+		(at 94.4119 112.2762 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e435719d-1c4b-4c7c-8f63-1db47c60149b")
+		(property "Reference" "D401"
+			(at 85.905 110.985 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "ESD9B5.0ST5G"
+			(at 77.474 113.7193 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-882"
+			(at 94.4119 112.2762 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF"
+			(at 94.4119 112.2762 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "ESD protection diode, 5.0Vrwm, SOD-923"
+			(at 94.4119 112.2762 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" " C7420372"
+			(at 94.4119 112.2762 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bf22edc9-9d50-47e9-9956-09a84c51a618")
+		)
+		(pin "2"
+			(uuid "cd66ce78-e5be-4c8d-bcf4-6f394a8af85e")
+		)
+		(instances
+			(project "LoRa_ESP"
+				(path "/920f9ee9-d8de-4f24-ad72-1c45434a67fe/08150646-03d3-490b-91bc-b349c1a686bf"
+					(reference "D401")
 					(unit 1)
 				)
 			)
