@@ -37,9 +37,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 3.5,
-          "height": 6.0,
-          "width": 6.0
+          "drill": 0.762,
+          "height": 1.524,
+          "width": 1.524
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.2
         }
       },
       "diff_pair_dimensions": [
@@ -58,7 +58,96 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        [
+          "copper_edge_clearance|117200000|36610000|04d0a519-ba57-4a6d-a116-fd23015fb20e|76b6467d-68cf-445b-a052-0c728b810995",
+          ""
+        ],
+        [
+          "copper_edge_clearance|120190000|36610000|04d0a519-ba57-4a6d-a116-fd23015fb20e|3bb49640-97c6-4d30-bbe8-406985306167",
+          ""
+        ],
+        [
+          "copper_edge_clearance|120190000|96610000|be080317-ee50-453e-9ab8-1faf1ef19203|436ebb79-a86a-41f6-8a41-3dd292afff35",
+          ""
+        ],
+        [
+          "copper_edge_clearance|127190000|36610000|f947f4fc-693f-49dd-99c5-04f5c6eb5155|93c1e347-cd99-401c-8f8c-e4f203d05890",
+          ""
+        ],
+        [
+          "copper_edge_clearance|127190000|96610000|f2e60c8e-0796-40dc-ab2c-7cb413c593cf|7190a10d-e5a7-451e-98da-33cae77a5738",
+          ""
+        ],
+        [
+          "copper_edge_clearance|176950000|36610000|f947f4fc-693f-49dd-99c5-04f5c6eb5155|a6eeeda7-d6bf-4d0e-9f83-3202683786ff",
+          ""
+        ],
+        [
+          "copper_edge_clearance|180190000|36610000|f947f4fc-693f-49dd-99c5-04f5c6eb5155|4a813431-7e45-4f73-9838-120b99563507",
+          ""
+        ],
+        [
+          "copper_edge_clearance|180190000|96610000|f2e60c8e-0796-40dc-ab2c-7cb413c593cf|4acf187e-40d0-4fe1-89c8-5d3c313f8716",
+          ""
+        ],
+        [
+          "copper_edge_clearance|63690000|40110000|c2e0af27-f165-4eba-bbe9-76af31bf7120|c5c514c1-cd8f-4301-b647-4d2e6f868fef",
+          ""
+        ],
+        [
+          "copper_edge_clearance|63690000|93110000|c2e0af27-f165-4eba-bbe9-76af31bf7120|cf8f5bda-1df4-4f90-88fe-18f73c414602",
+          ""
+        ],
+        [
+          "drill_out_of_range|142650000|51995000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|142650000|53395000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|143350000|51295000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|143350000|52695000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|143350000|54095000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|144050000|51995000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|144050000|53395000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|144750000|51295000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|144750000|52695000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|144750000|54095000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|145450000|51995000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ],
+        [
+          "drill_out_of_range|145450000|53395000|29ae4dc3-da6c-4897-9c16-d3ce01c0fe19|00000000-0000-0000-0000-000000000000",
+          ""
+        ]
+      ],
       "meta": {
         "version": 2
       },
@@ -479,7 +568,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.1,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
