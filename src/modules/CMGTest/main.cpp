@@ -30,11 +30,11 @@ constexpr uint8_t module_id = 0x45;
 constexpr uint8_t unit_id = 0x66;
 
 //component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
-//component::IMU9 imu(Wire, unit_id, 100, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
+component::IMU9 imu(Wire, unit_id, 10, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
 //component::Heater heater(Wire, unit_id, 1);
 //component::LogServo servo(12, 34, unit_id, WITH_READANGLE, 50);
-//component::Pressure pressure(Wire, unit_id, 1);
-component::MotorControl motor(2, 3, unit_id, 1000, 50);
+component::Pressure pressure(Wire, unit_id, 1);
+//component::MotorControl motor(2, 3, unit_id, 1000, 50);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -109,12 +109,12 @@ void setup() {
     error_indicator.set(true);
     
     //logger.begin();
-    //imu.begin(); 
+    imu.begin(); 
     //heater.begin();
     //servo.begin();
-    //pressure.begin();
-    //main_.begin();
-    motor.begin();
+    pressure.begin();
+    main_.begin();
+    //motor.begin();
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);

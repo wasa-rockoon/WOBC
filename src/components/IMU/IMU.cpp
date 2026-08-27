@@ -6,7 +6,7 @@ IMU9::IMU9(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz, int data_mod
   : process::Component("IMU", component_id),
     wire_(wire),
     IMU_(&::IMU),
-    ICM42688_(wire_, 0x69),
+    ICM42688_(wire_, 0x68),
     MMC5603_(),
     unit_id_(unit_id),
     data_mode(data_mode),
