@@ -130,14 +130,14 @@ namespace component {
             CalculatedTemperature[ch] = tempCelsius;
         }
         }
-        wcpp::Packet packet = newPacket(32);
+        wcpp::Packet packet = newPacket(64);
         packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF,
                          kernel::nextPacketSequence(unit_id_, 0xFF, component_id(),
                                                     wcpp::packet_type_mask | telemetry_id));
-        packet.append("Ca").setFloat32(CalculatedTemperature[0]);
-        packet.append("Cb").setFloat32(CalculatedTemperature[1]);
-        packet.append("Cc").setFloat32(CalculatedTemperature[2]);
-        packet.append("Cd").setFloat32(CalculatedTemperature[3]);
+        packet.append("Ca").setFloat16(CalculatedTemperature[0]);
+        packet.append("Cb").setFloat16(CalculatedTemperature[1]);
+        packet.append("Cc").setFloat16(CalculatedTemperature[2]);
+        packet.append("Cd").setFloat16(CalculatedTemperature[3]);
         packet.append("Hs").setBool(heater_.heater_output_high_);
         packet.append("Ts").setInt((int)millis());
         sendPacket(packet);

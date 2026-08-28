@@ -20,6 +20,7 @@
 
 constexpr uint8_t module_id = 0x40;
 constexpr uint8_t unit_id = 0x40;
+constexpr unsigned ign_sample_freq_hz = 10;
 constexpr component::Heater::AdcResolution heater_adc_resolution =
     component::Heater::AdcResolution::BIT_12;
 
@@ -28,7 +29,7 @@ core::SerialBus serial_bus(Serial);
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
-component::IGN ign(Wire, 5, 6, 4, unit_id);
+component::IGN ign(Wire, 5, 6, 4, unit_id, ign_sample_freq_hz);
 component::Heater heater(Wire, unit_id, 1, heater_adc_resolution);
 
 
