@@ -299,6 +299,55 @@ Micro SDカードにタイムスタンプ付きでログを記録する．
 
 # Ignite (36)
 
+コンポーネントIDは `36` (0x24)．モジュール内の全コンポーネントの初期化成功後にフェーズ0を開始し，開始から最短36秒後に点火するBBMシーケンスを実行する．タスクの遅延時は警告時間を省略せず，点火時刻を安全側（遅い側）へ延長する．
+
+モジュール側は `begin(true)` を呼び，最初のIGNループから開始する．`begin(false)` の場合は初期化のみを行い，`startSequence()` で開始できる．`abortSequence()` は内部エラー時に点火出力を直ちに停止する．同一boot中に開始できるのは1回だけとする．
+
+| ピン名 | 種別 | 内容 |
+| --- | --- | --- |
+| NORMAL | Digital Out | 状態表示LED．点火回路には接続されていない |
+| HIGH | Digital Out | HIGHのみでブザーが鳴る |
+| LOW | Digital Out | HIGHとLOWの両方がHIGHで点火 |
+
+## 電力状態（I）
+
+| エントリ名 | データ型 | 内容 |
+| --- | --- | --- |
+|Vi|int|点火回路電圧(mV)|
+|Ii|int|点火回路電流(mA)|
+|Pi|int|点火回路電力(mW)|
+|Ts|int|タイムスタンプ(ms)|
+
+## 点火シーケンス状態（S）
+
+状態が変化した時点で即座に送信し，変化が無い場合も1秒周期で送信する．
+
+| エントリ名 | データ型 | 内容 |
+| --- | --- | --- |
+|Ph|enum|シーケンス状態（0: Startup, 1: Countdown, 2: Final, 3: Ignition, 4: Done, 5: Disarmed, 6: Fault）|
+|Et|int|現在の状態に入ってからの経過時間(ms)|
+|St|int|シーケンス開始からの経過時間(ms)|
+|Rt|int|点火までの残り時間(ms)．点火後は0|
+|Bz|bool|ブザー鳴動中|
+|Ig|bool|点火出力中（HIGHとLOWが両方HIGH）|
+|Hi|bool|HIGHピンへ要求した出力状態（電気的なreadbackではない）|
+|Lo|bool|LOWピンへ要求した出力状態（電気的なreadbackではない）|
+|Nl|bool|NORMAL LEDへ要求した出力状態|
+|Ok|bool|初期化成功かつFault状態でない|
+|Ts|int|タイムスタンプ(ms)|
+
+### シーケンス状態（Ph）
+
+| 値 | 状態 | 長さ | ブザー | NORMAL LED |
+| --- | --- | --- | --- | --- |
+|0|Startup|1秒|連続|点灯|
+|1|Countdown|30秒|1秒周期で0.2秒|ブザーと同期して点滅|
+|2|Final|5秒|連続|5Hzで点滅|
+|3|Ignition|3秒|—|点灯|
+|4|Done|—|—|2秒周期で一瞬点灯|
+|5|Disarmed|—|—|消灯|
+|6|Fault|—|—|2Hzで点滅|
+
 # RCS (37)
 
 # TankPressure (40)

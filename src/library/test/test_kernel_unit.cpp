@@ -1,5 +1,6 @@
 #include <library/kernel/heap.h>
 #include <library/kernel/patricia_tri_tree.h>
+#include <components/IGN/IGNSequence.h>
 
 #include <cassert>
 #include <cstring>
@@ -8,6 +9,8 @@
 #include <random>
 #include <unity.h>
 
+void setUp() {}
+void tearDown() {}
 
 void test_heap() {
   unsigned arena_size = 4096;
@@ -146,12 +149,116 @@ void test_tree() {
   }
 }
 
+void test_ign_sequence_transitions() {
+  component::IGNSequence sequence;
 
+  auto state = sequence.update(0);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Disarmed,
+                    (int)state.phase);
+  TEST_ASSERT_FALSE(state.high);
+  TEST_ASSERT_FALSE(state.low);
+
+  TEST_ASSERT_TRUE(sequence.start(0));
+  state = sequence.update(0);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Startup,
+                    (int)state.phase);
+  TEST_ASSERT_TRUE(state.high);
+  TEST_ASSERT_FALSE(state.low);
+  TEST_ASSERT_EQUAL_UINT32(36000, state.remaining_ms);
+
+  state = sequence.update(999);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Startup,
+                    (int)state.phase);
+  state = sequence.update(1000);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Countdown,
+                    (int)state.phase);
+  TEST_ASSERT_TRUE(state.phase_changed);
+
+  state = sequence.update(30999);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Countdown,
+                    (int)state.phase);
+  state = sequence.update(31000);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Final,
+                    (int)state.phase);
+  TEST_ASSERT_TRUE(state.high);
+  TEST_ASSERT_FALSE(state.low);
+
+  state = sequence.update(35999);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Final,
+                    (int)state.phase);
+  state = sequence.update(36000);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Ignition,
+                    (int)state.phase);
+  TEST_ASSERT_TRUE(state.high);
+  TEST_ASSERT_TRUE(state.low);
+
+  state = sequence.update(38999);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Ignition,
+                    (int)state.phase);
+  state = sequence.update(39000);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Done,
+                    (int)state.phase);
+  TEST_ASSERT_FALSE(state.high);
+  TEST_ASSERT_FALSE(state.low);
+}
+
+void test_ign_sequence_never_energizes_after_expiry() {
+  component::IGNSequence sequence;
+  TEST_ASSERT_TRUE(sequence.start(0));
+  sequence.update(1000);
+  sequence.update(31000);
+  auto state = sequence.update(36000);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Ignition,
+                    (int)state.phase);
+
+  // If the next update is late, it must go directly to a safe Done output.
+  state = sequence.update(45000);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Done,
+                    (int)state.phase);
+  TEST_ASSERT_FALSE(state.high);
+  TEST_ASSERT_FALSE(state.low);
+}
+
+void test_ign_sequence_abort_fault_and_single_start() {
+  component::IGNSequence sequence;
+  TEST_ASSERT_TRUE(sequence.start(10));
+  sequence.abort(20);
+  auto state = sequence.update(20);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Disarmed,
+                    (int)state.phase);
+  TEST_ASSERT_FALSE(state.high);
+  TEST_ASSERT_FALSE(state.low);
+  TEST_ASSERT_FALSE(sequence.start(21));
+
+  component::IGNSequence faulted;
+  faulted.fault(30);
+  state = faulted.update(30);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Fault,
+                    (int)state.phase);
+  TEST_ASSERT_FALSE(state.high);
+  TEST_ASSERT_FALSE(state.low);
+  TEST_ASSERT_FALSE(faulted.start(31));
+}
+
+void test_ign_sequence_millis_wraparound() {
+  component::IGNSequence sequence;
+  const uint32_t start = UINT32_MAX - 499;
+  TEST_ASSERT_TRUE(sequence.start(start));
+
+  const auto state = sequence.update(500);
+  TEST_ASSERT_EQUAL((int)component::IGNSequence::Phase::Countdown,
+                    (int)state.phase);
+  TEST_ASSERT_FALSE(state.low);
+}
 
 int main() {
   UNITY_BEGIN();
   RUN_TEST(test_tree);
   RUN_TEST(test_heap);
+  RUN_TEST(test_ign_sequence_transitions);
+  RUN_TEST(test_ign_sequence_never_energizes_after_expiry);
+  RUN_TEST(test_ign_sequence_abort_fault_and_single_start);
+  RUN_TEST(test_ign_sequence_millis_wraparound);
   UNITY_END();
   return 0;
 }

@@ -18,9 +18,12 @@
 #define SDCARD_SS_PIN SPI0_CS_PIN
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
 
-constexpr uint8_t module_id = 0x40;
+constexpr uint8_t module_id = 'I';
 constexpr uint8_t unit_id = 0x40;
 constexpr unsigned ign_sample_freq_hz = 10;
+constexpr int ign_normal_pin = 5;
+constexpr int ign_high_pin = 6;
+constexpr int ign_low_pin = 4;
 constexpr component::Heater::AdcResolution heater_adc_resolution =
     component::Heater::AdcResolution::BIT_12;
 
@@ -29,7 +32,8 @@ core::SerialBus serial_bus(Serial);
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
-component::IGN ign(Wire, 5, 6, 4, unit_id, ign_sample_freq_hz);
+component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id,
+                   ign_sample_freq_hz);
 component::Heater heater(Wire, unit_id, 1, heater_adc_resolution);
 
 
@@ -66,14 +70,16 @@ public:
     }main_;
 
 void setup() {
-    
-
     Serial.begin(115200);
+
+    // Keep the ignition outputs safe even if kernel or task startup fails.
+    if (!ign.prepareSafeOutputs()) return;
+
     kernel::setUnitId(unit_id);
-    if (!kernel::begin(module_id, false)) return;
+    if (!kernel::begin(module_id, true)) return;
 
     Serial0.setPins(2, 1);
-    Wire.begin(17, 16);
+    if (!Wire.begin(17, 16)) return;
 
     can_bus.begin();
     serial_bus.begin();
@@ -88,11 +94,17 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
 
-    pressure.begin();
-    logger.begin();
-    ign.begin();
-    heater.begin();
-    main_.begin();
+    bool components_ok = true;
+    components_ok = pressure.begin() && components_ok;
+    components_ok = logger.begin() && components_ok;
+    components_ok = heater.begin() && components_ok;
+    components_ok = main_.begin() && components_ok;
+
+    // Start IGN only after every other component has initialized successfully.
+    if (!components_ok || !ign.begin(true)) {
+        ign.abortSequence();
+        return;
+    }
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);
