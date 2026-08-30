@@ -77,10 +77,10 @@ namespace component {
         }
         wcpp::Packet packet = newPacket(32);
         packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
-        packet.append("C1").setFloat32(CalculatedTemperature[0]);
-        packet.append("C2").setFloat32(CalculatedTemperature[1]);
-        packet.append("C3").setFloat32(CalculatedTemperature[2]);
-        packet.append("C4").setFloat32(CalculatedTemperature[3]);
+        packet.append("Ca").setFloat32(CalculatedTemperature[0]);
+        packet.append("Cb").setFloat32(CalculatedTemperature[1]);
+        packet.append("Cc").setFloat32(CalculatedTemperature[2]);
+        packet.append("Bv").setFloat32(CalculatedTemperature[3]);
         packet.append("Ts").setInt((int)millis());
         sendPacket(packet);
     }
