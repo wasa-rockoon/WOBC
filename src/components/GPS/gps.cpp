@@ -30,9 +30,10 @@ void GPS::SampleTimer::callback(){
     }
     wcpp::Packet packet = newPacket(64);
     packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
-    packet.append("LA").setFloat64(gps_.location.lat());
-    packet.append("LO").setFloat64(gps_.location.lng());
+    packet.append("LA").setFloat32(gps_.location.lat());
+    packet.append("LO").setFloat32(gps_.location.lng());
     packet.append("AL").setInt((int)gps_.altitude.meters());
+    packet.append("SV").setInt((int)gps_.satellites.value());
     
     // 時刻情報の文字列を作成（センチ秒まで）
     char timeStr[27];
@@ -43,7 +44,7 @@ void GPS::SampleTimer::callback(){
     
     // 文字列としてパケットに追加
     packet.append("UT").setString(timeStr);
-    //packet.append("Ts").setInt(millis());
+    packet.append("Ts").setInt(millis());
     sendPacket(packet);
     }
 }

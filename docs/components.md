@@ -257,6 +257,7 @@ Micro SDカードにタイムスタンプ付きでログを記録する．
 |LA|double|緯度(°)|
 |LO|double|経度(°)|
 |AL|int|GPS高度(m)|
+|SV|int|捕捉衛星数|
 |UT|int|Unix時間|
 
 ## GPSPassive (23)
@@ -267,6 +268,7 @@ Micro SDカードにタイムスタンプ付きでログを記録する．
 |LA|double|緯度(°)|
 |LO|double|経度(°)|
 |AL|int|GPS高度(m)|
+|SV|int|捕捉衛星数|
 |UT|int|Unix時間|
 
 # Pressure (25)
