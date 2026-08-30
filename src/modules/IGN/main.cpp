@@ -20,7 +20,6 @@
 
 constexpr uint8_t module_id = 'I';
 constexpr uint8_t unit_id = 0x40;
-constexpr unsigned ign_sample_freq_hz = 10;
 constexpr int ign_normal_pin = 5;
 constexpr int ign_high_pin = 6;
 constexpr int ign_low_pin = 4;
@@ -32,9 +31,8 @@ core::SerialBus serial_bus(Serial);
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
-component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id,
-                   ign_sample_freq_hz);
-component::Heater heater(Wire, unit_id, 1, heater_adc_resolution);
+component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id, 10);
+component::Heater heater(Wire, unit_id, 2, heater_adc_resolution);
 
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -50,7 +48,7 @@ public:
         my_listener_.telemetry(); 
         listen(my_listener_, 8);
         heartbeat_.component(0x54);
-        listen(heartbeat_,1);
+        listen(heartbeat_, 1);
     }
 
     void loop() override {
@@ -103,6 +101,7 @@ void setup() {
     // Start IGN only after every other component has initialized successfully.
     if (!components_ok || !ign.begin(true)) {
         ign.abortSequence();
+        error_indicator.set(true);
         return;
     }
 

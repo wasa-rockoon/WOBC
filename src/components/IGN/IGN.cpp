@@ -3,6 +3,7 @@
 namespace component {
 
 unsigned IGN::sampleIntervalMs(unsigned sample_freq_hz) {
+  // 1〜1000 Hz以外の指定は、安全な既定値（1秒）へ丸める。
   return sample_freq_hz >= 1 && sample_freq_hz <= 1000
        ? 1000 / sample_freq_hz
        : 1000;
@@ -16,6 +17,7 @@ IGN::IGN(TwoWire& wire, int normal_pin, int high_pin, int low_pin,
     high_pin_(high_pin),
     low_pin_(low_pin),
     unit_id_(unit_id),
+    // 周期・ピン番号・ピンの重複をここで検証し、不正な構成では動作させない。
     config_valid_(sample_freq_hz >= 1 && sample_freq_hz <= 1000
                && normal_pin >= 0 && high_pin >= 0 && low_pin >= 0
                && normal_pin != no_pin && high_pin != no_pin && low_pin != no_pin
@@ -25,6 +27,7 @@ IGN::IGN(TwoWire& wire, int normal_pin, int high_pin, int low_pin,
 }
 
 const char* IGN::phaseName(Phase phase) {
+  // テレメトリやログで読める名称へ状態列挙値を変換する。
   switch (phase) {
     case Phase::Startup:   return "Startup";
     case Phase::Countdown: return "Countdown";
@@ -40,8 +43,8 @@ const char* IGN::phaseName(Phase phase) {
 bool IGN::prepareSafeOutputs() {
   if (!config_valid_) return false;
 
-  // Set output latches before changing direction so startup never requests an
-  // energized igniter.
+  // 方向を出力へ切り替える前にラッチをLOWにすることで、起動時に
+  // 点火回路が一瞬でも通電されないようにする。
   digitalWrite(normal_pin_, LOW);
   digitalWrite(high_pin_, LOW);
   digitalWrite(low_pin_, LOW);
@@ -60,6 +63,7 @@ bool IGN::prepareSafeOutputs() {
 bool IGN::begin(bool start_immediately) {
   if (!prepareSafeOutputs()) return false;
 
+  // 電流計が使えない、または校正できない状態では点火を禁止する。
   const bool sensor_connected = ina_IGN_.begin();
   const int calibration_result = sensor_connected
                                ? ina_IGN_.setMaxCurrentShunt(4, 0.020)
@@ -76,8 +80,8 @@ bool IGN::begin(bool start_immediately) {
     return false;
   }
 
-  // Queue the initial transition before the component task starts. This avoids
-  // publishing a transient Disarmed status at power-up.
+  // コンポーネントタスクの開始前に最初の遷移を予約する。これにより起動時に
+  // 一時的なDisarmed状態を送信してしまうことを防ぐ。
   start_requested_ = start_immediately;
   begin_ok_ = true;
   if (!process::Component::begin()) {
@@ -100,12 +104,14 @@ bool IGN::startSequence() {
 }
 
 void IGN::abortSequence() {
+  // まず監視タスクの遮断要求を無効化し、GPIOを安全側へ戻す。
   cutoff_armed_ = false;
   forceSafeOutput();
   abort_requested_ = true;
 }
 
 void IGN::setup() {
+  // INA226の定期測定・テレメトリ送信を開始する。
   start(sample_timer_);
 }
 
@@ -113,17 +119,20 @@ void IGN::loop() {
   const unsigned long now = millis();
 
   if (abort_requested_) {
+    // 中止要求を状態機械に反映する。GPIOは要求受信時点で既に遮断済み。
     abort_requested_ = false;
     cutoff_armed_ = false;
     sequence_.abort(now);
   }
 
   if (cutoff_triggered_) {
+    // 独立監視タスクが点火時間超過を検出した場合、完了状態へ遷移する。
     cutoff_triggered_ = false;
     sequence_.cutoff(now);
   }
 
   if (start_requested_) {
+    // begin()またはstartSequence()で予約されたシーケンスを開始する。
     start_requested_ = false;
     if (!sequence_.start(now)) sequence_.fault(now);
   }
@@ -131,7 +140,7 @@ void IGN::loop() {
   IGNSequence::Snapshot snapshot = sequence_.update(now);
 
   if (snapshot.phase_changed && snapshot.phase == Phase::Ignition) {
-    // Arm the independent cutoff before energizing either ignition output.
+    // 点火出力を有効にする前に、独立した時間超過監視を必ず作動させる。
     if (!armCutoff()) {
       sequence_.fault(now);
       snapshot = sequence_.update(now);
@@ -150,7 +159,7 @@ void IGN::loop() {
 }
 
 void IGN::applySnapshot(const IGNSequence::Snapshot& snapshot) {
-  // All GPIOs are updated before the new phase is logged or transmitted.
+  // 新しい状態をログ・テレメトリへ出す前に、先にすべてのGPIOへ反映する。
   setOutput(snapshot.high, snapshot.low);
   setStatusLed(snapshot.status_led);
   if (snapshot.phase_changed) status_changed_ = true;
@@ -159,8 +168,8 @@ void IGN::applySnapshot(const IGNSequence::Snapshot& snapshot) {
 void IGN::setOutput(bool high, bool low) {
   portENTER_CRITICAL(&output_mux_);
 
-  // A stale snapshot cannot re-energize the circuit after abort or watchdog
-  // cutoff, even if either event preempted the component task.
+  // 中止や監視タスクの遮断がコンポーネントタスクへ割り込んだ場合でも、
+  // 古いスナップショットによる再通電を防ぐ。
   if (abort_requested_ || cutoff_triggered_) {
     high = false;
     low = false;
@@ -169,15 +178,15 @@ void IGN::setOutput(bool high, bool low) {
     low = false;
   }
 
-  // LOW without HIGH is never a valid requested state. Fail off if a corrupted
-  // state ever asks for it.
+  // HIGHなしでLOWだけを有効にする状態は不正なので、異常な要求は
+  // 非通電状態へ倒す。
   if (low && !high) {
     high = false;
     low = false;
   }
 
-  // De-energize before energizing. For ignition, HIGH is established first and
-  // LOW is the final action that completes the circuit.
+  // 遮断時は通電開始より先に出力を下げる。点火時はHIGHを先に確立し、
+  // LOWを最後に有効にして回路を閉じる。
   if (!low && low_out_) {
     digitalWrite(low_pin_, LOW);
     low_out_ = false;
@@ -207,7 +216,7 @@ void IGN::forceSafeOutput() {
     if (!prepareSafeOutputs()) return;
   }
 
-  // Do not depend on cached state when executing an emergency cutoff.
+  // 非常停止時はキャッシュした出力状態に頼らず、GPIOへ直接LOWを書き込む。
   portENTER_CRITICAL(&output_mux_);
   digitalWrite(low_pin_, LOW);
   digitalWrite(high_pin_, LOW);
@@ -218,6 +227,7 @@ void IGN::forceSafeOutput() {
 }
 
 void IGN::setStatusLed(bool on) {
+  // 状態が変化したときだけ書き込み、不要なGPIO操作を避ける。
   if (on == status_led_on_) return;
   digitalWrite(normal_pin_, on ? HIGH : LOW);
   status_led_on_ = on;
@@ -225,6 +235,7 @@ void IGN::setStatusLed(bool on) {
 }
 
 void IGN::sendStatus(const IGNSequence::Snapshot& snapshot) {
+  // 現在の段階、経過時間、GPIO出力、安全状態を1パケットにまとめて送る。
   wcpp::Packet packet = newPacket(80);
   packet.telemetry(Statustelemetry_id, component_id, unit_id_, 0xFF,
                    kernel::nextPacketSequence(unit_id_, 0xFF, component_id,
@@ -248,6 +259,7 @@ void IGN::sendStatus(const IGNSequence::Snapshot& snapshot) {
 }
 
 bool IGN::startCutoffTask() {
+  // 既に作成済みなら再利用し、なければ高優先度の監視タスクを起動する。
   if (cutoff_task_handle_ != nullptr) return true;
   return xTaskCreate(cutoffTaskEntry, "IGNCutoff", cutoff_task_stack_size,
                      this, configMAX_PRIORITIES - 1,
@@ -255,6 +267,7 @@ bool IGN::startCutoffTask() {
 }
 
 bool IGN::armCutoff() {
+  // 点火開始を監視タスクへ通知し、最大点火時間の計測を開始する。
   if (cutoff_task_handle_ == nullptr) return false;
   cutoff_armed_ = true;
   if (xTaskNotify(cutoff_task_handle_, 1, eSetValueWithOverwrite) == pdPASS) {
@@ -267,6 +280,7 @@ bool IGN::armCutoff() {
 void IGN::cutoffTaskEntry(void* instance) {
   IGN* ign = static_cast<IGN*>(instance);
   for (;;) {
+    // 点火開始通知を待ち、通知後に許容点火時間だけ待機する。
     ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
     vTaskDelay(pdMS_TO_TICKS(IGNSequence::ignition_ms));
     if (ign->cutoff_armed_) ign->cutoffFromWatchdog();
@@ -274,6 +288,7 @@ void IGN::cutoffTaskEntry(void* instance) {
 }
 
 void IGN::cutoffFromWatchdog() {
+  // 点火時間上限を超えたため、状態機械の処理を待たずに出力を強制遮断する。
   cutoff_armed_ = false;
   cutoff_triggered_ = true;
   forceSafeOutput();
@@ -287,6 +302,7 @@ IGN::SampleTimer::SampleTimer(INA226& ina_ref, uint8_t unit_id_ref,
 }
 
 void IGN::SampleTimer::callback() {
+  // INA226の基本単位（V/A/W）をテレメトリ用のmV/mA/mWへ変換する。
   const int voltage_mV = ina_IGN_.getBusVoltage() * 1000;
   const int current_mA = ina_IGN_.getCurrent() * 1000;
   const int power_mW = ina_IGN_.getPower() * 1000;
