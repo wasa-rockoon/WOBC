@@ -74,7 +74,7 @@ void setup() {
     if (!ign.prepareSafeOutputs()) return;
 
     kernel::setUnitId(unit_id);
-    if (!kernel::begin(module_id, true)) return;
+    if (!kernel::begin(module_id, false)) return;
 
     Serial0.setPins(2, 1);
     if (!Wire.begin(17, 16)) return;
@@ -92,18 +92,13 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
 
-    bool components_ok = true;
-    components_ok = pressure.begin() && components_ok;
-    components_ok = logger.begin() && components_ok;
-    components_ok = heater.begin() && components_ok;
-    components_ok = main_.begin() && components_ok;
+    pressure.begin();
+    logger.begin();
+    //heater.begin();
+    main_.begin();
 
-    // Start IGN only after every other component has initialized successfully.
-    if (!components_ok || !ign.begin(true)) {
-        ign.abortSequence();
-        error_indicator.set(true);
-        return;
-    }
+    //ign.begin();
+
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);
