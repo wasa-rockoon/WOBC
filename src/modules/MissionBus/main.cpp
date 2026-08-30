@@ -40,13 +40,14 @@ constexpr uint8_t unit_id = 0x62;
 
 HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
+core::CANBus can_bus(44, 43);
 
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
 component::IMU9 imu(Wire, unit_id, 100);
-component::GPS gps(39, 38, 115200, unit_id);
+component::GPS gps(38, 39, 9600, unit_id);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -86,6 +87,8 @@ void setup() {
     //Serial0.setPins(4, 5);
     Wire.begin(17, 16);
     serial_bus.begin();
+    can_bus.begin();
+    
 
     SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
@@ -100,7 +103,7 @@ void setup() {
     power.begin();
     //lora.begin();
     pressure.begin();
-    imu.begin();
+    //imu.begin();
     gps.begin();
     logger.begin();
     main_.begin();
