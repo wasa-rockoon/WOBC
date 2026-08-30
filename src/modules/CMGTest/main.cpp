@@ -8,10 +8,11 @@
 #include <components/Heater/Heater.h>
 #include <components/Servo/LogServo.h>
 #include <components/MotorControl/MotorControl.h>
+#include <components/LiPoPower/lipo_power.h>
 
 #define I2C_SCL_PIN 16
 #define I2C_SDA_PIN 17
-#define I2C_freq 1000000
+#define I2C_freq 400000
 
 #define SPI0_SCK_PIN 12
 #define SPI0_MOSI_PIN 11
@@ -24,17 +25,26 @@
 #define SDCARD_SS_PIN SPI0_CS_PIN
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
 
+#define ST 4
+#define PG 5
+#define STAT1 7
+#define STAT2 6
+#define HEAT 48
+#define CHARGELED 18
+#define TEMP 47
+
 core::SerialBus serial_bus(Serial); 
 
 constexpr uint8_t module_id = 0x45;
 constexpr uint8_t unit_id = 0x66;
 
-//component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
-component::IMU9 imu(Wire, unit_id, 10, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
+component::Logger logger(SPI, SPI0_CS_PIN, -1, 10.0);
+component::IMU9 imu(Wire, unit_id, 100, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
 //component::Heater heater(Wire, unit_id, 1);
 //component::LogServo servo(12, 34, unit_id, WITH_READANGLE, 50);
 component::Pressure pressure(Wire, unit_id, 1);
 //component::MotorControl motor(2, 3, unit_id, 1000, 50);
+component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -108,13 +118,14 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
     
-    //logger.begin();
+    logger.begin();
     imu.begin(); 
     //heater.begin();
     //servo.begin();
     pressure.begin();
     main_.begin();
     //motor.begin();
+    power.begin();
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);

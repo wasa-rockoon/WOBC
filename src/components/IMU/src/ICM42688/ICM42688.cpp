@@ -55,6 +55,9 @@ int ICM42688::begin() {
 		return ret;
 	}
 
+	setAccelODR(ICM42688::odr200); // 加速度センサーを200Hzに設定
+	setGyroODR(ICM42688::odr200); // ジャイロセンサーを200Hzに設定
+
 	// disable inner filters (Notch filter, Anti-alias filter, UI filter block)
 	if (setFilters(false, false) < 0) {
 		return -7;

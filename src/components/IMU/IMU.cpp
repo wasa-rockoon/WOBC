@@ -27,12 +27,14 @@ void IMU9::setup() {
     if (!ICM42688_.begin()) {
       error("I", "Failed to initialize ICM42688!");
     }
-    ICM42688_.setAccelFS(ICM42688::gpm16); // 加速度センサーのフルスケールレンジを±16gに設定
+    /*ICM42688_.setAccelFS(ICM42688::gpm16); // 加速度センサーのフルスケールレンジを±16gに設定
     ICM42688_.setGyroFS(ICM42688::dps2000); // ジャイロセンサーのフルスケールレンジを±2000dpsに設定
     ICM42688_.setAccelODR(ICM42688::odr200); // 加速度センサーを200Hzに設定
     ICM42688_.setGyroODR(ICM42688::odr200); // ジャイロセンサーを200Hzに設定
     ICM42688_.setFilters(true, false); // ジャイロセンサーのみにフィルタを適用
     ICM42688_.setGyroNotchFilter(166.7f, 166.7f, 166.7f, ICM42688::nfBW162Hz); // ジャイロセンサーのノッチフィルタを設定
+    delay(100); // ICM42688の設定後に少し待機する
+    */
     
     if (!MMC5603_.init()) {
       error("I", "Failed to initialize MMC5603!");
@@ -53,6 +55,7 @@ void IMU9::setup() {
       gyro_offset_ = calibrate_gyro();
     } 
   }
+  delay(100); // センサーの初期化後に少し待機する
   start(sample_timer_);
 }
 
