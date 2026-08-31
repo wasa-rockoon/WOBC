@@ -1,5 +1,9 @@
 #include "MotorControl.h"
 
+#if defined(ARDUINO_ARCH_ESP32)
+#include <esp_arduino_version.h>
+#endif
+
 namespace component {
 
 MotorControl* MotorControl::_instance = nullptr;
@@ -38,8 +42,15 @@ void MotorControl::begin() {
     pinMode(_ch2_pin, INPUT_PULLUP);
     pinMode(ch1_dir_pin, OUTPUT);
     pinMode(ch2_dir_pin, OUTPUT);
+#if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcAttach(ch1_pwm_pin, pwm_freq, 16);
     ledcAttach(ch2_pwm_pin, pwm_freq, 16);
+#else
+    ledcSetup(ch1_pwm_channel, pwm_freq, 16);
+    ledcSetup(ch2_pwm_channel, pwm_freq, 16);
+    ledcAttachPin(ch1_pwm_pin, ch1_pwm_channel);
+    ledcAttachPin(ch2_pwm_pin, ch2_pwm_channel);
+#endif
     attachInterrupt(digitalPinToInterrupt(_ch1_pin), handleInterrupt, RISING);
     attachInterrupt(digitalPinToInterrupt(_ch2_pin), handleInterrupt, RISING);
 }
@@ -66,14 +77,22 @@ void MotorControl::update() {
     float ch1_derivative = (ch1_error - ch1_previous_error) / dt;
     uint16_t ch1_duty = (uint16_t)(p_gain * ch1_error + i_gain * ch1_error_integral + d_gain * ch1_derivative);
     ch1_previous_error = ch1_error;
+#if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcWrite(ch1_pwm_pin, ch1_duty);
+#else
+    ledcWrite(ch1_pwm_channel, ch1_duty);
+#endif
 
     float ch2_error = _set_rpm - ch2_average_rpm;
     ch2_error_integral += ch2_error * dt;
     float ch2_derivative = (ch2_error - ch2_previous_error) / dt;
     uint16_t ch2_duty = (uint16_t)(p_gain * ch2_error + i_gain * ch2_error_integral + d_gain * ch2_derivative);
     ch2_previous_error = ch2_error;
+#if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcWrite(ch2_pwm_pin, ch2_duty);
+#else
+    ledcWrite(ch2_pwm_channel, ch2_duty);
+#endif
 
     wcpp::Packet packet = newPacket(128);
     packet.telemetry(_telemetry_id, component_id(), _unit_id, 0xFF, 1234);

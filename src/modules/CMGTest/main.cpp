@@ -7,8 +7,10 @@
 #include <components/Pressure/pressure.h>
 #include <components/Heater/Heater.h>
 #include <components/Servo/LogServo.h>
-#include <components/MotorControl/MotorControl.h>
+//#include <components/MotorControl/MotorControl.h>
 #include <components/LiPoPower/lipo_power.h>
+#include <components/PowerMeasure/PowerMeasure.h>
+
 
 #define I2C_SCL_PIN 16
 #define I2C_SDA_PIN 17
@@ -45,6 +47,7 @@ component::IMU9 imu(Wire, unit_id, 100, IMU_DATA_WITH_KALMAN_6, IMU_ICM_MMC);
 component::Pressure pressure(Wire, unit_id, 1);
 //component::MotorControl motor(2, 3, unit_id, 1000, 50);
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
+component::PowerMeasure power_measure(Wire, unit_id, 10);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -126,6 +129,7 @@ void setup() {
     main_.begin();
     //motor.begin();
     power.begin();
+    power_measure.begin();
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);

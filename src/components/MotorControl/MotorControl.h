@@ -12,6 +12,8 @@ private:
     uint8_t _ch2_pin;                     // センサー接続ピン
     static const uint8_t ch1_pwm_pin = 5;
     static const uint8_t ch2_pwm_pin = 6;
+    static const uint8_t ch1_pwm_channel = 0;
+    static const uint8_t ch2_pwm_channel = 1;
     static const uint8_t ch1_dir_pin = 7;
     static const uint8_t ch2_dir_pin = 8;
     uint16_t _set_rpm;                    // 設定RPM
