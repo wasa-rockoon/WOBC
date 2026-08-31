@@ -1,40 +1,53 @@
 // #define NDEBUG
 
 #include <library/wobc.h>
+#include <components/LiPoPower/lipo_power.h>
+#include <components/LoRa/lora.h>
 #include <components/Pressure/pressure.h>
+#include <components/IMU/IMU.h>
+#include <components/GPS/gps.h>
 #include <components/Logger/logger.h>
-#include <components/IGN/IGN.h>
-#include <components/Heater/Heater.h>
-#include <components/Telemeter/telemeter.h>
 #include <SPI.h>
 
-#define SPI0_SCK_PIN 12
-#define SPI0_MOSI_PIN 11
-#define SPI0_MISO_PIN 13
-#define SPI0_CS_PIN 10
+#define SPI0_SCK_PIN 5
+#define SPI0_MOSI_PIN 1
+#define SPI0_MISO_PIN 2
+#define SPI0_CS_PIN 4
 
-#define SD_INSERTED_PIN 9
+#define SD_INSERTED_PIN 6
 #define SDCARD_MOSI_PIN SPI0_MOSI_PIN
 #define SDCARD_MISO_PIN SPI0_MISO_PIN
 #define SDCARD_SS_PIN SPI0_CS_PIN
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
 
-constexpr uint8_t module_id = 'I';
-constexpr uint8_t unit_id = 0x40;
-constexpr int ign_normal_pin = 5;
-constexpr int ign_high_pin = 6;
-constexpr int ign_low_pin = 4;
-constexpr component::Heater::AdcResolution heater_adc_resolution =
-    component::Heater::AdcResolution::BIT_12;
+#define ST 8
+#define PG 11
+#define STAT1 10
+#define STAT2 -1
+#define HEAT 48
+#define CHARGELED -1
+#define TEMP 9
 
-core::CANBus can_bus(44, 43);
+#define LORA_CHANNEL 11
+#define LORA_TX_PIN 13
+#define LORA_RX_PIN 12
+#define LORA_AUX_PIN 21
+#define LORA_M0_PIN 14
+#define LORA_M1_PIN 18
+
+constexpr uint8_t module_id = 0x4D;
+constexpr uint8_t unit_id = 0x62;
+
+HardwareSerial lora_serial(1);
 core::SerialBus serial_bus(Serial);
+core::CANBus can_bus(44, 43);
 
+component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
+component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
-component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id, 10);
-component::Heater heater(Wire, unit_id, 2, heater_adc_resolution);
-component::Telemeter telemeter;
+component::IMU9 imu(Wire, unit_id, 100);
+component::GPS gps(38, 39, 9600, unit_id);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -48,40 +61,34 @@ public:
     void setup() override {
         my_listener_.telemetry(); 
         listen(my_listener_, 8);
-        heartbeat_.component(0x54);
-        listen(heartbeat_, 1);
+        heartbeat_.component(0x4D);
+        listen(heartbeat_,1);
     }
 
     void loop() override {
         while (my_listener_) {
-            delay(1000);
             wcpp::Packet packet = my_listener_.pop();
-                //wcpp::Packet lorapacket = newPacket(64);
-                //auto im = packet.find("Im");
-                //if(!im){
-                //    lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
-                //    lorapacket.append("Pa").setPacket(packet);
-                //    sendPacket(lorapacket);
-                //}
+                wcpp::Packet lorapacket = newPacket(64);
+                auto im = packet.find("Im");
+                if(!im){
+                    lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
+                    lorapacket.append("Pa").setPacket(packet);
+                    sendPacket(lorapacket);
+                }
             }
-        LOG("IGN working");
         }
     }main_;
 
 void setup() {
     Serial.begin(115200);
-
-    // Keep the ignition outputs safe even if kernel or task startup fails.
-    if (!ign.prepareSafeOutputs()) return;
-
     kernel::setUnitId(unit_id);
-    if (!kernel::begin(module_id, false)) return;
+    if (!kernel::begin(module_id, true)) return;
 
-    Serial0.setPins(2, 1);
-    if (!Wire.begin(17, 16)) return;
-
-    can_bus.begin();
+    //Serial0.setPins(4, 5);
+    Wire.begin(17, 16);
     serial_bus.begin();
+    can_bus.begin();
+    
 
     SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
@@ -93,15 +100,13 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
 
+    power.begin();
+    //lora.begin();
     pressure.begin();
+    //imu.begin();
+    gps.begin();
     logger.begin();
-    heater.begin();
-    telemeter.begin();
-
     main_.begin();
-
-    //ign.begin();
-
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);
