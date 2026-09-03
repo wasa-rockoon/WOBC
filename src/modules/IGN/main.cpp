@@ -5,6 +5,7 @@
 #include <components/Logger/logger.h>
 #include <components/IGN/IGN.h>
 #include <components/Heater/Heater.h>
+#include <components/FlightPin/FlightPin.h>
 #include <components/Telemeter/telemeter.h>
 #include <SPI.h>
 
@@ -34,6 +35,7 @@ component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
 component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id, 10);
 component::Heater heater(Wire, unit_id, 2, heater_adc_resolution);
+component::FlightPin flight_pin(unit_id, 21, 1);
 component::Telemeter telemeter;
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -75,7 +77,7 @@ void setup() {
     if (!ign.prepareSafeOutputs()) return;
 
     kernel::setUnitId(unit_id);
-    if (!kernel::begin(module_id, false)) return;
+    if (!kernel::begin(module_id, true)) return;
 
     Serial0.setPins(2, 1);
     if (!Wire.begin(17, 16)) return;
@@ -96,6 +98,7 @@ void setup() {
     pressure.begin();
     logger.begin();
     heater.begin();
+    flight_pin.begin();
     telemeter.begin();
 
     main_.begin();
