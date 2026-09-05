@@ -103,7 +103,7 @@ void setup() {
 
     main_.begin();
 
-    //ign.begin();
+    ign.begin(true);
 
 
     error_indicator.set(false);
