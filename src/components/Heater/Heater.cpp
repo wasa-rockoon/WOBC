@@ -16,13 +16,14 @@ namespace component {
             0.0f
             };
     
-    Heater::Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz,
+    Heater::Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz, uint8_t heater_pin,
                    AdcResolution adc_resolution)
         : process::Component("Heater", component_id),
           wire_(wire),
           unit_id_(unit_id),
           adc_resolution_(adc_resolution),
-          sample_timer_(*this, wire_, unit_id_, sample_freq_hz > 0 ? 1000 / sample_freq_hz : 1000) {
+          sample_timer_(*this, wire_, unit_id_, sample_freq_hz > 0 ? 1000 / sample_freq_hz : 1000),
+          heater_pin_(heater_pin) {
     }
 
     void Heater::setAdcResolution(AdcResolution adc_resolution) {
@@ -54,13 +55,15 @@ namespace component {
     }
 
     void Heater::setup() {
-        pinMode(HEATER_PIN, OUTPUT);
-        digitalWrite(HEATER_PIN, LOW);
+        ledcAttach(heater_pin_, FREQ, RES);
+        ledcWrite(heater_pin_, 0);
 
         wire_.beginTransmission(MCP3424_ADDR);
         if (wire_.endTransmission() != 0) {
             error("H", "Failed to initialize MCP3424!");
         }
+        ina1.begin();
+        ina1.setMaxCurrentShunt(1, 0.05);
         start(sample_timer_);
     }
 
@@ -72,11 +75,6 @@ namespace component {
     }
 
     void Heater::SampleTimer::callback() {
-        // Toggle the heater output once per timer period (one second by default).
-        heater_.heater_output_high_ = !heater_.heater_output_high_;
-        digitalWrite(Heater::HEATER_PIN,
-                     heater_.heater_output_high_ ? HIGH : LOW);
-
         // MCP3424の各CHの測定をキックする
         for (uint8_t ch = 0; ch < 4; ch++) {
             wire_.beginTransmission(MCP3424_ADDR);
@@ -130,6 +128,29 @@ namespace component {
             CalculatedTemperature[ch] = tempCelsius;
         }
         }
+
+        float busVoltage = ina1.getBusVoltage();
+        float busCurrent = ina1.getCurrent();
+
+        // 2. ヒーター制御
+        float maxTemp = max(CalculatedTemperature[0], max(CalculatedTemperature[1], max(CalculatedTemperature[2], CalculatedTemperature[3])));
+        String heater_status = "OFF";
+
+        // 先にバッテリー電圧をチェック
+        if (busVoltage < BATTERY_CUTOFF_V) {
+            ledcWrite(heater_pin_, 0);           // 強制終了
+            heater_status = "OFF_LOW_BATT";
+        }
+        // 電圧が正常で、温度が目標未満なら加熱
+        else if (maxTemp < TARGET_TEMP) {
+            ledcWrite(heater_pin_, 255);
+            heater_status = "ON";
+        }
+        // 目標温度に達したら停止
+        else {
+            ledcWrite(heater_pin_, 0);
+        }
+  
         wcpp::Packet packet = newPacket(64);
         packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF,
                          kernel::nextPacketSequence(unit_id_, 0xFF, component_id(),
@@ -138,7 +159,9 @@ namespace component {
         packet.append("Cb").setFloat16(CalculatedTemperature[1]);
         packet.append("Cc").setFloat16(CalculatedTemperature[2]);
         packet.append("Cd").setFloat16(CalculatedTemperature[3]);
-        packet.append("Hs").setBool(heater_.heater_output_high_);
+        packet.append("Vb").setFloat16(busVoltage);
+        packet.append("Ib").setFloat16(busCurrent);
+        packet.append("Hs").setString(heater_status);
         packet.append("Ts").setInt((int)millis());
         sendPacket(packet);
     }

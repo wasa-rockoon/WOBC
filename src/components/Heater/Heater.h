@@ -1,6 +1,7 @@
 #include <library/wobc.h>
 #include <Wire.h>
 #include <cmath>
+#include "INA226.h"
 
 #define MCP3424_ADDR 0x6A
 
@@ -18,7 +19,7 @@ namespace component {
             BIT_18 = 0x0C,
         };
 
-        Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 1,
+        Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz = 1, uint8_t heater_pin = HEATER_PIN,
                AdcResolution adc_resolution = AdcResolution::BIT_16);
         void setAdcResolution(AdcResolution adc_resolution);
         AdcResolution adcResolution() const;
@@ -37,10 +38,17 @@ namespace component {
         // ワンショットモードで各CHの測定をキックする設定バイト
         static const byte CONFIG_CH[4];
 
+        // ヒーター制御用定数
+        static const int   FREQ = 5000;
+        static const int   RES  = 8;
+        static const float TARGET_TEMP = 40.0;
+        static const float BATTERY_CUTOFF_V = 6.4;
+
         TwoWire& wire_;
         uint8_t unit_id_;
         AdcResolution adc_resolution_;
         bool heater_output_high_ = false;
+        INA226 ina1;
 
         uint16_t conversionTimeoutMs() const;
         float voltsPerCount() const;

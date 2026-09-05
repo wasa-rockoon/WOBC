@@ -34,7 +34,7 @@ core::SerialBus serial_bus(Serial);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
 component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id, 10);
-component::Heater heater(Wire, unit_id, 2, heater_adc_resolution);
+component::Heater heater(Wire, unit_id, 2, component::Heater::HEATER_PIN, heater_adc_resolution);
 component::FlightPin flight_pin(unit_id, 21, 1);
 component::Telemeter telemeter;
 
