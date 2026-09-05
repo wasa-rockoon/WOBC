@@ -40,6 +40,7 @@ protected:
   uint8_t unit_id_;
   int data_mode = 0;
   int sensor_mode = 0;
+  static int can_counter;
   int freq_;
   std::array<float, 3> gyro_offset_ = {0.0f, 0.0f, 0.0f};
   std::array<float, 3> bias_magnetometer_ = {0.0f, 0.0f, 0.0f};

@@ -25,6 +25,7 @@ namespace component {
         uint8_t mode_;
         uint8_t unit_id_;
         unsigned sample_freq_hz_;
+        Listener listener;
 
     protected:
         void setup() override;
@@ -35,7 +36,6 @@ namespace component {
   
     protected:
         void callback() override;
-  
     private:
         LogServo& servo_;
         uint8_t unit_id_;

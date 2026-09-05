@@ -56,6 +56,7 @@ void IMU9::setup() {
     } 
   }
   delay(100); // センサーの初期化後に少し待機する
+  can_counter = 0;
   start(sample_timer_);
 }
 
@@ -161,6 +162,27 @@ void IMU9::SampleTimer::callback() {
   
   packet.append("Ts").setInt((int)millis());
   sendPacket(packet);
+
+  // Send compact packet for CAN bus
+  // Contains only roll, pitch, yaw, and gyro data
+  can_counter++;
+  if (can_counter >= 2) { // Send every 2nd sample
+    can_counter = 0;
+    wcpp::Packet compact_packet = newPacket(48);
+    compact_packet.telemetry('A', component_id(), unit_id_, 0xFF, 1234);
+    compact_packet.append("Ro").setInt((int)(Ro * 100));      // Roll * 100 as int16
+    compact_packet.append("Pi").setInt((int)(Pi * 100));      // Pitch * 100 as int16
+    compact_packet.append("Ya").setInt((int)(Ya * 100));      // Yaw * 100 as int16
+    compact_packet.append("Gx").setInt((int)(Gx * 100));      // Gyro X * 100 as int16
+    compact_packet.append("Gy").setInt((int)(Gy * 100));      // Gyro Y * 100 as int16
+    compact_packet.append("Gz").setInt((int)(Gz * 100));      // Gyro Z * 100 as int16
+    compact_packet.append("Ax").setInt((int)(Ax * 100));      // Accel X * 100 as int16
+    compact_packet.append("Ay").setInt((int)(Ay * 100));      // Accel Y * 100 as int16
+    compact_packet.append("Az").setInt((int)(Az * 100));      // Accel Z * 100 as int16
+    compact_packet.append("Ts").setInt((int)millis());
+    sendPacket(compact_packet);
+  }
+  
 
   //uint32_t t4 = micros(); // ⑤ 全完了（送信完了）
 

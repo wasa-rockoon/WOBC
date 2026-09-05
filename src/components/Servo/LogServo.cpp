@@ -21,9 +21,11 @@ namespace component {
     }
 
     void LogServo::setup() {
-        servo1.attach(servo_pin_);
+        listener.command().packet('S');
         servo1.setPeriodHertz(50);
+        servo1.attach(servo_pin_);
         pinMode(adc_pin_, INPUT);
+        listen(listener, 16, true);
         start(sample_timer_);
     }
 
@@ -36,9 +38,21 @@ namespace component {
             int adc_value = analogRead(servo_.adc_pin_);
             servo_.observedAngle = map(adc_value, 0, 4095, 0, 180);
         }
+
+        if (servo_.listener) {
+            wcpp::Packet command_packet = servo_.listener.pop();
+            if (command_packet) {
+                auto angle_entry = command_packet.find("An");
+                if (angle_entry) {
+                    servo_.setAngle((*angle_entry).getFloat32());
+                }
+            }
+
+        }
+
         wcpp::Packet packet = newPacket(32);
         packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF, 1234);
-        packet.append("C1").setFloat32(servo_.observedAngle);
+        packet.append("An").setFloat32(servo_.observedAngle);
         sendPacket(packet);
     }
 }
