@@ -53,42 +53,89 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
-    kernel::Listener uplink_listener_;
 
     void setup() override {
-        listen(uplink_listener_, 8);
+        uplink_listener_.command();
+        listen(uplink_listener_, 32);
+        gps_listener_.telemetry().component(component::GPS::component_id)
+            .unit_origin(unit_id).packet(component::GPS::telemetry_id);
+        pressure_listener_.telemetry().component(component::Pressure::component_id)
+            .unit_origin(unit_id).packet(component::Pressure::telemetry_id);
+        listen(gps_listener_, 1);
+        listen(pressure_listener_, 1);
+        last_telemetry_ms_ = millis();
     }
 
     void loop() override {
-        while (uplink_listener_) {
-            wcpp::Packet rx_packet = uplink_listener_.pop();
-
-            // ACK対象はLoRa受信パケットだけに限定する。送信コマンドや
-            // 自分で生成したACKを再処理すると、Tracker内で無限ループになる。
-            if (!rx_packet.find("Ss")) continue;
-
-            // PC コマンド ('t' または 'c') 以外のパケット (自動送信センサーデータ等) は無視
-            char pid = rx_packet.packet_id();
-            if (pid != 't' && pid != 'c') continue;
-
-            // 1. ログ出力
-            LOG("Uplink Received! Packet ID: '%c' (0x%02X)", rx_packet.packet_id(), rx_packet.packet_id());
-
-            // 2. ACKパケットの作成 (Packet ID 'a', Status "St"=0, 受信Packet ID "Ri")
-            wcpp::Packet ack_packet = newPacket(32);
-            ack_packet.telemetry('a', rx_packet.component_id());
-            ack_packet.append("St").setInt(0);                    // 0: 成功
-            ack_packet.append("Ri").setInt(rx_packet.packet_id()); // 受信したパケットID
-
-            // 3. ACKパケットを LoRa 送信用コマンドパケット ("Pa" エントリ) に包んで返信
-            wcpp::Packet lora_send_packet = newPacket(ack_packet.size() + 32);
-            lora_send_packet.command(lora.send_command_id, lora.component_id_base + 0);
-            lora_send_packet.append("Pa").setPacket(ack_packet);
-            
-            // 4. LoRaコンポーネントへ送出
-            sendPacket(lora_send_packet, uplink_listener_);
+        // Retain a received command until its ACK has entered the priority queue.
+        // queuePacket() bypasses the lossy generic command listener, and returns
+        // false on backpressure. No packet is re-published into our own listener.
+        for (;;) {
+            if (pending_uplink_) {
+                wcpp::Packet ack = newPacket(32);
+                if (!ack) return;
+                ack.telemetry('a', pending_uplink_.component_id());
+                ack.append("St").setInt(0);
+                ack.append("Ri").setInt(pending_uplink_.packet_id());
+                if (!lora.queuePacket(ack, component::LoRa::TxPriority::Ack)) return;
+                LOG("[Tracker] Uplink received & ACK sending... (Packet ID: %c)",
+                    pending_uplink_.packet_id());
+                pending_uplink_ = wcpp::Packet::null();
+                last_telemetry_ms_ = millis();
+            }
+            if (!uplink_listener_) break;
+            wcpp::Packet packet = uplink_listener_.pop();
+            if (!packet.find("Ss")) continue;
+            if (packet.packet_id() != 't' && packet.packet_id() != 'c') continue;
+            pending_uplink_ = packet;
         }
+
+        if (gps_listener_) {
+            latest_gps_ = gps_listener_.pop();
+            gps_ms_ = millis();
+        }
+        if (pressure_listener_) {
+            latest_pressure_ = pressure_listener_.pop();
+            pressure_ms_ = millis();
+        }
+        const uint32_t now = millis();
+        if (uint32_t(now - last_telemetry_ms_) < telemetry_interval_ms ||
+            uplink_listener_ || !lora.canSendTelemetry()) return;
+
+        wcpp::Packet telemetry = newPacket(64);
+        if (!telemetry) return;
+        telemetry.telemetry('M', component_id(), unit_id, 0xFF, telemetry_sequence_);
+        telemetry.append("Ts").setInt(now);
+        // Cache sensor packets; never call sensor/UART drivers from this task.
+        // Missing/old samples are omitted instead of inventing a zero value.
+        if (latest_gps_ && uint32_t(now - gps_ms_) < 5000) {
+            for (const char* name : {"LA", "LO"}) {
+                auto value = latest_gps_.find(name);
+                if (value) telemetry.append(name).setFloat32((*value).getFloat32());
+            }
+            auto altitude = latest_gps_.find("AL");
+            if (altitude) telemetry.append("AL").setInt((*altitude).getInt());
+        }
+        if (latest_pressure_ && uint32_t(now - pressure_ms_) < 5000) {
+            for (const char* name : {"PR", "PA"}) {
+                auto value = latest_pressure_.find(name);
+                if (value) telemetry.append(name).setInt((*value).getInt());
+            }
+        }
+        // This second check/admission is serialized with ACK queueing and TX.
+        if (!lora.queuePacket(telemetry, component::LoRa::TxPriority::Telemetry)) return;
+        last_telemetry_ms_ = now; // No catch-up burst after busy periods.
+        ++telemetry_sequence_;
     }
+
+private:
+    static constexpr uint32_t telemetry_interval_ms = 2000;
+    kernel::Listener uplink_listener_, gps_listener_, pressure_listener_;
+    wcpp::Packet pending_uplink_ = wcpp::Packet::null();
+    wcpp::Packet latest_gps_ = wcpp::Packet::null();
+    wcpp::Packet latest_pressure_ = wcpp::Packet::null();
+    uint32_t last_telemetry_ms_ = 0, gps_ms_ = 0, pressure_ms_ = 0;
+    uint16_t telemetry_sequence_ = 0;
 } main_;
 
 void setup() {
@@ -111,6 +158,7 @@ void setup() {
     error_indicator.set(true);
 
     power.begin();
+    lora.enableTrackerScheduling();
     lora.begin();
     pressure.begin();
     gps.begin();

@@ -68,21 +68,25 @@ unsigned E220::receive(uint8_t* data, unsigned max_len) {
     if ((int)stream_.available() < len + 2) return 0;
     if (max_len > 0 && len > max_len) {
       for (int i = 0; i < len + 2; i++) stream_.read();
+      last_received_len_ = 0;
       return 0;
     }
     len = stream_.read();
     stream_.readBytes(data, len);
     rssi_ = - ((int)256 - (uint8_t)stream_.read());
+    last_received_len_ = 0; // Start a fresh timeout even for equal-length frames.
     return len;
   }
   else {
     if ((int)stream_.available() < len + 1) return 0;
     if (max_len > 0 && len > max_len) {
       for (int i = 0; i < len + 1; i++) stream_.read();
+      last_received_len_ = 0;
       return 0;
     }
     len = stream_.read();
     stream_.readBytes(data, len);
+    last_received_len_ = 0;
     return len;
   }
 }

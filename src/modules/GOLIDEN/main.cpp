@@ -56,12 +56,17 @@ class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
     kernel::Listener tx_listener_;
+    wcpp::Packet pending_tx_ = wcpp::Packet::null();
 
     void setup() override {
-        listen(tx_listener_, 8);
+        listen(tx_listener_, 32);
     }
 
     void loop() override {
+        if (pending_tx_) {
+            if (!lora.queuePacket(pending_tx_, component::LoRa::TxPriority::Normal)) return;
+            pending_tx_ = wcpp::Packet::null();
+        }
         while (tx_listener_) {
             wcpp::Packet packet = tx_listener_.pop();
 
@@ -71,19 +76,47 @@ public:
             }
 
             if (packet.find("Ss")) {
+                // LoRa already published this packet to SerialBus's independent
+                // listener. Publishing it again here would duplicate PC delivery.
+                // This branch accepts both ACK 'a' and telemetry 'M' (and other IDs).
+                logDownlink(packet.packet_id());
                 continue;
             }
+
+            // Local GPS/power telemetry and LOG packets must not occupy the RF
+            // channel or turn each downlink log into a new uplink transmission.
+            if (!packet.isCommand()) continue;
 
             auto im = packet.find("Im");
             if (im) {
                 continue;
             }
 
-            wcpp::Packet lorapacket = newPacket(packet.size() + 32);
-            lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
-            lorapacket.append("Pa").setPacket(packet);
-            sendPacket(lorapacket, tx_listener_);
+            if (packet.size() > component::LoRa::max_packet_size) {
+                LOG("GOLIDEN uplink rejected: packet too large (%u)", packet.size());
+                continue;
+            }
+
+            // Admission with backpressure avoids dropping PC commands while busy.
+            // Direct queueing does not re-publish to tx_listener_ or SerialBus.
+            if (!lora.queuePacket(packet, component::LoRa::TxPriority::Normal)) {
+                pending_tx_ = packet;
+                return;
+            }
         }
+    }
+
+private:
+    void logDownlink(uint8_t id) {
+        // Same '#' / 'Ms' log format as LOG(), with explicit listener exclusion.
+        char message[80];
+        snprintf(message, sizeof(message),
+                 "[GOLIDEN] LoRa Rx -> SerialBus Tx (Packet ID: %c)", id);
+        wcpp::Packet trace = newPacket(96);
+        if (!trace) return;
+        trace.telemetry(packet_id_log, component_id());
+        trace.append("Ms").setString(message);
+        sendPacket(trace, tx_listener_);
     }
 } main_;
 
