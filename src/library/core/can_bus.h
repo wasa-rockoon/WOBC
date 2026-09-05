@@ -33,7 +33,7 @@ private:
   driver::CAN can_;
   pin_t rx_;
   pin_t tx_;
-  Listener all_packets;
+  Listener can_compact;  // Only compact IMU telemetry packets
 
   struct PacketPoolSlot {
     uint32_t can_id;

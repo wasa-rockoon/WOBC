@@ -16,13 +16,14 @@ void CANBus::setup() {
   can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
 
   rx_queue_handle_ = xQueueCreate(WOBC_CAN_BUS_RX_QUEUE_SIZE, sizeof(FrameQueueItem));
-  listen(all_packets, WOBC_CAN_BUS_PACKET_QUEUE_SIZE, true);
+  listen(can_compact, WOBC_CAN_BUS_PACKET_QUEUE_SIZE, true);
+  can_compact.telemetry().packet('A');  // Only compact IMU telemetry (packet_id = 'A')
 }
 
 void CANBus::loop() {
   // Kernel to CAN bus
   {
-    const wcpp::Packet packet = all_packets.pop();
+    const wcpp::Packet packet = can_compact.pop();
     if (packet && packet.size() >= 4) {
 
       uint32_t id = (uint32_t)packet.packet_id() << 21
@@ -62,7 +63,7 @@ void CANBus::loop() {
         // Serial.printf("send %d %d %s\n", frame.id, frame.length, frame.data);
 
         if (!can_.send(frame)) {
-          error_(all_packets, "cbSN", "CAN bus, send error");
+          error_(can_compact, "cbSN", "CAN bus, send error");
           break;
         }
         frame.id++;
@@ -93,12 +94,12 @@ void CANBus::loop() {
 
           if (pool_[i].size == pool_[i].packet.size()) { // complete frame
             // Serial.printf("LAST %d %d\n", pool_[i].size, kernel::kernel_.packet_heap_.getRefCount(pool_[i].packet.getBuf()));
-            sendPacket(pool_[i].packet, all_packets);
+            sendPacket(pool_[i].packet, can_compact);
             pool_[i].packet.clear();
             pool_[i].can_id = 0;
           }
           else if (pool_[i].size > pool_[i].packet.size()) { // wrong size
-            error_(all_packets, "cbWS", "CAN bus, wrong size, expected: %d, actual: %d", pool_[i].size, pool_[i].packet.size());
+            error_(can_compact, "cbWS", "CAN bus, wrong size, expected: %d, actual: %d", pool_[i].size, pool_[i].packet.size());
             // printf("WRONG SIZE %d %d\n", pool_[i].size, pool_[i].packet.size());
             pool_[i].packet.clear();
             pool_[i].can_id = 0;
@@ -121,19 +122,19 @@ void CANBus::loop() {
       //first frame
 
       if ((item.can_id & 0b11111) != 0) { // missing previous frame
-        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0b11111);
+        error_(can_compact, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0b11111);
         return;
       }
 
       if (pool_[oldest].can_id != 0) { // lost frame
-        error_(all_packets, "cbLF", "CAN bus, lost frame, id:%X %X %x, %d", 
+        error_(can_compact, "cbLF", "CAN bus, lost frame, id:%X %X %x, %d", 
               0xFF & (item.can_id >> 21), 0xFF & (item.can_id >> 13), 0xFF & (item.can_id >> 5), 
               32 & pool_[oldest].can_id, oldest);
         pool_[oldest].can_id = 0;
       }
 
       if (item.length < 1) {
-        error_(all_packets, "cbEF", "CAN bus, empty frame");
+        error_(can_compact, "cbEF", "CAN bus, empty frame");
         return;
       }
 
@@ -153,13 +154,13 @@ void CANBus::loop() {
 
       if (pool_[oldest].packet.size() <= 10) { // single frame
           if (pool_[oldest].packet.size() != item.length + 3) { // wrong size
-            error_(all_packets, "cbWS", "CAN bus, wrong size first, expected: %d, actual: %d", 
+            error_(can_compact, "cbWS", "CAN bus, wrong size first, expected: %d, actual: %d", 
                    pool_[oldest].size, item.length + 3);
             pool_[oldest].packet.clear();
             pool_[oldest].can_id = 0;
           }
 
-        sendPacket(pool_[oldest].packet, all_packets);
+        sendPacket(pool_[oldest].packet, can_compact);
         pool_[oldest].packet.clear();
         pool_[oldest].can_id = 0;
       }
@@ -188,7 +189,7 @@ void CANBus::onReceive(const driver::CAN::Frame& frame) {
 }
 
 void CANBus::onError() {
-  error_(all_packets, "cbER", "CAN bus, can error");
+  error_(can_compact, "cbER", "CAN bus, can error");
 }
 
 }
