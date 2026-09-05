@@ -32,7 +32,7 @@ public:
 
   // 各段階の時間と、ブザー／LEDの点滅周期をミリ秒で定義する。
   static constexpr uint32_t startup_buzz_ms = 1000;
-  static constexpr uint32_t countdown_ms = 30000;
+  static constexpr uint32_t countdown_ms = 3000;
   static constexpr uint32_t countdown_beep_period_ms = 1000;
   static constexpr uint32_t countdown_beep_on_ms = 200;
   static constexpr uint32_t final_buzz_ms = 5000;
