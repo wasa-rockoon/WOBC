@@ -90,7 +90,7 @@ public:
 
         while (pressure_listener_) {
             wcpp::Packet packet = pressure_listener_.pop();
-            auto e = packet.find("Pa");
+            auto e = packet.find("PA");
             if (e) {
                 int pa = (*e).getInt();
                 if (pa > 17000) { // 高高度の判定条件
