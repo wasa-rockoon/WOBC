@@ -55,61 +55,83 @@ component::LogServo servo(SERVO_SIG_PIN, SERVO_READ_PIN, unit_id, WITH_READANGLE
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 
+uint8_t isMotorOn = 0;
+bool motor_started = false;
+uint8_t highAltitude = 0;
+uint8_t overheating = 0;
+static uint32_t missionStartTime = 0;
+static uint32_t fileSplitTime = 0;
+static uint32_t motorStartTime = 0;
+
 class Main : public process::Component {
 public:
     Main() : process::Component("Main", 0x00) {}
-    kernel::Listener my_listener_;
-    kernel::Listener heartbeat_;
+    kernel::Listener pressure_listener_;
+    kernel::Listener heater_listener_;
   
     void setup() override {
         LOG("CMG Task: Setup started"); 
-        my_listener_.component(0x25); 
-        listen(my_listener_, 128);
-        heartbeat_.component(0x4D);
-        listen(heartbeat_,1);
+        pressure_listener_.component(0x25);
+        listen(pressure_listener_, 128);
+        heater_listener_.component(0x46);
+        listen(heater_listener_, 128);
         LOG("CMG Task: loop starts"); 
+        missionStartTime = millis();
+        fileSplitTime = missionStartTime;
     }
 
     void loop() override {
-        uint8_t isMotorOn = 0;
-        uint8_t highAltitude = 0;
-        static uint32_t start_time = millis();
-        if (millis() - start_time > 1200000 && isMotorOn == 0) {
+        if (millis() - fileSplitTime > 1200000) {
             request_file_split.store(true);
-            start_time = millis();
+            fileSplitTime = millis();
         }
 
         delay(20);
 
-        if (isMotorOn == 1) {
-            static uint32_t motorStartTime = millis();
-            request_file_split.store(true);
-            LOG("Motor activated due to high altitude detection.");
-        }
-
-        if (my_listener_) { //main向けのログがあれば実行
-            wcpp::Packet packet = my_listener_.pop();
-            auto e = packet.find("PA");
+        while (pressure_listener_) {
+            wcpp::Packet packet = pressure_listener_.pop();
+            auto e = packet.find("Pa");
             if (e) {
                 int pa = (*e).getInt();
-                if (pa > 17000) { // 例: 高高度の判定条件
+                if (pa > 17000) { // 高高度の判定条件
                     highAltitude++;
                 }
             }
-        
-        if (highAltitude > 20) {
-            // 高高度が20回以上検出された場合の処理
-            LOG("High altitude detected 20 times.");
-            isMotorOn = 1; 
+        }
+
+        while (heater_listener_) {
+            wcpp::Packet packet = heater_listener_.pop();
+            auto e = packet.find("Ca");
+            if (isMotorOn && e && (*e).getFloat16() > 50.0f) { // 高温度の判定条件
+                overheating++;
+            }
+        }
+
+        if (!motor_started &&
+            (highAltitude > 19 || millis() - missionStartTime > 1800000)) { // 高高度が20回以上検出された場合、または30分経過した場合
+            motor_started = true;
+            isMotorOn = 1;
+            motorStartTime = millis();
+            digitalWrite(SERVO_EN_PIN, HIGH); // サーボモータの電源をONにする
             highAltitude = 0; // カウンタをリセット
+            request_file_split.store(true);
+            LOG("Motor activated.");
         }
 
+        if (isMotorOn &&
+            (overheating > 4 || millis() - motorStartTime > 300000)) { // 高温度が5回以上検出された場合、または5分経過した場合
+            isMotorOn = 0; 
+            digitalWrite(SERVO_EN_PIN, LOW); // サーボモータの電源をOFFにする
+            overheating = 0; // カウンタをリセット
+            request_file_split.store(true);
+            LOG("Motor deactivated.");
         }
 
-        /*wcpp::Packet servo_packet = newPacket(48);
-        servo_packet.command('S', component_id(), unit_id, 0xFF, 1234);
-        servo_packet.append("An").setFloat32(60.0f); // 例: 60度の角度を送信
-        sendPacket(servo_packet);*/
+        wcpp::Packet command_packet = newPacket(48);
+        command_packet.command('C', component_id(), unit_id, 0xFF, 1234);
+        command_packet.append("St").setInt(isMotorOn);  
+        command_packet.append("An").setFloat32(60.0f); 
+        sendPacket(command_packet);
         }
 } main_;
 
@@ -124,7 +146,6 @@ void setup() {
     can_bus.begin();
 
     pinMode(SERVO_EN_PIN, OUTPUT);
-    digitalWrite(SERVO_EN_PIN, HIGH); // サーボモータの電源をONにする
 
     delay(1000);
 

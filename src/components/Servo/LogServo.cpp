@@ -21,7 +21,7 @@ namespace component {
     }
 
     void LogServo::setup() {
-        listener.command().packet('S');
+        listener.command().packet('C');
         servo1.setPeriodHertz(50);
         servo1.attach(servo_pin_);
         pinMode(adc_pin_, INPUT);

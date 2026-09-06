@@ -33,11 +33,12 @@ private:
     static void handleInterrupt_ch2();
     static MotorControl* _instance;
 
-    static const uint16_t pwm_freq = 2000;
-    static const uint16_t duty_max = 65535;
+    static const uint8_t pwm_resolution = 12;
+    static const uint16_t pwm_freq = 1000;
+    static const uint16_t duty_max = (1U << pwm_resolution) - 1;
     static const uint16_t startup_duty_limit = duty_max / 3;
     static constexpr float startup_rpm_ratio = 0.8f;
-    static constexpr float startup_duty_step = 500.0f;
+    static constexpr float startup_duty_step = 31.25f;
     const float p_gain = 10.0 * 2 / 3;
     const float i_gain = 0.1 * 2 / 3;
     const float d_gain = 0.0f;
@@ -51,6 +52,8 @@ private:
     float ch2_duty_command = 0.0f;
     bool ch1_startup = true;
     bool ch2_startup = true;
+
+    Listener command_listener;
 
 public:
     MotorControl(uint8_t ch1_pin, uint8_t ch2_pin, uint8_t unit_id, uint16_t set_rpm, unsigned sample_freq_hz = 50);

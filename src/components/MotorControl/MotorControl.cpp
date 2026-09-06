@@ -59,13 +59,13 @@ void MotorControl::begin() {
     pinMode(ch2_pwm_1_pin, OUTPUT);
     pinMode(ch2_pwm_2_pin, OUTPUT);
 #if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
-    ledcAttach(ch1_pwm_1_pin, pwm_freq, 16);
-    ledcAttach(ch1_pwm_2_pin, pwm_freq, 16);
-    ledcAttach(ch2_pwm_1_pin, pwm_freq, 16);
-    ledcAttach(ch2_pwm_2_pin, pwm_freq, 16);
+    ledcAttach(ch1_pwm_1_pin, pwm_freq, pwm_resolution);
+    ledcAttach(ch1_pwm_2_pin, pwm_freq, pwm_resolution);
+    ledcAttach(ch2_pwm_1_pin, pwm_freq, pwm_resolution);
+    ledcAttach(ch2_pwm_2_pin, pwm_freq, pwm_resolution);
 #else
-    ledcSetup(ch1_pwm_channel, pwm_freq, 16);
-    ledcSetup(ch2_pwm_channel, pwm_freq, 16);
+    ledcSetup(ch1_pwm_channel, pwm_freq, pwm_resolution);
+    ledcSetup(ch2_pwm_channel, pwm_freq, pwm_resolution);
     ledcAttachPin(ch1_pwm_1_pin, ch1_pwm_channel);
     ledcAttachPin(ch2_pwm_1_pin, ch2_pwm_channel);
 #endif
@@ -75,6 +75,8 @@ void MotorControl::begin() {
 }
 
 void MotorControl::setup() {
+    command_listener.command().packet('C');
+    listen(command_listener, 128, true);
     start(sample_timer_);
 }
 
@@ -86,7 +88,7 @@ void MotorControl::update() {
         _ch1_diff = 0;
         _ch1current_rpm = 0.0f;
     } else if (_ch1_diff > 0) {
-        float rps = 1000000.0f / (float)_ch1_diff / 2.0f;
+        float rps = 1000000.0f / (float)_ch1_diff;
         _ch1current_rpm = rps * 60.0f;
     }
 
@@ -94,7 +96,7 @@ void MotorControl::update() {
         _ch2_diff = 0;
         _ch2current_rpm = 0.0f;
     } else if (_ch2_diff > 0) {
-        float rps = 1000000.0f / (float)_ch2_diff / 2.0f;
+        float rps = 1000000.0f / (float)_ch2_diff;
         _ch2current_rpm = rps * 60.0f;
     }
     ch1_average_rpm = 0.9f * ch1_average_rpm + 0.1f * _ch1current_rpm;
@@ -122,6 +124,7 @@ void MotorControl::update() {
     ch1_previous_error = ch1_error;
 #if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcWrite(ch1_pwm_1_pin, ch1_duty);
+    ledcWrite(ch1_pwm_2_pin, 0);
 #else
     ledcWrite(ch1_pwm_channel, ch1_duty);
 #endif
@@ -147,6 +150,7 @@ void MotorControl::update() {
     ch2_previous_error = ch2_error;
 #if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
     ledcWrite(ch2_pwm_1_pin, ch2_duty);
+    ledcWrite(ch2_pwm_2_pin, 0);
 #else
     ledcWrite(ch2_pwm_channel, ch2_duty);
 #endif
@@ -163,7 +167,21 @@ void MotorControl::update() {
 }
 
 void MotorControl::SampleTimer::callback() {
-    motor_.update();
+    wcpp::Packet command = motor_.command_listener.pop();
+    auto status = command.find("St");
+    if (status) {
+        int new_status = (*status).getInt();
+        if (new_status == 0) {
+            ledcWrite(ch1_pwm_1_pin, 0);
+            ledcWrite(ch1_pwm_2_pin, 0);
+            ledcWrite(ch2_pwm_1_pin, 0);
+            ledcWrite(ch2_pwm_2_pin, 0);
+        }
+        else {
+            motor_.update();
+        }
+    }
+    
 }
 
 } // namespace component
