@@ -7,6 +7,10 @@
 namespace component {
 
 class LoRa: public process::Component {
+protected:
+  // E220 keeps a Stream reference, so construct the UART first.
+  HardwareSerial lora_serial_;
+
 public:
   static const uint8_t component_id_base = 0x10; // TBD
   static const uint8_t send_command_id = 's'; // TBD
@@ -23,8 +27,6 @@ public:
   void enableTrackerScheduling() { tracker_scheduling_ = true; } // Before begin().
 
 protected:
-  HardwareSerial lora_serial_;
-  E220 e220_;
   bool antenna_switch_;
   pin_t antenna_A_;
   pin_t antenna_B_;
