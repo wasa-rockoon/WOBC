@@ -4,6 +4,10 @@
 namespace component {
 
 class LoRa: public process::Component {
+protected:
+  // E220 keeps a Stream reference, so construct the UART first.
+  HardwareSerial lora_serial_;
+
 public:
   static const uint8_t component_id_base = 0x10; // TBD
   static const uint8_t send_command_id = 's'; // TBD
@@ -14,7 +18,6 @@ public:
   LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, pin_t tx, pin_t rx, uint8_t channel, unsigned number = 0);
 
 protected:
-  HardwareSerial lora_serial_;
   bool antenna_switch_;
   pin_t antenna_A_;
   pin_t antenna_B_;

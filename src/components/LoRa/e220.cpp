@@ -12,11 +12,12 @@ bool E220::begin() {
   pinMode(m0_, OUTPUT);
   pinMode(m1_, OUTPUT);
 
-  setMode(Mode::NORMAL);
+  if (!setMode(Mode::NORMAL)) return false;
 
   unsigned long ms = millis();
   while (isBusy()) {
     if (millis() - ms > timeout_ms_ * 50) return false;
+    delay(1);
   }
   delay(200);
   return true;
@@ -27,16 +28,17 @@ bool E220::isBusy() {
 }
 
 bool E220::sendTransparent(const uint8_t* data, unsigned len) {
+  if (data == nullptr || len == 0 || len > 255) return false;
   if (isBusy()) return false;
 
   uint8_t buf[256];
   buf[0] = len;
   memcpy(buf + 1, data, len);
-  stream_.write(buf, len + 1);
-  return true;
+  return stream_.write(buf, len + 1) == len + 1;
 }
 
 bool E220::send(uint16_t addr, uint8_t channel, const uint8_t* data, unsigned len) {
+  if (data == nullptr || len == 0 || len > 255) return false;
   if (isBusy()) return false;
 
   uint8_t buf[260];
@@ -45,13 +47,22 @@ bool E220::send(uint16_t addr, uint8_t channel, const uint8_t* data, unsigned le
   buf[2] = channel;
   buf[3] = len;
   memcpy(buf + 4, data, len);
-  stream_.write(buf, 4 + len);
-  return true;
+  return stream_.write(buf, 4 + len) == 4 + len;
 }
 
 unsigned E220::receive(uint8_t* data, unsigned max_len) {
-  if (stream_.available() == 0) return 0;
+  if (stream_.available() == 0) {
+    last_received_len_ = 0;
+    return 0;
+  }
   uint8_t len = stream_.peek();
+
+  if (len == 0) {
+    stream_.read();
+    if (RSSI_enabled_ && stream_.available()) stream_.read();
+    last_received_len_ = 0;
+    return 0;
+  }
 
   if (len != last_received_len_) {
     last_received_ms_ = millis();
@@ -68,21 +79,25 @@ unsigned E220::receive(uint8_t* data, unsigned max_len) {
     if ((int)stream_.available() < len + 2) return 0;
     if (max_len > 0 && len > max_len) {
       for (int i = 0; i < len + 2; i++) stream_.read();
+      last_received_len_ = 0;
       return 0;
     }
     len = stream_.read();
     stream_.readBytes(data, len);
     rssi_ = - ((int)256 - (uint8_t)stream_.read());
+    last_received_len_ = 0;
     return len;
   }
   else {
     if ((int)stream_.available() < len + 1) return 0;
     if (max_len > 0 && len > max_len) {
       for (int i = 0; i < len + 1; i++) stream_.read();
+      last_received_len_ = 0;
       return 0;
     }
     len = stream_.read();
     stream_.readBytes(data, len);
+    last_received_len_ = 0;
     return len;
   }
 }
@@ -92,6 +107,7 @@ bool E220::setMode(Mode mode) {
   unsigned long ms = millis();
   while (isBusy()) {
     if (millis() - ms > timeout_ms_ * 50) return false;
+    delay(1);
   }
   digitalWrite(m0_, static_cast<uint8_t>(mode) & 0b01 ? HIGH : LOW);
   digitalWrite(m1_, static_cast<uint8_t>(mode) & 0b10 ? HIGH : LOW);
@@ -100,6 +116,7 @@ bool E220::setMode(Mode mode) {
   ms = millis();
   while (isBusy()) {
     if (millis() - ms > timeout_ms_ * 50) return false;
+    delay(1);
   }
   stream_.flush();
 
@@ -128,7 +145,7 @@ bool E220::setSerialBaudRate(unsigned baud) {
     bits = 0b101;
     break;
   case 57600:
-    bits = 0b100;
+    bits = 0b110;
     break;
   case 115200:
     bits = 0b111;
@@ -137,8 +154,8 @@ bool E220::setSerialBaudRate(unsigned baud) {
     return false;
   }
 
-  if (writeRegisterWithMask(ADDR::REG0, 0b11100000, bits << 5)) baud_ = baud;
-
+  if (!writeRegisterWithMask(ADDR::REG0, 0b11100000, bits << 5)) return false;
+  baud_ = baud;
   return true;
 }
 
@@ -190,6 +207,7 @@ int E220::getEnvRSSI() {
   unsigned long ms = millis();
   while (isBusy() || (int)stream_.available() < 5) {
     if (millis() - ms > timeout_ms_) return -255;
+    delay(1);
   }
 
   uint8_t rx[5];
@@ -204,11 +222,12 @@ bool E220::setParametersToDefault() {
 }
 
 bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
+  if (parameters == nullptr || len == 0 || len > 8) return false;
   bool ok = true;
 
   stream_.flush();
 
-  uint8_t cmd[10];
+  uint8_t cmd[11]; // 3-byte header + 8-byte default parameters
   cmd[0] = 0xC0;
   cmd[1] = static_cast<uint8_t>(addr);
   cmd[2] = len;
@@ -218,6 +237,7 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
   unsigned long ms = millis();
   while (isBusy() || (int)stream_.available() < 3 + len) {
     if (millis() - ms > timeout_ms_) return false;
+    delay(1);
   }
 
   uint8_t rx[16];
@@ -232,15 +252,14 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
 }
 
 bool E220::writeRegisterWithMask(ADDR addr, uint8_t mask, uint8_t value) {
-  bool ok = true;
   uint8_t reg;
-  ok &= readRegister(addr, &reg);
+  if (!readRegister(addr, &reg)) return false;
   reg = (reg & ~mask) | (value & mask);
-  ok &= writeRegister(addr, &reg);
-  return ok;
+  return writeRegister(addr, &reg);
 }
 
 bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
+  if (parameters == nullptr || len == 0 || len > 8) return false;
   bool ok = true;
 
   stream_.flush();
@@ -251,6 +270,7 @@ bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
   unsigned long ms = millis();
   while ((int)stream_.available() < 3 + len) {
     if (millis() - ms > timeout_ms_) return false;
+    delay(1);
   }
 
   uint8_t rx[16];
@@ -262,6 +282,7 @@ bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
   ms = millis();
   while (isBusy()) {
     if (millis() - ms > timeout_ms_) return false;
+    delay(1);
   }
   stream_.flush();
 

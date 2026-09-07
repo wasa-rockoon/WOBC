@@ -97,8 +97,8 @@ private:
   pin_t m1_;
   unsigned timeout_ms_ = 100;
   
-  unsigned long last_received_ms_;
-  unsigned last_received_len_;
+  unsigned long last_received_ms_ = 0;
+  unsigned last_received_len_ = 0;
 
   bool RSSI_enabled_;
   unsigned baud_;
