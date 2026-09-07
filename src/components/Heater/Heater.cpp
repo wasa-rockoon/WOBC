@@ -9,12 +9,13 @@ namespace component {
             0xE8  // CH4 測定スタート (One-Shot, 16bit)
             };
 
-    float Heater::CalculatedTemperature[4] = {
-            0.0f,
+    float Heater::CalculatedTemperature[Heater::TEMP_CH_COUNT] = {
             0.0f,
             0.0f,
             0.0f
             };
+
+    float Heater::BatteryVoltage = 0.0f;
     
     Heater::Heater(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz, uint8_t heater_pin,
                    AdcResolution adc_resolution)
@@ -22,8 +23,9 @@ namespace component {
           wire_(wire),
           unit_id_(unit_id),
           adc_resolution_(adc_resolution),
-          sample_timer_(*this, wire_, unit_id_, sample_freq_hz > 0 ? 1000 / sample_freq_hz : 1000),
-          heater_pin_(heater_pin) {
+          heater_pin_(heater_pin),
+          ina_heater(0x46),
+          sample_timer_(*this, wire_, ina_heater, unit_id_, sample_freq_hz > 0 ? 1000 / sample_freq_hz : 1000) {
     }
 
     void Heater::setAdcResolution(AdcResolution adc_resolution) {
@@ -55,21 +57,23 @@ namespace component {
     }
 
     void Heater::setup() {
-        ledcAttach(heater_pin_, FREQ, RES);
-        ledcWrite(heater_pin_, 0);
+        // The heater only uses fully off/on output, so no PWM is needed.
+        digitalWrite(heater_pin_, LOW);
+        pinMode(heater_pin_, OUTPUT);
 
         wire_.beginTransmission(MCP3424_ADDR);
         if (wire_.endTransmission() != 0) {
             error("H", "Failed to initialize MCP3424!");
         }
-        ina1.begin();
-        ina1.setMaxCurrentShunt(1, 0.05);
+        ina_heater.begin();
+        ina_heater.setMaxCurrentShunt(3, 0.020);
         start(sample_timer_);
     }
 
-    Heater::SampleTimer::SampleTimer(Heater& heater_ref, TwoWire& wire_ref, uint8_t unit_id_ref, unsigned interval_ms)
+    Heater::SampleTimer::SampleTimer(Heater& heater_ref, TwoWire& wire_ref, INA226& ina_heater_ref, uint8_t unit_id_ref, unsigned interval_ms)
         : process::Timer("Heater", interval_ms),
           wire_(wire_ref),
+          ina_heater_(ina_heater_ref),
           heater_(heater_ref),
           unit_id_(unit_id_ref) {
     }
@@ -120,6 +124,15 @@ namespace component {
         }
         float vOut = rawADC * heater_.voltsPerCount();
 
+        // CH4はバッテリー電圧を分圧したものなので，分圧比から元の電圧に戻す
+        if (ch == BATTERY_CH) {
+            if (vOut > 0.0 && vOut < V_REF) {
+                BatteryVoltage =
+                    vOut * (R_BATT_UPPER + R_BATT_LOWER) / R_BATT_LOWER;
+            }
+            continue;
+        }
+
         // 温度計算
         if (vOut > 0.05 && vOut < 2.00) { 
             float rThr = (V_REF * R_DOWNSTREAM / vOut) - R_UPSTREAM - R_DOWNSTREAM;
@@ -129,26 +142,26 @@ namespace component {
         }
         }
 
-        float busVoltage = ina1.getBusVoltage();
-        float busCurrent = ina1.getCurrent();
-
+        int busVoltage_mV = ina_heater_.getBusVoltage() * 1000;
+        int busCurrent_mA = ina_heater_.getCurrent() * 1000;
+        int busPower_mW = ina_heater_.getPower() * 1000;
         // 2. ヒーター制御
-        float maxTemp = max(CalculatedTemperature[0], max(CalculatedTemperature[1], max(CalculatedTemperature[2], CalculatedTemperature[3])));
-        String heater_status = "OFF";
+        float maxTemp = max(CalculatedTemperature[0], max(CalculatedTemperature[1], CalculatedTemperature[2]));
+        const char* heater_status = "OFF";
 
         // 先にバッテリー電圧をチェック
-        if (busVoltage < BATTERY_CUTOFF_V) {
-            ledcWrite(heater_pin_, 0);           // 強制終了
+        if (busVoltage_mV < BATTERY_CUTOFF_V * 1000) {
+            digitalWrite(heater_.heater_pin_, LOW); // 強制終了
             heater_status = "OFF_LOW_BATT";
         }
         // 電圧が正常で、温度が目標未満なら加熱
         else if (maxTemp < TARGET_TEMP) {
-            ledcWrite(heater_pin_, 255);
+            digitalWrite(heater_.heater_pin_, HIGH);
             heater_status = "ON";
         }
         // 目標温度に達したら停止
         else {
-            ledcWrite(heater_pin_, 0);
+            digitalWrite(heater_.heater_pin_, LOW);
         }
   
         wcpp::Packet packet = newPacket(64);
@@ -158,9 +171,10 @@ namespace component {
         packet.append("Ca").setFloat16(CalculatedTemperature[0]);
         packet.append("Cb").setFloat16(CalculatedTemperature[1]);
         packet.append("Cc").setFloat16(CalculatedTemperature[2]);
-        packet.append("Cd").setFloat16(CalculatedTemperature[3]);
-        packet.append("Vb").setFloat16(busVoltage);
-        packet.append("Ib").setFloat16(busCurrent);
+        packet.append("Vc").setInt((int)(BatteryVoltage * 1000));
+        packet.append("Vb").setInt(busVoltage_mV);
+        packet.append("Ib").setInt(busCurrent_mA);
+        packet.append("Pb").setInt(busPower_mW);
         packet.append("Hs").setString(heater_status);
         packet.append("Ts").setInt((int)millis());
         sendPacket(packet);

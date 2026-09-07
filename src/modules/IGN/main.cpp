@@ -26,7 +26,7 @@ constexpr int ign_normal_pin = 5;
 constexpr int ign_high_pin = 6;
 constexpr int ign_low_pin = 4;
 constexpr component::Heater::AdcResolution heater_adc_resolution =
-    component::Heater::AdcResolution::BIT_12;
+    component::Heater::AdcResolution::BIT_16;
 
 core::CANBus can_bus(44, 43);
 core::SerialBus serial_bus(Serial);
@@ -76,6 +76,10 @@ void setup() {
     // Keep the ignition outputs safe even if kernel or task startup fails.
     if (!ign.prepareSafeOutputs()) return;
 
+    // Allow the externally supplied 3.3 V rail and peripherals to settle
+    // before starting the kernel and CAN tasks. Ignition outputs stay LOW.
+    delay(1000);
+
     kernel::setUnitId(unit_id);
     if (!kernel::begin(module_id, true)) return;
 
@@ -103,7 +107,7 @@ void setup() {
 
     main_.begin();
 
-    ign.begin(true);
+    //ign.begin(true);
 
 
     error_indicator.set(false);

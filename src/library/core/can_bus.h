@@ -51,7 +51,7 @@ private:
     uint8_t data[8];
   };
   
-  QueueHandle_t rx_queue_handle_;
+  QueueHandle_t rx_queue_handle_ = nullptr;
 
   void setup() override;
   void loop() override;

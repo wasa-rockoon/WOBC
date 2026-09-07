@@ -9,6 +9,18 @@
 
 - Platform IO
 
+リポジトリのルートで `pio run -e Esp32CoreTest -e GS -e Tracker -e IGN`
+を実行すると，ESP32系の4環境をビルドできる．
+IGNだけをビルドする場合は `pio run -e IGN` を実行する．
+初回は依存ライブラリとツールチェーンのダウンロードに時間がかかる．
+
+HeaterのINA226アドレスは既定で `0x40` としている．基板のアドレス設定が
+異なる場合は，Heaterコンストラクタの第6引数で指定する．
+
+HeaterのMCP3424は，CH1〜CH3にサーミスタ，CH4にバッテリー電圧（VPPheater）を
+47kΩ/10kΩで分圧したものが入力されている．テレメトリでは温度を `Ca`・`Cb`・`Cc`
+（float16, ℃），CH4から求めたバッテリー電圧を `Vc`（int, mV）として送信する．
+
 ## ソフトウェアスタック
 
 - Arduino

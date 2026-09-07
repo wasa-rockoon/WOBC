@@ -13,13 +13,19 @@ void CANBus::setup() {
     pool_[i].packet = wcpp::Packet::null();
   }
 
-  can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
-
+  // The driver may deliver a frame as soon as CAN reception is enabled.
   rx_queue_handle_ = xQueueCreate(WOBC_CAN_BUS_RX_QUEUE_SIZE, sizeof(FrameQueueItem));
+  if (rx_queue_handle_ == nullptr) {
+    error("cbInit", "CAN bus, RX queue allocation failed");
+    return;
+  }
   listen(all_packets, WOBC_CAN_BUS_PACKET_QUEUE_SIZE, true);
+  can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
 }
 
 void CANBus::loop() {
+  if (rx_queue_handle_ == nullptr) return;
+
   // Kernel to CAN bus
   {
     const wcpp::Packet packet = all_packets.pop();
@@ -173,6 +179,7 @@ void CANBus::loop() {
 }
 
 void CANBus::onReceive(const driver::CAN::Frame& frame) {
+  if (rx_queue_handle_ == nullptr) return;
   // printf("CAN\n");
   if (!frame.extended) return;
   if (frame.rtr) return;

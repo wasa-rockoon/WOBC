@@ -1,7 +1,9 @@
+#pragma once
+
 #include <library/wobc.h>
 #include <Wire.h>
 #include <cmath>
-#include "INA226.h"
+#include <components/LiPoPower/INA226.h>
 
 #define MCP3424_ADDR 0x6A
 
@@ -11,6 +13,9 @@ namespace component {
         static const uint8_t component_id = 0x46;
         static const uint8_t telemetry_id = 'H';
         static const uint8_t HEATER_PIN = 14;
+        // MCP3424のCH1〜CH3はサーミスタ，CH4はバッテリー電圧の分圧が入力されている
+        static const uint8_t TEMP_CH_COUNT = 3;
+        static const uint8_t BATTERY_CH = 3;
 
         enum class AdcResolution : uint8_t {
             BIT_12 = 0x00,
@@ -23,12 +28,17 @@ namespace component {
                AdcResolution adc_resolution = AdcResolution::BIT_16);
         void setAdcResolution(AdcResolution adc_resolution);
         AdcResolution adcResolution() const;
-        static float CalculatedTemperature[4];
+        static float CalculatedTemperature[TEMP_CH_COUNT];
+        static float BatteryVoltage;
 
     protected:
         static const constexpr float V_REF = 2.048;         // MCP1501の出力電圧 (2.048V)
         static const constexpr float R_UPSTREAM = 120.0;     // 上流の保護抵抗値 (120Ω)
         static const constexpr float R_DOWNSTREAM = 10000.0; // GND側の分圧抵抗値 (10kΩ)
+
+        // バッテリー電圧測定用の分圧抵抗（VPPheater -47k- CH4 -10k- GND）
+        static const constexpr float R_BATT_UPPER = 47000.0; // 電源側の分圧抵抗値 (47kΩ)
+        static const constexpr float R_BATT_LOWER = 10000.0; // GND側の分圧抵抗値 (10kΩ)
 
         // サーミスタ 103JT-050 の特性値
         static const constexpr float B_CONSTANT = 3435.0; 
@@ -39,16 +49,15 @@ namespace component {
         static const byte CONFIG_CH[4];
 
         // ヒーター制御用定数
-        static const int   FREQ = 5000;
-        static const int   RES  = 8;
-        static const float TARGET_TEMP = 40.0;
-        static const float BATTERY_CUTOFF_V = 6.4;
+        static constexpr float TARGET_TEMP = 40.0;
+        static constexpr float BATTERY_CUTOFF_V = 6.4;
 
         TwoWire& wire_;
         uint8_t unit_id_;
         AdcResolution adc_resolution_;
+        uint8_t heater_pin_;
         bool heater_output_high_ = false;
-        INA226 ina1;
+        INA226 ina_heater;
 
         uint16_t conversionTimeoutMs() const;
         float voltsPerCount() const;
@@ -57,13 +66,14 @@ namespace component {
 
     class SampleTimer: public process::Timer {
     public:
-        SampleTimer(Heater& heater_ref, TwoWire& wire_ref, uint8_t unit_id_ref, unsigned interval_ms);
+        SampleTimer(Heater& heater_ref, TwoWire& wire_ref, INA226& ina_heater_ref, uint8_t unit_id_ref, unsigned interval_ms);
 
     protected:
         void callback() override;
 
     private:
         TwoWire& wire_;
+        INA226& ina_heater_;
         Heater& heater_;
         uint8_t unit_id_;
     } sample_timer_;
