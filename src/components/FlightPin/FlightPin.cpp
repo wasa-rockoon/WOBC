@@ -39,7 +39,7 @@ namespace component {
         packet.telemetry(telemetry_id, component_id(), flight_pin_.unit_id_, 0xFF,
                          kernel::nextPacketSequence(flight_pin_.unit_id_, 0xFF, component_id(),
                                                     wcpp::packet_type_mask | telemetry_id));
-        packet.append("FP").setInt(pin_state);
+        packet.append(stateEntryName()).setInt(pin_state);
         packet.append("ET").setInt(pin_state_elapsed_ms);
         packet.append("TS").setInt(now_ms); // タイムスタンプを追加
         sendPacket(packet);

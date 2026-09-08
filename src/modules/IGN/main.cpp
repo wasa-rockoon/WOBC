@@ -44,31 +44,45 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
-    kernel::Listener my_listener_;
-    kernel::Listener heartbeat_;
+    kernel::Listener flight_pin_listener_;
 
     void setup() override {
-        my_listener_.telemetry(); 
-        listen(my_listener_, 8);
-        heartbeat_.component(0x54);
-        listen(heartbeat_, 1);
+        flight_pin_listener_.telemetry()
+                            .packet(component::FlightPin::telemetry_id)
+                            .component(component::FlightPin::component_id)
+                            .unit_origin(unit_id);
+        listen(flight_pin_listener_, 4);
     }
 
     void loop() override {
-        while (my_listener_) {
-            delay(1000);
-            wcpp::Packet packet = my_listener_.pop();
-                //wcpp::Packet lorapacket = newPacket(64);
-                //auto im = packet.find("Im");
-                //if(!im){
-                //    lorapacket.command(lora.send_command_id, lora.component_id_base + 0);
-                //    lorapacket.append("Pa").setPacket(packet);
-                //    sendPacket(lorapacket);
-                //}
+        while (flight_pin_listener_) {
+            const wcpp::Packet packet = flight_pin_listener_.pop();
+            auto fp = packet.find(component::FlightPin::stateEntryName());
+            if (!fp || !(*fp).isInt()) continue;
+
+            const int64_t state = (*fp).getInt();
+            if (state != LOW && state != HIGH) continue;
+
+            if (state == HIGH) {
+                flight_pin_inserted_seen_ = true;
+                continue;
             }
-        LOG("IGN working");
+
+            if (flight_pin_inserted_seen_ && !ignition_start_requested_) {
+                ignition_start_requested_ = true;
+                if (ign.startSequence()) {
+                    LOG("Flight pin removed; ignition sequence requested");
+                } else {
+                    LOG("Flight pin removed; ignition sequence request rejected");
+                }
+            }
         }
-    }main_;
+    }
+
+private:
+    bool flight_pin_inserted_seen_ = false;
+    bool ignition_start_requested_ = false;
+} main_;
 
 void setup() {
     Serial.begin(115200);
@@ -102,13 +116,13 @@ void setup() {
     pressure.begin();
     logger.begin();
     heater.begin();
-    flight_pin.begin();
     telemeter.begin();
 
+    // Initialize IGN without starting the sequence. It remains Disarmed until
+    // the local FlightPin telemetry reports an observed HIGH-to-LOW removal.
+    if (!ign.begin(false)) return;
     main_.begin();
-
-    //ign.begin(true);
-
+    flight_pin.begin();
 
     error_indicator.set(false);
     error_indicator.blink_on_change(100);

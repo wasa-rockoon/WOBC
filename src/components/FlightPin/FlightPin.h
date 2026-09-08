@@ -9,6 +9,8 @@ namespace component {
         static const uint8_t component_id = 0x50;
         static const uint8_t telemetry_id = 'F';
 
+        static constexpr const char* stateEntryName() { return "Fp"; }
+
         FlightPin(uint8_t unit_id, int flight_pin, unsigned sample_freq_hz = 1);
 
     protected:

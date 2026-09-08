@@ -3,7 +3,7 @@
 ## 概要
 
 PlatformIO環境`IGN`（IGNモジュール）の実装内容と使用手順をまとめる．
-本モジュールは，電源投入から36秒の警告シーケンスを実行したのちモデルロケットのイグナイタへ通電し，
+本モジュールは，FlightPinの挿入状態（`Fp=1`）を観測した後，抜去状態（`Fp=0`）へ変化すると警告シーケンスを開始し，その後モデルロケットのイグナイタへ通電する．
 通電開始から3秒後に自動遮断する．シーケンス状態と点火回路の電圧・電流はテレメトリとして送信し，SDカードへ保存する．
 
 - 作成日: 2026-08-29
@@ -29,10 +29,10 @@ PlatformIO環境`IGN`（IGNモジュール）の実装内容と使用手順を�
 | `src/components/IGN/IGNSequence.h` | 点火シーケンスのステートマシン．時間管理と出力要求の決定 |
 | `src/components/IGN/IGN.h` | IGNコンポーネントの公開API，状態変数および安全機構の定義 |
 | `src/components/IGN/IGN.cpp` | GPIO制御，INA226の初期化，自動遮断タスク，テレメトリ送信 |
-| `src/modules/IGN/main.cpp` | モジュールの初期化順序と自動開始 |
+| `src/modules/IGN/main.cpp` | モジュールの初期化順序とFlightPinによる開始判定 |
 | `src/library/test/test_kernel_unit.cpp` | `IGNSequence`のnativeテスト |
 
-IGNモジュールには，IGNのほかにPressure，Heater，Logger，Mainのコンポーネントを搭載する．
+IGNモジュールには，IGNのほかにPressure，Heater，Logger，FlightPin，Mainのコンポーネントを搭載する．
 
 ### 2. 点火シーケンス（IGNSequence）
 
@@ -160,14 +160,14 @@ Windowsで`pio`にPATHが通っていない場合は`%USERPROFILE%\.platformio\p
 ### 4. 点火試験の手順
 
 1. イグナイタと点火用電源を切り離した状態でファームウェアを書き込む．
-2. 電源を投入し，ブザーとNORMAL LEDが第5節の表のとおりに変化することを確認する．
-3. オシロスコープまたはロジックアナライザで，HIGH・LOWの立ち上がり順序，36秒の警告時間，
+2. FlightPinを挿入した状態で電源を投入し，IGNがDisarmedで待機することを確認する．
+3. FlightPinを抜去し，ブザーとNORMAL LEDが第5節の表のとおりに変化することを確認する．
+4. オシロスコープまたはロジックアナライザで，HIGH・LOWの立ち上がり順序，警告時間，
    および通電開始から3秒後の遮断を確認する．
-4. テレメトリで`Ok`が真であること，`Ph`が0→1→2→3→4と遷移することを確認する．
-5. 以上を確認したのち，実イグナイタを接続した試験へ移る．
+5. テレメトリで`Ok`が真であること，`Ph`が5→0→1→2→3→4と遷移することを確認する．
+6. 以上を確認したのち，実イグナイタを接続した試験へ移る．
 
-電源投入またはリセットのたびにシーケンスが自動的に開始する．
-イグナイタを接続したままの再起動は，そのまま点火動作となる．
+電源投入時からFlightPinが抜去状態（`Fp=0`）の場合はシーケンスを開始しない．起動後に`Fp=1`を観測し，その後`Fp=0`へ変化した場合だけ開始する．
 
 ### 5. ブザーとLEDによる状態確認
 
@@ -204,21 +204,22 @@ Loggerコンポーネントが全パケットを購読してSDカードへ書き
 
 `ignition_ms`はシーケンスと自動遮断タスクの双方が参照するため，片方だけを変更することはできない．
 
-### 8. 自動開始しない構成
+### 8. FlightPinによる開始
 
-`main.cpp`では`ign.begin(true)`により，最初のIGNループからフェーズ0を開始する．
-初期化のみを行い，開始タイミングを別に決めたい場合は`begin(false)`を使う．
+`main.cpp`では`ign.begin(false)`により，IGNをDisarmedのまま初期化する．MainコンポーネントはFlightPinコンポーネント（ID `0x50`）のテレメトリ`F`を購読し，整数エントリ`Fp`の値を検査する．
 
 ```cpp
 if (!ign.begin(false)) {
     // 初期化失敗．点火出力はLOWに固定されている
 }
 
-// 任意のタイミングで開始する．1回のbootにつき1回だけ成功する
-ign.startSequence();
+// Fp=1を一度観測した後，Fp=0を受信したときだけ呼び出す
+if (flight_pin_inserted_seen && fp == 0) {
+    ign.startSequence();
+}
 ```
 
-`begin(false)`の場合，開始するまで`Ph`は5（Disarmed）となる．
+`Fp=1`を一度も観測していない場合，エントリが欠損している場合，整数以外または0・1以外の場合は開始しない．FlightPinは1 Hzでサンプリングするため，抜去から検出まで最大約1秒かかる．開始するまで`Ph`は5（Disarmed）となる．
 
 ### 9. 中止
 
@@ -258,7 +259,7 @@ pio test -e native
 
 ## 注意事項
 
-- 電源投入またはリセットで自動的にシーケンスが開始する．アーミング操作や通信による中止手段はない．
+- FlightPinの挿入状態を確認してから抜去した場合だけシーケンスを開始する．起動時から抜去状態の場合は開始しない．
 - 3秒自動遮断はソフトウェア上の高優先度タスクであり，外部の物理的なキルスイッチやハードウェアタイマーの代替ではない．
 - `Hi`，`Lo`，`Nl`はソフトウェア上の要求状態であり，実際の電気的状態を保証するものではない．
 - 実機での書き込み，GPIO波形の測定，INA226を接続した試験および点火試験は未実施である．
@@ -268,7 +269,7 @@ pio test -e native
 - `src/components/IGN/IGNSequence.h`: 点火シーケンスと時間管理
 - `src/components/IGN/IGN.h`: IGNの公開API，状態および安全機構の定義
 - `src/components/IGN/IGN.cpp`: GPIO制御，センサ初期化，遮断タスク，テレメトリ
-- `src/modules/IGN/main.cpp`: IGNモジュールの初期化順序と自動開始
+- `src/modules/IGN/main.cpp`: IGNモジュールの初期化順序とFlightPinによる開始判定
 - `src/library/test/test_kernel_unit.cpp`: IGNシーケンスのnativeテスト
 - `docs/components.md`: IGNコンポーネントおよびテレメトリ仕様
 - `docs/modules.md`: IGNモジュール構成
