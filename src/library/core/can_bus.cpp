@@ -29,8 +29,10 @@ void CANBus::loop() {
     const wcpp::Packet packet = all_packets.pop();
     if (packet && packet.size() >= 4) {
 
-      uint32_t id = can_packet_format::makeId(
-          packet.type_and_id(), packet.component_id(), packet.origin_unit_id());
+      // Preserve the command/telemetry bit when rebuilding the WCPP header.
+      uint32_t id = (uint32_t)packet.type_and_id() << 21
+                  | (uint32_t)packet.component_id() << 13
+                  | (uint32_t)packet.origin_unit_id() << 5;
 
       const uint8_t* buf = packet.encode();
 

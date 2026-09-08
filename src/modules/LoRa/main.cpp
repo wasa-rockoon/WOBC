@@ -13,6 +13,10 @@
 #define LORA_SW_A1 26
 #define LORA_SW_A2 27
 
+#ifndef LORA_USE_CAN
+#define LORA_USE_CAN 0
+#endif
+
 constexpr uint8_t module_id = 0x4C;
 
 core::CANBus can_bus(23, 22);
@@ -48,7 +52,9 @@ void setup() {
 
   delay(500);
 
-  //can_bus.begin();
+#if LORA_USE_CAN
+  can_bus.begin();
+#endif
   serial_bus.begin();
   main_.begin();
 
