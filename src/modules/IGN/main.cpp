@@ -8,6 +8,8 @@
 #include <components/FlightPin/FlightPin.h>
 #include <components/Telemeter/telemeter.h>
 #include <SPI.h>
+#include <driver/gpio.h>
+#include <esp_intr_alloc.h>
 
 #define SPI0_SCK_PIN 12
 #define SPI0_MOSI_PIN 11
@@ -22,9 +24,10 @@
 
 constexpr uint8_t module_id = 'I';
 constexpr uint8_t unit_id = 0x40;
-constexpr int ign_normal_pin = 5;
-constexpr int ign_high_pin = 6;
-constexpr int ign_low_pin = 4;
+constexpr int ign_normal_pin = 6;
+constexpr int ign_high_pin = 4;
+constexpr int ign_low_pin = 5;
+constexpr int flight_pin_pin = 21;
 constexpr component::Heater::AdcResolution heater_adc_resolution =
     component::Heater::AdcResolution::BIT_16;
 
@@ -33,10 +36,32 @@ core::SerialBus serial_bus(Serial);
 
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
-component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id, 10);
+component::IGN ign(Wire, ign_normal_pin, ign_high_pin, ign_low_pin, unit_id, 1);
 component::Heater heater(Wire, unit_id, 2, component::Heater::HEATER_PIN, heater_adc_resolution);
-component::FlightPin flight_pin(unit_id, 21, 1);
+component::FlightPin flight_pin(unit_id, flight_pin_pin, 1);
 component::Telemeter telemeter;
+
+void IRAM_ATTR onFlightPinInserted(void*) {
+    ign.abortSequenceFromISR();
+}
+
+bool beginFlightPinAbortInterrupt() {
+    pinMode(flight_pin_pin, INPUT);
+
+    const esp_err_t install_result = gpio_install_isr_service(ESP_INTR_FLAG_IRAM);
+    // 既存サービスのIRAM属性は確認できないため、既に導入済みの場合も安全側で失敗とする。
+    if (install_result != ESP_OK) {
+        return false;
+    }
+
+    if (gpio_set_intr_type(static_cast<gpio_num_t>(flight_pin_pin), GPIO_INTR_POSEDGE)
+        != ESP_OK) {
+        return false;
+    }
+
+    return gpio_isr_handler_add(static_cast<gpio_num_t>(flight_pin_pin),
+                                onFlightPinInserted, nullptr) == ESP_OK;
+}
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -72,6 +97,13 @@ public:
                 ignition_start_requested_ = true;
                 if (ign.startSequence()) {
                     LOG("Flight pin removed; ignition sequence requested");
+
+                    // 挿入が開始要求と割り込みのアームの境界で発生した場合も、
+                    // 現在値を確認して取りこぼさず中止する。
+                    if (digitalRead(flight_pin_pin) == HIGH) {
+                        ign.abortSequence();
+                        LOG("Flight pin inserted during ignition sequence start; aborted");
+                    }
                 } else {
                     LOG("Flight pin removed; ignition sequence request rejected");
                 }
@@ -121,6 +153,7 @@ void setup() {
     // Initialize IGN without starting the sequence. It remains Disarmed until
     // the local FlightPin telemetry reports an observed HIGH-to-LOW removal.
     if (!ign.begin(false)) return;
+    if (!beginFlightPinAbortInterrupt()) return;
     main_.begin();
     flight_pin.begin();
 

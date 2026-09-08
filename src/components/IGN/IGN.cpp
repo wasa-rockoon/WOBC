@@ -1,5 +1,12 @@
 #include "IGN.h"
 
+#if defined(ARDUINO_ARCH_ESP32)
+#include <soc/gpio_struct.h>
+#define IGN_ISR_ATTR IRAM_ATTR
+#else
+#define IGN_ISR_ATTR
+#endif
+
 namespace component {
 
 unsigned IGN::sampleIntervalMs(unsigned sample_freq_hz) {
@@ -99,15 +106,64 @@ bool IGN::startSequence() {
       || sequence_.hasStarted() || start_requested_) {
     return false;
   }
+
+  portENTER_CRITICAL(&output_mux_);
   start_requested_ = true;
+  flight_pin_abort_armed_ = true;
+  portEXIT_CRITICAL(&output_mux_);
   return true;
 }
 
 void IGN::abortSequence() {
-  // まず監視タスクの遮断要求を無効化し、GPIOを安全側へ戻す。
-  cutoff_armed_ = false;
-  forceSafeOutput();
+  // 先に中止要求を立てて開始予約と監視を無効化する。これにより、出力停止と
+  // 状態機械への反映の間に古い開始要求やSnapshotが出力を再有効化できない。
+  portENTER_CRITICAL(&output_mux_);
+  start_requested_ = false;
   abort_requested_ = true;
+  cutoff_armed_ = false;
+  flight_pin_abort_armed_ = false;
+  portEXIT_CRITICAL(&output_mux_);
+
+  forceSafeOutput();
+}
+
+void IGN_ISR_ATTR IGN::abortSequenceFromISR() {
+  portENTER_CRITICAL_ISR(&output_mux_);
+
+  // 開始要求前およびDone/Fault/Disarmed移行後の挿入割り込みは無視する。
+  if (!flight_pin_abort_armed_) {
+    portEXIT_CRITICAL_ISR(&output_mux_);
+    return;
+  }
+
+  // ISRではブロッキング処理、ログ、パケット送信を行わない。LOW側を先に落とし、
+  // 続いてHIGH側を落として点火回路を直ちに開放する。
+  start_requested_ = false;
+  abort_requested_ = true;
+  cutoff_armed_ = false;
+  flight_pin_abort_armed_ = false;
+#if defined(ARDUINO_ARCH_ESP32)
+  // ArduinoのdigitalWrite経由ではなくGPIOのwrite-one-to-clearレジスタを使い、
+  // フラッシュキャッシュ停止中でもISRから遮断できるようにする。
+  if (low_pin_ < 32) {
+    GPIO.out_w1tc = (1UL << low_pin_);
+  } else {
+    GPIO.out1_w1tc.val = (1UL << (low_pin_ - 32));
+  }
+  if (high_pin_ < 32) {
+    GPIO.out_w1tc = (1UL << high_pin_);
+  } else {
+    GPIO.out1_w1tc.val = (1UL << (high_pin_ - 32));
+  }
+#else
+  digitalWrite(low_pin_, LOW);
+  digitalWrite(high_pin_, LOW);
+#endif
+  low_out_ = false;
+  high_out_ = false;
+  status_changed_ = true;
+
+  portEXIT_CRITICAL_ISR(&output_mux_);
 }
 
 void IGN::setup() {
@@ -134,10 +190,24 @@ void IGN::loop() {
   if (start_requested_) {
     // begin()またはstartSequence()で予約されたシーケンスを開始する。
     start_requested_ = false;
-    if (!sequence_.start(now)) sequence_.fault(now);
+    if (sequence_.start(now)) {
+      sample_timer_.changePeriod(ignition_sample_interval_ms);
+    } else {
+      sequence_.fault(now);
+    }
   }
 
   IGNSequence::Snapshot snapshot = sequence_.update(now);
+
+  // 開始要求から活動中フェーズまでだけFlightPin割り込みによる中止を許可する。
+  // ISRが既に中止を要求している場合は、状態機械へ反映される前でも再アームしない。
+  const bool sequence_active = snapshot.phase == Phase::Startup
+                            || snapshot.phase == Phase::Countdown
+                            || snapshot.phase == Phase::Final
+                            || snapshot.phase == Phase::Ignition;
+  portENTER_CRITICAL(&output_mux_);
+  flight_pin_abort_armed_ = sequence_active && !abort_requested_;
+  portEXIT_CRITICAL(&output_mux_);
 
   if (snapshot.phase_changed && snapshot.phase == Phase::Ignition) {
     // 点火出力を有効にする前に、独立した時間超過監視を必ず作動させる。
@@ -321,3 +391,5 @@ void IGN::SampleTimer::callback() {
 }
 
 }  // namespace component
+
+#undef IGN_ISR_ATTR

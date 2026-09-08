@@ -36,6 +36,10 @@ public:
   // どの段階からでも点火出力を直ちにLOWへ戻し、シーケンスを中止する。
   void abortSequence();
 
+  // FlightPin挿入割り込みから呼び出す非常停止処理。シーケンスの開始要求後から
+  // 終了までの間だけ有効で、ISR内では出力停止と中止要求のラッチだけを行う。
+  void abortSequenceFromISR();
+
   Phase phase() const { return sequence_.phase(); }
   bool healthy() const { return begin_ok_; }
   static const char* phaseName(Phase phase);
@@ -63,6 +67,7 @@ protected:
   volatile bool abort_requested_ = false;
   volatile bool cutoff_armed_ = false;
   volatile bool cutoff_triggered_ = false;
+  volatile bool flight_pin_abort_armed_ = false;
 
   // GPIO初期化およびコンポーネント初期化が完了したかを示す。
   bool outputs_prepared_ = false;
@@ -71,6 +76,8 @@ protected:
 
   // 状態が変わらない場合でも、この周期で状態テレメトリを送信する。
   static constexpr unsigned long status_interval_ms = 1000;
+  // 点火シーケンス開始後はINA226の電力テレメトリを10 Hzで送信する。
+  static constexpr unsigned ignition_sample_interval_ms = 100;
   static constexpr unsigned cutoff_task_stack_size = 2048;
 
   // 点火時間の上限を独立して監視するFreeRTOSタスク。
