@@ -30,7 +30,7 @@ MotorControl::SampleTimer::SampleTimer(MotorControl& motor_ref, uint8_t unit_id_
       unit_id_(unit_id_ref) {
 }
 
-void MotorControl::handleInterrupt_ch1() {
+void IRAM_ATTR MotorControl::handleInterrupt_ch1() {
     if (_instance == nullptr) return;
 
     uint32_t current = micros();
@@ -40,7 +40,7 @@ void MotorControl::handleInterrupt_ch1() {
     }
 }
 
-void MotorControl::handleInterrupt_ch2() {
+void IRAM_ATTR MotorControl::handleInterrupt_ch2() {
     if (_instance == nullptr) return;
 
     uint32_t current = micros();
@@ -167,21 +167,22 @@ void MotorControl::update() {
 }
 
 void MotorControl::SampleTimer::callback() {
-    wcpp::Packet command = motor_.command_listener.pop();
-    auto status = command.find("St");
-    if (status) {
-        int new_status = (*status).getInt();
-        if (new_status == 0) {
-            ledcWrite(ch1_pwm_1_pin, 0);
-            ledcWrite(ch1_pwm_2_pin, 0);
-            ledcWrite(ch2_pwm_1_pin, 0);
-            ledcWrite(ch2_pwm_2_pin, 0);
+    while (motor_.command_listener) {
+        wcpp::Packet command = motor_.command_listener.pop();
+        auto status = command.find("St");
+        if (status) {
+            int new_status = (*status).getInt();
+            if (new_status == 0) {
+                ledcWrite(ch1_pwm_1_pin, 0);
+                ledcWrite(ch1_pwm_2_pin, 0);
+                ledcWrite(ch2_pwm_1_pin, 0);
+                ledcWrite(ch2_pwm_2_pin, 0);
+            }
+            else {
+                motor_.update();
+            }
         }
-        else {
-            motor_.update();
-        }
-    }
-    
+    } 
 }
 
 } // namespace component

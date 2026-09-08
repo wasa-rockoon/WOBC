@@ -145,6 +145,8 @@ void setup() {
     serial_bus.begin(); 
     can_bus.begin();
 
+    //Servo servo1;
+
     pinMode(SERVO_EN_PIN, OUTPUT);
 
     delay(1000);

@@ -29,8 +29,8 @@ private:
     float _ch1current_rpm;                 // 算出されたRPM
     float _ch2current_rpm;                 // 算出されたRPM
 
-    static void handleInterrupt_ch1();
-    static void handleInterrupt_ch2();
+    static void IRAM_ATTR handleInterrupt_ch1();
+    static void IRAM_ATTR handleInterrupt_ch2();
     static MotorControl* _instance;
 
     static const uint8_t pwm_resolution = 12;
