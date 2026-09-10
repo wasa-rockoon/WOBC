@@ -6,9 +6,9 @@ namespace component {
 LiPoPower::LiPoPower(TwoWire& wire, int st_pin, int pg_pin, int stat1_pin, int stat2_pin, int heat_pin, int charge_led_pin, int temp_pin, uint8_t unit_id, unsigned sample_freq_hz)
   : process::Component("LiPoPower", component_id),
     wire_(wire),
-    ina1(0x4F),
-    ina2(0x4D),
-    ina3(0x4E),
+    ina1(0x4F, &wire),
+    ina2(0x4D, &wire),
+    ina3(0x4E, &wire),
     st_pin_(st_pin),              // ピン番号をメンバ変数に保存
     pg_pin_(pg_pin),
     stat1_pin_(stat1_pin),
@@ -22,14 +22,12 @@ LiPoPower::LiPoPower(TwoWire& wire, int st_pin, int pg_pin, int stat1_pin, int s
 }
 
 void LiPoPower::setup() {
-  start(sample_timer_);
-
   // ここでピンの設定をコンストラクタで受け取った引数を使用して行う
-  pinMode(st_pin_, INPUT);
-  pinMode(pg_pin_, INPUT_PULLUP);
-  pinMode(stat1_pin_, INPUT_PULLUP);
-  pinMode(stat2_pin_, INPUT_PULLUP);
-  pinMode(charge_led_pin_, OUTPUT);
+  if (st_pin_ >= 0) pinMode(st_pin_, INPUT);
+  if (pg_pin_ >= 0) pinMode(pg_pin_, INPUT_PULLUP);
+  if (stat1_pin_ >= 0) pinMode(stat1_pin_, INPUT_PULLUP);
+  if (stat2_pin_ >= 0) pinMode(stat2_pin_, INPUT_PULLUP);
+  if (charge_led_pin_ >= 0) pinMode(charge_led_pin_, OUTPUT);
 
   ina1.begin();
   ina1.setMaxCurrentShunt(1, 0.05);
@@ -37,6 +35,8 @@ void LiPoPower::setup() {
   ina2.setMaxCurrentShunt(1, 0.05);
   ina3.begin();
   ina3.setMaxCurrentShunt(1, 0.05);
+
+  start(sample_timer_);
 }
 
 // SampleTimer コンストラクタに LiPoPower の参照を追加
@@ -58,15 +58,17 @@ void LiPoPower::SampleTimer::callback() {
   int x3_mW = ina3_.getPower() * 1000;
 
   // LiPoPower クラスのピン番号を使ってデジタル入力を読み込む
-  bool source = digitalRead(lipo_power_.st_pin_) ? 0 : 1;
+  bool source = lipo_power_.st_pin_ >= 0 && !digitalRead(lipo_power_.st_pin_);
   bool charge = 0;
 
-  if (!digitalRead(lipo_power_.pg_pin_) && !digitalRead(lipo_power_.stat1_pin_) && digitalRead(lipo_power_.stat2_pin_)) {
+  if (lipo_power_.pg_pin_ >= 0 && lipo_power_.stat1_pin_ >= 0 &&
+      lipo_power_.stat2_pin_ >= 0 &&
+      !digitalRead(lipo_power_.pg_pin_) && !digitalRead(lipo_power_.stat1_pin_) && digitalRead(lipo_power_.stat2_pin_)) {
     charge = 1;
   }
 
   // LED の状態を更新
-  digitalWrite(lipo_power_.charge_led_pin_, charge);
+  if (lipo_power_.charge_led_pin_ >= 0) digitalWrite(lipo_power_.charge_led_pin_, charge);
 
   // Powertelemetry_id パケット送信
 

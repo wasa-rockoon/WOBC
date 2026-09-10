@@ -126,15 +126,16 @@ void CANBus::loop() {
 
       //first frame
 
-      if ((item.can_id & 0xFF) != 0) { // missing previous frame
-        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0xFF);
+      // Only bits 0..4 are the frame index; bits 5..12 contain the unit ID.
+      if ((item.can_id & 0x1F) != 0) { // missing previous frame
+        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0x1F);
         return;
       }
 
       if (pool_[oldest].can_id != 0) { // lost frame
         error_(all_packets, "cbLF", "CAN bus, lost frame, id:%X %X %x, %d", 
               0xFF & (item.can_id >> 21), 0xFF & (item.can_id >> 13), 0xFF & (item.can_id >> 5), 
-              32 & pool_[oldest].can_id, oldest);
+              0x1F & pool_[oldest].can_id, oldest);
         pool_[oldest].can_id = 0;
       }
 

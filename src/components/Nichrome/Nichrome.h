@@ -7,13 +7,13 @@
 
 namespace component {
 
-// 点火回路を制御し、電力・状態テレメトリを送信するコンポーネント。
+// 分離回路を制御し、電力・状態テレメトリを送信するコンポーネント。
 class Nichrome : public process::Component {
 public:
   static const uint8_t component_id = 36;
   // INA226で計測した電圧・電流・電力を送信するテレメトリ種別。
   static const uint8_t Powertelemetry_id = 'I';
-  // 点火シーケンスの段階とGPIOの状態を送信するテレメトリ種別。
+  // 分離シーケンスの段階とGPIOの状態を送信するテレメトリ種別。
   static const uint8_t Statustelemetry_id = 'S';
 
   using Phase = NichromeSequence::Phase;
@@ -21,19 +21,19 @@ public:
   Nichrome(TwoWire& wire, int normal_pin, int high_pin, int low_pin, uint8_t unit_id,
       unsigned sample_freq_hz = 1);
 
-  // 点火用GPIOをすべてLOW出力に初期化する。カーネルやタスクの起動前にも
-  // 呼び出せるため、起動失敗時でも点火回路を非通電に保てる。
+  // 分離用GPIOをすべてLOW出力に初期化する。カーネルやタスクの起動前にも
+  // 呼び出せるため、起動失敗時でも分離回路を非通電に保てる。
   bool prepareSafeOutputs();
 
   // INA226と非常停止用タスクを初期化してコンポーネントを開始する。
-  // start_immediately が true の場合は、開始直後に点火シーケンスを予約する。
+  // start_immediately が true の場合は、開始直後に分離シーケンスを予約する。
   bool begin(bool start_immediately = false);
 
-  // 初期化後に一度だけ点火シーケンスの開始を予約する。同一ブート中の
-  // 再点火は許可しない。
+  // 初期化後に一度だけ分離シーケンスの開始を予約する。同一ブート中の
+  // 再分離は許可しない。
   bool startSequence();
 
-  // どの段階からでも点火出力を直ちにLOWへ戻し、シーケンスを中止する。
+  // どの段階からでも分離出力を直ちにLOWへ戻し、シーケンスを中止する。
   void abortSequence();
 
   // FlightPin挿入割り込みから呼び出す非常停止処理。シーケンスの開始要求後から
@@ -45,7 +45,7 @@ public:
   static const char* phaseName(Phase phase);
 
 protected:
-  // 点火回路の電圧・電流・電力を測定するINA226。
+  // 分離回路の電圧・電流・電力を測定するINA226。
   INA226 ina_Nichrome_;
 
   int normal_pin_;
@@ -54,7 +54,7 @@ protected:
   uint8_t unit_id_;
   bool config_valid_;
 
-  // 時間に応じた点火出力の要求を生成する、ハードウェア非依存の状態機械。
+  // 時間に応じた分離出力の要求を生成する、ハードウェア非依存の状態機械。
   NichromeSequence sequence_;
 
   // GPIOに最後に出力した状態と、ステータスLEDの状態。
@@ -76,11 +76,11 @@ protected:
 
   // 状態が変わらない場合でも、この周期で状態テレメトリを送信する。
   static constexpr unsigned long status_interval_ms = 1000;
-  // 点火シーケンス開始後はINA226の電力テレメトリを10 Hzで送信する。
+  // 分離シーケンス開始後はINA226の電力テレメトリを10 Hzで送信する。
   static constexpr unsigned ignition_sample_interval_ms = 100;
   static constexpr unsigned cutoff_task_stack_size = 2048;
 
-  // 点火時間の上限を独立して監視するFreeRTOSタスク。
+  // 分離時間の上限を独立して監視するFreeRTOSタスク。
   TaskHandle_t cutoff_task_handle_ = nullptr;
   portMUX_TYPE output_mux_ = portMUX_INITIALIZER_UNLOCKED;
 
@@ -94,7 +94,7 @@ protected:
   void setStatusLed(bool on);
   void sendStatus(const NichromeSequence::Snapshot& snapshot);
 
-  // 点火時間超過時に強制遮断する監視タスクを作成・制御する。
+  // 分離時間超過時に強制遮断する監視タスクを作成・制御する。
   bool startCutoffTask();
   bool armCutoff();
   void cutoffFromWatchdog();

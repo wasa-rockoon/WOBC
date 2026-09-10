@@ -1,4 +1,5 @@
 #include "IGN.h"
+#include <components/Pressure/pressure.h>
 
 #if defined(ARDUINO_ARCH_ESP32)
 #include <soc/gpio_struct.h>
@@ -17,7 +18,7 @@ unsigned IGN::sampleIntervalMs(unsigned sample_freq_hz) {
 }
 
 IGN::IGN(TwoWire& wire, int normal_pin, int high_pin, int low_pin,
-         uint8_t unit_id, unsigned sample_freq_hz)
+         uint8_t unit_id, int32_t ignition_altitude_m, unsigned sample_freq_hz)
   : process::Component("IGN", component_id),
     ina_IGN_(0x4D, &wire),
     normal_pin_(normal_pin),
@@ -30,7 +31,27 @@ IGN::IGN(TwoWire& wire, int normal_pin, int high_pin, int low_pin,
                && normal_pin != no_pin && high_pin != no_pin && low_pin != no_pin
                && normal_pin != high_pin && normal_pin != low_pin
                && high_pin != low_pin),
+    altitude_gate_(ignition_altitude_m),
     sample_timer_(ina_IGN_, unit_id_, sampleIntervalMs(sample_freq_hz)) {
+}
+
+bool IGN::altitudeConditionMet(bool flight_pin_removed) {
+  // このメソッドとゲート状態は呼び出し元のMainタスクだけで使用する。
+  if (!flight_pin_removed || !altitude_monitoring_) {
+    altitude_monitoring_ = flight_pin_removed;
+    altitude_gate_.reset();
+    // clear()はパケットの参照を解放しないため、pop()で破棄する。
+    while (pressure_listener_) pressure_listener_.pop();
+    return false;
+  }
+
+  while (pressure_listener_) {
+    const wcpp::Packet packet = pressure_listener_.pop();
+    const auto pa = packet.find("PA");
+    const bool valid = pa && (*pa).isInt();
+    altitude_gate_.observe(valid, valid ? (*pa).getInt() : 0);
+  }
+  return altitude_gate_.ready();
 }
 
 const char* IGN::phaseName(Phase phase) {
@@ -69,6 +90,12 @@ bool IGN::prepareSafeOutputs() {
 
 bool IGN::begin(bool start_immediately) {
   if (!prepareSafeOutputs()) return false;
+
+  pressure_listener_.telemetry()
+                    .packet(Pressure::telemetry_id)
+                    .component(Pressure::component_id)
+                    .unit_origin(unit_id_);
+  listen(pressure_listener_, 4);
 
   // 電流計が使えない、または校正できない状態では点火を禁止する。
   const bool sensor_connected = ina_IGN_.begin();
