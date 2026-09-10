@@ -39,6 +39,8 @@ constexpr int nichrome_normal_pin = 14;
 constexpr int nichrome_high_pin = 48;
 constexpr int nichrome_low_pin = 47;
 constexpr int flight_pin_pin = 2;
+// Start the sequence once, 90 minutes after boot (millis() origin).
+constexpr unsigned long separation_start_delay_ms = 90UL * 60UL * 1000UL;
 
 core::CANBus can_bus(44, 43);
 core::SerialBus serial_bus(Serial);
@@ -63,8 +65,18 @@ public:
     }
 
     void loop() override {
-        // TODO: Implement the Separation control logic.
+        if (separation_start_attempted_ || millis() < separation_start_delay_ms) return;
+
+        separation_start_attempted_ = true;
+        if (nichrome.startSequence()) {
+            LOG("Separation sequence started after 90 minutes from boot");
+        } else {
+            LOG("Separation sequence start rejected");
+        }
     }
+
+private:
+    bool separation_start_attempted_ = false;
 } main_;
 
 void setup() {
@@ -96,7 +108,7 @@ void setup() {
     logger.begin();
     power.begin();
 
-    nichrome.begin(true);
+    nichrome.begin(false);
 
     main_.begin();
     flight_pin.begin();
