@@ -1,4 +1,5 @@
 #include "can_bus.h"
+#include "can_packet_format.h"
 
 namespace core {
 
@@ -13,21 +14,23 @@ void CANBus::setup() {
     pool_[i].packet = wcpp::Packet::null();
   }
 
-  can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
-
   rx_queue_handle_ = xQueueCreate(WOBC_CAN_BUS_RX_QUEUE_SIZE, sizeof(FrameQueueItem));
   listen(all_packets, WOBC_CAN_BUS_PACKET_QUEUE_SIZE, true);
+  initialized_ = can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
+  if (!initialized_) {
+    error_(all_packets, "cbBI", "CAN bus, begin failed");
+  }
 }
 
 void CANBus::loop() {
+  if (!initialized_) return;
   // Kernel to CAN bus
   {
     const wcpp::Packet packet = all_packets.pop();
     if (packet && packet.size() >= 4) {
 
-      uint32_t id = (uint32_t)packet.packet_id() << 21
-                  | (uint32_t)packet.component_id() << 13
-                  | (uint32_t)packet.origin_unit_id() << 5;
+      uint32_t id = can_packet_format::makeId(
+          packet.type_and_id(), packet.component_id(), packet.origin_unit_id());
 
       const uint8_t* buf = packet.encode();
 
@@ -120,8 +123,9 @@ void CANBus::loop() {
 
       //first frame
 
-      if ((item.can_id & 0b11111) != 0) { // missing previous frame
-        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0b11111);
+      if (can_packet_format::frameIndex(item.can_id) != 0) { // missing previous frame
+        error_(all_packets, "cbDF", "CAN bus, drop %dth frame",
+               can_packet_format::frameIndex(item.can_id));
         return;
       }
 
@@ -137,16 +141,16 @@ void CANBus::loop() {
         return;
       }
 
-      uint8_t packet_id      = 0xFF & (item.can_id >> 21);
-      uint8_t component_id   = 0xFF & (item.can_id >> 13);
-      uint8_t origin_unit_id = 0xFF & (item.can_id >> 5);
+      uint8_t type_and_id    = can_packet_format::typeAndId(item.can_id);
+      uint8_t component_id   = can_packet_format::componentId(item.can_id);
+      uint8_t origin_unit_id = can_packet_format::originUnitId(item.can_id);
       // uint8_t frame          = 0xFF & item.can_id;
       pool_[oldest].packet = newPacket(item.data[0]);
       if (!pool_[oldest].packet) return;
       // Serial.printf("A %d %d\n", pool_[oldest].packet.getBuf() - kernel::kernel_.packet_heap_arena_, kernel::kernel_.packet_heap_.getRefCount(pool_[oldest].packet.getBuf()));
       uint8_t* buf = pool_[oldest].packet.getBuf();
       buf[0] = item.data[0];
-      buf[1] = packet_id;
+      buf[1] = type_and_id;
       buf[2] = component_id;
       buf[3] = origin_unit_id;
       memcpy(buf + 4, item.data + 1, item.length - 1); 
