@@ -2,19 +2,12 @@
 #include <Arduino.h>
 #include <library/wobc.h>
 #include <components/LoRa/e220.h>
+#include "hardware.h"
 
 // LoRa2026基板のLoRa2 (U401)。ピン番号はESP32-S3側のGPIO。
 // LoRa1 (U301)を使う場合: TX=13, RX=12, AUX=11, M0=14, M1=21,
 // SW_A1=39, SW_A2=40。チャンネルは通信相手と合わせる。
 #define LORA_CHANNEL 3 // modules/Tracker/main.cppと一致させる。
-#define LORA_TX_PIN 7
-#define LORA_RX_PIN 18
-#define LORA_AUX_PIN 8
-#define LORA_M0_PIN 5
-#define LORA_M1_PIN 6
-#define LORA_SW_A1 9
-#define LORA_SW_A2 10
-
 // 元のmodules/LoRa/main.cppと同様、通常はUSBシリアルで接続する。
 #ifndef LORA_USE_CAN
 #define LORA_USE_CAN 0
@@ -30,29 +23,36 @@ constexpr unsigned rssi_entry_size = 4; // Ss + 符号付きRSSI(-256..-1)
 // PCへの出力は[WCPP][CRC8][0x00]。Serial.print()による文字列を混在させない。
 core::SerialBus serial_bus(Serial);
 #if LORA_USE_CAN
-core::CANBus can_bus(44, 43); // RX, TX
+core::CANBus can_bus(lora_esp_hardware::can::rx,
+                     lora_esp_hardware::can::tx);
 #endif
-interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
-interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
+interface::WatchIndicator<unsigned> status_indicator(
+    lora_esp_hardware::indicator::status, kernel::packetCount());
+interface::WatchIndicator<unsigned> error_indicator(
+    lora_esp_hardware::indicator::error, kernel::errorCount());
 
 // 受信専用。PCからの's'コマンドによる無線送信は行わない。
 class LoRaReceiver : public process::Component {
 public:
   LoRaReceiver()
     : process::Component("LoRa", lora_component_id),
-      lora_serial_(1), e220_(lora_serial_, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN) {
+      lora_serial_(1),
+      e220_(lora_serial_, lora_esp_hardware::lora2::aux,
+            lora_esp_hardware::lora2::m0, lora_esp_hardware::lora2::m1) {
     priority_ = 1;
   }
 
   bool initialize() {
-    pinMode(LORA_SW_A1, OUTPUT);
-    pinMode(LORA_SW_A2, OUTPUT);
-    digitalWrite(LORA_SW_A1, HIGH);
-    digitalWrite(LORA_SW_A2, LOW);
+    pinMode(lora_esp_hardware::lora2::rf_switch_1, OUTPUT);
+    pinMode(lora_esp_hardware::lora2::rf_switch_2, OUTPUT);
+    digitalWrite(lora_esp_hardware::lora2::rf_switch_1, HIGH);
+    digitalWrite(lora_esp_hardware::lora2::rf_switch_2, LOW);
 
     // 最大フレーム(長さ + データ255バイト + RSSI)を保持できる容量。
     if (lora_serial_.setRxBufferSize(512) < 512) return false;
-    lora_serial_.begin(9600, SERIAL_8N1, LORA_RX_PIN, LORA_TX_PIN);
+    lora_serial_.begin(9600, SERIAL_8N1,
+                       lora_esp_hardware::lora2::uart_rx,
+                       lora_esp_hardware::lora2::uart_tx);
 
     if (!e220_.begin()) return false;
     ::delay(1000);

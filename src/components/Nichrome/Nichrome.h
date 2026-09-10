@@ -73,6 +73,7 @@ protected:
   bool outputs_prepared_ = false;
   bool begin_ok_ = false;
   unsigned long last_status_ms_ = 0;
+  uint16_t status_sequence_ = 0;
 
   // 状態が変わらない場合でも、この周期で状態テレメトリを送信する。
   static constexpr unsigned long status_interval_ms = 1000;
@@ -112,6 +113,7 @@ protected:
   private:
     INA226& ina_Nichrome_;
     uint8_t unit_id_;
+    uint16_t sequence_ = 0;
   } sample_timer_;
 };
 

@@ -7,3 +7,5 @@
 # Mission(b, 0x62)
 
 # Rocket(c, 0x63)
+
+# Separation(A, 0x41)

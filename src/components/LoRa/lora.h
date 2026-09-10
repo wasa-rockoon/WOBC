@@ -10,6 +10,7 @@ class LoRa: public process::Component {
 protected:
   // E220 keeps a Stream reference, so construct the UART first.
   HardwareSerial lora_serial_;
+  E220 e220_;
 
 public:
   static const uint8_t component_id_base = 0x10; // TBD

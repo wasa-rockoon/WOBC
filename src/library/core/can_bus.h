@@ -52,6 +52,7 @@ private:
   };
   
   QueueHandle_t rx_queue_handle_;
+  bool initialized_ = false;
 
   void setup() override;
   void loop() override;

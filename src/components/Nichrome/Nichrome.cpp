@@ -308,9 +308,7 @@ void Nichrome::sendStatus(const NichromeSequence::Snapshot& snapshot) {
   // 現在の段階、経過時間、GPIO出力、安全状態を1パケットにまとめて送る。
   wcpp::Packet packet = newPacket(80);
   packet.telemetry(Statustelemetry_id, component_id, unit_id_, 0xFF,
-                   kernel::nextPacketSequence(unit_id_, 0xFF, component_id,
-                                              wcpp::packet_type_mask
-                                              | Statustelemetry_id));
+                   status_sequence_++);
   packet.append("Ph").setEnum(snapshot.phase);
   packet.append("Et").setInt((int)snapshot.phase_elapsed_ms);
   packet.append("St").setInt((int)snapshot.sequence_elapsed_ms);
@@ -379,10 +377,7 @@ void Nichrome::SampleTimer::callback() {
 
   wcpp::Packet packet = newPacket(64);
   packet.telemetry(Powertelemetry_id, Nichrome::component_id, unit_id_, 0xFF,
-                   kernel::nextPacketSequence(unit_id_, 0xFF,
-                                              Nichrome::component_id,
-                                              wcpp::packet_type_mask
-                                              | Powertelemetry_id));
+                   sequence_++);
   packet.append("Vi").setInt(voltage_mV);
   packet.append("Ii").setInt(current_mA);
   packet.append("Pi").setInt(power_mW);
