@@ -235,6 +235,7 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
   stream_.write(cmd, 3 + len);
 
   unsigned long ms = millis();
+  last_response_length_ = 0;
   while (isBusy() || (int)stream_.available() < 3 + len) {
     if (millis() - ms > timeout_ms_) return false;
     delay(1);
@@ -242,6 +243,8 @@ bool E220::writeRegister(ADDR addr, const uint8_t* parameters, uint8_t len) {
 
   uint8_t rx[16];
   stream_.readBytes(rx, 3 + len);
+  memcpy(last_response_, rx, 3 + len);
+  last_response_length_ = 3 + len;
 
   cmd[0] = 0xC1;
   ok &= memcmp(cmd, rx, 3) == 0;
@@ -268,6 +271,7 @@ bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
   stream_.write(header, 3);
 
   unsigned long ms = millis();
+  last_response_length_ = 0;
   while ((int)stream_.available() < 3 + len) {
     if (millis() - ms > timeout_ms_) return false;
     delay(1);
@@ -275,6 +279,8 @@ bool E220::readRegister(ADDR addr, uint8_t* parameters, uint8_t len) {
 
   uint8_t rx[16];
   stream_.readBytes(rx, 3 + len);
+  memcpy(last_response_, rx, 3 + len);
+  last_response_length_ = 3 + len;
 
   ok &= memcmp(header, rx, 3) == 0;
   if (ok) memcpy(parameters, rx + 3, len);

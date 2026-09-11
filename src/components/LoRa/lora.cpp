@@ -3,9 +3,10 @@
 
 namespace component {
 
-LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx, uint8_t channel, unsigned number)
+LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx,
+           uint8_t channel, unsigned number, unsigned uart_number)
   : process::Component("LoRa", component_id_base + number),
-    lora_serial_(1),  // HardwareSerial(1)
+    lora_serial_(uart_number),
     e220_(lora_serial_, aux, m0, m1),
     antenna_switch_(false),
     tx_pin_(tx),
@@ -16,9 +17,11 @@ LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx, uint8_t channel, u
     channel_(channel) {
 }
 
-LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, pin_t tx, pin_t rx, uint8_t channel, unsigned number)
+LoRa::LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B,
+           pin_t tx, pin_t rx, uint8_t channel, unsigned number,
+           unsigned uart_number)
   : process::Component("LoRa", component_id_base + number),
-    lora_serial_(1),  // HardwareSerial(1)
+    lora_serial_(uart_number),
     e220_(lora_serial_, aux, m0, m1),
     antenna_switch_(true),
     antenna_A_(antenna_A),

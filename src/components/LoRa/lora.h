@@ -17,8 +17,11 @@ public:
   static const uint8_t send_command_id = 's'; // TBD
   static constexpr unsigned max_packet_size = 245; // Reserve receiver RSSI space.
 
-  LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx, uint8_t channel, unsigned number = 0);
-  LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B, pin_t tx, pin_t rx, uint8_t channel, unsigned number = 0);
+  LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t tx, pin_t rx, uint8_t channel,
+       unsigned number = 0, unsigned uart_number = 1);
+  LoRa(pin_t aux, pin_t m0, pin_t m1, pin_t antenna_A, pin_t antenna_B,
+       pin_t tx, pin_t rx, uint8_t channel, unsigned number = 0,
+       unsigned uart_number = 1);
 
   enum class TxPriority { Ack, Normal, Telemetry };
   // Nonblocking admission. On false the caller retains and retries the packet.

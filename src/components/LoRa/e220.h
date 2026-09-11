@@ -90,6 +90,11 @@ public:
   bool writeRegisterWithMask(ADDR addr, uint8_t mask, uint8_t value);
   bool readRegister(ADDR addr, uint8_t* parameters, uint8_t len = 1);
 
+  unsigned lastResponseLength() const { return last_response_length_; }
+  uint8_t lastResponseByte(unsigned index) const {
+    return index < last_response_length_ ? last_response_[index] : 0;
+  }
+
 private:
   Stream& stream_;
   pin_t aux_;
@@ -103,5 +108,7 @@ private:
   bool RSSI_enabled_;
   unsigned baud_;
   int rssi_;
+  uint8_t last_response_[16] = {};
+  unsigned last_response_length_ = 0;
 };
 
