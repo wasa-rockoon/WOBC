@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <esp32-hal-uart.h>
 #include <library/wobc.h>
 #include <components/LoRa/e220.h>
 #include "hardware.h"
@@ -92,6 +93,7 @@ protected:
   // The selected UART is deliberately dedicated to LoRa2 in this one-radio probe.
   LOG("LoRa2 UART%u diagnostic: LoRa1 is disabled", lora2_uart_number);
   lora2_setup_ = configureRadio(
+    lora2_uart_number,
     lora2_serial_, lora2_, lora_esp_hardware::lora2::aux,
     lora_esp_hardware::lora2::m0, lora_esp_hardware::lora2::m1,
     lora_esp_hardware::lora2::uart_rx,
@@ -102,6 +104,7 @@ protected:
   // The selected UART is deliberately dedicated to LoRa1 in this one-radio probe.
   LOG("LoRa1 UART%u diagnostic: LoRa2 is disabled", lora1_uart_number);
   lora1_setup_ = configureRadio(
+    lora1_uart_number,
     lora1_serial_, lora1_, lora_esp_hardware::lora1::aux,
     lora_esp_hardware::lora1::m0, lora_esp_hardware::lora1::m1,
     lora_esp_hardware::lora1::uart_rx,
@@ -110,6 +113,7 @@ protected:
     lora_esp_hardware::lora1::rf_switch_2, uplink_channel);
 #else
     lora1_setup_ = configureRadio(
+      lora1_uart_number,
       lora1_serial_, lora1_, lora_esp_hardware::lora1::aux,
       lora_esp_hardware::lora1::m0, lora_esp_hardware::lora1::m1,
       lora_esp_hardware::lora1::uart_rx,
@@ -117,6 +121,7 @@ protected:
         lora_esp_hardware::lora1::rf_switch_1,
         lora_esp_hardware::lora1::rf_switch_2, uplink_channel);
     lora2_setup_ = configureRadio(
+      lora2_uart_number,
       lora2_serial_, lora2_, lora_esp_hardware::lora2::aux,
       lora_esp_hardware::lora2::m0, lora_esp_hardware::lora2::m1,
       lora_esp_hardware::lora2::uart_rx,
@@ -134,8 +139,12 @@ protected:
       error("lr2I", "LoRa2 bring-up failed: %s", setupName(lora2_setup_));
     }
 #elif defined(LORA1_UART2_DIAG) || defined(LORA1_UART1_DIAG)
-    LOG("ROLE=%s LoRa1=UPLINK(ch%u,UART%u) bring-up=%s", role_name,
-        uplink_channel, lora1_uart_number, setupName(lora1_setup_));
+    LOG("ROLE=%s LoRa1=UPLINK(ch%u,UART%u) rx=%u tx=%u attached_rx=%d attached_tx=%d bring-up=%s",
+        role_name, uplink_channel, lora1_uart_number,
+        lora_esp_hardware::lora1::uart_rx,
+        lora_esp_hardware::lora1::uart_tx,
+        uart_get_RxPin(lora1_uart_number), uart_get_TxPin(lora1_uart_number),
+        setupName(lora1_setup_));
     if (!lora1_ready_) {
 #if defined(LORA1_UART2_DIAG)
       error("lr1I", "LoRa1 bring-up failed: %s (UART2 probe v2)",
@@ -206,7 +215,8 @@ private:
     return "UNKNOWN";
   }
 
-  RadioSetup configureRadio(HardwareSerial& serial, E220& radio, pin_t aux,
+  RadioSetup configureRadio(unsigned uart_number, HardwareSerial& serial,
+                            E220& radio, pin_t aux,
                             pin_t m0, pin_t m1, pin_t rx, pin_t tx,
                             pin_t rf_switch_1, pin_t rf_switch_2,
                             uint8_t channel) {
@@ -218,6 +228,9 @@ private:
 
     if (serial.setRxBufferSize(512) < 512) return RadioSetup::RX_BUFFER;
     serial.begin(9600, SERIAL_8N1, rx, tx);
+    LOG("UART%u ready: requested rx=%u tx=%u attached rx_gpio=%d tx_gpio=%d",
+        uart_number, rx, tx, uart_get_RxPin(uart_number),
+        uart_get_TxPin(uart_number));
     if (!radio.begin()) {
       LOG("E220_BEGIN failed: uart_rx=%u uart_tx=%u aux=%d m0=%d m1=%d",
           rx, tx, digitalRead(aux), digitalRead(m0), digitalRead(m1));
