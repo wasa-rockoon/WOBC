@@ -48,12 +48,15 @@ class Main : public process::Component {
 public:
     Main() : process::Component("Main", 0x00) {}
     kernel::Listener my_listener_;
+    kernel::Listener imu_listener_;
     kernel::Listener heartbeat_;
   
     void setup() override {
         LOG("CMG Task: Setup started"); 
         my_listener_.component(0x25); 
         listen(my_listener_, 128);
+        imu_listener_.component(component::IMU9::component_id);
+        listen(imu_listener_, 16, true);
         heartbeat_.component(0x4D);
         listen(heartbeat_,1);
         LOG("CMG Task: loop starts"); 
@@ -70,12 +73,70 @@ public:
 
         delay(100);
 
-        if (isMotorOn == 1) {
+        float roll = 0.0f;
+        float pitch = 0.0f;
+        float yaw = 0.0f;
+        float gyro_x = 0.0f;
+        float gyro_y = 0.0f;
+        float gyro_z = 0.0f;
+        float accel_x = 0.0f;
+        float accel_y = 0.0f;
+        float accel_z = 0.0f;
+        float RxTs = 0.0f;
+
+        if (millis() - start_time > 8000) {
+        while (imu_listener_) {
+            const wcpp::Packet imu_packet = imu_listener_.pop();
+
+            auto Ro = imu_packet.find("Ro");
+            auto Pi = imu_packet.find("Pi");
+            auto Ya = imu_packet.find("Ya");
+            auto Gx = imu_packet.find("Gx");
+            auto Gy = imu_packet.find("Gy");
+            auto Gz = imu_packet.find("Gz");
+            auto Ax = imu_packet.find("Ax");
+            auto Ay = imu_packet.find("Ay");
+            auto Az = imu_packet.find("Az");
+            auto Ts = imu_packet.find("Ts");
+
+            if (!Ro || !Pi || !Ya || !Gx || !Gy || !Gz ||
+                !Ax || !Ay || !Az || !Ts) {
+                continue;
+            }
+
+            roll = (*Ro).getFloat32();
+            pitch = (*Pi).getFloat32();
+            yaw = (*Ya).getFloat32();
+            gyro_x = (*Gx).getFloat32();
+            gyro_y = (*Gy).getFloat32();
+            gyro_z = (*Gz).getFloat32();
+            accel_x = (*Ax).getFloat32();
+            accel_y = (*Ay).getFloat32();
+            accel_z = (*Az).getFloat32();
+            RxTs = (*Ts).getFloat32();
+        }
+        wcpp::Packet compact_packet = newPacket(48);
+        compact_packet.telemetry('A', component::IMU9::component_id, unit_id, 0xFF, 1234);
+        compact_packet.append("Ro").setInt((int)(roll * 100));
+        compact_packet.append("Pi").setInt((int)(pitch * 100));
+        compact_packet.append("Ya").setInt((int)(yaw * 100));
+        compact_packet.append("Gx").setInt((int)(gyro_x * 100));
+        compact_packet.append("Gy").setInt((int)(gyro_y * 100));
+        compact_packet.append("Gz").setInt((int)(gyro_z * 100));
+        compact_packet.append("Ax").setInt((int)(accel_x * 100));
+        compact_packet.append("Ay").setInt((int)(accel_y * 100));
+        compact_packet.append("Az").setInt((int)(accel_z *  100));
+        compact_packet.append("Rt").setInt((int)RxTs);
+        compact_packet.append("Ts").setInt((int)millis());
+        sendPacket(compact_packet);
+        }
+
+        /*if (isMotorOn == 1) {
             static uint32_t motorStartTime = millis();
             request_file_split.store(true);
             LOG("Motor activated due to high altitude detection.");
         }
-
+*/
         if (my_listener_) { //main向けのログがあれば実行
             wcpp::Packet packet = my_listener_.pop();
             auto e = packet.find("PA");

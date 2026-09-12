@@ -49,7 +49,7 @@ component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN, 10.0);
 component::Heater heater(Wire, unit_id, 1);
 component::Pressure pressure(Wire, unit_id, 1);
 component::PowerMeasure power_measure(Wire, unit_id, 10);
-component::MotorControl motor(TACHOMETER_CH1_PIN, TACHOMETER_CH2_PIN, unit_id, 1000, 50);
+component::MotorControl motor(TACHOMETER_CH1_PIN, TACHOMETER_CH2_PIN, unit_id, 5000, 50);
 component::LogServo servo(SERVO_SIG_PIN, SERVO_READ_PIN, unit_id, WITH_READANGLE, 50);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
@@ -59,6 +59,7 @@ uint8_t isMotorOn = 0;
 bool motor_started = false;
 uint8_t highAltitude = 0;
 uint8_t overheating = 0;
+float servo_angle = 0.0f;
 static uint32_t missionStartTime = 0;
 static uint32_t fileSplitTime = 0;
 static uint32_t motorStartTime = 0;
@@ -108,7 +109,7 @@ public:
         }
 
         if (!motor_started &&
-            (highAltitude > 19 || millis() - missionStartTime > 1800000)) { // 高高度が20回以上検出された場合、または30分経過した場合
+            (highAltitude > 19 || millis() - missionStartTime > 18000)) { // 高高度が20回以上検出された場合、または18秒経過した場合
             motor_started = true;
             isMotorOn = 1;
             motorStartTime = millis();
@@ -127,10 +128,14 @@ public:
             LOG("Motor deactivated.");
         }
 
+        if (isMotorOn && millis() - motorStartTime > 60000) { // モータが1分以上稼働している場合
+            servo_angle = 40.0f;
+        }
+
         wcpp::Packet command_packet = newPacket(48);
         command_packet.command('C', component_id(), unit_id, 0xFF, 1234);
         command_packet.append("St").setInt(isMotorOn);  
-        command_packet.append("An").setFloat32(60.0f); 
+        command_packet.append("An").setFloat32(servo_angle + 90.0f); 
         sendPacket(command_packet);
         }
 } main_;

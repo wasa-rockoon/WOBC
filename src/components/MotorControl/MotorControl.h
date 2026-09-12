@@ -37,9 +37,7 @@ private:
     static const uint16_t pwm_freq = 1000;
     static const uint16_t duty_max = (1U << pwm_resolution) - 1;
     static const uint16_t startup_duty_limit = duty_max / 3;
-    static constexpr float startup_rpm_ratio = 0.8f;
-    static constexpr float startup_duty_step = 31.25f;
-    const float p_gain = 10.0 * 2 / 3;
+    const float p_gain = 2.0f;
     const float i_gain = 0.1 * 2 / 3;
     const float d_gain = 0.0f;
     float ch1_average_rpm = 0.0f;
@@ -48,8 +46,6 @@ private:
     float ch2_error_integral = 0.0f;
     float ch1_previous_error = 0.0f;
     float ch2_previous_error = 0.0f;
-    float ch1_duty_command = 0.0f;
-    float ch2_duty_command = 0.0f;
     bool ch1_startup = true;
     bool ch2_startup = true;
 

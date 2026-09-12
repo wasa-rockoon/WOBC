@@ -109,17 +109,13 @@ void MotorControl::update() {
     if (ch1_error_integral < -integral_limit) ch1_error_integral = -integral_limit;
     float ch1_derivative = (ch1_error - ch1_previous_error) / dt_s;
     float ch1_output = p_gain * ch1_error + i_gain * ch1_error_integral + d_gain * ch1_derivative;
-    if (ch1_startup && ch1_average_rpm >= _set_rpm * startup_rpm_ratio) {
+    if (ch1_startup && ch1_average_rpm >= _set_rpm) {
         ch1_startup = false;
-    }
-    if (ch1_startup && ch1_output > ch1_duty_command + startup_duty_step) {
-        ch1_output = ch1_duty_command + startup_duty_step;
     }
     if (ch1_output < 0.0f) ch1_output = 0.0f;
     if (ch1_output > (ch1_startup ? startup_duty_limit : duty_max)) {
         ch1_output = ch1_startup ? startup_duty_limit : duty_max;
     }
-    ch1_duty_command = ch1_output;
     uint16_t ch1_duty = (uint16_t)ch1_output;
     ch1_previous_error = ch1_error;
 #if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
@@ -135,17 +131,13 @@ void MotorControl::update() {
     if (ch2_error_integral < -integral_limit) ch2_error_integral = -integral_limit;
     float ch2_derivative = (ch2_error - ch2_previous_error) / dt_s;
     float ch2_output = p_gain * ch2_error + i_gain * ch2_error_integral + d_gain * ch2_derivative;
-    if (ch2_startup && ch2_average_rpm >= _set_rpm * startup_rpm_ratio) {
+    if (ch2_startup && ch2_average_rpm >= _set_rpm) {
         ch2_startup = false;
-    }
-    if (ch2_startup && ch2_output > ch2_duty_command + startup_duty_step) {
-        ch2_output = ch2_duty_command + startup_duty_step;
     }
     if (ch2_output < 0.0f) ch2_output = 0.0f;
     if (ch2_output > (ch2_startup ? startup_duty_limit : duty_max)) {
         ch2_output = ch2_startup ? startup_duty_limit : duty_max;
     }
-    ch2_duty_command = ch2_output;
     uint16_t ch2_duty = (uint16_t)ch2_output;
     ch2_previous_error = ch2_error;
 #if defined(ESP_ARDUINO_VERSION_MAJOR) && ESP_ARDUINO_VERSION_MAJOR >= 3
