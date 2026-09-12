@@ -1,4 +1,6 @@
-# ESP32-S3 LoRa 2系統通信の実装・検証まとめ
+# ESP32-S3 LoRa 2系統通信の実装・検証まとめ（旧実装）
+
+> この文書はコンポーネント化前の`modules/LoRa_ESP`実装に関する履歴である。現行の構成と実機試験結果は[20260912_lora_esp_dual_lora_test_log.md](20260912_lora_esp_dual_lora_test_log.md)を参照する。
 
 作業日：2026年9月  
 対象：WOBCのLoRa ESP基板（ESP32-S3、E220 LoRaモジュール2台）
@@ -192,4 +194,3 @@ pio run -e LoRa_ESP_LoRa1_UART2_Diag
 2. UART2 TX/RXの電圧レベル、アイドル電位、設定コマンド波形、E220応答波形を測定する。
 3. 必要ならE220のTX線を分離した安全なループバック試験を行う。
 4. UART2が電気的に正常と確認できた後、Ground/Flight通常版へ戻してLoRa2ダウンリンクを試験する。
-
