@@ -51,7 +51,7 @@ component::FlightPin flight_pin(unit_id, flight_pin_pin, 1);
 //component::Telemeter telemeter;
 component::Nichrome nichrome(Wire, nichrome_normal_pin, nichrome_high_pin, nichrome_low_pin, unit_id, 1);
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
-
+component::GPS gps(38, 39, 115200, unit_id);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -86,7 +86,7 @@ void setup() {
     delay(1000);
 
     kernel::setUnitId(unit_id);
-    if (!kernel::begin(module_id, false)) return;
+    if (!kernel::begin(module_id, true)) return;
 
     Serial0.setPins(2, 1);
     if (!Wire.begin(17, 16)) return;
@@ -107,6 +107,7 @@ void setup() {
     pressure.begin();
     logger.begin();
     power.begin();
+    gps.begin();
 
     nichrome.begin(false);
 
