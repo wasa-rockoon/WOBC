@@ -30,7 +30,8 @@ void CANBus::loop() {
     const wcpp::Packet packet = all_packets.pop();
     if (packet && packet.size() >= 4) {
 
-      uint32_t id = (uint32_t)packet.packet_id() << 21
+      // Preserve the command/telemetry bit along with the packet ID.
+      uint32_t id = (uint32_t)packet.type_and_id() << 21
                   | (uint32_t)packet.component_id() << 13
                   | (uint32_t)packet.origin_unit_id() << 5;
 
@@ -89,7 +90,13 @@ void CANBus::loop() {
       // continue frame
       for (int i = 0; i < WOBC_CAN_BUS_POOL_SIZE; i++) {
 
-        if (pool_[i].can_id == item.can_id) {
+        if (pool_[i].packet && pool_[i].can_id == item.can_id) {
+          if ((unsigned)pool_[i].size + item.length > pool_[i].packet.size()) {
+            error_(all_packets, "cbWS", "CAN bus, continuation exceeds packet size");
+            pool_[i].packet.clear();
+            pool_[i].can_id = 0;
+            return;
+          }
           // Serial.printf("P %d %d %d %d %d %d\n", item.can_id, i, pool_[i].size, pool_[i].packet.size(), item.length,  kernel::kernel_.packet_heap_.getRefCount(pool_[i].packet.getBuf()));
           memcpy(pool_[i].packet.getBuf() + pool_[i].size, item.data, item.length);
           pool_[i].size += item.length;
@@ -125,20 +132,29 @@ void CANBus::loop() {
 
       //first frame
 
-      if ((item.can_id & 0xFF) != 0) { // missing previous frame
-        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0xFF);
+      // Bits 0..4 are the frame index; bits 5..12 are the origin unit ID.
+      if ((item.can_id & 0x1F) != 0) { // missing previous frame
+        error_(all_packets, "cbDF", "CAN bus, drop %dth frame", item.can_id & 0x1F);
         return;
       }
 
       if (pool_[oldest].can_id != 0) { // lost frame
         error_(all_packets, "cbLF", "CAN bus, lost frame, id:%X %X %x, %d", 
               0xFF & (item.can_id >> 21), 0xFF & (item.can_id >> 13), 0xFF & (item.can_id >> 5), 
-              32 & pool_[oldest].can_id, oldest);
+              0x1F & pool_[oldest].can_id, oldest);
+        pool_[oldest].packet.clear();
         pool_[oldest].can_id = 0;
       }
 
       if (item.length < 1) {
         error_(all_packets, "cbEF", "CAN bus, empty frame");
+        return;
+      }
+
+      const unsigned header_size = ((item.can_id >> 5) & 0xFF) == unit_id_local ? 4 : 7;
+      if (item.data[0] < header_size || item.length + 3 > item.data[0]
+          || (item.data[0] <= 11 && item.length + 3 != item.data[0])) {
+        error_(all_packets, "cbWS", "CAN bus, invalid first frame size");
         return;
       }
 
@@ -156,14 +172,7 @@ void CANBus::loop() {
       buf[3] = origin_unit_id;
       memcpy(buf + 4, item.data + 1, item.length - 1); 
 
-      if (pool_[oldest].packet.size() <= 10) { // single frame
-          if (pool_[oldest].packet.size() != item.length + 3) { // wrong size
-            error_(all_packets, "cbWS", "CAN bus, wrong size first, expected: %d, actual: %d", 
-                   pool_[oldest].size, item.length + 3);
-            pool_[oldest].packet.clear();
-            pool_[oldest].can_id = 0;
-          }
-
+      if (pool_[oldest].packet.size() == item.length + 3) { // complete single frame
         sendPacket(pool_[oldest].packet, all_packets);
         pool_[oldest].packet.clear();
         pool_[oldest].can_id = 0;
@@ -178,6 +187,7 @@ void CANBus::loop() {
 }
 
 void CANBus::onReceive(const driver::CAN::Frame& frame) {
+  if (rx_queue_handle_ == nullptr || frame.length == 0 || frame.length > 8) return;
   // printf("CAN\n");
   if (!frame.extended) return;
   if (frame.rtr) return;
@@ -187,9 +197,12 @@ void CANBus::onReceive(const driver::CAN::Frame& frame) {
   item.length = frame.length;
   memcpy(item.data, frame.data, frame.length);
 
-  if (xQueueSendFromISR(rx_queue_handle_, &item, 0) != pdPASS) {
-
-  }
+#if defined(ARDUINO_ARCH_ESP32)
+  // ESP32 callbacks and polling run in tasks; RP2040 receives from its ISR.
+  xQueueSend(rx_queue_handle_, &item, 0);
+#else
+  xQueueSendFromISR(rx_queue_handle_, &item, 0);
+#endif
 }
 
 void CANBus::onError() {
