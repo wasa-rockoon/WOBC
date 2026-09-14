@@ -1,11 +1,10 @@
-// TrackerのLoRaテレメトリを受信し、WCPP形式でPCへ転送する。
+// Tracker / MissionBusのLoRaテレメトリを2つのUARTで受信する。
 #include <Arduino.h>
 #include <library/wobc.h>
 #include <components/LoRa/e220.h>
 
 // LoRa2026基板のLoRa2 (U401)。ピン番号はESP32-S3側のGPIO。
-// LoRa1 (U301)を使う場合: TX=13, RX=12, AUX=11, M0=14, M1=21,
-// SW_A1=39, SW_A2=40。チャンネルは通信相手と合わせる。
+// LoRa1 (U301)は下のmission_loraでMissionBus用に設定する。
 #define LORA_CHANNEL 3 // modules/Tracker/main.cppと一致させる。
 #define LORA_TX_PIN 7
 #define LORA_RX_PIN 18
@@ -23,7 +22,6 @@
 namespace {
 
 constexpr uint8_t module_id = 0x4C;
-constexpr uint8_t lora_component_id = 0x10;
 constexpr unsigned long lora_baud = 115200;
 constexpr unsigned rssi_entry_size = 4; // Ss + 符号付きRSSI(-256..-1)
 
@@ -38,21 +36,24 @@ interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
 // 受信専用。PCからの's'コマンドによる無線送信は行わない。
 class LoRaReceiver : public process::Component {
 public:
-  LoRaReceiver()
-    : process::Component("LoRa", lora_component_id),
-      lora_serial_(1), e220_(lora_serial_, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN) {
+  LoRaReceiver(const char* name, uint8_t id, uint8_t uart, uint8_t channel,
+               pin_t tx, pin_t rx, pin_t aux, pin_t m0, pin_t m1,
+               pin_t sw_a1, pin_t sw_a2)
+    : process::Component(name, id),
+      lora_serial_(uart), e220_(lora_serial_, aux, m0, m1),
+      channel_(channel), tx_(tx), rx_(rx), sw_a1_(sw_a1), sw_a2_(sw_a2) {
     priority_ = 1;
   }
 
   bool initialize() {
-    pinMode(LORA_SW_A1, OUTPUT);
-    pinMode(LORA_SW_A2, OUTPUT);
-    digitalWrite(LORA_SW_A1, HIGH);
-    digitalWrite(LORA_SW_A2, LOW);
+    pinMode(sw_a1_, OUTPUT);
+    pinMode(sw_a2_, OUTPUT);
+    digitalWrite(sw_a1_, HIGH);
+    digitalWrite(sw_a2_, LOW);
 
     // 最大フレーム(長さ + データ255バイト + RSSI)を保持できる容量。
     if (lora_serial_.setRxBufferSize(512) < 512) return false;
-    lora_serial_.begin(9600, SERIAL_8N1, LORA_RX_PIN, LORA_TX_PIN);
+    lora_serial_.begin(9600, SERIAL_8N1, rx_, tx_);
 
     if (!e220_.begin()) return false;
     ::delay(1000);
@@ -66,7 +67,7 @@ public:
       e220_.setEnvRSSIEnable(true) &&
       e220_.setSendMode(E220::SendMode::TRANSPARENT) &&
       e220_.setModuleAddr(E220::BROADCAST) &&
-      e220_.setChannel(LORA_CHANNEL) &&
+      e220_.setChannel(channel_) &&
       e220_.setRSSIEnable(true);
 
     // 設定失敗時も通常モードへ戻す。設定中のUARTは9600bps。
@@ -75,6 +76,19 @@ public:
     lora_serial_.updateBaudRate(lora_baud);
     ::delay(100);
     return configured && normal_mode;
+  }
+
+  bool start() {
+    if (!initialize()) {
+      error("lrIN", "LoRa setup failed; check wiring and power");
+      return false;
+    }
+    if (!begin()) {
+      error("lrST", "LoRa task start failed");
+      return false;
+    }
+    LOG("LoRa receiver ready (channel %u).", channel_);
+    return true;
   }
 
 protected:
@@ -118,9 +132,17 @@ private:
   // 宣言順もUART -> E220にし、有効なStreamを渡す。
   HardwareSerial lora_serial_;
   E220 e220_;
+  const uint8_t channel_;
+  const pin_t tx_, rx_, sw_a1_, sw_a2_;
 };
 
-LoRaReceiver lora;
+// LoRa2 / U401: Tracker (unit 0x61), UART1, channel 3.
+LoRaReceiver tracker_lora("TrackerLoRa", 0x10, 1, LORA_CHANNEL,
+    LORA_TX_PIN, LORA_RX_PIN, LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN,
+    LORA_SW_A1, LORA_SW_A2);
+// LoRa1 / U301: MissionBus (unit 0x62), UART2, channel 11.
+LoRaReceiver mission_lora("MissionLoRa", 0x11, 2, 11,
+    13, 12, 11, 14, 21, 39, 40);
 
 } // namespace
 
@@ -137,15 +159,10 @@ void setup() {
   can_bus.begin();
 #endif
 
-  if (!lora.initialize()) {
-    lora.error("lrIN", "LoRa setup failed; check wiring and power");
-    return;
-  }
-  if (!lora.begin()) {
-    lora.error("lrST", "LoRa task start failed");
-    return;
-  }
-  lora.LOG("Tracker LoRa receiver ready (channel %u).", LORA_CHANNEL);
+  // 片側が故障していても、もう片側の受信タスクを起動する。
+  const bool tracker_ok = tracker_lora.start();
+  const bool mission_ok = mission_lora.start();
+  if (!tracker_ok || !mission_ok) return;
   error_indicator.set(false);
   error_indicator.blink_on_change(100);
 }
