@@ -165,7 +165,7 @@ void setup() {
     pressure.begin();
     logger.begin();
     heater.begin();
-    //telemeter.begin();
+    telemeter.begin();
 
     // Initialize IGN without starting the sequence. It remains Disarmed until
     // FlightPin removal AND 30 consecutive pressure altitude samples qualify.
