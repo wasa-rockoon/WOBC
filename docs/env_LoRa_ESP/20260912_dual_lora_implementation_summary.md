@@ -81,8 +81,8 @@ Ground側の送信直前・送信結果、Flight側の受信・CRC・packet復�
 
 | 環境 | 用途 |
 |---|---|
-| `LoRa_ESP_Ground` | Ground通常版（LoRa1=UART2、LoRa2=UART1） |
-| `LoRa_ESP_Flight` | Flight通常版（LoRa1=UART2、LoRa2=UART1） |
+| `LoRa_ESP_CAN_Ground` | Ground通常版（CAN転送対応、LoRa1=UART2、LoRa2=UART1） |
+| `LoRa_ESP_CAN_Flight` | Flight通常版（CAN転送対応、LoRa1=UART2、LoRa2=UART1） |
 | `LoRa_ESP_LoRa1_UART2_Diag` | LoRa1のみをUART2で診断。LoRa2は無効 |
 | `LoRa_ESP_LoRa1_UART1_Diag` | LoRa1をUART1で動かす比較試験 |
 | `LoRa_ESP_LoRa2_UART1_Diag` | LoRa2のみをUART1で診断 |
@@ -177,7 +177,7 @@ GPIO12/13をE220接続中に単純短絡するループバックは、E220 TX出
 通常版のビルド：
 
 ```powershell
-pio run -e LoRa_ESP_Ground -e LoRa_ESP_Flight
+pio run -e LoRa_ESP_CAN_Ground -e LoRa_ESP_CAN_Flight
 ```
 
 LoRa1 UART2単体診断：

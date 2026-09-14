@@ -7,6 +7,10 @@ CAN* CAN_instance = nullptr;
 bool CAN::begin(unsigned baudrate, pin_t rx, pin_t tx) {
   CAN_instance = this;
   CAN0.setCANPins((gpio_num_t)rx, (gpio_num_t)tx);
+  // A normal TWAI recovery leaves the controller stopped after BUS-OFF.
+  // Restart the driver so CAN communication resumes even if another node
+  // was not powered when this node started transmitting.
+  CAN0.setForceRecovery(true, 2000);
   if (!CAN0.begin(baudrate)) return false;
   // CAN0.setRXFilter(0, 0, true);
   CAN0.watchFor();

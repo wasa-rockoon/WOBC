@@ -5,7 +5,7 @@
 
 namespace component {
 // Ground: command -> uplink, downlink -> bus.
-// Flight: uplink -> bus, 'M' telemetry -> downlink.
+// Flight: uplink -> bus, ACK ('a') and 'M' telemetry -> downlink.
 // Received packets carry Ss (RSSI) and are never retransmitted.
 class DualLoRa : public process::Component {
 public:
@@ -63,6 +63,7 @@ private:
   E220 lora1_;
   E220 lora2_;
   kernel::Listener tx_listener_;
+  kernel::Listener ack_listener_;
   wcpp::Packet pending_tx_ = wcpp::Packet::null();
   RadioSetup lora1_setup_ = RadioSetup::BEGIN;
   RadioSetup lora2_setup_ = RadioSetup::BEGIN;

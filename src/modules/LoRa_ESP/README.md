@@ -9,8 +9,6 @@ ESP32-S3 LoRa基板の通常ファームウェア。`docs/library.md`に従い�
 受信パケットにはRSSIの`Ss`を追加する。E220設定時はUART受信バッファに残った応答バイトを取り除いてから読出し要求を送る。
 
 ```powershell
-pio run -e LoRa_ESP_Ground
-pio run -e LoRa_ESP_Flight
 pio run -e LoRa_ESP_CAN_Ground
 pio run -e LoRa_ESP_CAN_Flight
 ```

@@ -65,8 +65,8 @@ UART0はUSBシリアルコンソールに予約する。Groundのunit IDは`0x63
 
 | 環境 | 用途 |
 |---|---|
-| `LoRa_ESP_Ground` | Ground通常版 |
-| `LoRa_ESP_Flight` | Flight通常版 |
+| `LoRa_ESP_CAN_Ground` | Ground通常版（CAN転送対応） |
+| `LoRa_ESP_CAN_Flight` | Flight通常版（CAN転送対応） |
 | `LoRa_ESP_LoRa1_UART1_Diag` | LoRa1のみをUART1で初期化する比較試験 |
 | `LoRa_ESP_LoRa1_UART2_Diag` | LoRa1のみをUART2で初期化する比較試験 |
 
@@ -151,8 +151,8 @@ Flightが`Ts`と`Ss`を受信したため、アップリンクも動作した。
 ## ビルドコマンド
 
 ```powershell
-pio run -e LoRa_ESP_Ground
-pio run -e LoRa_ESP_Flight
+pio run -e LoRa_ESP_CAN_Ground
+pio run -e LoRa_ESP_CAN_Flight
 ```
 
 書き込み時は`-t upload --upload-port COMxx`を追加する。書き込み対象のCOMポートを使用中のモニタは、事前に終了する。

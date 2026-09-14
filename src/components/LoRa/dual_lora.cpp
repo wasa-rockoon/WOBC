@@ -19,10 +19,16 @@ DualLoRa::DualLoRa(const RadioConfig& uplink, const RadioConfig& downlink, bool 
 void DualLoRa::setup() {
   LOG("LoRa build=DUAL_UART uplink_UART=%u baud=%lu",
       uplink_.uart_number, lora_baud);
-  // USB input without Ss is the only TX source. Ground accepts commands;
-  // Flight accepts telemetry, keeping the two directions unambiguous.
-  if (is_ground) tx_listener_.command();
-  else tx_listener_.telemetry().packet('M');
+  // Only packets without received-RSSI metadata are eligible for RF TX.
+  // Ground accepts commands; Flight accepts ACKs and mission telemetry.
+  if (is_ground) {
+    tx_listener_.command();
+  } else {
+    tx_listener_.telemetry().packet('M');
+    ack_listener_.telemetry().packet('a');
+    // Command acknowledgements take priority over periodic telemetry.
+    listen(ack_listener_, 16, false);
+  }
   listen(tx_listener_, 16, false);
 
   lora1_setup_ = configureRadio(
@@ -231,14 +237,20 @@ void DualLoRa::receiveOne(E220& radio, HardwareSerial& serial, bool uplink_rx) {
     return;
   }
   // Publish to SerialBus and all normal listeners.  The TX listener has a
-  // role-specific filter (GROUND=command, FLIGHT=M telemetry), so routing
+  // role-specific filters (GROUND=command, FLIGHT=ACK/M telemetry), so routing
   // RX directly to it would hide valid packets from USB.
   sendPacket(packet);
 }
 
 void DualLoRa::serviceTx(E220& radio, bool uplink_tx) {
-  if (!pending_tx_ && tx_listener_) {
-    wcpp::Packet candidate = tx_listener_.pop();
+  if (!pending_tx_) {
+    wcpp::Packet candidate = wcpp::Packet::null();
+    if (!is_ground && ack_listener_) {
+      candidate = ack_listener_.pop();
+    } else if (tx_listener_) {
+      candidate = tx_listener_.pop();
+    }
+    if (!candidate) return;
     if (!candidate.find("Ss")) {
       pending_tx_ = candidate;
     } else if (uplink_tx) {
@@ -255,21 +267,21 @@ void DualLoRa::serviceTx(E220& radio, bool uplink_tx) {
   uint8_t data[255];
   memcpy(data, pending_tx_.encode(), size);
   data[size] = pending_tx_.checksum();
-  if (uplink_tx) {
-    LOG("[UPLINK TX] type=%s packet_id=0x%02X component=0x%02X "
-        "origin=0x%02X destination=0x%02X sequence=%u payload_size=%u",
+  LOG("[%s TX] type=%s packet_id=0x%02X component=0x%02X "
+      "origin=0x%02X destination=0x%02X sequence=%u payload_size=%u",
+        uplink_tx ? "UPLINK" : "DOWNLINK",
         pending_tx_.isCommand() ? "command" : "telemetry",
         pending_tx_.packet_id(), pending_tx_.component_id(),
         pending_tx_.origin_unit_id(), pending_tx_.dest_unit_id(),
         pending_tx_.sequence(), size - pending_tx_.header_size());
-    LOG("[E220 TX] bytes=%u sendTransparent=called aux_busy_before=%s",
-        size + 1, radio.isBusy() ? "yes" : "no");
-  }
+  LOG("[E220 TX] direction=%s bytes=%u sendTransparent=called "
+      "aux_busy_before=%s",
+      uplink_tx ? "UPLINK" : "DOWNLINK", size + 1,
+      radio.isBusy() ? "yes" : "no");
   const bool written = radio.sendTransparent(data, size + 1);
-  if (uplink_tx) {
-    LOG("[E220 TX] uart_write=%s aux_busy_after=%s",
-        written ? "OK" : "NG", radio.isBusy() ? "yes" : "no");
-  }
+  LOG("[E220 TX] direction=%s uart_write=%s aux_busy_after=%s",
+      uplink_tx ? "UPLINK" : "DOWNLINK", written ? "OK" : "NG",
+      radio.isBusy() ? "yes" : "no");
   if (written) {
     pending_tx_ = wcpp::Packet::null();
   }

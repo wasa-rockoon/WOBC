@@ -35,10 +35,12 @@
 
 constexpr uint8_t module_id = 0x4C;
 #if defined(LORA_ESP_ROLE_GROUND)
-constexpr uint8_t unit_id = 0x63;
+// Ground LoRa and GS are modules on the same ground-side CAN unit.
+constexpr uint8_t unit_id = 0x64;
 constexpr bool is_ground = true;
 #else
-constexpr uint8_t unit_id = 0x61;
+// Flight LoRa and Separation are modules on the same flight-side CAN unit.
+constexpr uint8_t unit_id = 0x41;
 constexpr bool is_ground = false;
 #endif
 

@@ -28,7 +28,6 @@ void CANBus::loop() {
   {
     const wcpp::Packet packet = all_packets.pop();
     if (packet && packet.size() >= 4) {
-
       // Preserve the command/telemetry bit when rebuilding the WCPP header.
       uint32_t id = (uint32_t)packet.type_and_id() << 21
                   | (uint32_t)packet.component_id() << 13
