@@ -4,7 +4,7 @@
 #include <components/LiPoPower/lipo_power.h>
 #include <components/LoRa/lora.h>
 #include <components/Pressure/pressure.h>
-#include <components/IMU/IMU.h>
+//#include <components/IMU/IMU.h>
 #include <components/GPS/gps.h>
 #include <components/Logger/logger.h>
 #include <SPI.h>
@@ -35,10 +35,15 @@
 #define LORA_M0_PIN 14
 #define LORA_M1_PIN 18
 
+// Assumed GS-compatible wiring; verify against the MMission2026 schematic.
+#define CAN_RX_PIN 44
+#define CAN_TX_PIN 43
+
 constexpr uint8_t module_id = 0x4D;
 constexpr uint8_t unit_id = 0x62;
 
 HardwareSerial lora_serial(1);
+core::CANBus can_bus(CAN_RX_PIN, CAN_TX_PIN);
 core::SerialBus serial_bus(Serial);
 core::CANBus can_bus(44, 43);
 
@@ -46,8 +51,13 @@ component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, un
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
+<<<<<<< HEAD
 component::IMU9 imu(Wire, unit_id, 100);
 component::GPS gps(38, 39, 9600, unit_id);
+=======
+//component::IMU9 imu(Wire, unit_id, 100);
+component::GPS gps(39, 38, 115200, unit_id);
+>>>>>>> d679d77 (CANに挑戦)
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -100,12 +110,13 @@ void setup() {
     error_indicator.begin();
     error_indicator.set(true);
 
+    can_bus.begin();
     power.begin();
     lora.begin();
     pressure.begin();
     //imu.begin();
     gps.begin();
-    logger.begin();
+    //logger.begin();
     main_.begin();
 
     error_indicator.set(false);

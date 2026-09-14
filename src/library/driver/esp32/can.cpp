@@ -7,8 +7,7 @@ CAN* CAN_instance = nullptr;
 bool CAN::begin(unsigned baudrate, pin_t rx, pin_t tx) {
   CAN_instance = this;
   CAN0.setCANPins((gpio_num_t)rx, (gpio_num_t)tx);
-  if (!CAN0.begin(baudrate)) ;
-  // return false;
+  if (!CAN0.begin(baudrate)) return false;
   // CAN0.setRXFilter(0, 0, true);
   CAN0.watchFor();
   CAN0.setCallback(0, &callback);

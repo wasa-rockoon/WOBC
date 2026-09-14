@@ -13,13 +13,18 @@ void CANBus::setup() {
     pool_[i].packet = wcpp::Packet::null();
   }
 
-  can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
-
   rx_queue_handle_ = xQueueCreate(WOBC_CAN_BUS_RX_QUEUE_SIZE, sizeof(FrameQueueItem));
+  if (rx_queue_handle_ == nullptr) {
+    error_(all_packets, "cbRQ", "CAN bus, receive queue allocation failed");
+    return;
+  }
   listen(all_packets, WOBC_CAN_BUS_PACKET_QUEUE_SIZE, true);
+  ready_ = can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
+  if (!ready_) error_(all_packets, "cbIN", "CAN bus, initialization failed");
 }
 
 void CANBus::loop() {
+  if (!ready_) return;
   // Kernel to CAN bus
   {
     const wcpp::Packet packet = all_packets.pop();
