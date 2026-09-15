@@ -7,6 +7,7 @@
 //#include <components/IMU/IMU.h>
 #include <components/GPS/gps.h>
 #include <components/Logger/logger.h>
+#include <components/Telemeter/telemeter.h>
 #include <SPI.h>
 
 #define SPI0_SCK_PIN 5
@@ -41,14 +42,12 @@
 
 constexpr uint8_t module_id = 0x4D;
 constexpr uint8_t unit_id = 0x62;
-constexpr uint8_t ign_unit_id = 0x40;
-// false: binary SerialBus output for the telemetry viewer.
-// true: readable CAN diagnostics for a plain serial monitor (viewer disabled).
-constexpr bool can_serial_monitor = false;
 
 HardwareSerial lora_serial(1);
 core::CANBus can_bus(CAN_RX_PIN, CAN_TX_PIN);
 core::SerialBus serial_bus(Serial);
+// Use the same telemetry server as GS, including IGN and sensor telemetry.
+component::Telemeter telemeter(true);
 
 component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, unit_id, 1);
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
@@ -64,39 +63,13 @@ class Main : public process::Component {
 public:
     Main() : process::Component("main", 0x00) {}
     kernel::Listener my_listener_;
-    kernel::Listener heartbeat_;
-    kernel::Listener ign_listener_;
 
     void setup() override {
         my_listener_.telemetry(); 
         listen(my_listener_, 8);
-        heartbeat_.component(0x4D);
-        listen(heartbeat_,1);
-        if (can_serial_monitor) {
-            // Include commands so older IGN firmware with a missing type bit
-            // remains visible in the monitor without reclassifying its data.
-            ign_listener_.unit_origin(ign_unit_id);
-            listen(ign_listener_, 16);
-        }
     }
 
     void loop() override {
-        while (ign_listener_) {
-            const wcpp::Packet packet = ign_listener_.pop();
-            ++ign_rx_count_;
-            Serial.printf("[CAN RX] IGN unit=0x40 type=%s component=0x%02X packet=%c bytes=%u count=%lu",
-                          packet.isTelemetry() ? "TLM" : "CMD",
-                          (unsigned)packet.component_id(), (int)packet.packet_id(),
-                          (unsigned)packet.size(), ign_rx_count_);
-            const char* fields[] = {"Vi", "Ii", "Pi"};
-            for (const char* name : fields) {
-                auto entry = packet.find(name);
-                if (entry && (*entry).isInt()) {
-                    Serial.printf(" %s=%lld", name, (long long)(*entry).getInt());
-                }
-            }
-            Serial.println();
-        }
         while (my_listener_) {
             const wcpp::Packet packet = my_listener_.pop();
             auto im = packet.find("Im");
@@ -108,17 +81,8 @@ public:
                 sendPacket(lorapacket);
             }
         }
-        if (can_serial_monitor && millis() - last_can_report_ms_ >= 5000) {
-            last_can_report_ms_ = millis();
-            Serial.printf("[CAN MONITOR] RX=%d TX=%d baud=%u IGN packets=%lu\n",
-                          CAN_RX_PIN, CAN_TX_PIN, (unsigned)WOBC_CAN_BUS_BAUDRATE,
-                          ign_rx_count_);
-        }
     }
 
-private:
-    unsigned long ign_rx_count_ = 0;
-    unsigned long last_can_report_ms_ = 0;
 } main_;
 
 void setup() {
@@ -126,9 +90,8 @@ void setup() {
     kernel::setUnitId(unit_id);
     if (!kernel::begin(module_id, true)) return;
 
-    //Serial0.setPins(4, 5);
+    Serial0.setPins(4, 5);
     Wire.begin(17, 16);
-    if (!can_serial_monitor) serial_bus.begin();
 
     SPI.begin(SDCARD_SCK_PIN, SDCARD_MISO_PIN, SDCARD_MOSI_PIN, SDCARD_SS_PIN);
 
@@ -141,6 +104,8 @@ void setup() {
     error_indicator.set(true);
 
     can_bus.begin();
+    serial_bus.begin();
+    telemeter.begin();
     power.begin();
     lora.begin();
     pressure.begin();

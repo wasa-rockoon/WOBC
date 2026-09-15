@@ -2,8 +2,8 @@
 
 namespace component {
 
-Telemeter::Telemeter(void)
-  : process::Component("Telemeter", component_id) {
+Telemeter::Telemeter(bool all_telemetry)
+  : process::Component("Telemeter", component_id), all_telemetry_(all_telemetry) {
 }
 
 void Telemeter::webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
@@ -32,8 +32,8 @@ void Telemeter::webSocketEvent(WStype_t type, uint8_t* payload, size_t length) {
 }
 
 void Telemeter::setup() {
-    //up_packets_.telemetry();
-    up_packets_.packet('A');
+    if (all_telemetry_) up_packets_.telemetry();
+    else up_packets_.packet('A');
     listen(up_packets_, 8);
 
     delay(5000);
@@ -58,6 +58,7 @@ void Telemeter::setup() {
 }
 
 void Telemeter::loop() {
+  webSocket_.loop();
     if(!webSocket_.isConnected()){
         LOG("mistake connect server");
         webSocket_.begin("54.248.18.111", 80, "http://54.248.18.111/ws");
@@ -67,6 +68,12 @@ void Telemeter::loop() {
   while (up_packets_) {
 
     const wcpp::Packet packet = up_packets_.pop();
+    // Upload acknowledgements are themselves telemetry; do not upload them
+    // again and generate an endless chain of acknowledgements.
+    if (packet.component_id() == component_id
+        && (packet.packet_id() == packet_id_log || packet.packet_id() == packet_id_error)) {
+      continue;
+    }
     uint8_t buf[wcpp::size_max];
     wcpp::Packet packet_tele = wcpp::Packet::empty(buf, wcpp::size_max);
 

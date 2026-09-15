@@ -12,13 +12,15 @@ public:
   static const uint8_t component_id = 0x50;
   static const uint8_t telemeter_id = 'W';
 
-  Telemeter(void);
+  // Keep GS's packet-A filter by default; opt in to all telemetry for a gateway.
+  explicit Telemeter(bool all_telemetry = false);
 
 protected:
   WiFiMulti WiFiMulti_;
   WebSocketsClient webSocket_;
   
   Listener up_packets_;
+  bool all_telemetry_;
   unsigned packets_wrote_;
   unsigned bytes_wrote_;
 
