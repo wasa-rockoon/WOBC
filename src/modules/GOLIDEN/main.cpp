@@ -15,7 +15,7 @@
 #define GPS_RX_PIN 11
 #define GPS_TX_PIN 12
 
-#define LORA_CHANNEL 3
+#define LORA_CHANNEL 4
 #define LORA_TX_PIN 40
 #define LORA_RX_PIN 39
 #define LORA_AUX_PIN 38
