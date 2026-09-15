@@ -41,37 +41,40 @@ public:
                pin_t sw_a1, pin_t sw_a2)
     : process::Component(name, id),
       lora_serial_(uart), e220_(lora_serial_, aux, m0, m1),
-      channel_(channel), tx_(tx), rx_(rx), sw_a1_(sw_a1), sw_a2_(sw_a2) {
+      channel_(channel), tx_(tx), rx_(rx), aux_(aux), m0_(m0), m1_(m1),
+      sw_a1_(sw_a1), sw_a2_(sw_a2) {
     priority_ = 1;
   }
 
   bool initialize() {
+    failed_step_ = nullptr;
     pinMode(sw_a1_, OUTPUT);
     pinMode(sw_a2_, OUTPUT);
     digitalWrite(sw_a1_, HIGH);
     digitalWrite(sw_a2_, LOW);
 
     // 最大フレーム(長さ + データ255バイト + RSSI)を保持できる容量。
-    if (lora_serial_.setRxBufferSize(512) < 512) return false;
+    if (!checkInitStep("uart-buffer", lora_serial_.setRxBufferSize(512) >= 512)) return false;
     lora_serial_.begin(9600, SERIAL_8N1, rx_, tx_);
+    if (!checkInitStep("uart-begin", static_cast<bool>(lora_serial_))) return false;
 
-    if (!e220_.begin()) return false;
+    if (!checkInitStep("begin-aux", e220_.begin())) return false;
     ::delay(1000);
-    if (!e220_.setMode(E220::Mode::CONFIG_DS)) return false;
+    if (!checkInitStep("config-mode", e220_.setMode(E220::Mode::CONFIG_DS))) return false;
 
     // Trackerのcomponents/LoRa/lora.cppと同じ無線設定。
     const bool configured =
-      e220_.setParametersToDefault() &&
-      e220_.setSerialBaudRate(lora_baud) &&
-      e220_.setDataRate(E220::SF::SF9, E220::BW::BW125kHz) &&
-      e220_.setEnvRSSIEnable(true) &&
-      e220_.setSendMode(E220::SendMode::TRANSPARENT) &&
-      e220_.setModuleAddr(E220::BROADCAST) &&
-      e220_.setChannel(channel_) &&
-      e220_.setRSSIEnable(true);
+      checkInitStep("defaults", e220_.setParametersToDefault()) &&
+      checkInitStep("baud", e220_.setSerialBaudRate(lora_baud)) &&
+      checkInitStep("air-rate", e220_.setDataRate(E220::SF::SF9, E220::BW::BW125kHz)) &&
+      checkInitStep("env-rssi", e220_.setEnvRSSIEnable(true)) &&
+      checkInitStep("send-mode", e220_.setSendMode(E220::SendMode::TRANSPARENT)) &&
+      checkInitStep("address", e220_.setModuleAddr(E220::BROADCAST)) &&
+      checkInitStep("channel", e220_.setChannel(channel_)) &&
+      checkInitStep("rssi", e220_.setRSSIEnable(true));
 
     // 設定失敗時も通常モードへ戻す。設定中のUARTは9600bps。
-    const bool normal_mode = e220_.setMode(E220::Mode::NORMAL);
+    const bool normal_mode = checkInitStep("normal-mode", e220_.setMode(E220::Mode::NORMAL));
     lora_serial_.flush();
     lora_serial_.updateBaudRate(lora_baud);
     ::delay(100);
@@ -80,7 +83,9 @@ public:
 
   bool start() {
     if (!initialize()) {
-      error("lrIN", "LoRa setup failed; check wiring and power");
+      // WCPPのエラーパケットに収まる短い診断。最初の失敗時点の値を使う。
+      error("lrIN", "%s A=%d M=%d%d R=%d", failed_step_,
+            failed_aux_, failed_m0_, failed_m1_, failed_rx_pending_);
       return false;
     }
     if (!begin()) {
@@ -129,11 +134,26 @@ protected:
   }
 
 private:
+  bool checkInitStep(const char* step, bool ok) {
+    if (ok) return true;
+    // 後処理でモードや受信バッファが変わる前に、最初の失敗を記録する。
+    if (failed_step_ == nullptr) {
+      failed_step_ = step;
+      failed_aux_ = digitalRead(aux_);
+      failed_m0_ = digitalRead(m0_);
+      failed_m1_ = digitalRead(m1_);
+      failed_rx_pending_ = lora_serial_.available();
+    }
+    return false;
+  }
+
   // 宣言順もUART -> E220にし、有効なStreamを渡す。
   HardwareSerial lora_serial_;
   E220 e220_;
   const uint8_t channel_;
-  const pin_t tx_, rx_, sw_a1_, sw_a2_;
+  const pin_t tx_, rx_, aux_, m0_, m1_, sw_a1_, sw_a2_;
+  const char* failed_step_ = nullptr;
+  int failed_aux_ = 0, failed_m0_ = 0, failed_m1_ = 0, failed_rx_pending_ = 0;
 };
 
 // LoRa2 / U401: Tracker (unit 0x61), UART1, channel 3.
