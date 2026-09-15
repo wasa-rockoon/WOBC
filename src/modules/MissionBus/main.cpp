@@ -29,7 +29,7 @@
 #define CHARGELED -1
 #define TEMP 9
 
-#define LORA_CHANNEL 11
+#define LORA_CHANNEL 16
 #define LORA_TX_PIN 13
 #define LORA_RX_PIN 12
 #define LORA_AUX_PIN 21
