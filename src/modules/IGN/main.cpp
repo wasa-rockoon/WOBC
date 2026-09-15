@@ -23,7 +23,7 @@
 #define SDCARD_SCK_PIN SPI0_SCK_PIN
 
 constexpr uint8_t module_id = 'I';
-constexpr uint8_t unit_id = 0x40;
+constexpr uint8_t unit_id = 0x62;
 constexpr int ign_normal_pin = 6;
 constexpr int ign_high_pin = 4;
 constexpr int ign_low_pin = 5;
