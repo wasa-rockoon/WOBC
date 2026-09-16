@@ -6,6 +6,7 @@
 #include <components/Pressure/pressure.h>
 #include <components/GPS/gps.h>
 #include <components/Logger/logger.h>
+#include <components/IMU/IMU.h>
 #include <SPI.h>
 
 #define SPI0_SCK_PIN 5
@@ -53,8 +54,8 @@ component::LiPoPower power(Wire, ST, PG, STAT1, STAT2, HEAT, CHARGELED, TEMP, un
 component::LoRa lora(LORA_AUX_PIN, LORA_M0_PIN, LORA_M1_PIN, LORA_TX_PIN, LORA_RX_PIN, LORA_CHANNEL, 0);
 component::Logger logger(SPI, SPI0_CS_PIN, SD_INSERTED_PIN);
 component::Pressure pressure(Wire, unit_id);
-//component::IMU9 imu(Wire, unit_id, 100);
-//component::GPS gps(38, 39, 9600, unit_id);
+component::IMU9 imu(Wire, unit_id, 10, IMU_DATA, IMU_ICM_MMC);
+component::GPS gps(38, 39, 115200, unit_id);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -122,7 +123,7 @@ private:
 
 void setup() {
     Serial.begin(115200);
-    kernel::setUnitId(unit_id);GS
+    kernel::setUnitId(unit_id); //GS
     if (!kernel::begin(module_id, true)) return;
 
     Serial0.setPins(4, 5);
@@ -143,7 +144,7 @@ void setup() {
     power.begin();
     lora.begin();
     pressure.begin();
-    //imu.begin();
+    imu.begin();
     gps.begin();
     main_.begin();
 

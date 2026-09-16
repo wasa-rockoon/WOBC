@@ -5,7 +5,7 @@
 
 // LoRa2026基板のLoRa2 (U401)。ピン番号はESP32-S3側のGPIO。
 // LoRa1 (U301)は下のmission_loraでMissionBus用に設定する。
-#define LORA_CHANNEL 3 // modules/Tracker/main.cppと一致させる。
+#define LORA_CHANNEL 4 // modules/Tracker/main.cppと一致させる。
 #define LORA_TX_PIN 7
 #define LORA_RX_PIN 18
 #define LORA_AUX_PIN 8
