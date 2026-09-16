@@ -1,11 +1,12 @@
 #include <Arduino.h>
 #include <library/wobc.h>
-#include <components/LoRa/dual_lora.h>
+#include <components/LoRa/downlink.h>
+#include <components/Uplink/uplink.h>
 
 // LoRa2026基板。ピン番号はESP32-S3側のGPIO。
 // LoRa1はアップリンク、LoRa2はダウンリンク。通信相手と合わせる。
 #define LORA1_CHANNEL 10
-#define LORA2_CHANNEL 3
+#define LORA2_CHANNEL 12
 
 #define LORA1_TX_PIN 13
 #define LORA1_RX_PIN 12
@@ -50,13 +51,17 @@ core::SerialBus serial_bus(Serial);
 
 // コンポーネント
 // UART0はUSBコンソール用。無線には独立したUART2とUART1を使う。
-constexpr component::DualLoRa::RadioConfig lora1_config = {
+constexpr component::Uplink::RadioConfig lora1_config = {
     2, LORA1_AUX_PIN, LORA1_M0_PIN, LORA1_M1_PIN,
     LORA1_RX_PIN, LORA1_TX_PIN, LORA1_SW_A1, LORA1_SW_A2, LORA1_CHANNEL};
-constexpr component::DualLoRa::RadioConfig lora2_config = {
+constexpr component::Downlink::RadioConfig lora2_config = {
     1, LORA2_AUX_PIN, LORA2_M0_PIN, LORA2_M1_PIN,
     LORA2_RX_PIN, LORA2_TX_PIN, LORA2_SW_A1, LORA2_SW_A2, LORA2_CHANNEL};
-component::DualLoRa dual_lora(lora1_config, lora2_config, is_ground);
+component::Uplink uplink(
+    lora1_config,
+    is_ground ? component::Uplink::Role::Ground : component::Uplink::Role::Flight,
+    0x41);
+component::Downlink downlink(lora2_config, is_ground);
 
 interface::WatchIndicator<unsigned> status_indicator(42, kernel::packetCount());
 interface::WatchIndicator<unsigned> error_indicator(41, kernel::errorCount());
@@ -83,8 +88,12 @@ void setup() {
   delay(1000);
 
   // コンポーネントを起動
-  if (!dual_lora.begin()) {
-    dual_lora.error("lrST", "Dual LoRa task start failed");
+  if (!uplink.begin()) {
+    uplink.error("upST", "Uplink task start failed");
+    return;
+  }
+  if (!downlink.begin()) {
+    downlink.error("dnST", "Downlink task start failed");
     return;
   }
   error_indicator.set(false);
