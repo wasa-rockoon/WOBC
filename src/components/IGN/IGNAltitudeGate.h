@@ -11,7 +11,7 @@ public:
 
   void reset() { count_ = 0; }
   bool observe(bool valid, int64_t altitude_m) {
-    if (!valid || altitude_m <= altitude_m_) {
+    if (!valid || altitude_m < altitude_m_) {
       reset();
     } else if (count_ < required_samples) {
       ++count_;

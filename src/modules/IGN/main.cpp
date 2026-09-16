@@ -29,6 +29,8 @@ constexpr int ign_high_pin = 4;
 constexpr int ign_low_pin = 5;
 constexpr int flight_pin_pin = 21;
 constexpr int32_t ignition_altitude_m = 15000;
+// FlightPinのLOW確認から代替開始条件を許可するまでの時間（ミリ秒）。
+constexpr uint32_t ignition_fallback_delay_ms = 60UL * 60UL * 1000UL; // 1時間
 constexpr component::Heater::AdcResolution heater_adc_resolution =
     component::Heater::AdcResolution::BIT_16;
 
@@ -87,21 +89,21 @@ public:
             auto fp = packet.find(component::FlightPin::stateEntryName());
             if (!fp || !(*fp).isInt()) {
                 flight_pin_removed_ = false;
-                ign.altitudeConditionMet(false);
+                ign.startConditionMet(false, ignition_fallback_delay_ms);
                 continue;
             }
 
             const int64_t state = (*fp).getInt();
             if (state != LOW && state != HIGH) {
                 flight_pin_removed_ = false;
-                ign.altitudeConditionMet(false);
+                ign.startConditionMet(false, ignition_fallback_delay_ms);
                 continue;
             }
 
             if (state == HIGH) {
                 flight_pin_inserted_seen_ = true;
                 flight_pin_removed_ = false;
-                ign.altitudeConditionMet(false);
+                ign.startConditionMet(false, ignition_fallback_delay_ms);
                 continue;
             }
 
@@ -109,11 +111,11 @@ public:
         }
 
         const bool removed = flight_pin_removed_ && digitalRead(flight_pin_pin) == LOW;
-        const bool altitude_ready = ign.altitudeConditionMet(removed);
-        if (removed && altitude_ready && !ignition_start_requested_) {
+        const bool start_ready = ign.startConditionMet(removed, ignition_fallback_delay_ms);
+        if (removed && start_ready && !ignition_start_requested_) {
             ignition_start_requested_ = true;
             if (ign.startSequence()) {
-                LOG("Flight pin removed and altitude confirmed 30 times; ignition sequence requested");
+                LOG("Flight pin removed and ignition start conditions met; sequence requested");
 
                 // 挿入が開始要求と割り込みのアームの境界で発生した場合も、
                 // 現在値を確認して取りこぼさず中止する。
@@ -122,7 +124,7 @@ public:
                     LOG("Flight pin inserted during ignition sequence start; aborted");
                 }
             } else {
-                LOG("Flight pin and altitude conditions met; ignition sequence request rejected");
+                LOG("Flight pin and ignition start conditions met; sequence request rejected");
             }
         }
     }
@@ -168,7 +170,7 @@ void setup() {
     telemeter.begin();
 
     // Initialize IGN without starting the sequence. It remains Disarmed until
-    // FlightPin removal AND 30 consecutive pressure altitude samples qualify.
+    // FlightPin removal AND (30 pressure samples OR pressure timeout + timer + GPS).
     if (!ign.begin(false)) return;
     if (!beginFlightPinAbortInterrupt()) return;
     main_.begin();

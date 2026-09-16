@@ -10,8 +10,12 @@ int main() {
   assert(gate.observe(true, 15001));
   for (unsigned i = 0; i < 300; ++i) assert(gate.observe(true, 16000));
 
-  // Equality resets the streak; all 30 observations must be above the threshold.
-  assert(!gate.observe(true, 15000));
+  // Equality qualifies; any sample below the threshold resets the streak.
+  assert(gate.observe(true, 15000));
+  gate.reset();
+  for (unsigned i = 0; i < 29; ++i) assert(!gate.observe(true, 15000));
+  assert(gate.observe(true, 15000));
+  gate.reset();
   for (unsigned i = 0; i < 29; ++i) assert(!gate.observe(true, 15001));
   assert(!gate.observe(true, 14999));
   for (unsigned i = 0; i < 29; ++i) assert(!gate.observe(true, 15001));
@@ -26,9 +30,9 @@ int main() {
   assert(gate.observe(true, 15001));
 
   component::IGNAltitudeGate custom(20000);
-  for (unsigned i = 0; i < 30; ++i) assert(!custom.observe(true, 20000));
-  for (unsigned i = 0; i < 29; ++i) assert(!custom.observe(true, 20001));
-  assert(custom.observe(true, 20001));
+  for (unsigned i = 0; i < 30; ++i) assert(!custom.observe(true, 19999));
+  for (unsigned i = 0; i < 29; ++i) assert(!custom.observe(true, 20000));
+  assert(custom.observe(true, 20000));
 
   // Qualification enters the existing warning sequence; abort prevents restart.
   component::IGNSequence sequence;

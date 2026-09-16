@@ -1,5 +1,7 @@
 #include "IGN.h"
+#include "IGNGPSTelemetry.h"
 #include <components/Pressure/pressure.h>
+#include <components/GPS/gps.h>
 
 #if defined(ARDUINO_ARCH_ESP32)
 #include <soc/gpio_struct.h>
@@ -31,27 +33,51 @@ IGN::IGN(TwoWire& wire, int normal_pin, int high_pin, int low_pin,
                && normal_pin != no_pin && high_pin != no_pin && low_pin != no_pin
                && normal_pin != high_pin && normal_pin != low_pin
                && high_pin != low_pin),
-    altitude_gate_(ignition_altitude_m),
+    start_gate_(ignition_altitude_m),
     sample_timer_(ina_IGN_, unit_id_, sampleIntervalMs(sample_freq_hz)) {
 }
 
-bool IGN::altitudeConditionMet(bool flight_pin_removed) {
+bool IGN::startConditionMet(bool flight_pin_removed, uint32_t fallback_delay_ms) {
   // このメソッドとゲート状態は呼び出し元のMainタスクだけで使用する。
-  if (!flight_pin_removed || !altitude_monitoring_) {
-    altitude_monitoring_ = flight_pin_removed;
-    altitude_gate_.reset();
+  const uint32_t now_ms = millis();
+  const uint32_t previous_check_ms = last_condition_check_ms_;
+  last_condition_check_ms_ = now_ms;
+  if (start_gate_.setFlightPinRemoved(flight_pin_removed, now_ms)) {
     // clear()はパケットの参照を解放しないため、pop()で破棄する。
     while (pressure_listener_) pressure_listener_.pop();
+    while (gps_listener_) gps_listener_.pop();
     return false;
   }
 
   while (pressure_listener_) {
     const wcpp::Packet packet = pressure_listener_.pop();
+    const auto source = packet.find("Sm");
+    // 同一unit/componentのMissionBus側Pressureを数えない。
+    if (!source || !(*source).isInt() || (*source).getInt() != kernel::module_id()) continue;
     const auto pa = packet.find("PA");
-    const bool valid = pa && (*pa).isInt();
-    altitude_gate_.observe(valid, valid ? (*pa).getInt() : 0);
+    const auto validity = packet.find("Va");
+    const auto ts = packet.find("Ts");
+    const bool valid = pa && (*pa).isInt()
+        && validity && (*validity).isInt() && (*validity).getInt() == 1
+        && ts && (*ts).isInt() && (*ts).getInt() >= 0 && (*ts).getInt() <= UINT32_MAX;
+    start_gate_.observePressure(valid, valid ? (*pa).getInt() : 0,
+                                valid ? static_cast<uint32_t>((*ts).getInt()) : 0,
+                                millis());
   }
-  return altitude_gate_.ready();
+  while (gps_listener_) {
+    const wcpp::Packet packet = gps_listener_.pop();
+    // 同一unitのGPS(component 21, telemetry M)はMissionBusが送信する構成。
+    // 既存パケットにはmodule IDや高度有効性・測定年齢は含まれない。
+    int64_t altitude_m = 0;
+    uint64_t utc_key = 0;
+    const bool valid = decodeIGNGPS(packet, altitude_m, utc_key);
+    const uint32_t received_ms = millis();
+    // Mainが停止していた間のキュー滞留を保守的に加算する。
+    const uint32_t polling_gap_ms = received_ms - previous_check_ms;
+    start_gate_.observeGPS(valid, altitude_m, polling_gap_ms,
+                          utc_key, received_ms);
+  }
+  return start_gate_.ready(millis(), fallback_delay_ms);
 }
 
 const char* IGN::phaseName(Phase phase) {
@@ -96,6 +122,11 @@ bool IGN::begin(bool start_immediately) {
                     .component(Pressure::component_id)
                     .unit_origin(unit_id_);
   listen(pressure_listener_, 4);
+  gps_listener_.telemetry()
+               .packet(GPS::telemetry_id)
+               .component(GPS::component_id)
+               .unit_origin(unit_id_);
+  listen(gps_listener_, 1);
 
   // 電流計が使えない、または校正できない状態では点火を禁止する。
   const bool sensor_connected = ina_IGN_.begin();

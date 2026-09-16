@@ -4,7 +4,7 @@
 #include <Wire.h>
 #include <components/LiPoPower/INA226.h>
 #include "IGNSequence.h"
-#include "IGNAltitudeGate.h"
+#include "IGNStartGate.h"
 
 namespace component {
 
@@ -22,9 +22,9 @@ public:
   IGN(TwoWire& wire, int normal_pin, int high_pin, int low_pin, uint8_t unit_id,
       int32_t ignition_altitude_m, unsigned sample_freq_hz = 1);
 
-  // Mainタスクから毎ループ呼び出す。抜去後に受信したPAが連続30回高度を
-  // 超えた場合にtrueを返す。挿入中・抜去直後は保留パケットと回数をリセット。
-  bool altitudeConditionMet(bool flight_pin_removed);
+  // Mainタスクから毎ループ呼び出す。気圧高度30回 OR 気圧更新停止・時間・GPS。
+  // 挿入中・抜去直後は保留パケット・回数・タイマーをリセットする。
+  bool startConditionMet(bool flight_pin_removed, uint32_t fallback_delay_ms);
 
   // 点火用GPIOをすべてLOW出力に初期化する。カーネルやタスクの起動前にも
   // 呼び出せるため、起動失敗時でも点火回路を非通電に保てる。
@@ -59,8 +59,9 @@ protected:
   uint8_t unit_id_;
   bool config_valid_;
   kernel::Listener pressure_listener_;
-  IGNAltitudeGate altitude_gate_;
-  bool altitude_monitoring_ = false;
+  kernel::Listener gps_listener_;
+  IGNStartGate start_gate_;
+  uint32_t last_condition_check_ms_ = 0;
 
   // 時間に応じた点火出力の要求を生成する、ハードウェア非依存の状態機械。
   IGNSequence sequence_;

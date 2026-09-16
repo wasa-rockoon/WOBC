@@ -10,7 +10,6 @@ Pressure::Pressure(TwoWire& wire, uint8_t unit_id, unsigned sample_freq_hz)
 }
 
 void Pressure::setup() {
-  start(sample_timer_);
   storeOnCommand('Q'); // 高度規正値の設定コマンド
   Wire.begin();
   while(!bme.begin()){
@@ -21,6 +20,8 @@ void Pressure::setup() {
   // 高度計算のための初期化
   initialize_pressure_data();     // 圧力データの初期化
   initialize_coefficients();      // 既知の係数の初期化
+  // センサと係数の準備前に測定タイマーを走らせない。
+  start(sample_timer_);
 }
 
 
@@ -133,17 +134,30 @@ void Pressure::SampleTimer::callback() { // Timerで定期的に実行される�
   bme_.read(pres, temp, hum, tempUnit, presUnit);
 
   // height関数を使用して圧力から高度を計算
-  double pressureAlt = pressure_.height(pres) - pressure_.height(sealevel_Pa);  // オブジェクト pressure_ を使って height を呼び出す
+  const bool valid = std::isfinite(pres)
+      && pres > pressure_.p[max_index].pressure && pres < INT32_MAX
+      && std::isfinite(sealevel_Pa)
+      && sealevel_Pa > pressure_.p[max_index].pressure && sealevel_Pa < INT32_MAX;
+  const double pressureAlt = valid
+      ? pressure_.height(pres) - pressure_.height(sealevel_Pa) : NAN;
+  const bool altitude_valid = valid && std::isfinite(pressureAlt)
+      && pressureAlt > INT32_MIN && pressureAlt < INT32_MAX;
 
-  wcpp::Packet packet = newPacket(64);
+  wcpp::Packet packet = newPacket(80);
   packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF,
                    kernel::nextPacketSequence(unit_id_, 0xFF, component_id(),
                                               wcpp::packet_type_mask | telemetry_id));
-  packet.append("Sp").setInt((int)sealevel_Pa);
-  packet.append("PR").setInt((int)pres);
-  packet.append("TE").setInt((int)temp);
-  packet.append("HU").setInt((int)hum);
-  packet.append("PA").setInt((int)pressureAlt);  // 計算された高度を追加
+  packet.append("Sm").setInt(kernel::module_id());
+  packet.append("Va").setBool(altitude_valid);
+  // 無効な測定は整数へ変換せずnullにする。受信側の更新時計を進めない。
+  if (valid) {
+    packet.append("Sp").setInt((int)sealevel_Pa);
+    packet.append("PR").setInt((int)pres);
+  }
+  if (std::isfinite(temp) && temp > INT32_MIN && temp < INT32_MAX) packet.append("TE").setInt((int)temp);
+  if (std::isfinite(hum) && hum > INT32_MIN && hum < INT32_MAX) packet.append("HU").setInt((int)hum);
+  if (altitude_valid) packet.append("PA").setInt((int)pressureAlt);
+  else packet.append("PA").setNull();
 
   packet.append("Ts").setInt(millis());
   // ... TODO
