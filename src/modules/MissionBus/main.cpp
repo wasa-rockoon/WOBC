@@ -104,7 +104,7 @@ void setup() {
     error_indicator.set(true);
 
     
-    imu.begin();
+    //imu.begin();
     can_bus.begin();
     serial_bus.begin();
     telemeter.begin();
