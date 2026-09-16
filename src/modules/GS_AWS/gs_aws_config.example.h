@@ -1,0 +1,14 @@
+#pragma once
+#define WASA_WIFI_SSID ""
+#define WASA_WIFI_PASSWORD ""
+#define WASA_WS_HOST "ec2-34-193-113-84.compute-1.amazonaws.com"
+#define WASA_WS_PORT 80
+#define WASA_WS_PATH "/ws"
+#define WASA_WS_USE_TLS false
+#define WASA_RECEIVER_ID "fixed-gs-01"
+#define WASA_ENABLE_AUTH false
+#define WASA_TELEMETRY_INGEST_TOKEN ""
+#define WASA_ENABLE_AWS_OUTPUT true
+#define WASA_WIFI_RETRY_INTERVAL_MS 15000UL
+#define WASA_WEBSOCKET_RECONNECT_INTERVAL_MS 5000UL
+#define WASA_HEARTBEAT_INTERVAL_MS 10000UL
