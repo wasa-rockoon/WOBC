@@ -20,11 +20,12 @@ void CANBus::setup() {
     return;
   }
   listen(all_packets, WOBC_CAN_BUS_PACKET_QUEUE_SIZE, true);
-  can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
+  initialized_ = can_.begin(WOBC_CAN_BUS_BAUDRATE, rx_, tx_);
+  if (!initialized_) error("cbInit", "CAN bus, driver initialization failed");
 }
 
 void CANBus::loop() {
-  if (rx_queue_handle_ == nullptr) return;
+  if (!initialized_) return;
 
   // Kernel to CAN bus
   {

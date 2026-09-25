@@ -30,7 +30,7 @@ constexpr int ign_low_pin = 5;
 constexpr int flight_pin_pin = 21;
 constexpr int32_t ignition_altitude_m = 15000;
 // FlightPinのLOW確認から代替開始条件を許可するまでの時間（ミリ秒）。
-constexpr uint32_t ignition_fallback_delay_ms = 60UL * 60UL * 1000UL; // 1時間
+constexpr uint32_t ignition_fallback_delay_ms = 58UL * 60UL * 1000UL; // 1時間
 constexpr component::Heater::AdcResolution heater_adc_resolution =
     component::Heater::AdcResolution::BIT_16;
 

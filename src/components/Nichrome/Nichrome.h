@@ -76,7 +76,7 @@ protected:
 
   // 状態が変わらない場合でも、この周期で状態テレメトリを送信する。
   static constexpr unsigned long status_interval_ms = 1000;
-  // 分離シーケンス開始後はINA226の電力テレメトリを10 Hzで送信する。
+  // 分離シーケンス開始後はINA226を10 Hzで測定・送信し、Doneで1 Hzへ戻す。
   static constexpr unsigned ignition_sample_interval_ms = 100;
   static constexpr unsigned cutoff_task_stack_size = 2048;
 

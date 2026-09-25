@@ -278,6 +278,10 @@ void IGN::loop() {
   applySnapshot(snapshot);
 
   if (snapshot.phase_changed) {
+    if (snapshot.phase == Phase::Done) {
+      // 完了後はINA226の測定・テレメトリ送信を1 Hzへ戻す。
+      sample_timer_.changePeriod(1000);
+    }
     LOG("IGN phase: %s", phaseName(snapshot.phase));
   }
 

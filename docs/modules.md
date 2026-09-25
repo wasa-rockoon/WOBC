@@ -70,6 +70,13 @@ LoRaモジュールを2機搭載しアップリンクとダウンリンクの送
 | ModuleIFSimple | - |
 | Ignite | 36 |
 
+# Separation(S, 0x53)
+
+ニクロム線用の分離回路を制御するモジュール．FlightPinの挿入・抜去確認後，気圧高度20 km超を連続30回取得，または抜去後1時間かつ有効な気圧更新停止60秒で警告シーケンスを開始する．GPS高度は開始条件に使わない．警告36秒後に通電し，通電時間の設定は120秒．開始後の再挿入でアボートする．GPS，Pressure，LiPoPower，Logger，FlightPin，Nichrome，Mainを起動する．
+
+- [Separationの使い方・設定・アボート・テレメトリ](env_Separation/Separation_user_guide.md)
+- [Separationの実装・検証資料](env_Separation/Separation_implementation_and_usage.md)
+
 # RCS(V, 0x56)
 姿勢制御のためのスラスタの駆動を行う．そのほか圧縮空気タンクの圧力とロードセルのデータの取得を行う．
 

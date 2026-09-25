@@ -206,7 +206,9 @@ void Nichrome::loop() {
                             || snapshot.phase == Phase::Final
                             || snapshot.phase == Phase::Ignition;
   portENTER_CRITICAL(&output_mux_);
-  flight_pin_abort_armed_ = sequence_active && !abort_requested_;
+  // Main may have reserved a start after this loop captured a Disarmed snapshot.
+  // Read the reservation under the same lock used by startSequence()/the ISR.
+  flight_pin_abort_armed_ = (sequence_active || start_requested_) && !abort_requested_;
   portEXIT_CRITICAL(&output_mux_);
 
   if (snapshot.phase_changed && snapshot.phase == Phase::Ignition) {
@@ -220,6 +222,10 @@ void Nichrome::loop() {
   applySnapshot(snapshot);
 
   if (snapshot.phase_changed) {
+    if (snapshot.phase == Phase::Done) {
+      // 完了後はINA226の測定・テレメトリ送信を1 Hzへ戻す。
+      sample_timer_.changePeriod(1000);
+    }
     LOG("Nichrome phase: %s", phaseName(snapshot.phase));
   }
 
@@ -315,12 +321,12 @@ void Nichrome::sendStatus(const NichromeSequence::Snapshot& snapshot) {
   packet.append("Et").setInt((int)snapshot.phase_elapsed_ms);
   packet.append("St").setInt((int)snapshot.sequence_elapsed_ms);
   packet.append("Rt").setInt((int)snapshot.remaining_ms);
-  packet.append("Bz").setBool(high_out_ && !low_out_);
-  packet.append("Ig").setBool(high_out_ && low_out_);
-  packet.append("Hi").setBool(high_out_);
-  packet.append("Lo").setBool(low_out_);
-  packet.append("Nl").setBool(status_led_on_);
-  packet.append("Ok").setBool(begin_ok_ && snapshot.phase != Phase::Fault);
+  //packet.append("Bz").setBool(high_out_ && !low_out_);
+  //packet.append("Ig").setBool(high_out_ && low_out_);
+  //packet.append("Hi").setBool(high_out_);
+  //packet.append("Lo").setBool(low_out_);
+  //packet.append("Nl").setBool(status_led_on_);
+  //packet.append("Ok").setBool(begin_ok_ && snapshot.phase != Phase::Fault);
   packet.append("Ts").setInt((int)millis());
   sendPacket(packet);
 

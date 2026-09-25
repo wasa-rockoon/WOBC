@@ -60,6 +60,11 @@ namespace component {
         // The heater only uses fully off/on output, so no PWM is needed.
         digitalWrite(heater_pin_, LOW);
         pinMode(heater_pin_, OUTPUT);
+        control_mutex_ = xSemaphoreCreateMutex();
+        if (!control_mutex_) {
+            error("H", "Failed to create heater control mutex!");
+            return; // Remain off and do not start sampling.
+        }
 
         wire_.beginTransmission(MCP3424_ADDR);
         if (wire_.endTransmission() != 0) {
@@ -68,6 +73,23 @@ namespace component {
         ina_heater.begin();
         ina_heater.setMaxCurrentShunt(3, 0.020);
         start(sample_timer_);
+    }
+
+    void Heater::loop() {
+        // This component task is independent of the I2C sampling timer.
+        // Only this task may enable the output; never hold the mutex over I2C.
+        if (control_mutex_) {
+            xSemaphoreTake(control_mutex_, portMAX_DELAY);
+            const auto state = control_.evaluate(millis(), control_battery_mv_);
+            const bool high = state == HeaterControl::State::On;
+            if (high != heater_output_high_) {
+                digitalWrite(heater_pin_, high ? HIGH : LOW);
+                heater_output_high_ = high;
+            }
+            heater_status_ = HeaterControl::status(state);
+            xSemaphoreGive(control_mutex_);
+        }
+        vTaskDelay(pdMS_TO_TICKS(20));
     }
 
     Heater::SampleTimer::SampleTimer(Heater& heater_ref, TwoWire& wire_ref, INA226& ina_heater_ref, uint8_t unit_id_ref, unsigned interval_ms)
@@ -82,9 +104,17 @@ namespace component {
         // MCP3424の各CHの測定をキックする
         for (uint8_t ch = 0; ch < 4; ch++) {
             wire_.beginTransmission(MCP3424_ADDR);
-            wire_.write((CONFIG_CH[ch] & 0xF3) |
-                        static_cast<byte>(heater_.adc_resolution_));
-            wire_.endTransmission();
+            const byte config = (CONFIG_CH[ch] & 0xF3) |
+                                static_cast<byte>(heater_.adc_resolution_);
+            wire_.write(config);
+            if (wire_.endTransmission() != 0) {
+                if (ch == 0) {
+                    xSemaphoreTake(heater_.control_mutex_, portMAX_DELAY);
+                    heater_.control_.missing();
+                    xSemaphoreGive(heater_.control_mutex_);
+                }
+                continue;
+            }
 
         // 変換完了(RDY=0)まで待ちながらポーリング
         const uint8_t response_size =
@@ -101,7 +131,8 @@ namespace component {
         for (uint8_t i = 0; i < response_size; i++) {
             b[i] = wire_.read();
         }
-        if (!(b[response_size - 1] & 0x80)) {
+        // Require the requested channel, resolution, mode and gain as well as RDY=0.
+        if (b[response_size - 1] == (config & 0x7F)) {
             conversion_ready = true;
             break; 
         }  // RDY=0 で変換完了
@@ -110,6 +141,11 @@ namespace component {
 
         // 電圧値を計算
         if (!conversion_ready) {
+            if (ch == 0) {
+                xSemaphoreTake(heater_.control_mutex_, portMAX_DELAY);
+                heater_.control_.missing();
+                xSemaphoreGive(heater_.control_mutex_);
+            }
             continue;
         }
 
@@ -134,37 +170,39 @@ namespace component {
         }
 
         // 温度計算
-        if (vOut > 0.05 && vOut < 2.00) { 
+        bool valid_temperature = false;
+        if (vOut > 0.05 && vOut < 2.00) {
             float rThr = (V_REF * R_DOWNSTREAM / vOut) - R_UPSTREAM - R_DOWNSTREAM;
             float invT = (1.0 / T0) + (1.0 / B_CONSTANT) * std::log(rThr / R0);
             float tempCelsius = (1.0 / invT) - 273.15;
-            CalculatedTemperature[ch] = tempCelsius;
+            if (rThr > 0.0f && std::isfinite(tempCelsius)) {
+                CalculatedTemperature[ch] = tempCelsius;
+                valid_temperature = true;
+            }
+        }
+        if (ch == 0) {
+            xSemaphoreTake(heater_.control_mutex_, portMAX_DELAY);
+            if (valid_temperature) {
+                heater_.control_.observe(CalculatedTemperature[0], millis());
+            } else {
+                heater_.control_.invalidate();
+            }
+            xSemaphoreGive(heater_.control_mutex_);
         }
         }
 
         int busVoltage_mV = ina_heater_.getBusVoltage() * 1000;
+        xSemaphoreTake(heater_.control_mutex_, portMAX_DELAY);
+        heater_.control_battery_mv_ = busVoltage_mV;
+        xSemaphoreGive(heater_.control_mutex_);
         int busCurrent_mA = ina_heater_.getCurrent() * 1000;
         int busPower_mW = ina_heater_.getPower() * 1000;
-        // 2. ヒーター制御
-        float maxTemp = max(CalculatedTemperature[0], max(CalculatedTemperature[1], CalculatedTemperature[2]));
-        const char* heater_status = "OFF";
-
-        // 先にバッテリー電圧をチェック
-        if (busVoltage_mV < BATTERY_CUTOFF_V * 1000) {
-            digitalWrite(heater_.heater_pin_, LOW); // 強制終了
-            heater_status = "OFF_LOW_BATT";
-        }
-        // 電圧が正常で、温度が目標未満なら加熱
-        else if (maxTemp < TARGET_TEMP) {
-            digitalWrite(heater_.heater_pin_, HIGH);
-            heater_status = "ON";
-        }
-        // 目標温度に達したら停止
-        else {
-            digitalWrite(heater_.heater_pin_, LOW);
-        }
+        xSemaphoreTake(heater_.control_mutex_, portMAX_DELAY);
+        const char* heater_status = heater_.heater_status_;
+        xSemaphoreGive(heater_.control_mutex_);
   
-        wcpp::Packet packet = newPacket(64);
+        // Allow the longer temperature-fault status plus all numeric fields.
+        wcpp::Packet packet = newPacket(96);
         packet.telemetry(telemetry_id, component_id(), unit_id_, 0xFF,
                          kernel::nextPacketSequence(unit_id_, 0xFF, component_id(),
                                                     wcpp::packet_type_mask | telemetry_id));

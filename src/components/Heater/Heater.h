@@ -4,6 +4,7 @@
 #include <Wire.h>
 #include <cmath>
 #include <components/LiPoPower/INA226.h>
+#include "HeaterControl.h"
 
 #define MCP3424_ADDR 0x6A
 
@@ -48,21 +49,22 @@ namespace component {
         // ワンショットモードで各CHの測定をキックする設定バイト
         static const byte CONFIG_CH[4];
 
-        // ヒーター制御用定数
-        static constexpr float TARGET_TEMP = 40.0;
-        static constexpr float BATTERY_CUTOFF_V = 6.4;
-
         TwoWire& wire_;
         uint8_t unit_id_;
         AdcResolution adc_resolution_;
         uint8_t heater_pin_;
         bool heater_output_high_ = false;
+        SemaphoreHandle_t control_mutex_ = nullptr;
+        HeaterControl control_;
+        int control_battery_mv_ = 0;
+        const char* heater_status_ = "OFF_TEMP_STALE";
         INA226 ina_heater;
 
         uint16_t conversionTimeoutMs() const;
         float voltsPerCount() const;
 
         void setup() override;
+        void loop() override;
 
     class SampleTimer: public process::Timer {
     public:
