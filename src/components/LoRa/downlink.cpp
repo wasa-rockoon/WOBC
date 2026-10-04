@@ -35,8 +35,8 @@ void Downlink::loop() {
 bool Downlink::configureRadio() {
   pinMode(config_.rf_switch_1, OUTPUT);
   pinMode(config_.rf_switch_2, OUTPUT);
-  digitalWrite(config_.rf_switch_1, HIGH);
-  digitalWrite(config_.rf_switch_2, LOW);
+  digitalWrite(config_.rf_switch_1, LOW);
+  digitalWrite(config_.rf_switch_2, HIGH);
   if (serial_.setRxBufferSize(512) < 512) return false;
   serial_.begin(9600, SERIAL_8N1, config_.uart_rx, config_.uart_tx);
   if (!radio_.begin()) return false;

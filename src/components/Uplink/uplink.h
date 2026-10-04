@@ -91,7 +91,7 @@ private:
 
   static constexpr uint32_t turnaround_guard_ms = 100;
   static constexpr uint32_t ack_timeout_ms = 5000;
-  static constexpr unsigned max_transmit_attempts = 3;
+  static constexpr unsigned max_transmit_attempts = 10;
 };
 
 }  // namespace component

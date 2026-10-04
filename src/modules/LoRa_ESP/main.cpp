@@ -5,8 +5,8 @@
 
 // LoRa2026基板。ピン番号はESP32-S3側のGPIO。
 // LoRa1はアップリンク、LoRa2はダウンリンク。通信相手と合わせる。
-#define LORA1_CHANNEL 10
-#define LORA2_CHANNEL 12
+#define LORA1_CHANNEL 16
+#define LORA2_CHANNEL 24
 
 #define LORA1_TX_PIN 13
 #define LORA1_RX_PIN 12
