@@ -3013,6 +3013,16 @@
 	)
 	(wire
 		(pts
+			(xy 203.2 71.12) (xy 203.2 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "13c9306c-3dac-456c-9d8c-f8ea8d4acc8b")
+	)
+	(wire
+		(pts
 			(xy 81.28 69.85) (xy 77.47 69.85)
 		)
 		(stroke
@@ -3700,6 +3710,16 @@
 			(type default)
 		)
 		(uuid "b02054b1-28c3-447a-9601-9edd7b8454b9")
+	)
+	(wire
+		(pts
+			(xy 203.2 68.58) (xy 207.01 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b344681d-a246-479e-b286-5fbd248681a3")
 	)
 	(wire
 		(pts
@@ -4831,8 +4851,74 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector_Generic:Conn_01x02")
-		(at 212.09 63.5 0)
+		(lib_id "power:GND")
+		(at 203.2 71.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2f692ed9-f1ac-4b69-9349-39a5aeb6a244")
+		(property "Reference" "#PWR0122"
+			(at 203.2 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 203.2 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 203.2 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "29bf1c14-623a-4af3-846e-af5ee60c11dc")
+		)
+		(instances
+			(project "RegulusGS1"
+				(path "/8634b6ac-d8e4-497a-91db-59714669e675"
+					(reference "#PWR0122")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector_Generic:Conn_01x03")
+		(at 212.09 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4841,7 +4927,7 @@
 		(fields_autoplaced yes)
 		(uuid "315d2d2e-5b6f-466e-bda4-e37ea1124cc7")
 		(property "Reference" "J108"
-			(at 214.63 63.4999 0)
+			(at 214.63 64.7699 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4850,7 +4936,7 @@
 			)
 		)
 		(property "Value" "UART"
-			(at 214.63 66.0399 0)
+			(at 214.63 67.3099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4858,8 +4944,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical"
-			(at 212.09 63.5 0)
+		(property "Footprint" "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical"
+			(at 212.09 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4868,7 +4954,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 212.09 63.5 0)
+			(at 212.09 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4876,8 +4962,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 212.09 63.5 0)
+		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 212.09 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4891,8 +4977,11 @@
 		(pin "2"
 			(uuid "8c8abf7e-f5f9-487b-8ed0-11cb00df5686")
 		)
+		(pin "3"
+			(uuid "8188b66a-c9e9-4b5d-a8be-dc334f0b4343")
+		)
 		(instances
-			(project ""
+			(project "RegulusGS1"
 				(path "/8634b6ac-d8e4-497a-91db-59714669e675"
 					(reference "J108")
 					(unit 1)
@@ -5061,7 +5150,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
+		(property "Footprint" "Connector_AMASS:AMASS_XT30PW-M_1x02_P2.50mm_Horizontal"
 			(at 105.41 140.97 0)
 			(effects
 				(font
